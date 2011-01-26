@@ -79,7 +79,9 @@ module Bench
     def count(arg)
       case arg
       when Hash
-        arg.each_pair{|k,v| add_aggregation(v, Aggregator.count)}
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.count(k))}
+      when Array
+        count(Hash[arg.collect{|a| [a, a]}])
       when Symbol, String
         count(arg => arg)
       end
