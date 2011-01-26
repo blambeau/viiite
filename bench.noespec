@@ -1,0 +1,53 @@
+# Noe template for ruby gem libraries (https://github.com/blambeau/noe) - short version
+# Run 'noe show-spec' and 'noe help show-spec' for additional details.
+
+# Don't remove this entry!
+template-info:
+  name: "ruby"
+  version: 1.1.0
+
+# Update to match your own configuration.
+variables:
+  # A ruby lower case project name.
+  lower: 
+    bench
+
+  # A ruby upper case project name. 
+  upper:
+    Bench
+
+  # Version of your library
+  version:
+    1.0.0
+    
+  # Project summary (~ 1 line).
+  summary: |-
+    Benchmarking and complexity analyzer utility
+
+  # Project description (~ 5 lines). Project description should be more complete
+  # than the summary and will be used to describe your gem on rubygems.org
+  description: |-
+    This gem provides you tools to benchmark and analyze the complexity of your
+    algrithms
+      
+  # Authors of the project (- {name: Bob, email: bob@gmail.com}, ...) 
+  authors: 
+    - {name: Bernard Lambeau, email: blambeau@gmail.com}
+
+  # Web links for the project (- http://..., - http://...). 
+  links:
+    - http://github.com/blambeau/bench
+
+  # Gem dependencies. (- {name: ..., version: ..., groups: [...]}, ...)
+  dependencies: 
+    # Rake is required for developers, as usual
+    - {name: rake,      version: "~> 0.8.7", groups: [development]}
+    # Bundler is required for developers and is used by the Rakefile
+    - {name: bundler,   version: "~> 1.0",   groups: [development]}
+    # RSpec is required to run 'rake spec'. See tasks/spec.rake 
+    - {name: rspec,     version: "~> 2.4.0", groups: [development]}
+    # YARD and BlueCloth are required to run 'rake yard'. See tasks/yard.rake 
+    - {name: yard,      version: "~> 0.6.4", groups: [development]}
+    - {name: bluecloth, version: "~> 2.0.9", groups: [development]}
+    # wlang is required to run 'rake debug_mail'. See tasks/debug_mail.rake
+    - {name: wlang, version: "~> 0.10.1", groups: [development]}

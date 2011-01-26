@@ -1,0 +1,14 @@
+bench.gemspec
+bench.noespec
+CHANGELOG.md
+Gemfile
+Gemfile.lock
+bin/**/*
+lib/**/*
+LICENCE.md
+Manifest.txt
+Rakefile
+README.md
+spec/**/*
+tasks/**/*
+test/**/*
