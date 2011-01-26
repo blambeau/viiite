@@ -76,37 +76,27 @@ module Bench
       @aggregators[key] = aggregator
     end
     
-    def count(arg)
+    def aggregate(arg, function)
       case arg
       when Hash
-        arg.each_pair{|k,v| add_aggregation(v, Aggregator.count(k))}
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.send(function, k))}
       when Array
-        count(Hash[arg.collect{|a| [a, a]}])
+        aggregate(Hash[arg.collect{|a| [a, a]}], function)
       when Symbol, String
-        count(arg => arg)
+        aggregate({arg => arg}, function)
       end
+    end
+    
+    def count(arg)
+      aggregate(arg, :count)
     end
     
     def sum(arg)
-      case arg
-      when Hash
-        arg.each_pair{|k,v| add_aggregation(v, Aggregator.sum(k))}
-      when Array
-        sum(Hash[arg.collect{|a| [a, a]}])
-      when Symbol, String
-        sum(arg => arg)
-      end
+      aggregate(arg, :sum)
     end
     
     def avg(arg)
-      case arg
-      when Hash
-        arg.each_pair{|k,v| add_aggregation(v, Aggregator.avg(k))}
-      when Array
-        avg(Hash[arg.collect{|a| [a, a]}])
-      when Symbol, String
-        avg(arg => arg)
-      end
+      aggregate(arg, :avg)
     end
     
     def <<(tuples)
