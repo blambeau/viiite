@@ -72,25 +72,23 @@ module Bench
       @by += names
     end
     
-    def add_aggregation(key, init_value, collector, finalizer = nil)
-      @aggregators[key] = Aggregator.new(init_value, collector, finalizer)
+    def add_aggregation(key, aggregator)
+      @aggregators[key] = aggregator
     end
     
     def count(arg)
       case arg
       when Hash
-        arg.each_pair{|k,v| count(v)}
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.count)}
       when Symbol, String
-        add_aggregation(arg, 0, lambda{|memo, tuple| memo + 1})
+        count(arg => arg)
       end
     end
     
     def sum(arg)
       case arg
       when Hash
-        arg.each_pair{|k,v|
-          add_aggregation(v, 0, lambda{|memo, tuple| memo + tuple[k]})
-        }
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.sum(k))}
       when Array
         sum(Hash[arg.collect{|a| [a, a]}])
       when Symbol, String
@@ -101,13 +99,7 @@ module Bench
     def avg(arg)
       case arg
       when Hash
-        arg.each_pair{|k,v|
-          add_aggregation(v, 
-            [ 0, 0 ], 
-            lambda{|memo, tuple| [ memo[0] + 1, memo[1] + tuple[k] ]},
-            lambda{|memo| (memo[0] == 0 ? 0 : memo[1] / memo[0]) }
-          )
-        }
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.avg(k))}
       when Array
         avg(Hash[arg.collect{|a| [a, a]}])
       when Symbol, String
