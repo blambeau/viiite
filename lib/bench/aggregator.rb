@@ -29,8 +29,13 @@ module Bench
     end
     
     # Factors a counting aggregator
-    def self.count
-      @count ||= Aggregator.new(0, lambda{|memo, val| memo + 1})
+    def self.count(attribute = nil)
+      case attribute
+      when nil, Symbol
+        @count ||= Aggregator.new(0, lambda{|memo, val| memo + 1})
+      else
+        raise ArgumentError, "Unrecognized argument: #{attribute} (#{attribute.class})"
+      end
     end
     
     # Factors a sum aggregator
