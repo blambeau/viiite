@@ -1,0 +1,13 @@
+Subject: [ANN] !{lower} !{version} Released
+
+!{lower} version !{version} has been released!
+
+!{summary}
+
+*{links as l}{* <!{l}>}{!{"\n"}}
+
+!{description}
+
+Changes:
+
+!{changes}
