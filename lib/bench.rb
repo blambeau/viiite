@@ -8,6 +8,7 @@ module Bench
   def self.run(db_file = nil) 
     bench_case = BenchCase.new(db_file)
     yield bench_case
+    bench_case
   end
   
   class BenchCase
@@ -19,7 +20,8 @@ module Bench
     def initialize(db_file = nil)
       @db_file = db_file
       @stack = [ Hash.new ]
-      @measures = [ ]
+      @measures   = [ ]
+      @run_blocks = [ ]
     end
     
     # Outputs a benchmark measure
@@ -38,16 +40,23 @@ module Bench
     end
     
     def run(&block)
-      measure = (1..runs).inject(Benchmark::Tms.new){|memo, i|
-        memo + Benchmark.measure{ block.call(i) }
-      } 
-      output(@stack.last.merge(:runs => runs, :time => measure))
-      measure
+      @run_blocks << [ @stack.last.dup, block ]
+    end
+    
+    def each
+      @run_blocks.each{|pair|
+        tuple, block = pair
+        (1..runs).each{|i|
+          measure = Benchmark.measure{ block.call(i) }
+          yield tuple.merge(:run => i, :time => measure)
+        } 
+      }
     end
     
   end
   
 end # module Bench
 require "bench/loader"
+require "bench/ext/benchmark"
 require "bench/aggregator"
 require "bench/summarize"

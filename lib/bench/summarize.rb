@@ -99,12 +99,20 @@ module Bench
       aggregate(arg, :avg)
     end
     
-    def <<(tuples)
+    def collect
       @root = build_sub_node(-1)
-      tuples.each{|t| @root << t}
+      yield(@root)
       a = []
       @root.to_a(a, {})
       a
+    end
+    
+    def <<(tuples)
+      collect{|root| 
+        tuples.each{|t| 
+          @root << t
+        }
+      }
     end
     
   end # class Summarize
