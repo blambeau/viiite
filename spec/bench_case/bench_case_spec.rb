@@ -41,7 +41,7 @@ module Bench
         end
       end
       res = b.collect do |t| t; end
-      res.collect{|t| t[:"#run"]}.should == [1, 2]
+      res.collect{|t| t[:"#run"]}.should == [0, 1]
     end
 
   end
