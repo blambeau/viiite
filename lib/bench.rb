@@ -16,14 +16,6 @@ module Bench
     def initialize(defn)
       @defn = defn
     end
-    
-    def report(hash)
-      @stack.last.merge!(hash)
-    end
-
-    def output
-      @reporter.call @stack.last.dup
-    end
   
     def variation_point(name, value, &block)
       if block
@@ -51,6 +43,16 @@ module Bench
     end
     alias :each :execute
     
+    private    
+
+    def report(hash)
+      @stack.last.merge!(hash)
+    end
+
+    def output
+      @reporter.call @stack.last.dup
+    end
+
   end # class BenchCase
   
 end # module Bench
