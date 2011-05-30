@@ -28,7 +28,7 @@ module Bench
     end
     
     def run(&block)
-      measure = Benchmark.measure{ block.call(self) }
+      measure = Benchmark.measure{ block.call }
       report :stime => measure.stime,
              :utime => measure.utime,
              :total => measure.total,
