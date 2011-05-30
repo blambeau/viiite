@@ -20,6 +20,14 @@ module Bench
       res.size.should == 1
       res.first[:measure].should be_kind_of(Benchmark::Tms)
     end
+
+    it "should be enumerable" do
+      b = Bench.define do run{ 1 + 1 } end
+      res = b.collect do |tuple| tuple; end
+      res.should be_kind_of(Array)
+      res.size.should == 1
+      res.first[:measure].should be_kind_of(Benchmark::Tms)
+    end
     
   end
 end

@@ -10,6 +10,7 @@ module Bench
   end
   
   class BenchCase
+    include Enumerable
     
     # Creates a benchmarking case instance
     def initialize(defn)
@@ -41,8 +42,9 @@ module Bench
       self.instance_eval &@defn
       @stack, @reporter = nil, nil
     end
+    alias :each :execute
     
-  end
+  end # class BenchCase
   
 end # module Bench
 require "bench/loader"
