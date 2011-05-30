@@ -33,5 +33,16 @@ module Bench
       res.first[:total].should be_kind_of(Float)
     end
     
+    it "should support variation points" do
+      b = Bench.define do |bench|
+        2.times do |i| 
+          bench.variation_point(:"#run", i)
+          bench.run do end
+        end
+      end
+      res = b.collect do |t| t; end
+      res.collect{|t| t[:"#run"]}.should == [1, 2]
+    end
+
   end
 end
