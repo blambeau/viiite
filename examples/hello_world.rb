@@ -17,7 +17,7 @@ end
 
 t = AttrTest.new
 b = Bench.run('hello_world.bench') do |bench|
-  bench.runs = 10000
+  bench.runs = 1000
   bench.variation_point(:ruby_version, RUBY_VERSION)
   bench.variation_point(:test, :via_reader){
     bench.run{|run| t.via_reader }
@@ -26,14 +26,25 @@ b = Bench.run('hello_world.bench') do |bench|
     bench.run{|run| t.via_method }
   }
 end
-# b.each{|x| puts x.inspect}
+b.each{|x| puts x.inspect}
 s = Bench::Summarize.new{|s|
-  s.by :ruby_version, :test
-  s.count :runs
-  s.avg :time => :avg_time
-  s.sum :time => :total_time
+  s.by    :ruby_version, :test
+  s.avg   :time
 }
 a = (s << b)
-puts a.collect{|h| 
-  [ h[:ruby_version], h[:test], h[:avg_time].total, h[:total_time].total ].inspect
-}.join("\n")
+puts a.collect{|h| h.inspect}.join("\n")
+
+# [
+#   {:ruby_version=>"1.8.6", :test=>:via_reader, :run=>1, :total=>0.0}
+#   {:ruby_version=>"1.8.6", :test=>:via_method, :run=>1, :total=>0.0}
+#   {:ruby_version=>"1.8.6", :test=>:via_reader, :run=>2, :total=>0.0}
+#   {:ruby_version=>"1.8.6", :test=>:via_method, :run=>2, :total=>0.0}
+#   {:ruby_version=>"1.8.6", :test=>:via_reader, :run=>3, :total=>0.0}
+#   {:ruby_version=>"1.8.6", :test=>:via_method, :run=>3, :total=>0.0}
+# ]
+# 
+# [
+#   {:ruby_version=>"1.8.6", :run=>1, :via_reader => {:total=>0.0}, :via_method => {:total => 0.0}}
+#   {:ruby_version=>"1.8.6", :run=>2, :via_reader => {:total=>0.0}, :via_method => {:total => 0.0}}
+#   {:ruby_version=>"1.8.6", :run=>3, :via_reader => {:total=>0.0}, :via_method => {:total => 0.0}}
+# ]
