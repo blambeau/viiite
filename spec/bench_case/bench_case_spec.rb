@@ -4,14 +4,14 @@ module Bench
     
     it "should be definable with Bench.define" do
       b = Bench.define do |bench|
-        bench.run{ 1 + 1 }
+        bench.report{ 1 + 1 }
       end
       b.should be_kind_of(BenchCase)
     end
 
     it "should be executable" do
       b = Bench.define do |bench|
-        bench.run{ 1 + 1 }
+        bench.report{ 1 + 1 }
       end
       res = []
       b.execute do |tuple|
@@ -25,7 +25,7 @@ module Bench
 
     it "should be enumerable" do
       b = Bench.define do |bench|
-        bench.run{ 1 + 1 }
+        bench.report{ 1 + 1 }
       end
       res = b.to_a
       res.should be_kind_of(Array)
@@ -37,7 +37,7 @@ module Bench
       b = Bench.define do |bench|
         2.times do |i| 
           bench.variation_point(:"#run", i)
-          bench.run do end
+          bench.report do end
         end
       end
       res = b.to_a

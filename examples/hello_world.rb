@@ -22,10 +22,10 @@ bench = Bench.define do |b|
   10.times do |i|
     b.variation_point :"#run", i
     b.variation_point :test, :via_reader do
-      b.run{ t.via_reader }
+      b.report{ t.via_reader }
     end
     b.variation_point :test, :via_method do
-      b.run{ t.via_method }
+      b.report{ t.via_method }
     end
   end
 end

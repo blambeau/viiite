@@ -16,24 +16,30 @@ module Bench
     def initialize(defn)
       @defn = defn
     end
+
+    def with(hash)
+      if block_given?
+        @stack << @stack.last.merge(hash)
+        res = yield
+        @stack.pop
+        res
+      else
+        @stack.last.merge!(hash)
+      end  
+    end
   
     def variation_point(name, value, &block)
-      if block
-        @stack << @stack.last.merge(name => value)
-        block.call(self)
-        @stack.pop
-      else
-        @stack.last[name] = value
-      end
+      with(name => value, &block)
     end
     
-    def run(&block)
+    def report(&block)
       measure = Benchmark.measure{ block.call }
-      report :stime => measure.stime,
-             :utime => measure.utime,
-             :total => measure.total,
-             :real  => measure.real
-      output
+      with :stime => measure.stime,
+           :utime => measure.utime,
+           :total => measure.total,
+           :real  => measure.real do
+        output
+      end
     end
 
     def execute(&reporter)
@@ -44,10 +50,6 @@ module Bench
     alias :each :execute
     
     private    
-
-    def report(hash)
-      @stack.last.merge!(hash)
-    end
 
     def output
       @reporter.call @stack.last.dup
