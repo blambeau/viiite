@@ -59,6 +59,5 @@ module Bench
   
 end # module Bench
 require "bench/loader"
-require "bench/ext/benchmark"
 require "bench/aggregator"
 require "bench/summarize"
