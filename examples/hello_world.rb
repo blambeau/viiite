@@ -19,7 +19,7 @@ t = AttrTest.new
 
 bench = Bench.define do |b|
   b.variation_point :ruby_version, RUBY_VERSION
-  10.times do |i|
+  100.times do |i|
     b.variation_point :"#run", i
     b.variation_point :test, :via_reader do
       b.report{ t.via_reader }
