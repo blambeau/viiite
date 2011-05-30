@@ -4,53 +4,42 @@
 module Bench
   
   VERSION = "1.0.0".freeze
-  
-  def self.run(db_file = nil) 
-    bench_case = BenchCase.new(db_file)
-    yield bench_case
-    bench_case
+
+  def self.define(&block)
+    BenchCase.new(block)
   end
   
   class BenchCase
     
-    # Number of runs to make
-    attr_accessor :runs
-    
     # Creates a benchmarking case instance
-    def initialize(db_file = nil)
-      @db_file = db_file
-      @stack = [ Hash.new ]
-      @measures   = [ ]
-      @run_blocks = [ ]
+    def initialize(defn)
+      @defn = defn
     end
     
     # Outputs a benchmark measure
-    def output(hash)
-      @measures << [ hash ]
+    def output(measure)
+      @reporter.call @stack.last.merge(:measure => measure)
     end
   
     # Sets a variation point  
-    def variation_point(name, value)
-      @stack.last[name] = value
-      if block_given?
-        @stack << @stack.last.dup  
-        yield
+    def variation_point(name, value, &block)
+      if block
+        @stack << @stack.last.merge(name => value)
+        block.call(self)
         @stack.pop
+      else
+        @stack.last[name] = value
       end
     end
     
     def run(&block)
-      @run_blocks << [ @stack.last.dup, block ]
+      output Benchmark.measure{ block.call(self) }
     end
-    
-    def each
-      @run_blocks.each{|pair|
-        tuple, block = pair
-        (1..runs).each{|i|
-          measure = Benchmark.measure{ block.call(i) }
-          yield tuple.merge(:run => i, :time => measure)
-        } 
-      }
+
+    def execute(&reporter)
+      @stack, @reporter = [ {} ], reporter
+      self.instance_eval &@defn
+      @stack, @reporter = nil, nil
     end
     
   end

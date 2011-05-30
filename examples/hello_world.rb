@@ -16,16 +16,20 @@ class AttrTest
 end
 
 t = AttrTest.new
-b = Bench.run('hello_world.bench') do |bench|
-  bench.runs = 1000
-  bench.variation_point(:ruby_version, RUBY_VERSION)
-  bench.variation_point(:test, :via_reader){
-    bench.run{|run| t.via_reader }
-  }
-  bench.variation_point(:test, :via_method){
-    bench.run{|run| t.via_method }
-  }
+
+b = Bench.define do
+  variation_point, :ruby_version, RUBY_VERSION
+  1000.times do |i|
+    variation_point :"#run", i
+    variation_point(:test, :via_reader){
+      run{|run| t.via_reader }
+    }
+    variation_point(:test, :via_method){
+      run{|run| t.via_method }
+    }    
+  end
 end
+
 b.each{|x| puts x.inspect}
 s = Bench::Summarize.new{|s|
   s.by    :ruby_version, :test
@@ -48,3 +52,4 @@ puts a.collect{|h| h.inspect}.join("\n")
 #   {:ruby_version=>"1.8.6", :run=>2, :via_reader => {:total=>0.0}, :via_method => {:total => 0.0}}
 #   {:ruby_version=>"1.8.6", :run=>3, :via_reader => {:total=>0.0}, :via_method => {:total => 0.0}}
 # ]
+
