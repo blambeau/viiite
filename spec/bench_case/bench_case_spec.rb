@@ -27,7 +27,7 @@ module Bench
       b = Bench.define do |bench|
         bench.run{ 1 + 1 }
       end
-      res = b.collect do |tuple| tuple; end
+      res = b.to_a
       res.should be_kind_of(Array)
       res.size.should == 1
       res.first[:total].should be_kind_of(Float)
@@ -40,7 +40,7 @@ module Bench
           bench.run do end
         end
       end
-      res = b.collect do |t| t; end
+      res = b.to_a
       res.collect{|t| t[:"#run"]}.should == [0, 1]
     end
 
