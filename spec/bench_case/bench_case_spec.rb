@@ -13,12 +13,12 @@ module Bench
       b = Bench.define do run{ 1 + 1 } end
       res = []
       b.execute do |tuple|
-        tuple.should have_key(:measure)
+        tuple.should have_key(:total)
         res << tuple
       end
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:measure].should be_kind_of(Benchmark::Tms)
+      res.first[:total].should be_kind_of(Float)
     end
 
     it "should be enumerable" do
@@ -26,7 +26,7 @@ module Bench
       res = b.collect do |tuple| tuple; end
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:measure].should be_kind_of(Benchmark::Tms)
+      res.first[:total].should be_kind_of(Float)
     end
     
   end

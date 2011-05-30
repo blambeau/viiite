@@ -17,12 +17,14 @@ module Bench
       @defn = defn
     end
     
-    # Outputs a benchmark measure
-    def output(measure)
-      @reporter.call @stack.last.merge(:measure => measure)
+    def report(hash)
+      @stack.last.merge!(hash)
+    end
+
+    def output
+      @reporter.call @stack.last.dup
     end
   
-    # Sets a variation point  
     def variation_point(name, value, &block)
       if block
         @stack << @stack.last.merge(name => value)
@@ -34,7 +36,12 @@ module Bench
     end
     
     def run(&block)
-      output Benchmark.measure{ block.call(self) }
+      measure = Benchmark.measure{ block.call(self) }
+      report :stime => measure.stime,
+             :utime => measure.utime,
+             :total => measure.total,
+             :real  => measure.real
+      output
     end
 
     def execute(&reporter)
