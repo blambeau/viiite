@@ -8,6 +8,15 @@ module Bench
   def self.define(&block)
     BenchCase.new(block)
   end
+
+  def self.short_ruby_descr
+    if Object.const_defined?(:RUBY_DESCRIPTION)
+      RUBY_DESCRIPTION =~ /^([^\s]+\s*[^\s]+)/
+      $1
+    else
+      "ruby #{RUBY_VERSION} (#{RUBY_PLATFORM})"
+    end
+  end
   
   class BenchCase
     include Enumerable
