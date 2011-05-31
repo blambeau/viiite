@@ -62,7 +62,7 @@ module Bench
     
     def build_sub_node(index)
       if key = @by[index + 1]
-        ByNode.new(self, index+1, key)
+        ByNode.new(self, index + 1, key)
       else
         LeafNode.new(self, index + 1, @aggregators)
       end
@@ -109,9 +109,7 @@ module Bench
     
     def <<(tuples)
       collect{|root| 
-        tuples.each{|t| 
-          @root << t
-        }
+        tuples.each{|t| @root << t}
       }
     end
     
