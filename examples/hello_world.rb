@@ -18,6 +18,7 @@ end
 t = AttrTest.new
 
 bench = Bench.define do |b|
+  b.variation_point :ruby_platform, RUBY_PLATFORM
   b.variation_point :ruby_version, RUBY_VERSION
   100.times do |i|
     b.variation_point :"#run", i
@@ -32,7 +33,7 @@ end
 #bench.each{|x| puts x.inspect}
 
 s = Bench::Summarize.new{|s|
-  s.by    :ruby_version, :test
+  s.by    :ruby_version, :ruby_platform, :test
   s.avg   :real
   s.count :count
 }
