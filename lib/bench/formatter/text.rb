@@ -47,7 +47,7 @@ module Bench
             when Symbol
               value.inspect
             when Float
-              ((value * 100000).to_i / 100000.0).to_s
+              "%.7f" % value
             when Hash
               to_s([value])
             when Array

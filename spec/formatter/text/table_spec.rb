@@ -24,12 +24,12 @@ module Bench
         let(:records){ [ [:by_x, 10.0], [:by_y, 2.0] ] }
 
         specify "render" do
-          table.render.should == "+---------+--------+\n" +
-                                 "| :method | :total |\n" +
-                                 "+---------+--------+\n" +
-                                 "| :by_x   |   10.0 |\n" +
-                                 "| :by_y   |    2.0 |\n" +
-                                 "+---------+--------+\n"
+          table.render.should == "+---------+------------+\n" +
+                                 "| :method | :total     |\n" +
+                                 "+---------+------------+\n" +
+                                 "| :by_x   | 10.0000000 |\n" +
+                                 "| :by_y   |  2.0000000 |\n" +
+                                 "+---------+------------+\n"
         end
 
       end
