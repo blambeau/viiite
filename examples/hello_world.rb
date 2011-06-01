@@ -32,7 +32,8 @@ end
 #bench.each{|x| puts x.inspect}
 
 summarized = Bench::Summarizer.new{|s|
-  s.by    :ruby_version, :test
+  s.by    :ruby_version
+  s.pivot :test
   s.avg   :real
   s.count :count
 }.summarize(bench)

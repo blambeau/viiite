@@ -20,6 +20,18 @@ module Bench
       end
       
     end # class ByNode
+
+    class PivotNode < ByNode
+
+      def each
+        tuple = {}
+        @subtree.each_pair do |k,v| 
+          tuple[k] = v.to_a
+        end
+        yield tuple
+      end
+
+    end # class PivotNode
     
     class LeafNode
       include Enumerable
@@ -63,6 +75,8 @@ module Bench
       case kind
         when :by 
           ByNode.new(key, lambda{ build_sub_node(index + 1) })
+        when :pivot
+          PivotNode.new(key, lambda{ build_sub_node(index + 1) })
         when NilClass
           LeafNode.new(@aggregators)
         else
@@ -74,6 +88,10 @@ module Bench
     
     def by(*names)
       @nodes += names.collect{|n| [:by, n]}
+    end
+    
+    def pivot(*names)
+      @nodes += names.collect{|n| [:pivot, n]}
     end
     
     def count(arg)
