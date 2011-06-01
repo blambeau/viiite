@@ -71,24 +71,11 @@ module Bench
         LeafNode.new(self, index + 1, @aggregators)
       end
     end
+
+    # Factory methods (public DSL)
     
     def by(*names)
       @by += names
-    end
-    
-    def add_aggregation(key, aggregator)
-      @aggregators[key] = aggregator
-    end
-    
-    def aggregate(arg, function)
-      case arg
-      when Hash
-        arg.each_pair{|k,v| add_aggregation(v, Aggregator.send(function, k))}
-      when Array
-        aggregate(Hash[arg.collect{|a| [a, a]}], function)
-      when Symbol, String
-        aggregate({arg => arg}, function)
-      end
     end
     
     def count(arg)
@@ -103,18 +90,40 @@ module Bench
       aggregate(arg, :avg)
     end
     
+    # Running methods
+
+    def root
+      @root ||= build_sub_node(-1)
+    end
+
     def collect
-      @root = build_sub_node(-1)
-      yield(@root)
+      yield(root)
       a = []
-      @root.to_a(a, {})
+      root.to_a(a, {})
       a
     end
     
     def <<(tuples)
-      collect{|root| 
-        tuples.each{|t| @root << t}
-      }
+      collect{|root| tuples.each{|t| root << t}}
+    end
+
+    # Private API
+
+    private
+    
+    def add_aggregation(key, aggregator)
+      @aggregators[key] = aggregator
+    end
+    
+    def aggregate(arg, function)
+      case arg
+      when Hash
+        arg.each_pair{|k,v| add_aggregation(v, Aggregator.send(function, k))}
+      when Array
+        aggregate(Hash[arg.collect{|a| [a, a]}], function)
+      when Symbol, String
+        aggregate({arg => arg}, function)
+      end
     end
     
   end # class Summarize

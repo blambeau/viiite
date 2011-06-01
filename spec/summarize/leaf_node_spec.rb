@@ -3,9 +3,13 @@ module Bench
   class Summarize
     describe LeafNode do
       
-      let(:count) { Aggregator.count    }
-      let(:sum)   { Aggregator.sum(:id) }
-      let(:leaf)  { LeafNode.new(nil, 0, :sum => sum, :count => count) }
+      let(:summarize) {
+        Summarize.new do |s|
+          s.count :id => :count
+          s.sum   :id => :sum
+        end
+      }
+      let(:leaf)  { summarize.root }
       let(:tuples){ [{:id => 1}, {:id => 2}] }
 
       it "should have a each method" do
