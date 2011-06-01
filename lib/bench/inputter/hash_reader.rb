@@ -11,10 +11,10 @@ module Bench
         @input.each_line do |line|
           begin
             h = Kernel.eval(line)
-            yield(h)
             raise "hash expected, got #{h}" unless h.is_a?(Hash) 
+            yield(h)
           rescue Exception => ex
-            $stderr << "Skipping #{line}: #{ex.message}"
+            $stderr << "Skipping #{line}"
           end
         end
       end

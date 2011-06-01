@@ -117,11 +117,16 @@ module Bench
       end # class Table
 
       def self.render(relation, buffer = "")
-        attrs = relation.first.keys
-        records = relation.collect{|t|
-          attrs.collect{|a| t[a]}
-        }
-        Table.new(records, attrs).render(buffer)
+        first = relation.first
+        if first.nil?
+          buffer << "+--+ Empty relation +--+\n"
+        else
+          attrs = first.keys
+          records = relation.collect{|t|
+            attrs.collect{|a| t[a]}
+          }
+          Table.new(records, attrs).render(buffer)
+        end
       end
 
     end # class Text
