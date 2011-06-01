@@ -69,4 +69,4 @@ module Bench
 end # module Bench
 require "bench/loader"
 require "bench/aggregator"
-require "bench/summarize"
+require "bench/summarizer"

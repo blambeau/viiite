@@ -1,10 +1,10 @@
 require File.expand_path('../../spec_helper', __FILE__)
 module Bench
-  class Summarize
+  class Summarizer
     describe ByNode do
       
       let(:summarize) {
-        Summarize.new do |s|
+        Summarizer.new do |s|
           s.by    :ruby_version
           s.sum   :total => :sum
         end

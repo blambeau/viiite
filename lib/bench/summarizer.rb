@@ -1,5 +1,5 @@
 module Bench
-  class Summarize
+  class Summarizer
     
     class ByNode
       include Enumerable
@@ -115,5 +115,5 @@ module Bench
       end
     end
     
-  end # class Summarize
+  end # class Summarizer
 end # module Bench

@@ -1,6 +1,6 @@
 require File.expand_path('../spec_helper', __FILE__)
 module Bench
-  describe "Summarize /" do
+  describe Summarizer do
     
     let(:tuples) {[
       {:algorithm => "hello1", :time => 12.0},
@@ -9,7 +9,7 @@ module Bench
     ]}
 
     it "should support a bulk computation" do
-      s = Summarize.new{|s|
+      s = Summarizer.new{|s|
         s.by    :algorithm
         s.count :"#invocations"
         s.sum   :time => :total_time
@@ -21,5 +21,5 @@ module Bench
       ]
     end
     
-  end # Summarize
+  end # Summarizer
 end # module Bench

@@ -31,7 +31,7 @@ bench = Bench.define do |b|
 end
 #bench.each{|x| puts x.inspect}
 
-summarized = Bench::Summarize.new{|s|
+summarized = Bench::Summarizer.new{|s|
   s.by    :ruby_version, :test
   s.avg   :real
   s.count :count
