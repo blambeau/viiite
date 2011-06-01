@@ -86,4 +86,5 @@ module Bench
 end # module Bench
 require "bench/aggregator"
 require "bench/summarizer"
+require "bench/inputter/hash_reader"
 require "bench/formatter/text"
