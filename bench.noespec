@@ -40,14 +40,11 @@ variables:
 
   # Gem dependencies. (- {name: ..., version: ..., groups: [...]}, ...)
   dependencies: 
-    # Rake is required for developers, as usual
-    - {name: rake,      version: "~> 0.8.7", groups: [development]}
-    # Bundler is required for developers and is used by the Rakefile
-    - {name: bundler,   version: "~> 1.0",   groups: [development]}
-    # RSpec is required to run 'rake spec'. See tasks/spec.rake 
-    - {name: rspec,     version: "~> 2.4.0", groups: [development]}
-    # YARD and BlueCloth are required to run 'rake yard'. See tasks/yard.rake 
-    - {name: yard,      version: "~> 0.6.4", groups: [development]}
-    - {name: bluecloth, version: "~> 2.0.9", groups: [development]}
-    # wlang is required to run 'rake debug_mail'. See tasks/debug_mail.rake
-    - {name: wlang, version: "~> 0.10.1", groups: [development]}
+    - {name: rake,      version: "~> 0.8.7",  groups: [development]}
+    - {name: bundler,   version: "~> 1.0",    groups: [development]}
+    - {name: rspec,     version: "~> 2.4.0",  groups: [development]}
+    - {name: yard,      version: "~> 0.6.4",  groups: [development]}
+    - {name: bluecloth, version: "~> 2.0.9",  groups: [development]}
+    - {name: wlang,     version: "~> 0.10.1", groups: [development]}
+    - {name: noe,       version: "~> 1.3.0",  groups: [development]}
+    - {name: quickl,    version: "~> 0.2.0",  groups: [runtime]}

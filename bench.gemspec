@@ -1,8 +1,8 @@
 # We require your library, mainly to have access to the VERSION number. 
 # Feel free to set $version manually.
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require "bench"
-$version = Bench::VERSION.dup
+require "bench/version"
+$version = Bench::Version.to_s
 
 #
 # This is your Gem specification. Default values are provided so that your library
@@ -80,11 +80,10 @@ Gem::Specification.new do |s|
   # of the project. Entries of the manifest are interpreted as Dir[...] 
   # patterns so that lazy people may use wilcards like lib/**/*
   #
-  here = File.dirname(__FILE__)
+  here = File.expand_path(File.dirname(__FILE__))
   s.files = File.readlines(File.join(here, 'Manifest.txt')).
-                 inject([]){|files, pattern| 
-    files + Dir[File.join(here, pattern.strip)]
-  }
+                 inject([]){|files, pattern| files + Dir[File.join(here, pattern.strip)]}.
+                 collect{|x| x[(1+here.size)..-1]}
 
   # Test files included in this gem.
   #
@@ -130,7 +129,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency("yard", "~> 0.6.4")
   s.add_development_dependency("bluecloth", "~> 2.0.9")
   s.add_development_dependency("wlang", "~> 0.10.1")
-  
+  s.add_development_dependency("noe", "~> 1.3.0")
+  s.add_dependency("quickl", "~> 0.2.0")
 
   # The version of ruby required by this gem
   #

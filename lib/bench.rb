@@ -1,9 +1,10 @@
+require "bench/version"
+require "bench/loader"
+require "benchmark"
 #
 # Benchmarking and complexity analyzer utility
 #
 module Bench
-  
-  VERSION = "1.0.0".freeze
 
   def self.define(&block)
     BenchCase.new(block)
@@ -83,7 +84,6 @@ module Bench
   end # class BenchCase
   
 end # module Bench
-require "bench/loader"
 require "bench/aggregator"
 require "bench/summarizer"
 require "bench/formatter/text"

@@ -25,8 +25,8 @@
 # http://rake.rubyforge.org/classes/Rake/TestTask.html
 #
 begin
-  desc "Lauches unit tests"
   require 'rake/testtask'
+  desc "Run unit tests"
   Rake::TestTask.new(:unit_test) do |t|
 
     # List of directories to added to $LOAD_PATH before running the
@@ -71,6 +71,7 @@ rescue LoadError => ex
     abort 'rspec is not available. In order to run spec, you must: gem install rspec'
   end
 ensure
+  desc "Run all tests"
   task :test => [:unit_test]
 end
 
