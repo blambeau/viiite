@@ -32,6 +32,8 @@ module Bench
       measure = Benchmark.measure{ block.call }
       with :stime => measure.stime,
            :utime => measure.utime,
+           :cstime => measure.cstime,
+           :cutime => measure.cutime,
            :total => measure.total,
            :real  => measure.real do
         output
