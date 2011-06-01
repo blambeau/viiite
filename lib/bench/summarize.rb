@@ -13,6 +13,12 @@ module Bench
       def <<(tuple)
         @subtree[tuple[@key]] << tuple
       end
+
+      def each
+        @subtree.each_pair do |k,v|
+          v.each{|t| yield t.merge(@key => k)}
+        end
+      end
       
       def to_a(collect, parent_hash)
         @subtree.each_pair do |k,v|
