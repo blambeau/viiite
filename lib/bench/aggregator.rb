@@ -69,6 +69,60 @@ module Bench
       end
     end
   
+    def self.min(attribute = nil)
+      case attribute
+      when Symbol
+        Aggregator.new(nil, lambda{|memo, val|
+          if memo.nil?
+            val[attribute]
+          elsif val.nil?
+            memo
+          else
+            val[attribute] < memo ? val[attribute] : memo
+          end
+        })
+      when nil
+        Aggregator.new(nil, lambda{|memo, val|
+          if memo.nil?
+            val
+          elsif val.nil?
+            memo
+          else
+            val < memo ? val : memo
+          end
+        })
+      else
+        raise ArgumentError, "Unrecognized argument: #{attribute} (#{attribute.class})"
+      end
+    end
+  
+    def self.max(attribute = nil)
+      case attribute
+      when Symbol
+        Aggregator.new(nil, lambda{|memo, val|
+          if memo.nil?
+            val[attribute]
+          elsif val.nil?
+            memo
+          else
+            val[attribute] > memo ? val[attribute] : memo
+          end
+        })
+      when nil
+        Aggregator.new(nil, lambda{|memo, val|
+          if memo.nil?
+            val
+          elsif val.nil?
+            memo
+          else
+            val > memo ? val : memo
+          end
+        })
+      else
+        raise ArgumentError, "Unrecognized argument: #{attribute} (#{attribute.class})"
+      end
+    end
+  
   end # class Aggregator
 
 end # module Bench
