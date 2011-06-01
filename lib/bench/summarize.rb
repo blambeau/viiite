@@ -2,6 +2,7 @@ module Bench
   class Summarize
     
     class ByNode
+      include Enumerable
       
       def initialize(summarize, index, key)
         @key = key
@@ -20,15 +21,10 @@ module Bench
         end
       end
       
-      def to_a(collect, parent_hash)
-        @subtree.each_pair do |k,v|
-          v.to_a(collect, parent_hash.merge(@key => k))
-        end
-      end
-      
     end # class ByNode
     
     class LeafNode
+      include Enumerable
       
       attr_reader :aggregation
       
@@ -56,10 +52,6 @@ module Bench
 
       def each
         yield(finalize)
-      end
-      
-      def to_a(collect, parent_hash)
-        collect << parent_hash.merge(finalize)
       end
       
     end # class LeafNode
@@ -98,19 +90,10 @@ module Bench
     
     # Running methods
 
-    def root
-      @root ||= build_sub_node(-1)
-    end
-
-    def collect
-      yield(root)
-      a = []
-      root.to_a(a, {})
-      a
-    end
-    
-    def <<(tuples)
-      collect{|root| tuples.each{|t| root << t}}
+    def summarize(tuples)
+      root = build_sub_node(-1)
+      tuples.each{|t| root << t}
+      root
     end
 
     # Private API

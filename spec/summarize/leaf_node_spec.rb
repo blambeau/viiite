@@ -9,14 +9,11 @@ module Bench
           s.sum   :id => :sum
         end
       }
-      let(:leaf)  { summarize.root }
       let(:tuples){ [{:id => 1}, {:id => 2}] }
+      let(:leaf)  { summarize.summarize(tuples) }
 
       it "should have a each method" do
-        tuples.each{|t| leaf << t}
-        result = []
-        leaf.each{|t| result << t}
-        result.should == [{:sum => 3, :count => 2}]
+        leaf.to_a.should == [{:sum => 3, :count => 2}]
       end
 
     end

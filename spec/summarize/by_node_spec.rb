@@ -9,17 +9,14 @@ module Bench
           s.sum   :total => :sum
         end
       }
-      let(:by)    { summarize.root }
       let(:tuples){ [ {:ruby_version => "1.8.6", :total => 2}, 
                       {:ruby_version => "1.8.7", :total => 4}, 
                       {:ruby_version => "1.8.6", :total => 3} ] }
+      let(:by)    { summarize.summarize(tuples) }
 
       it "should have a each method" do
-        tuples.each{|t| by << t}
-        result = []
-        by.each{|t| result << t}
-        result.should == [{:ruby_version => "1.8.6", :sum => 5},
-                          {:ruby_version => "1.8.7", :sum => 4}]
+        by.to_a.should == [{:ruby_version => "1.8.6", :sum => 5},
+                           {:ruby_version => "1.8.7", :sum => 4}]
       end
 
     end
