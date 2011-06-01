@@ -67,10 +67,10 @@ module Bench
       
     end # class LeafNode
     
-    def initialize
+    def initialize(defn = nil, &block)
       @nodes = []
       @aggregators = {}
-      yield self
+      (defn || block).call(self)
     end
     
     def build_sub_node(index)

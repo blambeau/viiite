@@ -6,8 +6,12 @@ require "benchmark"
 #
 module Bench
 
-  def self.define(&block)
-    BenchCase.new(block)
+  def self.runner(&block)
+    Runner.new(block)
+  end
+
+  def self.summarizer(&block)
+    Summarizer.new(block)
   end
 
   def self.sortkeys(keys)
@@ -30,7 +34,7 @@ module Bench
   end
     
 end # module Bench
-require "bench/bench_case"
+require "bench/runner"
 require "bench/aggregator"
 require "bench/summarizer"
 require "bench/inputter/hash_reader"

@@ -1,16 +1,16 @@
-require File.expand_path('../../spec_helper', __FILE__)
+require File.expand_path('../spec_helper', __FILE__)
 module Bench
-  describe BenchCase do
+  describe Runner do
     
-    it "should be definable with Bench.define" do
-      b = Bench.define do |bench|
+    it "should be definable with Bench.runner" do
+      b = Bench.runner do |bench|
         bench.report{ 1 + 1 }
       end
-      b.should be_kind_of(BenchCase)
+      b.should be_kind_of(Bench::Runner)
     end
 
     it "should be executable" do
-      b = Bench.define do |bench|
+      b = Bench.runner do |bench|
         bench.report{ 1 + 1 }
       end
       res = []
@@ -24,7 +24,7 @@ module Bench
     end
 
     it "should be enumerable" do
-      b = Bench.define do |bench|
+      b = Bench.runner do |bench|
         bench.report{ 1 + 1 }
       end
       res = b.to_a
@@ -34,7 +34,7 @@ module Bench
     end
     
     it "should support variation points" do
-      b = Bench.define do |bench|
+      b = Bench.runner do |bench|
         2.times do |i| 
           bench.variation_point(:"#run", i)
           bench.report do end
@@ -45,7 +45,7 @@ module Bench
     end
 
     it "should support ranging over values" do
-      b = Bench.define do |bench|
+      b = Bench.runner do |bench|
         bench.range_over [10, 100, 1000], :times do |t|
           bench.report do end
         end

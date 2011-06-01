@@ -1,5 +1,5 @@
 module Bench
-  class BenchCase
+  class Runner
     include Enumerable 
 
     # Creates a benchmarking case instance
@@ -57,5 +57,5 @@ module Bench
       @reporter.call @stack.last.dup
     end
 
-  end # class BenchCase
+  end # class Runner
 end # module Bench
