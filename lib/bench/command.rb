@@ -37,5 +37,7 @@ module Bench
 
   end # class Delegator
 end # module Bench
+require "bench/command/commons"
+require "bench/command/run"
 require "bench/command/help"
 

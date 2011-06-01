@@ -4,7 +4,7 @@ module Bench
     # Show help about a specific command
     #
     # SYNOPSIS
-    #   #{program_name} #{command_name} help COMMAND
+    #   #{program_name} #{command_name} COMMAND
     #
     class Help < Quickl::Command(__FILE__, __LINE__)
       
