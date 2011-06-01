@@ -53,23 +53,27 @@ module Bench
     end # class LeafNode
     
     def initialize
-      @by = []
+      @nodes = []
       @aggregators = {}
       yield self
     end
     
     def build_sub_node(index)
-      if key = @by[index + 1]
-        ByNode.new(key, lambda{ build_sub_node(index + 1) })
-      else
-        LeafNode.new(@aggregators)
+      kind, key = @nodes[index + 1]
+      case kind
+        when :by 
+          ByNode.new(key, lambda{ build_sub_node(index + 1) })
+        when NilClass
+          LeafNode.new(@aggregators)
+        else
+          raise "Unexpected node kind #{kind}"
       end
     end
 
     # Factory methods (public DSL)
     
     def by(*names)
-      @by += names
+      @nodes += names.collect{|n| [:by, n]}
     end
     
     def count(arg)
