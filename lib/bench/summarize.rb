@@ -20,7 +20,7 @@ module Bench
         end
       end
       
-    end
+    end # class ByNode
     
     class LeafNode
       
@@ -47,12 +47,16 @@ module Bench
         }
         f
       end
+
+      def each
+        yield(finalize)
+      end
       
       def to_a(collect, parent_hash)
         collect << parent_hash.merge(finalize)
       end
       
-    end
+    end # class LeafNode
     
     def initialize
       @by = []
