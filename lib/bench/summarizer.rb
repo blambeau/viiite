@@ -15,7 +15,10 @@ module Bench
 
       def each
         Bench.sortkeys(@subtree.keys).each do |k|
-          @subtree[k].each{|t| yield t.merge(@key => k)}
+          @subtree[k].each{|t| 
+            tuple = {@key => k}.merge(t)
+            yield(tuple)
+          }
         end
       end
       

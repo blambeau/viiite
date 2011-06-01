@@ -19,7 +19,7 @@ t = AttrTest.new
 
 bench = Bench.define do |b|
   b.variation_point :ruby_version, Bench.short_ruby_descr
-  b.range_over([1, 10, 100, 1000], :runs) do |runs|
+  b.range_over([100, 1000, 10000], :runs) do |runs|
     b.variation_point :test, :via_reader do
       b.report{ runs.times{ t.via_reader } }
     end
@@ -28,7 +28,6 @@ bench = Bench.define do |b|
     end
   end
 end
-#bench.each{|x| puts x.inspect}
 
 summarized = Bench::Summarizer.new{|s|
   s.by    :ruby_version, :runs
@@ -37,5 +36,5 @@ summarized = Bench::Summarizer.new{|s|
   s.max   :real => :max
   s.min   :real => :min
 }.summarize(bench)
-puts Bench.render(summarized)
+puts Bench.render(summarized.to_a)
 
