@@ -6,22 +6,42 @@ module Bench
     # SYNOPSIS
     #   #{program_name} #{command_name} BENCHFILE
     #
+    # OPTIONS
+    # #{summarized_options}
+    #
     class Run < Quickl::Command(__FILE__, __LINE__)
       
       options do |opt|
         
+        @formatter = :text
+        opt.on('-p', '--pipe') do 
+          @formatter = :inspect
+        end
+
+      end # options
+
+      def output(enum, io = $stdout)
+        case @formatter
+          when :inspect
+            enum.each{|t| io << t.inspect << "\n"}
+          when :text
+            Formatter::Text.render(enum, io)
+        end
+      end
+
+      def build_chain(args)
+        parts = args.collect do |arg|
+          Kernel.instance_eval(File.read(arg), arg)
+        end
+        parts.unshift Inputter::HashReader.new($stdin)
+        parts[1..-1].inject(parts.first) do |chain, n|
+          n.pipe(chain)
+        end
       end
 
       def execute(args)
-        raise Quickl::InvalidArgument unless args.size == 1
-        file = args.first
-        res = Kernel.instance_eval(File.read(file), file)
-        case res
-          when Bench::BenchCase
-            res.execute{|tuple| puts tuple.inspect}
-          else
-            raise Quickl::Error, "Unable to execute #{file}"
-        end
+        chain = build_chain(args)
+        output(chain)
       end
 
     end # class Help

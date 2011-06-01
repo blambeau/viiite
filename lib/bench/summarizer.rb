@@ -1,6 +1,6 @@
 module Bench
   class Summarizer
-    
+
     class ByNode
       include Enumerable
       
@@ -124,6 +124,7 @@ module Bench
       tuples.each{|t| root << t}
       root
     end
+    alias :pipe :summarize 
 
     # Private API
 
