@@ -1,4 +1,3 @@
-#!/usr/bin/env bench
 Bench.summarizer do |s|
   s.by    :ruby_version
   s.pivot :test

@@ -1,4 +1,3 @@
-#!/usr/bin/env bench
 require File.expand_path("../sort", __FILE__)
 
 # Benchmark definition, use 'bench run ...' to run it

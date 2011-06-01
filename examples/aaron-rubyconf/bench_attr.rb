@@ -1,4 +1,3 @@
-#!/usr/bin/env bench
 require File.expand_path("../foo", __FILE__)
 
 # This is the class under benchmark
