@@ -26,9 +26,7 @@ module Bench
     class LeafNode
       include Enumerable
       
-      attr_reader :aggregation
-      
-      def initialize(summarize, index, aggregators)
+      def initialize(aggregators)
         @aggregators = aggregators
         @aggregation = {}
         aggregators.each_pair{|key,agg|
@@ -66,7 +64,7 @@ module Bench
       if key = @by[index + 1]
         ByNode.new(self, index + 1, key)
       else
-        LeafNode.new(self, index + 1, @aggregators)
+        LeafNode.new(@aggregators)
       end
     end
 
