@@ -1,6 +1,2 @@
-begin
-  require "quickl"
-rescue LoadError
-  require "rubygems"
-  require "quickl"
-end
+require "quickl"
+require "gnuplot"
