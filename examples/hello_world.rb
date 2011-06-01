@@ -19,7 +19,7 @@ t = AttrTest.new
 
 bench = Bench.define do |b|
   b.variation_point :ruby_version, Bench.short_ruby_descr
-  b.range_over(1..100, :"#run") do |i|
+  b.range_over(1..10, :"#run") do |i|
     b.variation_point :test, :via_reader do
       b.report{ t.via_reader }
     end
