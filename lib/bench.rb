@@ -9,6 +9,16 @@ module Bench
     BenchCase.new(block)
   end
 
+  def self.sortkeys(keys)
+    keys.sort{|k1,k2|
+      k1.respond_to?(:<=>) ? k1 <=> k2 : k1.to_s <=> k2.to_s
+    }
+  end
+
+  def self.render(rel)
+    Formatter::Text.render(rel)
+  end
+
   def self.short_ruby_descr
     if Object.const_defined?(:RUBY_DESCRIPTION)
       RUBY_DESCRIPTION =~ /^([^\s]+\s*[^\s]+)/
@@ -76,3 +86,4 @@ end # module Bench
 require "bench/loader"
 require "bench/aggregator"
 require "bench/summarizer"
+require "bench/formatter/text"
