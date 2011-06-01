@@ -31,11 +31,10 @@ bench = Bench.define do |b|
 end
 #bench.each{|x| puts x.inspect}
 
-s = Bench::Summarize.new{|s|
+summarized = Bench::Summarize.new{|s|
   s.by    :ruby_version, :test
   s.avg   :real
   s.count :count
-}
-a = (s << bench)
-puts a.collect{|h| h.inspect}.join("\n")
+}.summarize(bench)
+puts summarized.collect{|h| h.inspect}.join("\n")
 
