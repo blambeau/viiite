@@ -4,11 +4,9 @@ module Bench
     class ByNode
       include Enumerable
       
-      def initialize(summarize, index, key)
+      def initialize(key, factory)
         @key = key
-        @subtree = Hash.new{|h, k|
-          h[k] = summarize.build_sub_node(index)
-        }
+        @subtree = Hash.new{|h, k| h[k] = factory.call()}
       end
       
       def <<(tuple)
@@ -62,7 +60,7 @@ module Bench
     
     def build_sub_node(index)
       if key = @by[index + 1]
-        ByNode.new(self, index + 1, key)
+        ByNode.new(key, lambda{ build_sub_node(index + 1) })
       else
         LeafNode.new(@aggregators)
       end
