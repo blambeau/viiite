@@ -13,9 +13,15 @@ module Bench
         @subtree[tuple[@key]] << tuple
       end
 
+      def sortkeys(keys)
+        keys.sort{|k1,k2|
+          k1.respond_to?(:<=>) ? k1 <=> k2 : k1.to_s <=> k2.to_s
+        }
+      end
+
       def each
-        @subtree.each_pair do |k,v|
-          v.each{|t| yield t.merge(@key => k)}
+        sortkeys(@subtree.keys).each do |k|
+          @subtree[k].each{|t| yield t.merge(@key => k)}
         end
       end
       
@@ -25,8 +31,8 @@ module Bench
 
       def each
         tuple = {}
-        @subtree.each_pair do |k,v| 
-          tuple[k] = v.to_a
+        sortkeys(@subtree.keys).each do |k|
+          tuple[k] = @subtree[k].to_a
         end
         yield tuple
       end
