@@ -36,6 +36,12 @@ module Bench
         @stack.last.merge!(hash)
       end  
     end
+
+    def range_over(range, name, &block)
+      range.each do |value|
+        with(name => value){ block.call(value) }
+      end
+    end
   
     def variation_point(name, value, &block)
       with(name => value, &block)

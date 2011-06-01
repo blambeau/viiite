@@ -44,5 +44,14 @@ module Bench
       res.collect{|t| t[:"#run"]}.should == [0, 1]
     end
 
+    it "should support ranging over values" do
+      b = Bench.define do |bench|
+        bench.range_over [10, 100, 1000], :times do |t|
+          bench.report do end
+        end
+      end
+      b.to_a.collect{|t| t[:times]}.should == [10, 100, 1000]
+    end
+
   end
 end
