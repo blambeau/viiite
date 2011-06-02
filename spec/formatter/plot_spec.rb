@@ -6,7 +6,7 @@ module Bench
 
       let(:output)  { File.expand_path('../plot.gif', __FILE__) }
       let(:data)    { [ {:x => 1, :y => 10}, {:x => 2, :y => 20} ] }
-      let(:dataset) { {:title => "serie", :with => "lines", :linewidth => 2, :data =>  data } }
+      let(:dataset) { {:title => "serie", :with => "lines", :linewidth => 2, :data => data } }
       let(:plot)    { {:title => "plot", :terminal => "gif", :output => output, 
                        :datasets => [ dataset ] } }
       before { FileUtils.rm_rf output }
