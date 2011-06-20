@@ -11,7 +11,7 @@ module Bench
   # Runner for benchmarks.
   # 
   class Runner
-    include Enumerable
+    include Alf::Iterator
 
     def initialize(defn)
       @defn = defn

@@ -39,5 +39,6 @@ module Bench
 end # module Bench
 require "bench/command/commons"
 require "bench/command/run"
+require "bench/command/plot"
 require "bench/command/help"
 

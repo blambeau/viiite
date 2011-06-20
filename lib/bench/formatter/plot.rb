@@ -14,6 +14,7 @@ module Bench
 
       def self.to_dataset(tuple)
         ds = Gnuplot::DataSet.new(to_data(tuple[:data]))
+        ds.with = "linespoints"
         tuple.each_pair do |k,v|
           next if k == :data
           if ds.respond_to?(:"#{k}=")
