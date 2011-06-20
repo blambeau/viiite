@@ -102,9 +102,9 @@ module Bench
         end
       end
 
-      def self.render(graph)
-        Gnuplot.open do |gp|
-          gp << to_plot(graph).to_gplot
+      def self.to_plots(graphs, buffer = "")
+        graphs.each do |tuple|
+          buffer << to_plot(tuple).to_gplot << "\n"
         end
       end
 
@@ -243,6 +243,10 @@ module Bench
         opt.on('--gplot', "Render output as a gnuplot input text") do
           @render = :gplot
         end
+        @graph = nil
+        opt.on('-g graph', "Specify multi-graph attribute") do |value|
+          @graph = value.to_sym
+        end
         @abscissa = :x
         opt.on('-x abscissa', "Specify abscissa attribute") do |value|
           @abscissa = value.to_sym
@@ -258,14 +262,16 @@ module Bench
       end
     
       def query(input)
-        (group \
+        (rename \
           (group \
-            (summarize \
-              (rename input, @abscissa => :x, @ordinate => :y, @series => :title),
-              [:title, :x], 
-              :y => Agg::avg(:y)),
-            [:x, :y], :data),
-          [:title, :data], :datasets)
+            (group \
+              (summarize \
+                (rename input, @graph => :graph, @abscissa => :x, @ordinate => :y, @series => :title),
+                [:title, :x, :graph], 
+                :y => Agg::avg(:y)),
+              [:x, :y], :data),
+            [:title, :data], :datasets),
+          :graph => :title)
       end
       
       def execute(args)
@@ -275,7 +281,7 @@ module Bench
         when :text
           Alf::Renderer.text(op).execute($stdout)
         when :gplot
-          puts Bench::Formatter::Plot::to_plot(op.to_a.first).to_gplot
+          Bench::Formatter::Plot::to_plots(op.to_a, $stdout)
         end
       end
     
