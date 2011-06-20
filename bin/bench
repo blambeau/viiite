@@ -1,9 +1,4 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require "bench/command"
-
-# Run the command
-if (ARGV.size > 0) && !(["run", "help"].include?(ARGV.first))
-  ARGV.unshift("run")
-end
 Bench::Command.run(ARGV, __FILE__)
