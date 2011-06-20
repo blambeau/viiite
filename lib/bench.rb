@@ -35,7 +35,6 @@ module Bench
     
 end # module Bench
 require "bench/runner"
-require "bench/aggregator"
 require "bench/inputter/hash_reader"
 require "bench/formatter/text"
 require "bench/formatter/plot"
