@@ -14,7 +14,7 @@ module Bench
         bench.report{ 1 + 1 }
       end
       res = []
-      b.execute do |tuple|
+      b.each do |tuple|
         tuple.should have_key(:total)
         res << tuple
       end

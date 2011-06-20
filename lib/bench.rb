@@ -7,14 +7,18 @@ require "benchmark"
 #
 module Bench
 
+  #
+  # Runner for benchmarks.
+  # 
   class Runner
-    include Enumerable 
+    include Enumerable
 
-    # Creates a benchmarking case instance
     def initialize(defn)
       @defn = defn
     end
 
+    ### DSL
+    
     def with(hash)
       if block_given?
         @stack << @stack.last.merge(hash)
@@ -48,19 +52,20 @@ module Bench
       end
     end
 
-    def execute(&reporter)
+    ### Alf's contract
+    
+    def each(&reporter)
+      self.dup._each(&reporter)
+    end
+    
+    protected    
+
+    def _each(&reporter)
       @stack, @reporter = [ {} ], reporter
       self.instance_eval &@defn
       @stack, @reporter = nil, nil
     end
-    alias :each :execute
     
-    def pipe(n)
-      self
-    end
-
-    private    
-
     def output
       @reporter.call @stack.last.dup
     end
