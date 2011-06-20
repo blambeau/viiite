@@ -30,7 +30,7 @@ GEM
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
     wlang (0.10.2)
-    yard (0.6.8)
+    yard (0.6.4)
 
 PLATFORMS
   java
