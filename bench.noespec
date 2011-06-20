@@ -47,7 +47,7 @@ variables:
     - {name: bluecloth,    version: "~> 2.0.9",  groups: [development]}
     - {name: wlang,        version: "~> 0.10.1", groups: [development]}
     - {name: noe,          version: "~> 1.3.0",  groups: [development]}
-    - {name: alf,          version: "~> 0.9.0",  groups: [runtime]}
+    - {name: alf,          version: "~> 0.9.1",  groups: [runtime]}
     - {name: quickl,       version: "~> 0.2.1",  groups: [runtime]}
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime]}
 

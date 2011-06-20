@@ -130,7 +130,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("bluecloth", "~> 2.0.9")
   s.add_development_dependency("wlang", "~> 0.10.1")
   s.add_development_dependency("noe", "~> 1.3.0")
-  s.add_dependency("alf", "~> 0.9.0")
+  s.add_dependency("alf", "~> 0.9.1")
   s.add_dependency("quickl", "~> 0.2.1")
   s.add_dependency("gnuplot", "~> 2.3.6")
 

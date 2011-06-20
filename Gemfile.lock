@@ -1,20 +1,47 @@
 PATH
-  remote: /home/blambeau/work/devel/alf
+  remote: .
   specs:
-    alf (0.9.1)
+    bench (1.0.0)
+      alf (~> 0.9.1)
+      gnuplot (~> 2.3.6)
       quickl (~> 0.2.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    alf (0.9.1)
+      quickl (~> 0.2.1)
+    bluecloth (2.0.11)
+    diff-lcs (1.1.2)
     gnuplot (2.3.6)
+    highline (1.6.2)
+    noe (1.3.0)
+      highline (~> 1.6.0)
+      quickl (~> 0.2.0)
+      wlang (~> 0.10.1)
     quickl (0.2.1)
+    rake (0.8.7)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.4.0)
+    wlang (0.10.2)
+    yard (0.6.8)
 
 PLATFORMS
   java
   ruby
 
 DEPENDENCIES
-  alf!
-  gnuplot (~> 2.3.6)
-  quickl (~> 0.2.1)
+  bench!
+  bluecloth (~> 2.0.9)
+  bundler (~> 1.0)
+  noe (~> 1.3.0)
+  rake (~> 0.8.7)
+  rspec (~> 2.4.0)
+  wlang (~> 0.10.1)
+  yard (~> 0.6.4)

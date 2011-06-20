@@ -72,7 +72,45 @@ module Bench
 
   end # class Runner
 
-  #
+  # Formatter
+  class Formatter
+    class Plot < Formatter
+
+      def self.to_data(rel)
+        [rel.collect{|t| t[:x]}, rel.collect{|t| t[:y]}]
+      end
+
+      def self.to_dataset(tuple)
+        ds = Gnuplot::DataSet.new(to_data(tuple[:data]))
+        ds.with = "linespoints"
+        tuple.each_pair do |k,v|
+          next if k == :data
+          if ds.respond_to?(:"#{k}=")
+            ds.send(:"#{k}=", v)
+          end 
+        end
+        ds
+      end
+
+      def self.to_plot(graph)
+        Gnuplot::Plot.new do |plot|
+          graph.each_pair do |k,v|
+            next if k == :datasets
+            plot.set(k.id2name, v)
+          end
+          plot.data = graph[:datasets].collect{|d| to_dataset(d)}
+        end
+      end
+
+      def self.render(graph)
+        Gnuplot.open do |gp|
+          gp << to_plot(graph).to_gplot
+        end
+      end
+
+    end # class Plot
+  end # class Formatter
+
   # Builds a runner instance via the DSL definition given by the block.
   #
   # Example
@@ -104,6 +142,147 @@ module Bench
       "ruby #{RUBY_VERSION} (#{RUBY_PLATFORM})"
     end
   end
+
+  #
+  # bench - Benchmark ruby scripts the easy way
+  #
+  # SYNOPSIS
+  #   #{program_name} [--version] [--help] COMMAND [cmd opts] ARGS...
+  #
+  # OPTIONS
+  # #{summarized_options}
+  #
+  # COMMANDS
+  # #{summarized_subcommands}
+  #
+  # DESCRIPTION
+  #   This command helps you benchmarking ruby applications and manipulating
+  #   benchmark results very simply.
+  #
+  # See '#{program_name} help COMMAND' for more information on a specific command.
+  #
+  class Command < Quickl::Delegator(__FILE__, __LINE__)
+  
+    # 
+    # Show help about a specific command
+    #
+    # SYNOPSIS
+    #   #{program_name} #{command_name} COMMAND
+    #
+    class Help < Quickl::Command(__FILE__, __LINE__)
+      
+      # Let NoSuchCommandError be passed to higher stage
+      no_react_to Quickl::NoSuchCommand
+      
+      # Command execution
+      def execute(args)
+        if args.size != 1
+          puts super_command.help
+        else
+          cmd = has_command!(args.first, super_command)
+          puts cmd.help
+        end
+      end
+      
+    end # class Help
+
+    # 
+    # Run a benchmark 
+    #
+    # SYNOPSIS
+    #   #{program_name} #{command_name} BENCHFILE
+    #
+    # OPTIONS
+    # #{summarized_options}
+    #
+    class Run < Quickl::Command(__FILE__, __LINE__)
+      
+      def execute(args)
+        raise Quickl::InvalidArgument if args.size != 1
+        arg = args.first
+        bench = Kernel.instance_eval(File.read(arg), arg)
+        bench.each do |tuple|
+          puts tuple.inspect
+        end
+      end
+
+    end # class Run
+
+    # 
+    # Generates a plot
+    #
+    # SYNOPSIS
+    #   #{program_name} #{command_name} [BENCHFILE]
+    #
+    # OPTIONS
+    # #{summarized_options}
+    #
+    class Plot < Quickl::Command(__FILE__, __LINE__)
+      include Alf::Lispy
     
+      # Install options
+      options do |opt|
+        @render = :text
+        opt.on('--text', "Render output as a text table") do
+          @render = :text
+        end
+        opt.on('--gplot', "Render output as a gnuplot input text") do
+          @render = :gplot
+        end
+        @abscissa = :x
+        opt.on('-x abscissa', "Specify abscissa attribute") do |value|
+          @abscissa = value.to_sym
+        end
+        @ordinate = :y
+        opt.on('-y ordinate', "Specify ordinate attribute") do |value|
+          @ordinate = value.to_sym
+        end
+        @series = :series
+        opt.on('-s series', "Specify series attribute") do |value|
+          @series = value.to_sym
+        end
+      end
+    
+      def query(input)
+        (group \
+          (group \
+            (summarize \
+              (rename input, @abscissa => :x, @ordinate => :y, @series => :title),
+              [:title, :x], 
+              :y => Agg::avg(:y)),
+            [:x, :y], :data),
+          [:title, :data], :datasets)
+      end
+      
+      def execute(args)
+        raise Quickl::InvalidArgument if args.size > 1
+        input = if args.empty?
+          $stdin
+        else
+          arg = args.first
+          Kernel.instance_eval(File.read(arg), arg)
+        end
+        op = query(input)
+        case @render
+        when :text
+          Alf::Renderer.text(op).execute($stdout)
+        when :gplot
+          puts Bench::Formatter::Plot::to_plot(op.to_a.first).to_gplot
+        end
+      end
+    
+    end # class Plot
+
+    # Install options
+    options do |opt|
+      opt.on_tail("--help", "Show help") do
+        raise Quickl::Help
+      end
+      opt.on_tail("--version", "Show version") do
+        raise Quickl::Exit, "#{program_name} #{Bench::VERSION} (c) 2011, Bernard Lambeau"
+      end
+    end
+  
+  end # class Command
+
 end # module Bench
-require "bench/formatter/plot"
