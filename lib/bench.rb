@@ -111,6 +111,22 @@ module Bench
     end # class Plot
   end # class Formatter
 
+  # .bench file 
+  class BenchFile < Alf::Reader
+
+    # (see Alf::Reader#each)
+    def each
+      op = if input.is_a?(String)
+        Kernel.instance_eval(input_text, input)
+      else
+        Kernel.instance_eval(input_text)
+      end
+      op.each(&Proc.new)
+    end
+    
+    Alf::Reader.register(:bench, [".bench"], self)
+  end # class BenchFile
+  
   # Builds a runner instance via the DSL definition given by the block.
   #
   # Example
@@ -198,10 +214,8 @@ module Bench
     class Run < Quickl::Command(__FILE__, __LINE__)
       
       def execute(args)
-        raise Quickl::InvalidArgument if args.size != 1
-        arg = args.first
-        bench = Kernel.instance_eval(File.read(arg), arg)
-        bench.each do |tuple|
+        raise Quickl::InvalidArgument if args.size > 1
+        BenchFile.new(args.first || $stdin).each do |tuple|
           puts tuple.inspect
         end
       end
@@ -256,13 +270,7 @@ module Bench
       
       def execute(args)
         raise Quickl::InvalidArgument if args.size > 1
-        input = if args.empty?
-          $stdin
-        else
-          arg = args.first
-          Kernel.instance_eval(File.read(arg), arg)
-        end
-        op = query(input)
+        op = query Alf::Reader.reader(args.first || $stdin)
         case @render
         when :text
           Alf::Renderer.text(op).execute($stdout)
