@@ -4,3 +4,5 @@ pkg
 doc/api
 .yardoc
 .bundle
+.project
+.buildpath
