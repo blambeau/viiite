@@ -1,3 +1,9 @@
+class Array
+  def self.random(size)
+    Array.new(size){ Kernel.rand }
+  end
+end
+
 def quicksort(v)
    return v if v.nil? or v.length <= 1
    less, more = v[1..-1].partition { |i| i < v[0] }
@@ -16,3 +22,10 @@ def bubblesort(list)
   slist
 end
 
+def rubysort(list)
+  list.sort
+end
+
+def rubysort!(list)
+  list.sort!
+end

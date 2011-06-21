@@ -4,7 +4,7 @@ Bench.runner do |b|
   # Report variation point on ruby version
   b.variation_point :ruby_version, Bench.which_ruby
   # Variation point on the size of the array to sort
-  b.range_over([1, 200, 400, 600, 800, 1000], :size) do |size|
+  b.range_over([250, 500, 750, 1000], :size) do |size|
     # Variation point for statistical validity
     b.range_over(1..10, :i) do
       # Generate the same test case for everybody
