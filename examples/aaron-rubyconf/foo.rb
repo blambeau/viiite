@@ -10,4 +10,12 @@ class Foo
     @bench_method
   end
   
+  def explicit &block
+    yield
+  end
+  
+  def implicit
+    yield
+  end
+  
 end
