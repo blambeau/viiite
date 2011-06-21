@@ -18,7 +18,7 @@ variables:
 
   # Version of your library
   version:
-    1.0.0
+    0.0.1
     
   # Project summary (~ 1 line).
   summary: |-
