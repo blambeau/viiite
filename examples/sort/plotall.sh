@@ -1,0 +1,2 @@
+bundle exec ../../bin/bench plot sort.rash --style=style.rash --pdf -x size -y real -g ruby_version -s test > sort-variants.pdf
+bundle exec ../../bin/bench plot sort.rash --style=style.rash --pdf -x size -y real -s ruby_version -g test > sort-rubies.pdf
