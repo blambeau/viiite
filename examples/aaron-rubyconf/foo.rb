@@ -1,13 +1,13 @@
 class Foo
   
-  attr_reader :via_reader
+  attr_reader :bench_reader
   
   def initialize
-    @via_reader = @via_method = 10
+    @bench_reader = @bench_method = 10
   end
   
-  def via_method
-    @via_method
+  def bench_method
+    @bench_method
   end
   
 end

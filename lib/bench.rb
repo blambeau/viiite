@@ -243,18 +243,25 @@ module Bench
         opt.on('--gplot', "Render output as a gnuplot input text") do
           @render = :gplot
         end
+        opt.on('--pdf', "Render output as a gnuplot pdf file") do
+          @render = :pdf
+        end
+        
         @graph = nil
         opt.on('-g graph', "Specify multi-graph attribute") do |value|
           @graph = value.to_sym
         end
+        
         @abscissa = :x
         opt.on('-x abscissa', "Specify abscissa attribute") do |value|
           @abscissa = value.to_sym
         end
+        
         @ordinate = :y
         opt.on('-y ordinate', "Specify ordinate attribute") do |value|
           @ordinate = value.to_sym
         end
+        
         @series = :series
         opt.on('-s series', "Specify series attribute") do |value|
           @series = value.to_sym
@@ -282,6 +289,11 @@ module Bench
           Alf::Renderer.text(op).execute($stdout)
         when :gplot
           Bench::Formatter::Plot::to_plots(op.to_a, $stdout)
+        when :pdf
+          Gnuplot.open do |gp|
+            gp << "set terminal pdf\n"
+            Bench::Formatter::Plot::to_plots(op.to_a, gp)
+          end
         end
       end
     
