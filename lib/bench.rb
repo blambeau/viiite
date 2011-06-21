@@ -82,7 +82,6 @@ module Bench
 
       def self.to_dataset(tuple)
         ds = Gnuplot::DataSet.new(to_data(tuple[:data]))
-        ds.with = "linespoints"
         tuple.each_pair do |k,v|
           next if k == :data
           if ds.respond_to?(:"#{k}=")
@@ -272,15 +271,17 @@ module Bench
         end
       end
     
-      def query(input)
-        op = (rename input, @graph => :graph, 
-                            @abscissa => :x, 
-                            @ordinate => :y, 
-                            @series => :serie)
-        op = (summarize op, [:serie, :x, :graph], :y => Agg::avg(:y))
-        op = (group op, [:x, :y], :data)
-        op = (group (rename op, :serie => :title), [:title, :data], :series)
-        op = (rename op, :graph => :title)
+      def query(op)
+        op = (project op, [@graph, @abscissa, @ordinate, @series])
+        op = (join op, Alf::Reader.reader(@style)) if @style
+        op = (rename op, @graph => :graph, 
+                         @abscissa => :x, 
+                         @ordinate => :y, 
+                         @series => :serie)
+         op = (summarize op, [:y], {:y => Agg::avg(:y)}, true)
+         op = (group op, [:x, :y], :data)
+         op = (group (rename op, :serie => :title), [:graph], :series, true)
+         op = (rename op, :graph => :title)
       end
       
       def execute(args)
