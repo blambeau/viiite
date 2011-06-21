@@ -238,11 +238,11 @@ module Bench
         opt.on('--text', "Render output as a text table") do
           @render = :text
         end
-        opt.on('--gplot', "Render output as a gnuplot input text") do
-          @render = :gplot
-        end
-        opt.on('--pdf', "Render output as a gnuplot pdf file") do
-          @render = :pdf
+
+        opt.on("--gnuplot=[TERM]", 
+               "Render output as a gnuplot text (and terminal)") do |value|
+          @render = :gnuplot
+          @term = (value || "dumb").to_sym
         end
         
         opt.on('--style=FILE', "Joins a graph style file") do |value|
@@ -289,13 +289,9 @@ module Bench
         case @render
         when :text
           Alf::Renderer.text(op).execute($stdout)
-        when :gplot
+        when :gnuplot
+          $stdout << "set terminal #{@term}\n"
           Bench::Formatter::Plot::to_plots(op.to_a, $stdout)
-        when :pdf
-          Gnuplot.open do |gp|
-            gp << "set terminal pdf\n"
-            Bench::Formatter::Plot::to_plots(op.to_a, gp)
-          end
         end
       end
     

@@ -127,7 +127,7 @@ Be able to summarize results in any way I want, with
 * Perfect! Could-you please give me a beautiful gnuplot graph that compares rubies 
   on sort methods
   
-        % bench plot results.rash -x size -y utime -g test -s ruby_version --gplot --term=dumb
+        % bench plot results.rash -x size -y utime -g test -s ruby_version --gnuplot | gnuplot
         
         1.1 ++-------+-------+--------+-------+--------+--------+-------+-------++
             +        +       +        +       +        +       ruby 1.8.7 **A****A
