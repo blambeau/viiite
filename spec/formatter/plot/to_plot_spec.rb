@@ -7,7 +7,7 @@ module Bench
 
       let(:dataset) { {:title => "serie", :linewidth => 4, :data =>  data } }
 
-      let(:plot)    { {:title => "plot", :datasets => [ dataset ] } }
+      let(:plot)    { {:title => "plot", :series => [ dataset ] } }
 
       subject{ Formatter::Plot.to_plot(plot) }
 

@@ -95,10 +95,10 @@ module Bench
       def self.to_plot(graph)
         Gnuplot::Plot.new do |plot|
           graph.each_pair do |k,v|
-            next if k == :datasets
+            next if k == :series
             plot.set(k.id2name, v)
           end
-          plot.data = graph[:datasets].collect{|d| to_dataset(d)}
+          plot.data = graph[:series].collect{|d| to_dataset(d)}
         end
       end
 
@@ -247,6 +247,10 @@ module Bench
           @render = :pdf
         end
         
+        opt.on('--style=FILE', "Joins a graph style file") do |value|
+          @style = value
+        end
+        
         @graph = nil
         opt.on('-g graph', "Specify multi-graph attribute") do |value|
           @graph = value.to_sym
@@ -269,16 +273,14 @@ module Bench
       end
     
       def query(input)
-        (rename \
-          (group \
-            (group \
-              (summarize \
-                (rename input, @graph => :graph, @abscissa => :x, @ordinate => :y, @series => :title),
-                [:title, :x, :graph], 
-                :y => Agg::avg(:y)),
-              [:x, :y], :data),
-            [:title, :data], :datasets),
-          :graph => :title)
+        op = (rename input, @graph => :graph, 
+                            @abscissa => :x, 
+                            @ordinate => :y, 
+                            @series => :serie)
+        op = (summarize op, [:serie, :x, :graph], :y => Agg::avg(:y))
+        op = (group op, [:x, :y], :data)
+        op = (group (rename op, :serie => :title), [:title, :data], :series)
+        op = (rename op, :graph => :title)
       end
       
       def execute(args)
