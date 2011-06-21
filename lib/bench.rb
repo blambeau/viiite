@@ -7,9 +7,6 @@ require "benchmark"
 #
 module Bench
 
-  #
-  # Runner for benchmarks.
-  # 
   class Runner
     include Alf::Iterator
 
@@ -40,19 +37,21 @@ module Bench
       with(name => value, &block)
     end
     
-    def report(&block)
-      measure = Benchmark.measure{ block.call }
-      with :stime => measure.stime,
-           :utime => measure.utime,
-           :cstime => measure.cstime,
-           :cutime => measure.cutime,
-           :total => measure.total,
-           :real  => measure.real do
-        output
-      end
+    def report(hash = {}, &block)
+      with(hash) {
+        measure = Benchmark.measure{ block.call }
+        with :stime => measure.stime,
+             :utime => measure.utime,
+             :cstime => measure.cstime,
+             :cutime => measure.cutime,
+             :total => measure.total,
+             :real  => measure.real do
+          output
+        end
+      }
     end
 
-    ### Alf's contract
+    ### Alf contract
     
     def each(&reporter)
       self.dup._each(&reporter)
@@ -131,7 +130,7 @@ module Bench
   # Example
   #
   #  Bench.runner do |b|
-  #    b.variation_point :ruby_version, Bench.short_ruby_descr
+  #    b.variation_point :ruby_version, Bench.which_ruby
   #    b.range_over([100, 1000, 10000, 100000], :runs) do |runs|
   #      b.variation_point :test, :via_reader do
   #        b.report{ runs.times{ foo.via_reader } }
@@ -149,7 +148,7 @@ module Bench
   #
   # Returns a short string with a ruby interpreter description
   # 
-  def self.short_ruby_descr
+  def self.which_ruby
     if Object.const_defined?(:RUBY_DESCRIPTION)
       RUBY_DESCRIPTION =~ /^([^\s]+\s*[^\s]+)/
       $1

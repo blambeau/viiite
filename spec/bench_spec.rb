@@ -6,7 +6,7 @@ describe Bench do
   end
 
   it "should provide a way to have short ruby descr" do
-    Bench.short_ruby_descr.should_not be_empty
+    Bench.which_ruby.should_not be_empty
   end
   
 end

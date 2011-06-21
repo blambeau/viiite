@@ -5,7 +5,7 @@ foo = Foo.new
 
 # Aaron's slides 151 -> 158
 Bench.runner do |b|
-  b.variation_point :ruby_version, Bench.short_ruby_descr
+  b.variation_point :ruby_version, Bench.which_ruby
   b.range_over([10, 100, 1000, 10000, 100000], :runs) do |runs|
     b.variation_point :test, :bench_reader do
       b.report{ runs.times{ foo.bench_reader } }
