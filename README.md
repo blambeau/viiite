@@ -2,6 +2,10 @@
 
 Benchmarking and complexity analyzer utility
 
+**This project is an investigation so far**. I'm still in the process of 
+identifying benchmarking use cases and requirements. All ideas, wishes and 
+contributions are of course welcome! 
+
 ## Links
 
 * {http://rubydoc.info/github/blambeau/bench/master/frames} (read this file there!)
@@ -150,3 +154,28 @@ Be able to summarize results in any way I want, with
           0 ++--C$$$$$$$$$$--+--------+-------+--------+--------+-------+-------++
            200      300     400      500     600      700      800     900      1000
        
+## Ideas (quick memo about stuff to add)
+
+* Benchmarking with stdlib is often used in very straighforward scenarios, as 
+  illustrated below (with credits to 
+  {http://on-ruby.blogspot.com/2008/12/benchmarking-makes-it-better.html 
+  http://on-ruby.blogspot.com/} . Bench should at least provide a way to execute 
+  benchmarks as easily: 
+
+    blambeau@kali:~$ cat /tmp/bench.rb 
+    require 'benchmark'
+    n = 5_000_000
+    Benchmark.bm(15) do |x|
+      x.report("for loop:")   { for i in 1..n; a = "1"; end }
+      x.report("times:")      { n.times do   ; a = "1"; end }
+      x.report("upto:")       { 1.upto(n) do ; a = "1"; end }
+    end
+    
+    blambeau@kali:~$ ruby /tmp/bench.rb 
+                         user     system      total        real
+    for loop:        1.430000   0.000000   1.430000 (  1.437242)
+    times:           1.420000   0.000000   1.420000 (  1.420435)
+    upto:            1.410000   0.000000   1.410000 (  1.409634)
+
+* 'rake bench', of course.
+
