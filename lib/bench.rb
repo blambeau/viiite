@@ -300,6 +300,14 @@ module Bench
 
     # Install options
     options do |opt|
+      opt.on("-Idirectory", 
+             "specify $LOAD_PATH directory (may be used more than once)") do |val|
+        $LOAD_PATH.unshift val
+      end
+      opt.on("-rlibrary",
+             "require the library, before executing your script") do |val|
+        require(val)
+      end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
