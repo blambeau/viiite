@@ -304,9 +304,9 @@ module Bench
              "specify $LOAD_PATH directory (may be used more than once)") do |val|
         $LOAD_PATH.unshift val
       end
-      opt.on("-rlibrary",
-             "require the library, before executing your script") do |val|
-        require(val)
+      opt.on('-rlibrary',
+             "require the library, before executing bench") do |lib|
+        require(lib)
       end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
@@ -315,7 +315,18 @@ module Bench
         raise Quickl::Exit, "#{program_name} #{Bench::VERSION} (c) 2011, Bernard Lambeau"
       end
     end
-  
+    
+    # Run the command by delegation
+    def _run(argv = [])
+      # My own options
+      my_argv = []
+      while argv.first =~ /^-/
+        my_argv << argv.shift
+      end
+      parse_options(my_argv)
+      execute(argv)
+    end
+    
   end # class Command
 
 end # module Bench
