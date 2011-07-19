@@ -33,8 +33,9 @@ module Bench
       end
     end
   
-    def variation_point(name, value, &block)
-      with(name => value, &block)
+    def variation_point(name, value, &proc)
+      h = {name => value}
+      with(h, &proc)
     end
     
     def report(hash = {}, &block)
