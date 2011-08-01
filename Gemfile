@@ -8,7 +8,7 @@ end
 group :release do
   gem "rake", "~> 0.9.2"
   gem "rspec", "~> 2.6.0"
-  gem "wlang", "~> 0.10.1"
+  gem "wlang", "~> 0.10.2"
 end
 
 group :doc do
@@ -17,8 +17,8 @@ group :doc do
 end
 
 group :runtime do
-  gem "alf", "~> 0.9.1"
-  gem "quickl", "~> 0.2.2"
+  gem "alf",     :git => "git://github.com/blambeau/alf.git"    #"~> 0.9.3"
+  gem "quickl",  :git => "git://github.com/blambeau/quickl.git" #"~> 0.3.0"
   gem "gnuplot", "~> 2.3.6"
 end
 

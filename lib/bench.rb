@@ -191,12 +191,9 @@ module Bench
       
       # Command execution
       def execute(args)
-        if args.size != 1
-          puts super_command.help
-        else
-          cmd = has_command!(args.first, super_command)
-          puts cmd.help
-        end
+        sup = Quickl.super_command(self)
+        sub = (args.size != 1) ? sup : Quickl.sub_command!(sup, args.first)
+        puts Quickl.help(sub)
       end
       
     end # class Help
@@ -231,7 +228,6 @@ module Bench
     # #{summarized_options}
     #
     class Plot < Quickl::Command(__FILE__, __LINE__)
-      include Alf::Lispy
     
       # Install options
       options do |opt|
@@ -272,16 +268,15 @@ module Bench
       end
     
       def query(op)
-        op = (project op, [@graph, @abscissa, @ordinate, @series])
-        op = (join op, Alf::Reader.reader(@style)) if @style
-        op = (rename op, @graph => :graph, 
-                         @abscissa => :x, 
-                         @ordinate => :y, 
-                         @series => :serie)
-         op = (summarize op, [:y], {:y => Agg::avg(:y)}, true)
-         op = (group op, [:x, :y], :data)
-         op = (group (rename op, :serie => :title), [:graph], :series, true)
-         op = (rename op, :graph => :title)
+        lispy = Alf.lispy
+        op = lispy.project(op, [@graph, @abscissa, @ordinate, @series])
+        op = lispy.join(op, Alf::Reader.reader(@style)) if @style
+        op = lispy.rename(op, @graph => :graph, @abscissa => :x, @ordinate => :y, 
+                              @series => :serie)
+        op = lispy.summarize(op, [:y], {:y => Alf::Aggregator::avg(:y)}, true)
+        op = lispy.group(op, [:x, :y], :data)
+        op = lispy.group(lispy.rename(op, :serie => :title), [:graph], :series, true)
+        op = lispy.rename(op, :graph => :title)
       end
       
       def execute(args)
@@ -314,17 +309,6 @@ module Bench
       opt.on_tail("--version", "Show version") do
         raise Quickl::Exit, "#{program_name} #{Bench::VERSION} (c) 2011, Bernard Lambeau"
       end
-    end
-    
-    # Run the command by delegation
-    def _run(argv = [])
-      # My own options
-      my_argv = []
-      while argv.first =~ /^-/
-        my_argv << argv.shift
-      end
-      parse_options(my_argv)
-      execute(argv)
     end
     
   end # class Command

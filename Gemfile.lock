@@ -1,12 +1,24 @@
+GIT
+  remote: git://github.com/blambeau/alf.git
+  revision: db46ffad09e79c5f33ae4458635da2ae67fd1a0a
+  specs:
+    alf (0.9.4)
+      myrrha (~> 1.2.0)
+      quickl (~> 0.3.0)
+
+GIT
+  remote: git://github.com/blambeau/quickl.git
+  revision: fdadf5ddf1e3153933fd71312976662f4694fcce
+  specs:
+    quickl (0.3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
-    alf (0.9.2)
-      quickl (~> 0.2.2)
     bluecloth (2.1.0)
     diff-lcs (1.1.2)
     gnuplot (2.3.6)
-    quickl (0.2.2)
+    myrrha (1.2.0)
     rake (0.9.2)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
@@ -24,11 +36,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  alf (~> 0.9.1)
+  alf!
   bluecloth (~> 2.1.0)
   gnuplot (~> 2.3.6)
-  quickl (~> 0.2.2)
+  quickl!
   rake (~> 0.9.2)
   rspec (~> 2.6.0)
-  wlang (~> 0.10.1)
+  wlang (~> 0.10.2)
   yard (~> 0.7.2)
