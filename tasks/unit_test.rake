@@ -45,7 +45,7 @@ begin
     t.warning = false
 
     # Glob pattern to match test files. (default is 'test/test*.rb')
-    t.pattern = "test/test*.rb"
+    t.pattern = "test/test_*.rb"
 
     # Style of test loader to use.  Options are:
     #
@@ -68,7 +68,7 @@ begin
   end
 rescue LoadError => ex
   task :unit_test do
-    abort 'rspec is not available. In order to run spec, you must: gem install rspec'
+    abort "rake/testtask does not seem available...\n  #{ex.message}"
   end
 ensure
   desc "Run all tests"

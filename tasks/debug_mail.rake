@@ -56,7 +56,7 @@ begin
     # Load interesting changesets
     changes, end_found = [], 0
     File.readlines(logs.first).select{|line|
-      if line =~ /^#/
+      if line =~ /^# /
         break if end_found >= 1
         end_found += 1
       end
