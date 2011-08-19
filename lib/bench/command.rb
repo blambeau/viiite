@@ -43,7 +43,7 @@ module Bench
     # Run a benchmark 
     #
     # SYNOPSIS
-    #   #{program_name} #{command_name} BENCHFILE
+    #   #{program_name} #{command_name} [BENCHFILE]
     #
     # OPTIONS
     # #{summarized_options}
@@ -52,12 +52,32 @@ module Bench
       
       def execute(args)
         raise Quickl::InvalidArgument if args.size > 1
-        BenchFile.new(args.first || $stdin).each do |tuple|
-          puts tuple.inspect
-        end
+        input  = Alf::Reader.reader(args.first || $stdin)
+        output = $stdout
+        Alf::Renderer.rash(input).execute(output)
       end
 
     end # class Run
+
+    # 
+    # Show a benchmark 
+    #
+    # SYNOPSIS
+    #   #{program_name} #{command_name} [BENCHFILE]
+    #
+    # OPTIONS
+    # #{summarized_options}
+    #
+    class Show < Quickl::Command(__FILE__, __LINE__)
+    
+      def execute(args)
+        raise Quickl::InvalidArgument if args.size > 1
+        input  = Alf::Reader.reader(args.first || $stdin)
+        output = $stdout
+        Alf::Renderer.text(input).execute(output)
+      end
+
+    end # class Show
 
     # 
     # Generates a plot

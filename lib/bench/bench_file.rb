@@ -11,6 +11,6 @@ module Bench
       op.each(&Proc.new)
     end
     
-    Alf::Reader.register(:bench, [".bench"], self)
+    Alf::Reader.register(:bench, [".bench", ".rb"], self)
   end # class BenchFile
 end # module Bench

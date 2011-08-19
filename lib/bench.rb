@@ -42,12 +42,17 @@ module Bench
   end
 
   #
-  # Builds a runner instance and runs it
+  # Builds a runner instance and runs it, outputting ruby hashes on `output`
   #
-  def self.run(&block)
-    runner(&block).each do |tuple|
-      puts Alf::Tools.to_ruby_literal(tuple)
-    end
+  def self.run(output = $stdout, &block)
+    Alf::Renderer.rash(runner(&block)).execute(output)
+  end
+
+  #
+  # Builds a runner instance and runs it, outputting a text table on `output`
+  #
+  def self.show(output = $stdout, &block)
+    Alf::Renderer.text(runner(&block)).execute(output)
   end
 
   #
