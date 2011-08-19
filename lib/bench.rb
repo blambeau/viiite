@@ -12,6 +12,10 @@ require "benchmark"
 #
 module Bench
 
+  OPTIONS = {
+    :autorun => false
+  }
+
   # Builds a Tms object
   def self.Tms(*args)
     Bench::Tms.coerce(args)
@@ -38,16 +42,16 @@ module Bench
   #  end
   # 
   def self.runner(&block)
-    Runner.new(block)
+    runner = Runner.new(block)
+    _run(runner) if OPTIONS[:autorun]
+    runner
   end
 
   #
   # Builds a runner instance and runs it, outputting ruby hashes on `output`
   #
-  def self.run(output = $stdout, &block)
-    show = Bench::Command::Show.new
-    show.parse_options []
-    show.execute runner(&block)
+  def self.run(&block)
+    _run(runner(&block))
   end
 
   #
@@ -60,6 +64,14 @@ module Bench
     else
       "ruby #{RUBY_VERSION} (#{RUBY_PLATFORM})"
     end
+  end
+
+  private 
+
+  def self._run(runner)
+    show = Bench::Command::Show.new
+    show.parse_options []
+    show.execute runner
   end
 
 end # module Bench
