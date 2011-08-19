@@ -36,6 +36,10 @@ module Bench
       "Bench::Tms(#{to_a.collect{|f| f.inspect}.join(',')})"
     end
 
+    def *(x);     memberwise(:*, x)     end
+    def +(other); memberwise(:+, other) end
+    def -(other); memberwise(:-, other) end
+
     def to_h
       @to_h ||= Hash[FIELDS.collect{|f| [f, send(f)]}]
     end
@@ -64,6 +68,17 @@ module Bench
       arg0 ? Kernel::format(fmtstr, *args) : fmtstr
     end
     alias :to_s :format
+
+    private
+
+    def memberwise(op, x)
+      case x
+      when Bench::Tms
+        Bench::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x.send(f))}
+      else
+        Bench::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x)}
+      end
+    end
 
   end # class Tms
 end # module Bench
