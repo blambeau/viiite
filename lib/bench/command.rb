@@ -71,25 +71,25 @@ module Bench
     class Show < Quickl::Command(__FILE__, __LINE__)
 
       options do |opt|
-        @by = nil
-        opt.on("--by=x,y,z", Array, 
-               "Specify the aggregation 'by key'") do |by|
-          @by = by
-        end
-        opt.on("--rg=x,y,z", Array,
+        @regroup = [:bench]
+        opt.on("--regroup=x,y,z", Array,
                "Regroup by x, then y, then z, ...") do |group|
-          @by = ((@by || []) + group).uniq
           @regroup = group
+        end
+        @hierarchy = false
+        opt.on('-h', "Make a hierarchical regrouping") do
+          @hierarchy = true
         end
       end
 
       def query(input)
         lispy = Alf.lispy
         op = input
-        op = lispy.summarize(op, @by || [:bench_case], :time => lispy.avg{tms})
-        if @regroup
-          op = lispy.group(op, @regroup, :bench_cases, {:allbut => true})
-        end
+        op = lispy.summarize(op, @regroup, :measure => lispy.avg{tms})
+        @regroup[1..-1].each do |grouping|
+          op = lispy.group(op, [grouping] + [:measure], :measure)
+        end if @hierarchy 
+        op
       end
 
       def execute(args)

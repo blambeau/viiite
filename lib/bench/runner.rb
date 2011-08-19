@@ -31,7 +31,7 @@ module Bench
     end
     
     def report(hash = {}, &block)
-      hash = {:bench_case => hash} unless hash.is_a?(Hash)
+      hash = {:bench => hash} unless hash.is_a?(Hash)
       with(hash) {
         with(:tms => Bench.measure{block.call}){ output }
       }
