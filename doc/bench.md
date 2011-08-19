@@ -9,14 +9,14 @@ Let's starts with the common Benchmark example. In Bench, this goes as follows:
 ```ruby
 require 'bench/autorun'
 n = 15000
-Bench.runner do |r|
+Bench.bm do |r|
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
 end
 ```
 
-You can simply run the benchmark as follows:
+You can simply run the benchmark as follows (assuming here that bench_iteration.rb contains the code above):
 
 ```terminal
 $ ruby bench_iteration.rb
@@ -35,7 +35,7 @@ What if we want to compare rubies? The Benchmark approach does not scale really 
 ```ruby
 require 'bench'         # !! we removed autorun here !!
 n = 15000
-Bench.runner do |r|
+Bench.bm do |r|
   r.variation_point :ruby, Bench.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }

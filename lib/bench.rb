@@ -41,17 +41,10 @@ module Bench
   #    end
   #  end
   # 
-  def self.runner(&block)
+  def self.bm(&block)
     runner = Runner.new(block)
     _run(runner) if OPTIONS[:autorun]
     runner
-  end
-
-  #
-  # Builds a runner instance and runs it, outputting ruby hashes on `output`
-  #
-  def self.run(&block)
-    _run(runner(&block))
   end
 
   #
