@@ -25,7 +25,7 @@ variables:
     - {name: yard,         version: "~> 0.7.2",  groups: [doc          ]}
     - {name: bluecloth,    version: "~> 2.1.0",  groups: [doc          ]}
     - {name: wlang,        version: "~> 0.10.2", groups: [release      ]}
-    - {name: alf,          version: "~> 0.9.3",  groups: [runtime      ]}
-    - {name: quickl,       version: "~> 0.3.0",  groups: [runtime      ]}
+    - {name: alf,          version: "~> 0.10.0", groups: [runtime      ]}
+    - {name: quickl,       version: "~> 0.4.0",  groups: [runtime      ]}
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime      ]}
 
