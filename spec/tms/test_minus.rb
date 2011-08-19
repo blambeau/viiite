@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Bench
-  describe Tms, "#times" do
+  describe Tms, "#minus" do
   
     subject{ tms - operand }
     let(:tms){ Bench::Tms.new([1.0, 2.0, 3.0, 4.0, 5.0]) }

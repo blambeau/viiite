@@ -39,6 +39,11 @@ module Bench
     def *(x);     memberwise(:*, x)     end
     def +(other); memberwise(:+, other) end
     def -(other); memberwise(:-, other) end
+    def /(other); memberwise(:/, other) end
+
+    def coerce(other)
+      [self, other]
+    end
 
     def to_h
       @to_h ||= Hash[FIELDS.collect{|f| [f, send(f)]}]
