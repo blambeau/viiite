@@ -52,7 +52,8 @@ module Bench
   # Builds a runner instance and runs it, outputting a text table on `output`
   #
   def self.show(output = $stdout, &block)
-    Alf::Renderer.text(runner(&block)).execute(output)
+    show  = Bench::Command::Show.new
+    show.execute runner(&block)
   end
 
   #

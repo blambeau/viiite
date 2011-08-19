@@ -69,12 +69,39 @@ module Bench
     # #{summarized_options}
     #
     class Show < Quickl::Command(__FILE__, __LINE__)
-    
+
+      options do |opt|
+        @by = nil
+        opt.on("--by=x,y,z", Array, 
+               "Specify the aggregation 'by key'") do |by|
+          @by = by
+        end
+        opt.on("--rg=x,y,z", Array,
+               "Regroup by x, then y, then z, ...") do |group|
+          @by = ((@by || []) + group).uniq
+          @regroup = group
+        end
+      end
+
+      def query(input)
+        lispy = Alf.lispy
+        op = input
+        op = lispy.summarize(op, @by || [:bench_case], :time => lispy.avg{tms})
+        if @regroup
+          op = lispy.group(op, @regroup, :bench_cases, {:allbut => true})
+        end
+      end
+
       def execute(args)
-        raise Quickl::InvalidArgument if args.size > 1
-        input  = Alf::Reader.reader(args.first || $stdin)
-        output = $stdout
-        Alf::Renderer.text(input).execute(output)
+        case args
+        when Array
+          raise Quickl::InvalidArgument if args.size > 1
+          execute Alf::Reader.reader(args.first || $stdin)
+        when Alf::Iterator
+          Alf::Renderer.text(query(args)).execute($stdout)
+        else 
+          raise ArgumentError, "Unable to show #{args.inspec}"
+        end
       end
 
     end # class Show
