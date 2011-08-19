@@ -15,12 +15,12 @@ module Bench
       end
       res = []
       b.each do |tuple|
-        tuple.should have_key(:total)
+        tuple.should have_key(:tms)
         res << tuple
       end
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:total].should be_kind_of(Float)
+      res.first[:tms].should be_kind_of(Bench::Tms)
     end
 
     it "should be enumerable" do
@@ -30,7 +30,7 @@ module Bench
       res = b.to_a
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:total].should be_kind_of(Float)
+      res.first[:tms].should be_kind_of(Bench::Tms)
     end
     
     it "should support variation points" do

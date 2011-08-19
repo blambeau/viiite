@@ -32,15 +32,7 @@ module Bench
     
     def report(hash = {}, &block)
       with(hash) {
-        measure = Benchmark.measure{ block.call }
-        with :stime => measure.stime,
-             :utime => measure.utime,
-             :cstime => measure.cstime,
-             :cutime => measure.cutime,
-             :total => measure.total,
-             :real  => measure.real do
-          output
-        end
+        with(:tms => Bench.measure{block.call}){ output }
       }
     end
 

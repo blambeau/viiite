@@ -1,5 +1,6 @@
 require "bench/version"
 require "bench/loader"
+require "bench/tms"
 require "bench/formatter"
 require "bench/runner"
 require "bench/command"
@@ -10,6 +11,15 @@ require "benchmark"
 # Benchmarking and complexity analyzer utility
 #
 module Bench
+
+  # Builds a Tms object
+  def self.Tms(*args)
+    Bench::Tms.coerce(args)
+  end
+
+  def self.measure(&block)
+    Bench::Tms.coerce Benchmark.measure(&block)
+  end
 
   # Builds a runner instance via the DSL definition given by the block.
   #
@@ -29,6 +39,15 @@ module Bench
   # 
   def self.runner(&block)
     Runner.new(block)
+  end
+
+  #
+  # Builds a runner instance and runs it
+  #
+  def self.run(&block)
+    runner(&block).each do |tuple|
+      puts Alf::Tools.to_ruby_literal(tuple)
+    end
   end
 
   #
