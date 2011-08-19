@@ -45,14 +45,8 @@ module Bench
   # Builds a runner instance and runs it, outputting ruby hashes on `output`
   #
   def self.run(output = $stdout, &block)
-    Alf::Renderer.rash(runner(&block)).execute(output)
-  end
-
-  #
-  # Builds a runner instance and runs it, outputting a text table on `output`
-  #
-  def self.show(output = $stdout, &block)
-    show  = Bench::Command::Show.new
+    show = Bench::Command::Show.new
+    show.parse_options []
     show.execute runner(&block)
   end
 
