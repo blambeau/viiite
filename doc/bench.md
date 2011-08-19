@@ -71,7 +71,7 @@ $ rvm exec bench run bench_iteration.rb
 Ok. The 'bench show' takes such kind of input, and let you regroup and compare results easily:
 
 ```terminal
-$ rvm exec bench run bench_iteration.rb | bench show --regroup=ruby,bench
+$ rvm exec bench run bench_iteration.rb | bench show --hierarchy --regroup=ruby,bench
 +----------------+------------------------------------------------------------+
 | :ruby          | :measure                                                   |
 +----------------+------------------------------------------------------------+
@@ -107,7 +107,7 @@ $ rvm exec bench run bench_iteration.rb | bench show --regroup=ruby,bench
 ```
 
 ```terminal
-$ rvm exec bench run bench_iteration.rb | bench show --regroup=bench,ruby
+$ rvm exec bench run bench_iteration.rb | bench show --hierarchy --regroup=bench,ruby
 +--------+--------------------------------------------------------------------+
 | :bench | :measure                                                           |
 +--------+--------------------------------------------------------------------+

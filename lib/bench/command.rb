@@ -77,7 +77,7 @@ module Bench
           @regroup = group
         end
         @hierarchy = false
-        opt.on('-h', "Make a hierarchical regrouping") do
+        opt.on('-h', "--hierarchy", "Make a hierarchical regrouping") do
           @hierarchy = true
         end
       end
