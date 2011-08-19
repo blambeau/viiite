@@ -114,9 +114,10 @@ module Bench
         op = lispy.join(op, Alf::Reader.reader(@style)) if @style
         op = lispy.rename(op, @graph => :graph, @abscissa => :x, @ordinate => :y, 
                               @series => :serie)
-        op = lispy.summarize(op, [:y], {:y => Alf::Aggregator::avg(:y)}, true)
+        op = lispy.summarize(op, [:y], {:y => lispy.avg(:y)}, {:allbut => true})
         op = lispy.group(op, [:x, :y], :data)
-        op = lispy.group(lispy.rename(op, :serie => :title), [:graph], :series, true)
+        op = lispy.rename(op, :serie => :title)
+        op = lispy.group(op, [:graph], :series, {:allbut => true})
         op = lispy.rename(op, :graph => :title)
       end
       

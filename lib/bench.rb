@@ -3,6 +3,7 @@ require "bench/loader"
 require "bench/formatter"
 require "bench/runner"
 require "bench/command"
+require "bench/bench_file"
 require "benchmark"
 
 #
