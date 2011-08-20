@@ -1,1 +1,2 @@
-permalink: :title
+permalink: /:title
+baseurl: /bench
