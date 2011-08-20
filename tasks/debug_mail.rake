@@ -38,7 +38,7 @@ begin
   desc "Debug the release announcement mail"
   task :debug_mail do 
     # Check that a .noespec file exists
-    noespec_file = File.expand_path('../../bench.noespec', __FILE__)
+    noespec_file = File.expand_path('../../viiite.noespec', __FILE__)
     unless File.exists?(noespec_file)
       raise "Unable to find .noespec project file, sorry."
     end

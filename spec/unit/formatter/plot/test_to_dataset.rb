@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Bench
+module Viiite
   class Formatter::Plot
     describe "to_dataset" do
 

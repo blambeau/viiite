@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Bench
+module Viiite
   class Command
     describe Run do
 
@@ -15,7 +15,7 @@ module Bench
           $stdout.string.each_line do |line|
             h = eval(line)
             h.should be_a(Hash)
-            h[:tms].should be_a(Bench::Tms)
+            h[:tms].should be_a(Viiite::Tms)
           end
         }
       end

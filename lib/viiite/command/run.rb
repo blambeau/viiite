@@ -1,10 +1,10 @@
-module Bench
+module Viiite
   class Command
     # 
     # Run a benchmark and output raw data
     #
     # SYNOPSIS
-    #   bench #{command_name} [BENCHFILE]
+    #   viiite #{command_name} [BENCHFILE]
     #
     # OPTIONS
     # #{summarized_options}
@@ -20,4 +20,4 @@ module Bench
 
     end # class Run
   end # class Command
-end # module Bench
+end # module Viiite

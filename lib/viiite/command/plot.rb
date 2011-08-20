@@ -1,10 +1,10 @@
-module Bench
+module Viiite
   class Command < Quickl::Delegator(__FILE__, __LINE__)
     # 
     # Report benchmarking results as a plot
     #
     # SYNOPSIS
-    #   bench #{command_name} [BENCHFILE]
+    #   viiite #{command_name} [BENCHFILE]
     #
     # OPTIONS
     # #{summarized_options}
@@ -79,10 +79,10 @@ module Bench
           Alf::Renderer.text(op).execute($stdout)
         when :gnuplot
           $stdout << "set terminal #{@term}\n"
-          Bench::Formatter::Plot::to_plots(op.to_a, $stdout)
+          Viiite::Formatter::Plot::to_plots(op.to_a, $stdout)
         end
       end
     
     end # class Plot
   end # class Command
-end # module Bench
+end # module Viiite

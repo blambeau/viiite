@@ -1,10 +1,10 @@
-module Bench
+module Viiite
   class Command
     # 
     # Show help about a specific command
     #
     # SYNOPSIS
-    #   bench #{command_name} COMMAND
+    #   viiite #{command_name} COMMAND
     #
     class Help < Quickl::Command(__FILE__, __LINE__)
       
@@ -20,5 +20,5 @@ module Bench
       
     end # class Help
   end # class Command
-end # module Bench
+end # module Viiite
 

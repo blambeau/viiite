@@ -1,4 +1,4 @@
-module Bench
+module Viiite
   module Version
   
     MAJOR = 0

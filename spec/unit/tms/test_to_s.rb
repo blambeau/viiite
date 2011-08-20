@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Bench
+module Viiite
   describe Tms, "#to_s" do
 
     subject{ tms.to_s }

@@ -1,12 +1,12 @@
 
-bench - Benchmark ruby scripts the easy way
+viiite - Benchmark ruby scripts the easy way
 
 SYNOPSIS
-  bench [--version] [--help] COMMAND [cmd opts] ARGS...
+  viiite [--version] [--help] COMMAND [cmd opts] ARGS...
 
 OPTIONS
   -Idirectory                      specify $LOAD_PATH directory (may be used more than once)
-  -rlibrary                        require the library, before executing bench
+  -rlibrary                        require the library, before executing viiite
       --help                       Show help
       --version                    Show version
 
@@ -20,6 +20,6 @@ DESCRIPTION
   This command helps you benchmarking ruby applications and manipulating
   benchmark results very simply.
 
-See 'bench help COMMAND' for more information on a specific command.
+See 'viiite help COMMAND' for more information on a specific command.
 
 SystemExit

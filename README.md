@@ -1,30 +1,30 @@
-# Bench
+# Viiite
 
-Bench brings tools to benchmark and analyze the complexity of your algorithms. 
+Viiite brings tools to benchmark and analyze the complexity of your algorithms. 
 It has been designed as an alternative to Benchmark that let your benchmarks 
 evolve smoothly from simple measures to more complex infrastructures.
 
-    [sudo] gem install bench
+    [sudo] gem install viiite
 
-Bench uses [semantic versionning](http://semver.org) and has not yet reached the
-public API required for 1.0.0. The safe way to require bench for now is as 
+Viiite uses [semantic versionning](http://semver.org) and has not yet reached the
+public API required for 1.0.0. The safe way to require viiite for now is as 
 follows:
 
-    gem "bench", "~> 0.1.0"
+    gem "viiite", "~> 0.1.0"
 
-Learn more on the [github-pages of this project](http://blambeau.github.com/bench)!
+Learn more on the [github-pages of this project](http://blambeau.github.com/viiite)!
 
 ## Links
 
-* [Github pages with more documentation](http://blambeau.github.com/bench)
-* [Source code](http://github.com/blambeau/bench)
+* [Github pages with more documentation](http://blambeau.github.com/viiite)
+* [Source code](http://github.com/blambeau/viiite)
 
 ## From simple measures ...
 
 ```ruby
-require 'bench'
+require 'viiite'
 n = 15000
-Bench.bm do |r|
+Viiite.bm do |r|
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -32,7 +32,7 @@ end
 ```
 
 ```terminal
-$ bench report bench_iteration.rb
+$ viiite report viiite_iteration.rb
 +--------+-----------------------------------------------+
 | :bench | :measure                                      |
 +--------+-----------------------------------------------+
@@ -45,10 +45,10 @@ $ bench report bench_iteration.rb
 ## To more complex ones ...
 
 ```ruby
-require 'bench'
+require 'viiite'
 n = 15000
-Bench.bm do |r|
-  r.variation_point :ruby, Bench.which_ruby
+Viiite.bm do |r|
+  r.variation_point :ruby, Viiite.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -56,7 +56,7 @@ end
 ```
 
 ```terminal
-$ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=bench,ruby
+$ rvm exec viiite run viiite_iteration.rb | viiite report --hierarchy --regroup=viiite,ruby
 +--------+--------------------------------------------------------------------+
 | :bench | :measure                                                           |
 +--------+--------------------------------------------------------------------+
@@ -80,21 +80,21 @@ $ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=ben
 ## To awesomeness ...
 
 ```ruby
-require 'bench'
-Bench.bm do |b|
-  b.variation_point :ruby, Bench.which_ruby
+require 'viiite'
+Viiite.bm do |b|
+  b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do
-      bench_case = Array.random(size)
-      b.report(:quicksort) { bench_case.quicksort }
-      b.report(:bubblesort){ bench_case.bubblesort }
+      viiite_case = Array.random(size)
+      b.report(:quicksort) { viiite_case.quicksort }
+      b.report(:bubblesort){ viiite_case.bubblesort }
     end
   end
 end
 ```
 
 ```terminal
-$ bench plot bench_sort.rb -x size -y tms.total --graph=ruby --series=bench --gnuplot | gnuplot
+$ viiite plot viiite_sort.rb -x size -y tms.total --graph=ruby --series=viiite --gnuplot | gnuplot
 
                                     ruby 1.8.7
 
@@ -147,7 +147,7 @@ $ bench plot bench_sort.rb -x size -y tms.total --graph=ruby --series=bench --gn
 ```
 
 ```terminal
-$ bench plot bench_sort.rb -x size -y tms.total --graph=bench --series=ruby --gnuplot | gnuplot
+$ viiite plot viiite_sort.rb -x size -y tms.total --graph=viiite --series=ruby --gnuplot | gnuplot
                                     bubblesort
 
   0.35 ++-------+-------+--------+-------+--------+--------+-------+-------++

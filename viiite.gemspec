@@ -1,8 +1,8 @@
 # We require your library, mainly to have access to the VERSION number. 
 # Feel free to set $version manually.
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require "bench/version"
-$version = Bench::Version.to_s
+require "viiite/version"
+$version = Viiite::Version.to_s
 
 #
 # This is your Gem specification. Default values are provided so that your library
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   ################################################################### ABOUT YOUR GEM
   
   # Gem name (required) 
-  s.name = "bench"
+  s.name = "viiite"
   
   # Gem version (required)
   s.version = $version
@@ -27,10 +27,10 @@ Gem::Specification.new do |s|
   #
   # The description should be more detailed than the summary.  For example,
   # you might wish to copy the entire README into the description.
-  s.description = "Bench brings tools to benchmark and analyze the complexity of your algorithms. \nIt has been designed as an alternative to Benchmark that let your benchmarks \nevolve smoothly from simple measures to more complex infrastructures."
+  s.description = "Viiite brings tools to benchmark and analyze the complexity of your algorithms. \nIt has been designed as an alternative to Benchmark that let your benchmarks \nevolve smoothly from simple measures to more complex infrastructures."
   
   # The URL of this gem home page (optional)
-  s.homepage = "http://blambeau.github.com/bench"
+  s.homepage = "http://blambeau.github.com/viiite"
 
   # Gem publication date (required but auto)
   #

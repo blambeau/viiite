@@ -8,22 +8,22 @@ template-info:
       ignore: true
 variables:
   lower: 
-    bench
+    viiite
   upper:
-    Bench
+    Viiite
   version:
     0.1.0
   summary: |-
     An alternative to Benchmark
   description: |-
-    Bench brings tools to benchmark and analyze the complexity of your algorithms. 
+    Viiite brings tools to benchmark and analyze the complexity of your algorithms. 
     It has been designed as an alternative to Benchmark that let your benchmarks 
     evolve smoothly from simple measures to more complex infrastructures.
   authors: 
     - {name: Bernard Lambeau, email: blambeau@gmail.com}
   links:
-    - http://blambeau.github.com/bench
-    - http://github.com/blambeau/bench
+    - http://blambeau.github.com/viiite
+    - http://github.com/blambeau/viiite
   dependencies: 
     - {name: rake,         version: "~> 0.9.2",  groups: [test, release]}
     - {name: rspec,        version: "~> 2.6.0",  groups: [test, release]}

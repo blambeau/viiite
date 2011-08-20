@@ -1,5 +1,5 @@
-bench.gemspec
-bench.noespec
+viiite.gemspec
+viiite.noespec
 CHANGELOG.md
 Gemfile
 Gemfile.lock

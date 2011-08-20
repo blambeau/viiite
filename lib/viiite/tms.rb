@@ -1,4 +1,4 @@
-module Bench
+module Viiite
   class Tms
 
     FMTSTR = "%10.6u %10.6y %10.6t %10.6r"
@@ -10,18 +10,18 @@ module Bench
 
     def self.coerce(arg)
       case arg
-      when Bench::Tms
+      when Viiite::Tms
         arg
       when Benchmark::Tms
-        Bench::Tms.new arg.to_a[1..-1]
+        Viiite::Tms.new arg.to_a[1..-1]
       when Numeric
-        Bench::Tms.new [arg, 0.0, 0.0, 0.0, 0.0]
+        Viiite::Tms.new [arg, 0.0, 0.0, 0.0, 0.0]
       when Hash
-        Bench::Tms.new FIELDS.collect{|f| arg[f] || 0.0}
+        Viiite::Tms.new FIELDS.collect{|f| arg[f] || 0.0}
       when Array
-        Bench::Tms.new arg
+        Viiite::Tms.new arg
       else
-        raise ArgumentError, "Invalid value #{arg.inspect} for Bench::Tms"
+        raise ArgumentError, "Invalid value #{arg.inspect} for Viiite::Tms"
       end
     end
 
@@ -33,7 +33,7 @@ module Bench
     def total;  cutime + cstime + stime + utime; end
 
     def to_ruby_literal
-      "Bench::Tms(#{to_a.collect{|f| f.inspect}.join(',')})"
+      "Viiite::Tms(#{to_a.collect{|f| f.inspect}.join(',')})"
     end
 
     def *(x);     memberwise(:*, x)     end
@@ -78,12 +78,12 @@ module Bench
 
     def memberwise(op, x)
       case x
-      when Bench::Tms
-        Bench::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x.send(f))}
+      when Viiite::Tms
+        Viiite::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x.send(f))}
       else
-        Bench::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x)}
+        Viiite::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x)}
       end
     end
 
   end # class Tms
-end # module Bench
+end # module Viiite

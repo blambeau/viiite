@@ -1,10 +1,10 @@
-module Bench
+module Viiite
   class Command
     #
     # Report benchmarking results as a table
     #
     # SYNOPSIS
-    #   bench #{command_name} [BENCHFILE]
+    #   viiite #{command_name} [BENCHFILE]
     #
     # OPTIONS
     # #{summarized_options}
@@ -43,5 +43,5 @@ module Bench
 
     end # class Report
   end # class Command
-end # module Bench
+end # module Viiite
 

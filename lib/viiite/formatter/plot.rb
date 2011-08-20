@@ -1,4 +1,4 @@
-module Bench
+module Viiite
   class Formatter
     class Plot < Formatter
 
@@ -35,4 +35,4 @@ module Bench
 
     end # class Plot
   end # class Formatter
-end # module Bench
+end # module Viiite

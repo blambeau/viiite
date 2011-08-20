@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'bench'
+require 'viiite'
 
 def redirect_io
   $oldstdout = $stdout 

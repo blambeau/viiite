@@ -1,4 +1,4 @@
-module Bench
+module Viiite
   class Runner
     include Alf::Iterator
 
@@ -33,7 +33,7 @@ module Bench
     def report(hash = {}, &block)
       hash = {:bench => hash} unless hash.is_a?(Hash)
       with(hash) {
-        with(:tms => Bench.measure{block.call}){ output }
+        with(:tms => Viiite.measure{block.call}){ output }
       }
     end
 
@@ -56,4 +56,4 @@ module Bench
     end
 
   end # class Runner
-end # module Bench
+end # module Viiite

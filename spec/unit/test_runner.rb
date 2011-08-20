@@ -1,17 +1,17 @@
 require 'spec_helper'
-module Bench
+module Viiite
   describe Runner do
     
-    it "should be definable with Bench.bm" do
-      b = Bench.bm do |bench|
-        bench.report{ 1 + 1 }
+    it "should be definable with Viiite.bm" do
+      b = Viiite.bm do |viiite|
+        viiite.report{ 1 + 1 }
       end
-      b.should be_kind_of(Bench::Runner)
+      b.should be_kind_of(Viiite::Runner)
     end
 
     it "should be executable" do
-      b = Bench.bm do |bench|
-        bench.report{ 1 + 1 }
+      b = Viiite.bm do |viiite|
+        viiite.report{ 1 + 1 }
       end
       res = []
       b.each do |tuple|
@@ -20,24 +20,24 @@ module Bench
       end
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:tms].should be_kind_of(Bench::Tms)
+      res.first[:tms].should be_kind_of(Viiite::Tms)
     end
 
     it "should be enumerable" do
-      b = Bench.bm do |bench|
-        bench.report{ 1 + 1 }
+      b = Viiite.bm do |viiite|
+        viiite.report{ 1 + 1 }
       end
       res = b.to_a
       res.should be_kind_of(Array)
       res.size.should == 1
-      res.first[:tms].should be_kind_of(Bench::Tms)
+      res.first[:tms].should be_kind_of(Viiite::Tms)
     end
     
     it "should support variation points" do
-      b = Bench.bm do |bench|
+      b = Viiite.bm do |viiite|
         2.times do |i| 
-          bench.variation_point(:"#run", i)
-          bench.report do end
+          viiite.variation_point(:"#run", i)
+          viiite.report do end
         end
       end
       res = b.to_a
@@ -45,9 +45,9 @@ module Bench
     end
 
     it "should support ranging over values" do
-      b = Bench.bm do |bench|
-        bench.range_over [10, 100, 1000], :times do |t|
-          bench.report do end
+      b = Viiite.bm do |viiite|
+        viiite.range_over [10, 100, 1000], :times do |t|
+          viiite.report do end
         end
       end
       b.to_a.collect{|t| t[:times]}.should == [10, 100, 1000]

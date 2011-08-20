@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Bench
+module Viiite
   describe Tms, ".coerce" do
 
     subject{ Tms.coerce(arg) }

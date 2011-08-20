@@ -1,32 +1,32 @@
-require "bench/version"
-require "bench/loader"
-require "bench/tms"
-require "bench/formatter"
-require "bench/runner"
-require "bench/command"
-require "bench/bench_file"
+require "viiite/version"
+require "viiite/loader"
+require "viiite/tms"
+require "viiite/formatter"
+require "viiite/runner"
+require "viiite/command"
+require "viiite/viiite_file"
 require "benchmark"
 
 #
 # Benchmarking and complexity analyzer utility
 #
-module Bench
+module Viiite
 
   # Builds a Tms object
   def self.Tms(*args)
-    Bench::Tms.coerce(args)
+    Viiite::Tms.coerce(args)
   end
 
   def self.measure(&block)
-    Bench::Tms.coerce Benchmark.measure(&block)
+    Viiite::Tms.coerce Benchmark.measure(&block)
   end
 
   # Builds a runner instance via the DSL definition given by the block.
   #
   # Example
   #
-  #  Bench.runner do |b|
-  #    b.variation_point :ruby_version, Bench.which_ruby
+  #  Viiite.runner do |b|
+  #    b.variation_point :ruby_version, Viiite.which_ruby
   #    b.range_over([100, 1000, 10000, 100000], :runs) do |runs|
   #      b.variation_point :test, :via_reader do
   #        b.report{ runs.times{ foo.via_reader } }
@@ -53,4 +53,4 @@ module Bench
     end
   end
 
-end # module Bench
+end # module Viiite

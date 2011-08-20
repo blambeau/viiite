@@ -1,9 +1,9 @@
-module Bench
+module Viiite
   #
-  # bench - Benchmark ruby scripts the easy way
+  # viiite - Benchmark ruby scripts the easy way
   #
   # SYNOPSIS
-  #   bench [--version] [--help] COMMAND [cmd opts] ARGS...
+  #   viiite [--version] [--help] COMMAND [cmd opts] ARGS...
   #
   # OPTIONS
   # #{summarized_options}
@@ -15,7 +15,7 @@ module Bench
   #   This command helps you benchmarking ruby applications and manipulating
   #   benchmark results very simply.
   #
-  # See 'bench help COMMAND' for more information on a specific command.
+  # See 'viiite help COMMAND' for more information on a specific command.
   #
   class Command < Quickl::Delegator(__FILE__, __LINE__)
 
@@ -26,20 +26,20 @@ module Bench
         $LOAD_PATH.unshift val
       end
       opt.on('-rlibrary',
-             "require the library, before executing bench") do |lib|
+             "require the library, before executing viiite") do |lib|
         require(lib)
       end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
       opt.on_tail("--version", "Show version") do
-        raise Quickl::Exit, "bench #{Bench::VERSION} (c) 2011, Bernard Lambeau"
+        raise Quickl::Exit, "viiite #{Viiite::VERSION} (c) 2011, Bernard Lambeau"
       end
     end
     
   end # class Command
-end # module Bench
-require "bench/command/help"
-require "bench/command/run"
-require "bench/command/report"
-require "bench/command/plot"
+end # module Viiite
+require "viiite/command/help"
+require "viiite/command/run"
+require "viiite/command/report"
+require "viiite/command/plot"

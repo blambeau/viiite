@@ -1,9 +1,9 @@
 require 'spec_helper'
-describe "bench command / " do
+describe "viiite command / " do
 
   Dir[File.expand_path('../**/*.cmd', __FILE__)].each do |input|
     cmd = File.readlines(input).first
-    specify{ cmd.should =~ /^bench / }
+    specify{ cmd.should =~ /^viiite / }
   
     describe "#{File.basename(input)}: #{cmd}" do
       let(:argv)     { Quickl.parse_commandline_args(cmd)[1..-1] }
@@ -20,7 +20,7 @@ describe "bench command / " do
           if i = argv.index("raw_data")
             argv[i] = File.expand_path('../raw_data.rash', __FILE__)
           end
-          Bench::Command.run(argv)
+          Viiite::Command.run(argv)
         rescue SystemExit
           $stdout << "SystemExit" << "\n"
         end
