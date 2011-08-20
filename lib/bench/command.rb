@@ -3,7 +3,7 @@ module Bench
   # bench - Benchmark ruby scripts the easy way
   #
   # SYNOPSIS
-  #   #{program_name} [--version] [--help] COMMAND [cmd opts] ARGS...
+  #   bench [--version] [--help] COMMAND [cmd opts] ARGS...
   #
   # OPTIONS
   # #{summarized_options}
@@ -15,7 +15,7 @@ module Bench
   #   This command helps you benchmarking ruby applications and manipulating
   #   benchmark results very simply.
   #
-  # See '#{program_name} help COMMAND' for more information on a specific command.
+  # See 'bench help COMMAND' for more information on a specific command.
   #
   class Command < Quickl::Delegator(__FILE__, __LINE__)
 
@@ -33,7 +33,7 @@ module Bench
         raise Quickl::Help
       end
       opt.on_tail("--version", "Show version") do
-        raise Quickl::Exit, "#{program_name} #{Bench::VERSION} (c) 2011, Bernard Lambeau"
+        raise Quickl::Exit, "bench #{Bench::VERSION} (c) 2011, Bernard Lambeau"
       end
     end
     

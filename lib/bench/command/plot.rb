@@ -4,7 +4,7 @@ module Bench
     # Generates a plot
     #
     # SYNOPSIS
-    #   #{program_name} #{command_name} [BENCHFILE]
+    #   bench #{command_name} [BENCHFILE]
     #
     # OPTIONS
     # #{summarized_options}

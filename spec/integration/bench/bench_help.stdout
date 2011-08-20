@@ -1,0 +1,25 @@
+
+bench - Benchmark ruby scripts the easy way
+
+SYNOPSIS
+  bench [--version] [--help] COMMAND [cmd opts] ARGS...
+
+OPTIONS
+  -Idirectory                      specify $LOAD_PATH directory (may be used more than once)
+  -rlibrary                        require the library, before executing bench
+      --help                       Show help
+      --version                    Show version
+
+COMMANDS
+  help       Show help about a specific command
+  run        Run a benchmark and output raw data
+  report     Run a benchmark and summarize results
+  plot       Generates a plot
+
+DESCRIPTION
+  This command helps you benchmarking ruby applications and manipulating
+  benchmark results very simply.
+
+See 'bench help COMMAND' for more information on a specific command.
+
+SystemExit
