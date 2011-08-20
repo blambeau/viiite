@@ -98,7 +98,7 @@ For example, suppose that we would like to compare the different iteration metho
 
 Or the other way around? Comparing rubies on each iteration method?
 
-    $ rvm exec bench run bench_iteration.rb | --hierarchy --regroup=bench,ruby
+    $ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=bench,ruby
     +--------+--------------------------------------------------------------------+
     | :bench | :measure                                                           |
     +--------+--------------------------------------------------------------------+
