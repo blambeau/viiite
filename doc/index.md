@@ -56,31 +56,11 @@ Why not comparing sort methods on different rubies? Here is the benchmark:
       end
     end
 
-We can compare execution time on a sort method basis:
-
-    $ rvm exec bench run bench_sort.rb | bench report --hierarchy --regroup=ruby,bench
-    +---------------+-----------------------------------------------------------------+
-    | :ruby         | :measure                                                        |
-    +---------------+-----------------------------------------------------------------+
-    | ruby 1.8.7    | +-------------+-----------------------------------------------+ |
-    |               | | :bench      | :measure                                      | |
-    |               | +-------------+-----------------------------------------------+ |
-    |               | | :bubblesort |   0.140800   0.000000   0.140800 (  0.143613) | |
-    |               | | :quicksort  |   0.004000   0.000000   0.004000 (  0.003992) | |
-    |               | +-------------+-----------------------------------------------+ |
-    | ruby 1.9.3dev | +-------------+-----------------------------------------------+ |
-    |               | | :bench      | :measure                                      | |
-    |               | +-------------+-----------------------------------------------+ |
-    |               | | :bubblesort |   0.045600   0.000000   0.045600 (  0.045382) | |
-    |               | | :quicksort  |   0.002000   0.000000   0.002000 (  0.002538) | |
-    |               | +-------------+-----------------------------------------------+ |
-    +---------------+-----------------------------------------------------------------+
-
-Or visualizing complexity profiles, on a per-ruby basis:
+And here is a way to obain a comparison of ruby versions/implementations:
 
     $ rvm exec bench run bench_sort.rb | \
       bench plot -x size -y tms.total --series=ruby --graph=bench --gnuplot
 
 ![Comparing Bubblesort complexity with Bench](/images/bubblesort-rubies.jpeg)
 
-
+You'll find typical use-cases in the menu at left!

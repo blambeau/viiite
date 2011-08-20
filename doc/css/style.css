@@ -1,11 +1,9 @@
 body {
-  padding: 10px 10px;
+  padding: 15px 50px 0px 0px;
   font-family: 'Nunito', 'Palatino', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   overflow: scroll;
   color: #212122;
-  width: 80%;
-  margin: auto;
 }
 
 a, a:visited {
@@ -24,5 +22,43 @@ pre code {
   font-size: 14px;
   font-weight: bold;
   background: white;
+}
+
+#menu {
+  width: 200px;
+  position:fixed;
+  left: 25px;
+  top: 25px;
+  font-size: 1.25em;
+  list-style: none;
+  width: 250px;
+  border: 2px solid #A30600;
+  border-left: none;
+  border-bottom: none;
+  padding: 10px;
+}
+
+h1 {
+}
+
+#content {
+  padding-left: 315px;
+  padding-right: 200px;
+}
+
+#links {
+  width: 140px;
+  position: fixed;
+  right: 100px;
+  top: 140px;
+  font-size: 14px;
+}
+#links a {
+  display: block;
+}
+#social {
+  position: absolute;
+  right: 275px;
+  top: 55px;
 }
 
