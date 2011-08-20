@@ -1,0 +1,25 @@
+body {
+  padding: 10px 10px;
+  font-family: 'Nunito', 'Palatino', sans-serif;
+  font-size: 18px;
+  overflow: scroll;
+  color: #212122;
+  width: 80%;
+  margin: auto;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #A30600;
+}
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+pre code {
+  font-size: 16px;
+  font-weight: bold;
+  background: white;
+}
+
