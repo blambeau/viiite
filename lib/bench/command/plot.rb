@@ -39,9 +39,9 @@ module Bench
           @abscissa = value.to_sym
         end
         
-        @ordinate = :y
+        @ordinate = "tms.total"
         opt.on('-y ordinate', "Specify ordinate attribute") do |value|
-          @ordinate = value.to_sym
+          @ordinate = value
         end
         
         @series = :bench
