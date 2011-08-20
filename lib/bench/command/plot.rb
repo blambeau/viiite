@@ -24,9 +24,14 @@ module Bench
           @term = (value || "dumb").to_sym
         end
         
-        @style = File.expand_path("../plot_style.rash", __FILE__)
-        opt.on('--style=FILE', "Joins a graph style file") do |value|
-          @style = value
+        @serie_style = File.expand_path("../serie_style.rash", __FILE__)
+        opt.on('--style=FILE', "Specify a style file to use for series") do |value|
+          @serie_style = value
+        end
+        
+        @graph_style = File.expand_path("../graph_style.rash", __FILE__)
+        opt.on('--style=FILE', "Specify a style file to use for graphs") do |value|
+          @graph_style = value
         end
         
         @abscissa = :size
@@ -56,11 +61,12 @@ module Bench
         lispy = Alf.lispy
         op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
                                  {:y => "avg{ #{@ordinate} }"})
-        op = lispy.join(op, Alf::Reader.reader(@style))
+        op = lispy.join(op, Alf::Reader.reader(@serie_style))
         op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
         op = lispy.group(op, [:x, :y], :data)
         op = lispy.rename(op, :serie => :title)
         op = lispy.group(op, [:graph], :series, {:allbut => true})
+        op = lispy.join(op, Alf::Reader.reader(@graph_style))
         op = lispy.rename(op, :graph => :title)
         op
       end

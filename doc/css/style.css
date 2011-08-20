@@ -1,7 +1,7 @@
 body {
   padding: 10px 10px;
   font-family: 'Nunito', 'Palatino', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   overflow: scroll;
   color: #212122;
   width: 80%;
@@ -17,8 +17,11 @@ a:hover {
   cursor: pointer;
 }
 
+pre, img {
+  padding-left: 75px;
+}
 pre code {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   background: white;
 }
