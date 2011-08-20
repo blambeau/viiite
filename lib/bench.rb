@@ -53,12 +53,4 @@ module Bench
     end
   end
 
-  private 
-
-  def self._run(runner)
-    run = Bench::Command::Run.new
-    run.parse_options []
-    run.execute runner
-  end
-
 end # module Bench

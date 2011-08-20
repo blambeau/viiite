@@ -4,7 +4,7 @@ title: Bench &mdash; An alternative to Benchmark
 ---
 # Bench &mdash; An alternative to Benchmark
 
-After a first sketch a few weeks ago, I've decided to dedicate my *whyday* on Bench. Bench is an alternative to Benchmark, designed to let benchmarks evolve smootlhy from simple measures to complete benchmarking infrastructures.
+After a first sketch a few weeks ago, I've decided to dedicate my *whyday* on Bench. Bench is an alternative to Benchmark, designed to let benchmarks evolve smootlhy from simple measures to complete benchmarking infrastructures. It does it through a separation of concerns between *running* benchmarks (bench run) and *reporting* benchmarking results (bench report). 
 
 ## Starting 'ala' Benchmark
 
@@ -18,9 +18,9 @@ Let's starts with the common Benchmark example, performing very simple measures 
       r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
     end
 
-As with Benchmark, you can run the bench case by launching ruby on the script; this works provided that you required "bench/autorun". For example, if bench_iteration.rb contains the code above, then:
+In such a simple case, the reporting command provides a one-liner for 'run + report with default options':
 
-    $ bench show bench_iteration.rb
+    $ bench report bench_iteration.rb
     +--------+-----------------------------------------------+
     | :bench | :measure                                      |
     +--------+-----------------------------------------------+
@@ -31,7 +31,7 @@ As with Benchmark, you can run the bench case by launching ruby on the script; t
 
 ## Comparing rubies
 
-Suppose that we want to add a dimension to our benchmarking suite: running it with different ruby versions/implementations. The Benchmark approach does not scale really well, because comparing results becomes difficult. Bench has been designed so that moving forward to more complex benchmarking scenarios remains easy.
+Suppose that we want to add a dimension to our benchmarking suite: running it with different ruby versions/implementations. The Benchmark approach does not scale really well, because comparing results becomes difficult in that case. Bench has been designed so that moving forward to more complex benchmarking scenarios remains easy.
 
 ### Enhancing the benchmark case
 
@@ -48,16 +48,16 @@ First, we add a so-called *variation-point* to our benchmarking suite:
 
 ### Running it
 
-Then, we run the benchmark, using bench instead or ruby this time:
+Then, we run the benchmark, using 'bench run' this time:
 
     $ bench run bench_iteration.rb
     {:ruby => "ruby 1.9.3dev", :bench => :for,   :tms => Bench::Tms(0.02, 0.0, 0.0, 0.0, 0.012284517288208008) }
     {:ruby => "ruby 1.9.3dev", :bench => :times, :tms => Bench::Tms(0.0,  0.0, 0.0, 0.0, 0.0024671554565429688)}
     {:ruby => "ruby 1.9.3dev", :bench => :upto,  :tms => Bench::Tms(0.0,  0.0, 0.0, 0.0, 0.0025177001953125)   }
 
-Okay. The output is not as readable as before (for now). The point is that Bench makes a strict separation of concerns between *running benchmarks* and *analyzing results*. By default, running a benchmarks outputs something neutral, a sequence of hashes. Among others, this allows analyzing benchmarking results with full relational power of [Alf](http://blambeau.github.com/alf), but that's another story. 
+Okay. The output is not as readable as before. In Bench, running a benchmark outputs something neutral, that is, a sequence of hashes. Among others, this allows analyzing benchmarking results with full relational power of [Alf](http://blambeau.github.com/alf), but that's another story. 
 
-The point here is that we can simply execute the same benchmark on different ruby versions/implementations thanks to [RVM](http://beginrescueend.com/rvm/install/).
+The point here is that we can simply execute the same benchmark on different ruby versions/implementations thanks to [RVM](http://beginrescueend.com/rvm/install/). As seen by Bench, the result is not different than what 'bench run' would have returned. This means that benchmarking results can be piped to 'bench report', saved somewhere, analyzed later, and so on:
 
     $ rvm exec bench run bench_iteration.rb
     {:ruby => "ruby 1.8.7",     :bench => :for,   :tms => Bench::Tms(0.0,0.0,0.0,0.0,0.00345611572265625)   }
@@ -70,14 +70,13 @@ The point here is that we can simply execute the same benchmark on different rub
     {:ruby => "jruby 1.6.3",    :bench => :times, :tms => Bench::Tms(0.0149998664855957,0.0,0.0,0.0,0.0149998664855957) }
     {:ruby => "jruby 1.6.3",    :bench => :upto,  :tms => Bench::Tms(0.0120000839233398,0.0,0.0,0.0,0.0120000839233398) }
 
-### Comparing results
+### Reporting & Comparing results
 
-Bench comes with a few commands to compare benchmarking results. One of them is 'bench show', which simply taskes a sequence of hashes as input, and let you regroup and compare results easily:
+Bench comes with a few commands to report and compare benchmarking results. One of them is 'bench report', which simply taskes a sequence of hashes as input, and let you regroup and compare results easily.
 
-For example, suppose that we would like to compare the different iteration methods, per ruby version. Here is how it goes. First, we save benchmarking raw data to a file (to ensure that all comparisons are made on a common basis). Then, we play with 'bench show'.
+For example, suppose that we would like to compare the different iteration methods, per ruby version. Here is how it goes:
 
-    $ rvm exec bench run bench_iteration.rb > /tmp/raw-data.rash
-    $ bench show /tmp/raw-data.rash --hierarchy --regroup=ruby,bench
+    $ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=ruby,bench
     +----------------+------------------------------------------------------------+
     | :ruby          | :measure                                                   |
     +----------------+------------------------------------------------------------+
@@ -99,7 +98,7 @@ For example, suppose that we would like to compare the different iteration metho
 
 Or the other way around? Comparing rubies on each iteration method?
 
-    $ bench show /tmp/raw-data.rash --hierarchy --regroup=bench,ruby
+    $ rvm exec bench run bench_iteration.rb | --hierarchy --regroup=bench,ruby
     +--------+--------------------------------------------------------------------+
     | :bench | :measure                                                           |
     +--------+--------------------------------------------------------------------+

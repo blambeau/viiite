@@ -33,7 +33,7 @@ end
 ```
 
 ```terminal
-$ bench show bench_iteration.rb
+$ bench report bench_iteration.rb
 +--------+-----------------------------------------------+
 | :bench | :measure                                      |
 +--------+-----------------------------------------------+
@@ -46,7 +46,7 @@ $ bench show bench_iteration.rb
 ### To more complex ones ...
 
 ```terminal
-$ rvm exec bench run bench_iteration.rb | bench show --hierarchy --regroup=bench,ruby
+$ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=bench,ruby
 +--------+--------------------------------------------------------------------+
 | :bench | :measure                                                           |
 +--------+--------------------------------------------------------------------+
