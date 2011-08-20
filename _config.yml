@@ -1,2 +1,3 @@
 permalink: /:title
-baseurl: http://blambeau.github.com/bench
+baseurl: /bench
+base-url: /bench
