@@ -29,24 +29,26 @@ module Bench
           @style = value
         end
         
-        @graph = nil
-        opt.on('-g graph', "Specify multi-graph attribute") do |value|
-          @graph = value.to_sym
-        end
-        
-        @abscissa = :x
-        opt.on('-x abscissa', "Specify abscissa attribute") do |value|
+        @abscissa = :size
+        opt.on('-x abscissa', "Specify the abscissa attribute") do |value|
           @abscissa = value.to_sym
         end
         
         @ordinate = "tms.total"
-        opt.on('-y ordinate', "Specify ordinate attribute") do |value|
+        opt.on('-y ordinate', "Specify the ordinate attribute") do |value|
           @ordinate = value
         end
-        
+
         @series = :bench
-        opt.on('-s series', "Specify series attribute") do |value|
+        opt.on("--series=ATTR",
+               "Specify the attribute to split series") do |value|
           @series = value.to_sym
+        end
+
+        @graph = :ruby
+        opt.on('--graph=ATTR', 
+               "Specify the attribute to split graphs") do |value|
+          @graph = value.to_sym
         end
       end
     
