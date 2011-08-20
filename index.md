@@ -61,6 +61,6 @@ And here is a way to obain a comparison of ruby versions/implementations:
     $ rvm exec bench run bench_sort.rb | \
       bench plot -x size -y tms.total --series=ruby --graph=bench --gnuplot
 
-![Comparing Bubblesort complexity with Bench](/images/bubblesort-rubies.jpeg)
+![Comparing Bubblesort complexity with Bench](images/bubblesort-rubies.jpeg)
 
 You'll find typical use-cases in the menu at left!
