@@ -8,3 +8,4 @@ doc/_site
 .buildpath
 *.rbc
 Gemfile.lock
+gh-pages
