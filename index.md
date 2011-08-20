@@ -63,6 +63,6 @@ And here is a way to obain a comparison of ruby versions/implementations:
     $ rvm exec viiite run bench_sort.rb | \
       viiite plot -x size -y tms.total --series=ruby --graph=bench --gnuplot
 
-![Comparing Bubblesort complexity with Viiite](images/bubblesort-rubies.jpeg)
+![Comparing Bubblesort complexity with Viiite](/images/bubblesort-rubies.jpeg)
 
 You'll find typical use-cases in the menu at left!
