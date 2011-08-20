@@ -29,9 +29,9 @@ Viiite.bm do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do
-      viiite_case = Array.random(size)
-      b.report(:quicksort) { viiite_case.quicksort }
-      b.report(:bubblesort){ viiite_case.bubblesort }
+      bench_case = Array.random(size)
+      b.report(:quicksort) { bench_case.quicksort }
+      b.report(:bubblesort){ bench_case.bubblesort }
     end
   end
 end
