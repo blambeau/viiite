@@ -27,6 +27,9 @@ describe "bench command / " do
       
       specify{
         begin
+          if i = argv.index("raw_data")
+            argv[i] = File.expand_path('../raw_data.rash', __FILE__)
+          end
           Bench::Command.run(argv)
         rescue SystemExit
           $stdout << "SystemExit" << "\n"
