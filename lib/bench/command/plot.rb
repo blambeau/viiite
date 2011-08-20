@@ -24,6 +24,7 @@ module Bench
           @term = (value || "dumb").to_sym
         end
         
+        @style = File.expand_path("../plot_style.rash", __FILE__)
         opt.on('--style=FILE', "Joins a graph style file") do |value|
           @style = value
         end
@@ -43,7 +44,7 @@ module Bench
           @ordinate = value.to_sym
         end
         
-        @series = :series
+        @series = :bench
         opt.on('-s series', "Specify series attribute") do |value|
           @series = value.to_sym
         end
@@ -51,15 +52,15 @@ module Bench
     
       def query(op)
         lispy = Alf.lispy
-        op = lispy.project(op, [@graph, @abscissa, @ordinate, @series])
-        op = lispy.join(op, Alf::Reader.reader(@style)) if @style
-        op = lispy.rename(op, @graph => :graph, @abscissa => :x, @ordinate => :y, 
-                              @series => :serie)
-        op = lispy.summarize(op, [:y], {:y => lispy.avg(:y)}, {:allbut => true})
+        op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
+                                 {:y => "avg{ #{@ordinate} }"})
+        op = lispy.join(op, Alf::Reader.reader(@style))
+        op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
         op = lispy.group(op, [:x, :y], :data)
         op = lispy.rename(op, :serie => :title)
         op = lispy.group(op, [:graph], :series, {:allbut => true})
         op = lispy.rename(op, :graph => :title)
+        op
       end
       
       def execute(args)

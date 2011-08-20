@@ -36,15 +36,9 @@ module Bench
       end
 
       def execute(args)
-        case args
-        when Array
-          raise Quickl::InvalidArgument if args.size > 1
-          execute Alf::Reader.reader(args.first || $stdin)
-        when Alf::Iterator
-          Alf::Renderer.text(query(args)).execute($stdout)
-        else 
-          raise ArgumentError, "Unable to report from #{args.inspec}"
-        end
+        raise Quickl::InvalidArgument if args.size > 1
+        op = query Alf::Reader.reader(args.first || $stdin)
+        Alf::Renderer.text(op).execute($stdout)
       end
 
     end # class Report
