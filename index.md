@@ -10,6 +10,7 @@ After a first sketch a few weeks ago, I've decided to dedicate my *whyday* on Vi
 
 Let's starts with the common Benchmark example, performing very simple measures first. In Viiite, this goes as follows:
 
+    # bench_iteration.rb
     n = 15000
     Viiite.bm do |r|
       r.report(:for)   { for i in 1..n; a = "1"; end }
@@ -19,7 +20,7 @@ Let's starts with the common Benchmark example, performing very simple measures 
 
 In such a simple case, the reporting command provides a one-liner for 'run + report with default options':
 
-    $ viiite report viiite_iteration.rb
+    $ viiite report bench_iteration.rb
     +--------+-----------------------------------------------+
     | :bench | :measure                                      |
     +--------+-----------------------------------------------+
@@ -32,6 +33,7 @@ In such a simple case, the reporting command provides a one-liner for 'run + rep
 
 Why not comparing sort methods on different rubies? Here is the benchmark:
 
+    # bench_sort.rb
     require 'viiite'
     class Array
       def random(x) 
@@ -58,8 +60,8 @@ Why not comparing sort methods on different rubies? Here is the benchmark:
 
 And here is a way to obain a comparison of ruby versions/implementations:
 
-    $ rvm exec viiite run viiite_sort.rb | \
-      viiite plot -x size -y tms.total --series=ruby --graph=viiite --gnuplot
+    $ rvm exec viiite run bench_sort.rb | \
+      viiite plot -x size -y tms.total --series=ruby --graph=bench --gnuplot
 
 ![Comparing Bubblesort complexity with Viiite](images/bubblesort-rubies.jpeg)
 
