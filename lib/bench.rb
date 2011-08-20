@@ -12,10 +12,6 @@ require "benchmark"
 #
 module Bench
 
-  OPTIONS = {
-    :autorun => false
-  }
-
   # Builds a Tms object
   def self.Tms(*args)
     Bench::Tms.coerce(args)
@@ -42,9 +38,7 @@ module Bench
   #  end
   # 
   def self.bm(&block)
-    runner = Runner.new(block)
-    _run(runner) if OPTIONS[:autorun]
-    runner
+    Runner.new(block)
   end
 
   #
@@ -62,9 +56,9 @@ module Bench
   private 
 
   def self._run(runner)
-    show = Bench::Command::Show.new
-    show.parse_options []
-    show.execute runner
+    run = Bench::Command::Run.new
+    run.parse_options []
+    run.execute runner
   end
 
 end # module Bench

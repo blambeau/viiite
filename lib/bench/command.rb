@@ -40,7 +40,7 @@ module Bench
     end # class Help
 
     # 
-    # Run a benchmark 
+    # Run a benchmark and summarize results
     #
     # SYNOPSIS
     #   #{program_name} #{command_name} [BENCHFILE]
@@ -49,46 +49,35 @@ module Bench
     # #{summarized_options}
     #
     class Run < Quickl::Command(__FILE__, __LINE__)
-      
-      def execute(args)
-        raise Quickl::InvalidArgument if args.size > 1
-        input  = Alf::Reader.reader(args.first || $stdin)
-        output = $stdout
-        Alf::Renderer.rash(input).execute(output)
-      end
-
-    end # class Run
-
-    # 
-    # Show a benchmark 
-    #
-    # SYNOPSIS
-    #   #{program_name} #{command_name} [BENCHFILE]
-    #
-    # OPTIONS
-    # #{summarized_options}
-    #
-    class Show < Quickl::Command(__FILE__, __LINE__)
 
       options do |opt|
+
+        @raw = false
+        opt.on("--raw", "Output raw data to be analyzed later") do
+          @raw= true
+        end
+
         @regroup = [:bench]
         opt.on("--regroup=x,y,z", Array,
                "Regroup by x, then y, then z, ...") do |group|
           @regroup = group
         end
+
         @hierarchy = false
         opt.on('-h', "--hierarchy", "Make a hierarchical regrouping") do
           @hierarchy = true
         end
+
       end
 
-      def query(input)
+      def query(op)
         lispy = Alf.lispy
-        op = input
-        op = lispy.summarize(op, @regroup, :measure => lispy.avg{tms})
-        @regroup[1..-1].each do |grouping|
-          op = lispy.group(op, [grouping] + [:measure], :measure)
-        end if @hierarchy 
+        unless @raw
+          op = lispy.summarize(op, @regroup, :measure => lispy.avg{tms})
+          @regroup[1..-1].each do |grouping|
+            op = lispy.group(op, [grouping] + [:measure], :measure)
+          end if @hierarchy 
+        end
         op
       end
 
@@ -98,9 +87,13 @@ module Bench
           raise Quickl::InvalidArgument if args.size > 1
           execute Alf::Reader.reader(args.first || $stdin)
         when Alf::Iterator
-          Alf::Renderer.text(query(args)).execute($stdout)
+          if @raw
+            Alf::Renderer.rash(query(args)).execute($stdout)
+          else
+            Alf::Renderer.text(query(args)).execute($stdout)
+          end
         else 
-          raise ArgumentError, "Unable to show #{args.inspec}"
+          raise ArgumentError, "Unable to run #{args.inspec}"
         end
       end
 

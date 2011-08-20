@@ -10,7 +10,7 @@ After a first sketch a few weeks ago, I've decided to dedicate my *whyday* on Be
 
 Let's starts with the common Benchmark example, performing very simple measures first. In Bench, this goes as follows:
 
-    require 'bench/autorun'
+    require 'bench'
     n = 15000
     Bench.bm do |r|
       r.report(:for)   { for i in 1..n; a = "1"; end }
@@ -20,7 +20,7 @@ Let's starts with the common Benchmark example, performing very simple measures 
 
 As with Benchmark, you can run the bench case by launching ruby on the script; this works provided that you required "bench/autorun". For example, if bench_iteration.rb contains the code above, then:
 
-    $ ruby -rubygems bench_iteration.rb
+    $ bench show bench_iteration.rb
     +--------+-----------------------------------------------+
     | :bench | :measure                                      |
     +--------+-----------------------------------------------+
@@ -37,7 +37,7 @@ Suppose that we want to add a dimension to our benchmarking suite: running it wi
 
 First, we add a so-called *variation-point* to our benchmarking suite:
 
-    require 'bench'         # !! we removed autorun here !!
+    require 'bench'
     n = 15000
     Bench.bm do |r|
       r.variation_point :ruby, Bench.which_ruby
