@@ -32,7 +32,7 @@ end
 ```
 
 ```terminal
-$ viiite report viiite_iteration.rb
+$ viiite report bench_iteration.rb
 +--------+-----------------------------------------------+
 | :bench | :measure                                      |
 +--------+-----------------------------------------------+
@@ -56,7 +56,7 @@ end
 ```
 
 ```terminal
-$ rvm exec viiite run viiite_iteration.rb | viiite report --hierarchy --regroup=viiite,ruby
+$ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=viiite,ruby
 +--------+--------------------------------------------------------------------+
 | :bench | :measure                                                           |
 +--------+--------------------------------------------------------------------+
@@ -94,7 +94,7 @@ end
 ```
 
 ```terminal
-$ viiite plot viiite_sort.rb -x size -y tms.total --graph=ruby --series=viiite --gnuplot | gnuplot
+$ viiite plot bench_sort.rb -x size -y tms.total --graph=ruby --series=viiite --gnuplot | gnuplot
 
                                     ruby 1.8.7
 
@@ -147,7 +147,7 @@ $ viiite plot viiite_sort.rb -x size -y tms.total --graph=ruby --series=viiite -
 ```
 
 ```terminal
-$ viiite plot viiite_sort.rb -x size -y tms.total --graph=viiite --series=ruby --gnuplot | gnuplot
+$ viiite plot bench_sort.rb -x size -y tms.total --graph=viiite --series=ruby --gnuplot | gnuplot
                                     bubblesort
 
   0.35 ++-------+-------+--------+-------+--------+--------+-------+-------++

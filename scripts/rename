@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+from, to = ARGV
+raise if from.nil? or to.nil?
+
+rx = Regexp.compile(from)
+
+dir = File.dirname(File.dirname(__FILE__))
+Dir["#{dir}/**/*"].each do |file|
+  next unless file =~ /\.(rb|md|txt|noespec|gemspec|yml|stdout|cmd)$/
+  before = File.read(file)
+  if before =~ rx
+    puts "Rewriting #{file}"
+    File.open(file, 'w') do |io|
+      io << before.gsub(rx, to)
+    end
+  end
+end
