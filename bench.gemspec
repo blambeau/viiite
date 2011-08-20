@@ -21,16 +21,16 @@ Gem::Specification.new do |s|
   # A short summary of this gem
   #
   # This is displayed in `gem list -d`.
-  s.summary = "Benchmarking and complexity analyzer utility"
+  s.summary = "An alternative to Benchmark"
 
   # A long description of this gem (required)
   #
   # The description should be more detailed than the summary.  For example,
   # you might wish to copy the entire README into the description.
-  s.description = "This gem provides you tools to benchmark and analyze the complexity of your\nalgrithms"
+  s.description = "Bench brings tools to benchmark and analyze the complexity of your algorithms. \nIt has been designed as an alternative to Benchmark that let your benchmarks \nevolve smoothly from simple measures to more complex infrastructures."
   
   # The URL of this gem home page (optional)
-  s.homepage = "http://github.com/blambeau/bench"
+  s.homepage = "http://blambeau.github.com/bench"
 
   # Gem publication date (required but auto)
   #
