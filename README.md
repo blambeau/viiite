@@ -42,7 +42,7 @@ $ bench report bench_iteration.rb
 +--------+-----------------------------------------------+
 ```
 
-### To more complex ones ...
+## To more complex ones ...
 
 ```ruby
 require 'bench'
@@ -77,7 +77,7 @@ $ rvm exec bench run bench_iteration.rb | bench report --hierarchy --regroup=ben
 | ...    | ...                                                                |
 ```
 
-### To awesomeness ...
+## To awesomeness ...
 
 ```ruby
 require 'bench'
@@ -94,7 +94,7 @@ end
 ```
 
 ```terminal
-$ bench plot bench_sort.rash -x size -y tms.total --graph=ruby --series=bench --gnuplot | gnuplot
+$ bench plot bench_sort.rb -x size -y tms.total --graph=ruby --series=bench --gnuplot | gnuplot
 
                                     ruby 1.8.7
 
@@ -147,7 +147,7 @@ $ bench plot bench_sort.rash -x size -y tms.total --graph=ruby --series=bench --
 ```
 
 ```terminal
-$ bench plot bench_sort.rash -x size -y tms.total --graph=bench --series=ruby --gnuplot | gnuplot
+$ bench plot bench_sort.rb -x size -y tms.total --graph=bench --series=ruby --gnuplot | gnuplot
                                     bubblesort
 
   0.35 ++-------+-------+--------+-------+--------+--------+-------+-------++
