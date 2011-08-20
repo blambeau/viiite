@@ -1,7 +1,7 @@
 module Bench
   class Command < Quickl::Delegator(__FILE__, __LINE__)
     # 
-    # Generates a plot
+    # Report benchmarking results as a plot
     #
     # SYNOPSIS
     #   bench #{command_name} [BENCHFILE]

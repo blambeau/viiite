@@ -1,7 +1,7 @@
 module Bench
   class Command
     #
-    # Run a benchmark and summarize results
+    # Report benchmarking results as a table
     #
     # SYNOPSIS
     #   bench #{command_name} [BENCHFILE]

@@ -12,18 +12,8 @@ describe "bench command / " do
       let(:stdout_expected) { File.exists?(stdout) ? File.read(stdout) : "" }
       let(:stderr_expected) { File.exists?(stderr) ? File.read(stderr) : "" }
 
-      before{ 
-        $oldstdout = $stdout 
-        $oldstderr = $stderr
-        $stdout = StringIO.new
-        $stderr = StringIO.new
-      }
-      after { 
-        $stdout = $oldstdout
-        $stderr = $oldstderr
-        $oldstdout = nil 
-        $oldstderr = nil 
-      }
+      before{ redirect_io }
+      after { restore_io  }
       
       specify{
         begin
