@@ -43,7 +43,7 @@ In Viiite, running a benchmark outputs something neutral, that is, a sequence of
 
 Viiite comes with a few commands to report and compare benchmarking results. One of them is 'viiite report', which simply taskes a sequence of hashes as input, and lets regrouping and comparing results easily. For example, suppose that we would like to compare the different iteration methods, per ruby version. Here is how it goes:
 
-    $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=ruby,viiite
+    $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=ruby,bench
     +----------------+------------------------------------------------------------+
     | :ruby          | :measure                                                   |
     +----------------+------------------------------------------------------------+
@@ -65,7 +65,7 @@ Viiite comes with a few commands to report and compare benchmarking results. One
 
 Or the other way around? Comparing rubies on each iteration method:
 
-    $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=viiite,ruby
+    $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=bench,ruby
     +--------+--------------------------------------------------------------------+
     | :bench | :measure                                                           |
     +--------+--------------------------------------------------------------------+
