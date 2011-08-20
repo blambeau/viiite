@@ -1,12 +1,16 @@
+def bench_clean_binding
+  binding
+end
+
 module Bench
   class BenchFile < Alf::Reader
 
     # (see Alf::Reader#each)
     def each
       op = if input.is_a?(String)
-        Kernel.instance_eval(input_text, input)
+        Kernel.eval(input_text, bench_clean_binding, input)
       else
-        Kernel.instance_eval(input_text)
+        Kernel.eval(input_text, bench_clean_binding)
       end
       op.each(&Proc.new)
     end
