@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Benchmarking rubies
+title: Comparing rubies
 ---
-# Benchmarking rubies with Bench
+# Comparing rubies with Bench
 
 In this post, we show how to compare the performance of the same algorithm(s) under different ruby versions/implementations. We do it on the common bench_iteration benchmark.
 
