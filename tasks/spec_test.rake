@@ -30,7 +30,7 @@ begin
   desc "Run RSpec code examples"
   RSpec::Core::RakeTask.new(:spec_test) do |t|
     # Glob pattern to match files.
-    t.pattern = "spec/**/test_*.rb"
+    t.pattern = "spec/unit/**/test_*.rb"
 
     # By default, if there is a Gemfile, the generated command will include
     # 'bundle exec'. Set this to true to ignore the presence of a Gemfile, 
