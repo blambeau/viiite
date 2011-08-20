@@ -16,8 +16,8 @@ Learn more on the [github-pages of this project](http://blambeau.github.com/benc
 
 ## Links
 
-http://blambeau.github.com/bench
-http://github.com/blambeau/bench
+* [Github pages with more documentation](http://blambeau.github.com/bench)
+* [Source code](http://github.com/blambeau/bench)
 
 ## From simple measures ...
 
