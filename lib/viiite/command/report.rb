@@ -28,9 +28,14 @@ module Viiite
 
       def query(op)
         lispy = Alf.lispy
-        op = lispy.summarize(op, @regroup, :measure => lispy.avg{tms})
+        op = lispy.summarize(op, @regroup, :user   => lispy.avg{tms.utime},
+                                           :system => lispy.avg{tms.stime},
+                                           :total  => lispy.avg{tms.total},
+                                           :real   => lispy.avg{tms.real})
+        depend = [:user, :system, :total, :real]
         @regroup[1..-1].each do |grouping|
-          op = lispy.group(op, [grouping] + [:measure], :measure)
+          op = lispy.group(op, [grouping] + depend, :measure)
+          depend = [:measure]
         end if @hierarchy 
         op
       end
