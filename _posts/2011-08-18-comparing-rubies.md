@@ -17,27 +17,27 @@ First, we add a so-called *variation-point* to the benchmarking case, here under
       r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
     end
 
-## Running the benchmark thanks to RVM 
+## Running the benchmark with RVM 
 
 Running the benchmark may be done with 'viiite run':
 
     $ viiite run bench_iteration.rb
-    {:ruby => "ruby 1.9.3dev", :bench => :for,   :tms => Viiite::Tms(0.02, 0.0, 0.0, 0.0, 0.012284517288208008) }
-    {:ruby => "ruby 1.9.3dev", :bench => :times, :tms => Viiite::Tms(0.0,  0.0, 0.0, 0.0, 0.0024671554565429688)}
-    {:ruby => "ruby 1.9.3dev", :bench => :upto,  :tms => Viiite::Tms(0.0,  0.0, 0.0, 0.0, 0.0025177001953125)   }
+    {:ruby => "ruby 1.9.3dev", :bench => :for,   :tms => Viiite::Tms(0.02, 0.0, 0.0, 0.0, 0.012284517288208008)  }
+    {:ruby => "ruby 1.9.3dev", :bench => :times, :tms => Viiite::Tms(0.0,  0.0, 0.0, 0.0, 0.0024671554565429688) }
+    {:ruby => "ruby 1.9.3dev", :bench => :upto,  :tms => Viiite::Tms(0.0,  0.0, 0.0, 0.0, 0.0025177001953125)    }
 
 In Viiite, running a benchmark outputs something neutral, that is, a sequence of hashes. Among others, this allows analyzing benchmarking results with full relational power of [Alf](http://blambeau.github.com/alf), but that's another story. The point here is that we can simply execute the same benchmark on different ruby versions/implementations thanks to [RVM](http://beginrescueend.com/rvm/install/). As seen by Viiite, the result is not different than what 'viiite run' would have returned. This means that benchmarking results can be piped to 'viiite report', saved somewhere, analyzed later, and so on:
 
     $ rvm exec viiite run bench_iteration.rb
-    {:ruby => "ruby 1.8.7",     :bench => :for,   :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00345611572265625)   }
-    {:ruby => "ruby 1.8.7",     :bench => :times, :tms => Viiite::Tms(0.01,0.0,0.0,0.0,0.00325107574462891)  }
-    {:ruby => "ruby 1.8.7",     :bench => :upto,  :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00334000587463379)   }
-    {:ruby => "ruby 1.9.3dev",  :bench => :for,   :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0024805068969726562) }
-    {:ruby => "ruby 1.9.3dev",  :bench => :times, :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.007232666015625) }
-    {:ruby => "ruby 1.9.3dev",  :bench => :upto,  :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.008184194564819336)}
-    {:ruby => "jruby 1.6.3",    :bench => :for,   :tms => Viiite::Tms(0.0499999523162842,0.0,0.0,0.0,0.0499999523162842) }
-    {:ruby => "jruby 1.6.3",    :bench => :times, :tms => Viiite::Tms(0.0149998664855957,0.0,0.0,0.0,0.0149998664855957) }
-    {:ruby => "jruby 1.6.3",    :bench => :upto,  :tms => Viiite::Tms(0.0120000839233398,0.0,0.0,0.0,0.0120000839233398) }
+    {:ruby => "ruby 1.8.7",     :bench => :for,   :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00345611572265625)                   }
+    {:ruby => "ruby 1.8.7",     :bench => :times, :tms => Viiite::Tms(0.01,0.0,0.0,0.0,0.00325107574462891)                  }
+    {:ruby => "ruby 1.8.7",     :bench => :upto,  :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00334000587463379)                   }
+    {:ruby => "ruby 1.9.3dev",  :bench => :for,   :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0024805068969726562)                 }
+    {:ruby => "ruby 1.9.3dev",  :bench => :times, :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.007232666015625)    }
+    {:ruby => "ruby 1.9.3dev",  :bench => :upto,  :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.008184194564819336) }
+    {:ruby => "jruby 1.6.3",    :bench => :for,   :tms => Viiite::Tms(0.0499999523162842,0.0,0.0,0.0,0.0499999523162842)     }
+    {:ruby => "jruby 1.6.3",    :bench => :times, :tms => Viiite::Tms(0.0149998664855957,0.0,0.0,0.0,0.0149998664855957)     }
+    {:ruby => "jruby 1.6.3",    :bench => :upto,  :tms => Viiite::Tms(0.0120000839233398,0.0,0.0,0.0,0.0120000839233398)     }
 
 ## Comparing results
 
@@ -83,5 +83,5 @@ Or the other way around? Comparing rubies on each iteration method:
     |        | | ruby 1.9.3dev  | 0.010000 | 0.000000 | 0.010000 | 0.003988 | |
     |        | | jruby 1.6.3    | 0.028000 | 0.000000 | 0.028000 | 0.028000 | |
     |        | +----------------+----------+----------+----------+----------+ |
-    | ...    | ...                                                                |
+    | ...    | ...                                                            |
 
