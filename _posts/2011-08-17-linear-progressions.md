@@ -49,9 +49,9 @@ Then:
 
 ## Interpretation
 
-This kind of benchmark can be a bit misleading. The fact that the curves are linear says nothing about the complexity of the tested algorithm. What is true, is that the delta between the different curves (precisely, the difference of their slope) is representative of the efficiency difference between bench_attr and bench_method. As Aaron himself says: *the benchmark shows a constant amount of work in a linear progression*.
+This kind of benchmark can be a bit misleading. The fact that the curves are linear says nothing about the complexity of the tested algorithm. However, the delta between the different curves (precisely, the difference of their slope) is representative of the difference of efficiency between bench_attr and bench_method. As Aaron himself says: *the benchmark shows a constant amount of work in a linear progression*.
 
-Outputting a graph here is only interresting for visual reasons: the intuitive message is very clear, and that's why Aaron probably did it that way. Observe that the following way of conducting the comparison share the same information:
+Outputting a graph here is only interresting for visual reasons: the intuitive message is very clear. That's probably why Aaron did it that way. Observe that the following way of conducting the comparison shares the same information, but is less convenient for a talk:
 
     # bench_attr_vs_method_2.rb
     require 'viiite'
