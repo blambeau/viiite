@@ -11,14 +11,8 @@ group :release do
   gem "wlang", "~> 0.10.2"
 end
 
-group :doc do
-  gem "yard", "~> 0.7.2"
-  gem "bluecloth", "~> 2.1.0"
-  gem "jekyll", "~> 0.11.0"
-end
-
 group :runtime do
-  gem "alf", :git => "git@github.com:blambeau/alf.git" #"~> 0.10.1"
+  gem "alf", :git => "git@github.com:blambeau/alf.git"
   gem "quickl", "~> 0.4.0"
   gem "gnuplot", "~> 2.3.6"
 end

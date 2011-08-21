@@ -27,9 +27,6 @@ variables:
   dependencies: 
     - {name: rake,         version: "~> 0.9.2",  groups: [test, release]}
     - {name: rspec,        version: "~> 2.6.0",  groups: [test, release]}
-    - {name: yard,         version: "~> 0.7.2",  groups: [doc          ]}
-    - {name: bluecloth,    version: "~> 2.1.0",  groups: [doc          ]}
-    - {name: jekyll,       version: "~> 0.11.0", groups: [doc          ]}
     - {name: wlang,        version: "~> 0.10.2", groups: [release      ]}
     - {name: alf,          version: "~> 0.10.0", groups: [runtime      ]}
     - {name: quickl,       version: "~> 0.4.0",  groups: [runtime      ]}
