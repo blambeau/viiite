@@ -13,7 +13,8 @@ class Foo
   attr_reader :bench_reader
   
   def initialize
-    @bench_reader = @bench_method = 10
+    @bench_reader = 10
+    @bench_method = 10
   end
   
   def bench_method

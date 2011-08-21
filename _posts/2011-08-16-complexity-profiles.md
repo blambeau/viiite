@@ -54,9 +54,12 @@ Now, the benchmark:
     require 'viiite'
     Viiite.bm do |b|
       b.variation_point :ruby, Viiite.which_ruby
-      b.range_over([100, 200, 300, 400, 500], :size) do |size|
-        bench_case = Array.random(size)
-        b.report(:bubblesort){ bench_case.bubblesort }
+      b.range_over([100, 300, 500, 700, 900], :size) do |size|
+        # smoothing and statistical validity 
+        b.range_over(1..5, :run) do |run|
+          bench_case = Array.random(size)
+          b.report(:bubblesort){ bench_case.bubblesort }
+        end
       end
     end
 
@@ -64,16 +67,34 @@ Observe that we run the same algorithm (bubblesort) on different problems (rando
 
 ## Executing & Reporting
 
+Reporting is straightforward. Below, we use -I and -r options to ensure that our Array patch applies. These options mimic those of ruby:
+
     $ viiite -I. -rarray_patch report --regroup=size bench_sort.rb
     +-------+----------+----------+----------+----------+
     | :size | :user    | :system  | :total   | :real    |
     +-------+----------+----------+----------+----------+
-    |   100 | 0.010000 | 0.000000 | 0.010000 | 0.003520 |
-    |   200 | 0.020000 | 0.010000 | 0.030000 | 0.024389 |
-    |   300 | 0.040000 | 0.000000 | 0.040000 | 0.031459 |
-    |   400 | 0.060000 | 0.000000 | 0.060000 | 0.061382 |
-    |   500 | 0.110000 | 0.000000 | 0.110000 | 0.104301 |
+    |   100 | 0.004000 | 0.000000 | 0.004000 | 0.004476 |
+    |   300 | 0.024000 | 0.000000 | 0.024000 | 0.026255 |
+    |   500 | 0.070000 | 0.000000 | 0.070000 | 0.070412 |
+    |   700 | 0.142000 | 0.002000 | 0.144000 | 0.141941 |
+    |   900 | 0.232000 | 0.000000 | 0.232000 | 0.233136 |
     +-------+----------+----------+----------+----------+
 
+Or as a plot:
 
+    $ viiite -I. -rarray_patch run bench_sort.rb | \
+      viiite plot -x size -y tms.total --graph=bench --gnuplot=jpeg | \
+      gnuplot > bench_sort.jpeg
+
+![Plotting a complexity profile](images/bench_sort.jpeg)
+
+## Going further
+
+If you've read the [Comparing rubies](use-cases/comparing-rubies), you certainly understand the following as well:
+
+    $ rvm exec viiite -I. -rarray_patch run bench_sort.rb | \
+      viiite plot -x size -y tms.total --graph=bench --series=ruby --gnuplot=jpeg | \
+      gnuplot > bench_sort-rvm.jpeg
+
+![Plotting a complexity profile](images/bench_sort-rvm.jpeg)
 

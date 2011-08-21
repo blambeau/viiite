@@ -24,14 +24,23 @@ pre code {
   background: white;
 }
 
+table pre, table img {
+  padding: 0px;
+}
+table tr td {
+  vertical-align: top;
+}
+table img {
+  width: 100%;
+}
+
 #menu {
-  width: 200px;
   position:fixed;
   left: 25px;
   top: 25px;
-  font-size: 1.25em;
+  font-size: 1.05em;
   list-style: none;
-  width: 250px;
+  width: 215px;
   border: 2px solid #A30600;
   border-left: none;
   border-bottom: none;
