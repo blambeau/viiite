@@ -4,7 +4,7 @@ title: Basic benchmarking
 ---
 # Basic benchmarking
 
-In its simplest form, benchmarking with Viiite is very similar to the Benchmark standard library. You start by writing a chunk of ruby code that defines a benchmark:
+In its simplest form, benchmarking with Viiite is similar to benchmarking with Benchmark. You start with a chunk of ruby code that defines a benchmark:
 
     # bench_iteration.rb
     n = 15000
@@ -27,7 +27,7 @@ And you execute it!
 
 ## Separation of concerns (running vs. analyzing)
 
-Viiite is designed to make a strong separation of concerns between *running* benchmarks and *analyzing* results. The reporting above is actually a shortcut for a longer expression that distinguishes between the two activities:
+Viiite is designed to make a strong separation of concerns between *running* benchmarks and *analyzing* results. In fact, the reporting above is a shortcut for a longer expression that distinguishes between these two activities:
 
     $ viiite run bench_iteration.rb | viiite report
     +--------+-----------------------------------------------+
@@ -38,14 +38,14 @@ Viiite is designed to make a strong separation of concerns between *running* ben
     | :upto  |   0.010000   0.000000   0.010000 (  0.007034) |
     +--------+-----------------------------------------------+
 
-Let's see what 'bench run' actually does:
+'bench run' simply outputs ruby hashes on the standard output, as a neutral form of benchmarking raw data:
 
     $ viiite run bench_iteration.rb
     { :bench => :for,   :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.007663726806640625)                  }
     { :bench => :times, :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.007062673568725586) }
     { :bench => :upto,  :tms => Viiite::Tms(0.010000000000000009,0.0,0.0,0.0,0.007016897201538086) }
 
-Okay. It simply outputs ruby hashes on the standard output, as a neutral form of bencharming raw-data. This way, you can save your benchmarking data, compile them from various sources, etc. while being able to analyze them later. For example:
+This way, you can save your benchmarking data, compile them from various sources, etc. while keeping the ability of analyzing them later. For example:
 
     $ viiite run bench_iteration.rb > raw.rash    # .rash for 'ruby hashes'
     $ viiite run bench_iteration.rb >> raw.rash   # second exec, typically with different environment
@@ -60,11 +60,11 @@ Okay. It simply outputs ruby hashes on the standard output, as a neutral form of
 
 ## Your (potential) power
 
-Measures are automatically averaged by default, which might not necessary fit your needs. Raw data is clear, clean and neutral. In particular, Viiite has been designed to work hand-in-hand with [Alf](http://blambeau.github.com/alf), an flavor of relational algebra. Provided that you learn a bit of it, you should never be blocked in analyzing your benchmarking data the way **you want**. The report above is actually a shortcut on the following Alf invocation:
+Measures are automatically averaged by default, which might not necessary fit your needs. Always remember that your raw data is clear, clean and neutral. In particular, Viiite has been designed to work hand-in-hand with [Alf](http://blambeau.github.com/alf), a flavor of relational algebra. Provided that you learn a bit of Alf, you should never be blocked in analyzing your benchmarking data the way **you want**. The report above is actually a shortcut on the following Alf invocation:
 
     $  alf --text -rviiite summarize raw.rash -- bench -- measure "avg{ tms }"
 
-What is you want the total time spent in each case?
+What if you want the total time spent in each case?
 
     $  alf --text -rviiite summarize raw.rash -- bench -- total_time "sum{ tms }"
 
