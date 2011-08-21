@@ -24,6 +24,11 @@ module Viiite
           @hierarchy = true
         end
 
+        @ff = "%.6f"
+        opt.on("--ff=FORMAT", 
+               "Specify the floating point format") do |val|
+          @ff = val
+        end
       end
 
       def query(op)
@@ -43,7 +48,7 @@ module Viiite
       def execute(args)
         raise Quickl::InvalidArgument if args.size > 1
         op = query Alf::Reader.reader(args.first || $stdin)
-        Alf::Renderer.text(op, {:float_format => "%.6f"}).execute($stdout)
+        Alf::Renderer.text(op, {:float_format => @ff}).execute($stdout)
       end
 
     end # class Report
