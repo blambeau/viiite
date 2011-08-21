@@ -18,7 +18,7 @@ group :doc do
 end
 
 group :runtime do
-  gem "alf", "~> 0.10.0"
+  gem "alf", :git => "git@github.com:blambeau/alf.git" #"~> 0.10.1"
   gem "quickl", "~> 0.4.0"
   gem "gnuplot", "~> 2.3.6"
 end

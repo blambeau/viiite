@@ -43,7 +43,7 @@ module Viiite
       def execute(args)
         raise Quickl::InvalidArgument if args.size > 1
         op = query Alf::Reader.reader(args.first || $stdin)
-        Alf::Renderer.text(op).execute($stdout)
+        Alf::Renderer.text(op, {:float_precision => "%.6f"}).execute($stdout)
       end
 
     end # class Report
