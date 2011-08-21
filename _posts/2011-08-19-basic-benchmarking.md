@@ -17,26 +17,26 @@ In its simplest form, benchmarking with Viiite is similar to benchmarking with B
 And you execute it!
 
     $ viiite report bench_iteration.rb
-    +--------+-----------------------------------------------+
-    | :bench | :measure                                      |
-    +--------+-----------------------------------------------+
-    | :for   |   0.000000   0.000000   0.000000 (  0.007995) |
-    | :times |   0.010000   0.000000   0.010000 (  0.006995) |
-    | :upto  |   0.010000   0.000000   0.010000 (  0.007034) |
-    +--------+-----------------------------------------------+
+    +--------+----------+----------+----------+----------+
+    | :bench | :user    | :system  | :total   | :real    |
+    +--------+----------+----------+----------+----------+
+    | :for   | 0.010000 | 0.000000 | 0.010000 | 0.013039 |
+    | :times | 0.000000 | 0.000000 | 0.000000 | 0.003753 |
+    | :upto  | 0.010000 | 0.000000 | 0.010000 | 0.003803 |
+    +--------+----------+----------+----------+----------+
 
 ## Separation of concerns (running vs. analyzing)
 
 Viiite is designed to make a strong separation of concerns between *running* benchmarks and *analyzing* results. In fact, the reporting above is a shortcut for a longer expression that distinguishes between these two activities:
 
     $ viiite run bench_iteration.rb | viiite report
-    +--------+-----------------------------------------------+
-    | :bench | :measure                                      |
-    +--------+-----------------------------------------------+
-    | :for   |   0.000000   0.000000   0.000000 (  0.007995) |
-    | :times |   0.010000   0.000000   0.010000 (  0.006995) |
-    | :upto  |   0.010000   0.000000   0.010000 (  0.007034) |
-    +--------+-----------------------------------------------+
+    +--------+----------+----------+----------+----------+
+    | :bench | :user    | :system  | :total   | :real    |
+    +--------+----------+----------+----------+----------+
+    | :for   | 0.010000 | 0.000000 | 0.010000 | 0.013039 |
+    | :times | 0.000000 | 0.000000 | 0.000000 | 0.003753 |
+    | :upto  | 0.010000 | 0.000000 | 0.010000 | 0.003803 |
+    +--------+----------+----------+----------+----------+
 
 'bench run' simply outputs ruby hashes on the standard output, as a neutral form of benchmarking raw data:
 
@@ -50,17 +50,19 @@ This way, you can save your benchmarking data, compile them from various sources
     $ viiite run bench_iteration.rb > raw.rash    # .rash for 'ruby hashes'
     $ viiite run bench_iteration.rb >> raw.rash   # second exec, typically with different environment
     $ viiite report raw.rash
-    +--------+-----------------------------------------------+
-    | :bench | :measure                                      |
-    +--------+-----------------------------------------------+
-    | :for   |   0.010000   0.000000   0.010000 (  0.007635) |
-    | :times |   0.005000   0.000000   0.005000 (  0.007265) |
-    | :upto  |   0.010000   0.000000   0.010000 (  0.007058) |
-    +--------+-----------------------------------------------+
+    +--------+----------+----------+----------+----------+
+    | :bench | :user    | :system  | :total   | :real    |
+    +--------+----------+----------+----------+----------+
+    | :for   | 0.015000 | 0.000000 | 0.015000 | 0.013980 |
+    | :times | 0.000000 | 0.000000 | 0.000000 | 0.003871 |
+    | :upto  | 0.015000 | 0.000000 | 0.015000 | 0.011104 |
+    +--------+----------+----------+----------+----------+
+
+Measures above have been automatically averaged, which might not necessary fit your needs...
 
 ## Your (potential) power
 
-Measures are automatically averaged by default, which might not necessary fit your needs. Always remember that your raw data is clear, clean and neutral. In particular, Viiite has been designed to work hand-in-hand with [Alf](http://blambeau.github.com/alf), a flavor of relational algebra. Provided that you learn a bit of Alf, you should never be blocked in analyzing your benchmarking data the way **you want**. The report above is actually a shortcut on the following Alf invocation:
+Always remember that your raw data is clear, clean and neutral. In particular, Viiite has been designed to work hand-in-hand with [Alf](http://blambeau.github.com/alf), a flavor of relational algebra. Provided that you learn a bit of Alf, you should never be blocked in analyzing your benchmarking data the way **you want**. The report above is actually a shortcut on the following Alf invocation (except that 'bench report' also split the tms value in different columns):
 
     $  alf --text -rviiite summarize raw.rash -- bench -- measure "avg{ tms }"
 
