@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Progressions
+title: Linear progressions
 ---
 # A constant amount of work in a linear progression
 
