@@ -2,7 +2,6 @@ module Viiite
   class Tms < Struct.new(:utime, :stime, :cutime, :cstime, :real)
 
     FMTSTR = "%10.6u %10.6y %10.6t %10.6r"
-    FIELDS = [:utime, :stime, :cutime, :cstime, :real]
 
     def initialize(tms)
       super(*tms)
@@ -17,7 +16,7 @@ module Viiite
       when Numeric
         Viiite::Tms.new [arg, 0.0, 0.0, 0.0, 0.0]
       when Hash
-        Viiite::Tms.new FIELDS.collect{|f| arg[f] || 0.0}
+        Viiite::Tms.new members.collect{|f| arg[f] || 0.0}
       when Array
         Viiite::Tms.new arg
       else
@@ -41,11 +40,11 @@ module Viiite
     end
 
     def to_h
-      @to_h ||= Hash[FIELDS.collect{|f| [f, send(f)]}]
+      @to_h ||= Hash[members.collect{|f| [f, send(f)]}]
     end
 
     def to_a
-      @to_a ||= FIELDS.collect{|f| send(f)}
+      @to_a ||= members.collect{|f| send(f)}
     end
 
     def hash
@@ -74,9 +73,9 @@ module Viiite
     def memberwise(op, x)
       case x
       when Viiite::Tms
-        Viiite::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x.send(f))}
+        Viiite::Tms.new members.collect{|f| __send__(f).__send__(op, x.send(f))}
       else
-        Viiite::Tms.new FIELDS.collect{|f| __send__(f).__send__(op, x)}
+        Viiite::Tms.new members.collect{|f| __send__(f).__send__(op, x)}
       end
     end
 
