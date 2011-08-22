@@ -4,10 +4,13 @@ module Viiite
 
     subject{ Tms.coerce(arg) }
 
+    before(:each) do
+      subject.should be_a Tms
+    end
+
     describe "from zero" do
       let(:arg){ 0.0 }
       specify{ 
-        subject.should be_a(Tms)
         subject.to_a.should eq([0.0, 0.0, 0.0, 0.0, 0.0]) 
       }
     end
@@ -15,7 +18,6 @@ module Viiite
     describe "from one" do
       let(:arg){ 1.0 }
       specify{ 
-        subject.should be_a(Tms)
         subject.to_a.should eq([1.0, 0.0, 0.0, 0.0, 0.0]) 
       }
     end
@@ -29,7 +31,6 @@ module Viiite
         :real => 5.0, 
       } } 
       specify{ 
-        subject.should be_a(Tms)
         subject.to_a.should eq([1.0, 2.0, 3.0, 4.0, 5.0]) 
       }
     end
@@ -37,7 +38,6 @@ module Viiite
     describe "from an array" do
       let(:arg){ [1.0, 2.0, 3.0, 4.0, 5.0] } 
       specify{ 
-        subject.should be_a(Tms)
         subject.to_a.should eq([1.0, 2.0, 3.0, 4.0, 5.0]) 
       }
     end
