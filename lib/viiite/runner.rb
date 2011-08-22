@@ -33,7 +33,9 @@ module Viiite
     def report(hash = {}, &block)
       hash = {:bench => hash} unless hash.is_a?(Hash)
       with(hash) {
-        with(:tms => Viiite.measure{block.call}){ output }
+        GC.start
+        tms = Viiite.measure{block.call}
+        with(:tms => tms){ output }
       }
     end
 
