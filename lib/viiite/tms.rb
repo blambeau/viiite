@@ -1,11 +1,11 @@
 module Viiite
-  class Tms
+  class Tms < Struct.new(:utime, :stime, :cutime, :cstime, :real)
 
     FMTSTR = "%10.6u %10.6y %10.6t %10.6r"
     FIELDS = [:utime, :stime, :cutime, :cstime, :real]
 
     def initialize(tms)
-      @tms = tms
+      super(*tms)
     end
 
     def self.coerce(arg)
@@ -25,11 +25,6 @@ module Viiite
       end
     end
 
-    def utime;  @tms[0]; end
-    def stime;  @tms[1]; end
-    def cutime; @tms[2]; end
-    def cstime; @tms[3]; end
-    def real;   @tms[4]; end
     def total;  cutime + cstime + stime + utime; end
 
     def to_ruby_literal
