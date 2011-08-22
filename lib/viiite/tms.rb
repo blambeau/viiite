@@ -79,5 +79,10 @@ module Viiite
       end
     end
 
+    if RUBY_VERSION < '1.9'
+      public
+      def members; super.map(&:to_sym); end
+      def self.members; super.map(&:to_sym); end
+    end
   end # class Tms
 end # module Viiite
