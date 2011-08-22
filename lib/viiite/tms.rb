@@ -40,11 +40,7 @@ module Viiite
     end
 
     def to_h
-      @to_h ||= Hash[members.collect{|f| [f, send(f)]}]
-    end
-
-    def to_a
-      @to_a ||= members.collect{|f| send(f)}
+      @to_h ||= Hash[members.zip(values)]
     end
 
     def hash
@@ -73,9 +69,9 @@ module Viiite
     def memberwise(op, x)
       case x
       when Viiite::Tms
-        Viiite::Tms.new members.collect{|f| __send__(f).__send__(op, x.send(f))}
+        Viiite::Tms.new values.zip(x.values).collect {|a,b| a.__send__(op, b)}
       else
-        Viiite::Tms.new members.collect{|f| __send__(f).__send__(op, x)}
+        Viiite::Tms.new values.collect{|v| v.__send__(op, x)}
       end
     end
 
