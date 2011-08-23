@@ -1,5 +1,5 @@
 require 'viiite'
-n = 15000
+n = 1000
 Viiite.bm do |r|
   r.variation_point :ruby, Viiite.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
