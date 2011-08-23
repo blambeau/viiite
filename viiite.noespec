@@ -12,7 +12,7 @@ variables:
   upper:
     Viiite
   version:
-    0.1.0
+    0.2.0
   summary: |-
     An alternative to Benchmark
   description: |-
