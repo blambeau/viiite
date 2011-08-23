@@ -1,5 +1,6 @@
 require "viiite/version"
 require "viiite/loader"
+require "viiite/errors"
 require "viiite/tms"
 require "viiite/formatter"
 require "viiite/benchmark"
