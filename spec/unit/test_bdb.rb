@@ -3,7 +3,6 @@ module Viiite
   describe BDB do
 
     after{
-      subject.should be_a(BDB)
       subject.dataset("bench_iteration").should be_a(Alf::Iterator)
       subject.dataset("Array/bench_sort").should be_a(Alf::Iterator)
     }
@@ -14,7 +13,7 @@ module Viiite
 
     describe '.immediate' do
       subject{ BDB.immediate(ff) }
-      it{ should be_a(BDB) }
+      it{ should be_a(BDB::Immediate) }
     end
 
     describe '.cached with a folder' do

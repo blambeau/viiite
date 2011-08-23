@@ -1,6 +1,6 @@
 module Viiite
   class BDB
-    class Immediate < BDB
+    class Immediate
       include Utils
 
       attr_reader :folder

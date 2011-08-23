@@ -1,6 +1,6 @@
 module Viiite
   class BDB
-    class Cached < BDB
+    class Cached
       include Utils
 
       attr_reader :delegate

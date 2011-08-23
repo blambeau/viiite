@@ -11,12 +11,12 @@ module Viiite
     end
 
     def self.cached(folder = "benchmarks", cache = nil)
-      if folder.is_a?(BDB)
-        bdb = folder
-        cache ||= File.join(folder.folder, '.cache')
-      else
+      if folder.is_a?(String)
         bdb = immediate(folder)
         cache ||= File.join(folder, '.cache')
+      else
+        bdb = folder
+        cache ||= File.join(folder.folder, '.cache')
       end
       BDB::Cached.new(bdb, cache)
     end
