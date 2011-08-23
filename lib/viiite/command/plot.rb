@@ -10,7 +10,8 @@ module Viiite
     # #{summarized_options}
     #
     class Plot < Quickl::Command(__FILE__, __LINE__)
-    
+      include Commons 
+
       # Install options
       options do |opt|
         @render = :text
