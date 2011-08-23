@@ -3,12 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "#dataset" do
 
-      let(:fixtures_folder){ 
-        File.expand_path("../../../../fixtures", __FILE__) 
-      }
-      let(:bdb){ 
-        Immediate.new(fixtures_folder) 
-      }
+      let(:bdb){ Immediate.new(fixtures_folder) }
       subject{ bdb.dataset(name) }
 
       describe "when name denotes an existing file" do
