@@ -5,15 +5,18 @@ module Viiite
 
       attr_reader :delegate
       attr_reader :cache_folder
+      attr_reader :mode
 
-      def initialize(delegate, cache_folder)
+      def initialize(delegate, cache_folder, mode = "w")
         @delegate     = delegate
         @cache_folder = cache_folder
+        @mode         = mode
       end
 
       def benchmark(name)
-        bm, cache = delegate.benchmark(name), cache_file(name)
-        Proxy.new(bm, cache)
+        bm    = delegate.benchmark(name)
+        cache = cache_file(name)
+        Proxy.new(bm, cache, mode)
       end
 
       def dataset(name)
@@ -33,7 +36,7 @@ module Viiite
       class Proxy < DelegateClass(Benchmark)
         include Alf::Iterator
 
-        def initialize(benchmark, cache_file, mode = "w")
+        def initialize(benchmark, cache_file, mode)
           @benchmark  = benchmark
           @cache_file = cache_file
           @mode       = mode
