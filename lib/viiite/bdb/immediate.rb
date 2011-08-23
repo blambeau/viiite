@@ -5,8 +5,9 @@ module Viiite
 
       attr_reader :folder
 
-      def initialize(folder)
+      def initialize(folder, ext = ".rb")
         @folder = folder
+        @ext = ext
       end
 
       def cached?
@@ -14,9 +15,7 @@ module Viiite
       end
 
       def benchmark(name)
-        if File.exists?(file = bench_file(folder, name, ".rb"))
-          return Alf::Reader.reader(file, self)
-        elsif File.exists?(file = bench_file(folder, name, ".rash"))
+        if File.exists?(file = bench_file(folder, name, @ext))
           return Alf::Reader.reader(file, self)
         else
           raise NoSuchBenchmarkError, "No such benchmark #{name}"
