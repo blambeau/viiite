@@ -12,9 +12,20 @@ module Viiite
       it{ should be_a(BDB) }
     end
 
-    describe '.cached' do
+    describe '.cached with a folder' do
       subject{ BDB.cached(fixtures_folder) }
-      it{ should be_a(BDB) }
+      specify{
+        subject.should be_a(BDB)
+        subject.cache_folder.should eq(File.join(fixtures_folder, ".cache"))
+      }
+    end
+
+    describe '.cached with a bdb' do
+      subject{ BDB.cached(BDB.immediate(fixtures_folder)) }
+      specify{
+        subject.should be_a(BDB)
+        subject.cache_folder.should eq(File.join(fixtures_folder, ".cache"))
+      }
     end
 
   end

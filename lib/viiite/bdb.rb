@@ -10,9 +10,13 @@ module Viiite
       BDB::Immediate.new(folder)
     end
 
-    def self.cached(folder = "benchmarks", 
-                    cache_folder = File.join(folder, '.cache'))
-      BDB::Cached.new(immediate(folder), cache_folder)
+    def self.cached(folder = "benchmarks")
+      if folder.is_a?(BDB)
+        bdb, cache = folder, File.join(folder.folder, '.cache')
+      else
+        bdb, cache = immediate(folder), File.join(folder, '.cache')
+      end
+      BDB::Cached.new(bdb, cache)
     end
 
   end # class BDB
