@@ -31,7 +31,14 @@ module Viiite
         }
       end
 
-      describe "with a argv with a benchmark name" do
+      describe "with a argv with a benchmark name but no requester" do
+        let(:argv){ [ :hello ] }
+        specify{
+          lambda{subject}.should raise_error(Quickl::InvalidArgument) 
+        }
+      end
+
+      describe 'with a argv and a requester' do
         let(:argv){ [ :hello ] }
         let(:requester){
           Object.new.extend Module.new{
@@ -40,15 +47,17 @@ module Viiite
           }
         }
         before{ commons.requester = requester }
-        it{ should eq("HELLO") }
+        describe "with a block" do
+          subject{ 
+            commons.single_source(argv){|*args| args}
+          }
+          it{ should eq([requester, :hello]) }
+        end
+        describe "without block" do
+          it{ should eq("HELLO") }
+        end
       end
 
-      describe "with a argv with a benchmark name but no requester" do
-        let(:argv){ [ :hello ] }
-        specify{
-          lambda{subject}.should raise_error(Quickl::InvalidArgument) 
-        }
-      end
 
     end
   end
