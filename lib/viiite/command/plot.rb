@@ -26,12 +26,12 @@ module Viiite
         end
         
         @serie_style = File.expand_path("../serie_style.rash", __FILE__)
-        opt.on('--style=FILE', "Specify a style file to use for series") do |value|
+        opt.on('--serie-style=FILE', "Specify a style file to use for series") do |value|
           @serie_style = value
         end
         
         @graph_style = File.expand_path("../graph_style.rash", __FILE__)
-        opt.on('--style=FILE', "Specify a style file to use for graphs") do |value|
+        opt.on('--graph-style=FILE', "Specify a style file to use for graphs") do |value|
           @graph_style = value
         end
         
