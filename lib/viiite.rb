@@ -4,7 +4,6 @@ require "viiite/tms"
 require "viiite/formatter"
 require "viiite/benchmark"
 require "viiite/command"
-require "viiite/viiite_file"
 require "benchmark"
 
 #
