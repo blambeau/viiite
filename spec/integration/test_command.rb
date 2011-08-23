@@ -18,7 +18,7 @@ describe "viiite command / " do
       specify{
         begin
           cache = File.join(fixtures_folder, '.saved')
-          Viiite::Command.run(["--db=#{cache}"] + argv)
+          Viiite::Command.run(["--db=#{cache}", "--no-cache"] + argv)
         rescue SystemExit
           $stdout << "SystemExit" << "\n"
         end

@@ -37,6 +37,11 @@ module Viiite
         end
         @db_folder = val
       end
+      @cache_folder = true
+      opt.on('--[no-]cache=[FOLDER]',
+             'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
+        @cache_folder = folder
+      end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
@@ -46,7 +51,17 @@ module Viiite
     end
 
     def bdb
-      @bdb ||= BDB.immediate(@db_folder)
+      @bdb ||= begin
+        bdb = BDB.immediate(@db_folder)
+        case @cache_folder
+        when String
+          BDB.cached(bdb, @cache_folder)
+        when true
+          BDB.cached(bdb, File.join(@db_folder, '.cache'))
+        when false
+          bdb
+        end
+      end
     end
     
   end # class Command
