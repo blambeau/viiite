@@ -11,6 +11,10 @@ module Viiite
         end
       end
 
+      def bench_file(folder, name, ext)
+        File.join(folder, rextname(name, ext))
+      end
+
     end # module Utils
   end # class BDB
 end # module Viiite
