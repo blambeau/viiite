@@ -10,7 +10,7 @@ module Viiite
       @definition = definition
     end
 
-    def self.new(arg)
+    def self.new(arg, *others)
       case arg
       when String
         Kernel.eval(File.read(arg), viiite_clean_binding, arg)
