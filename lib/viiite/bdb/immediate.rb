@@ -3,6 +3,8 @@ module Viiite
     class Immediate < BDB
       include Utils
 
+      attr_reader :folder
+
       def initialize(folder)
         @folder = folder
       end
