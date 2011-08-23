@@ -13,8 +13,10 @@ module Viiite
       include Commons
 
       def execute(argv)
-        input, output = single_source(argv), $stdout
-        Alf::Renderer.rash(input).execute(output)
+        input = single_source(argv) do |bdb, arg|
+          bdb.benchmark(arg)
+        end
+        Alf::Renderer.rash(input).execute($stdout)
       end
 
     end # class Run

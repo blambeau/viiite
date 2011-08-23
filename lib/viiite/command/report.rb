@@ -47,7 +47,10 @@ module Viiite
       end
 
       def execute(argv)
-        op = query(single_source(argv))
+        op = single_source(argv) do |bdb, arg|
+          bdb.dataset(arg)
+        end
+        op = query(op)
         Alf::Renderer.text(op, {:float_format => @ff}).execute($stdout)
       end
 

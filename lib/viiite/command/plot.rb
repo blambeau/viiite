@@ -73,7 +73,10 @@ module Viiite
       end
       
       def execute(argv)
-        op = query(single_source(argv))
+        op = single_source(argv) do |bdb, arg|
+          bdb.dataset(arg)
+        end
+        op = query(op)
         case @render
         when :text
           Alf::Renderer.text(op).execute($stdout)
