@@ -1,12 +1,12 @@
 require 'spec_helper'
 module Viiite
-  describe Runner do
+  describe Benchmark do
     
     it "should be definable with Viiite.bm" do
       b = Viiite.bm do |viiite|
         viiite.report{ 1 + 1 }
       end
-      b.should be_kind_of(Viiite::Runner)
+      b.should be_kind_of(Viiite::Benchmark)
     end
 
     it "should be executable" do

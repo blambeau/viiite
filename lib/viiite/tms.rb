@@ -12,7 +12,7 @@ module Viiite
       case arg
       when Viiite::Tms
         arg
-      when Benchmark::Tms
+      when ::Benchmark::Tms
         Viiite::Tms.new arg.to_a[1..-1]
       when Numeric
         Viiite::Tms.new [arg, 0.0, 0.0, 0.0, 0.0]

@@ -2,7 +2,7 @@ require "viiite/version"
 require "viiite/loader"
 require "viiite/tms"
 require "viiite/formatter"
-require "viiite/runner"
+require "viiite/benchmark"
 require "viiite/command"
 require "viiite/viiite_file"
 require "benchmark"
@@ -18,14 +18,14 @@ module Viiite
   end
 
   def self.measure(&block)
-    Viiite::Tms.coerce Benchmark.measure(&block)
+    Viiite::Tms.coerce ::Benchmark.measure(&block)
   end
 
   # Builds a runner instance via the DSL definition given by the block.
   #
   # Example
   #
-  #  Viiite.runner do |b|
+  #  Viiite.bm do |b|
   #    b.variation_point :ruby_version, Viiite.which_ruby
   #    b.range_over([100, 1000, 10000, 100000], :runs) do |runs|
   #      b.variation_point :test, :via_reader do
@@ -38,7 +38,7 @@ module Viiite
   #  end
   # 
   def self.bm(&block)
-    Runner.new(block)
+    Benchmark.new(block)
   end
 
   #
