@@ -1,11 +1,13 @@
 require 'spec_helper'
+require 'fileutils'
 module Viiite
   class BDB
     describe Cached, "#dataset" do
 
-      let(:folder){ File.join(fixtures_folder, '.cache') }
-      let(:bdb)   { Cached.new(delegate, folder)         }
-      subject     { bdb.dataset(name)                    }
+      let(:folder) { File.join(fixtures_folder, '.cache') }
+      let(:bdb)    { Cached.new(delegate, folder)         }
+      subject      { bdb.dataset(name)                    }
+      before(:each){ FileUtils.rm_rf(folder)              }
 
       describe "when the benchmark exists" do
         let(:delegate){
@@ -17,8 +19,8 @@ module Viiite
             end
           }
         }
-        let(:name)  { "bench_iteration"                 }
-        let(:cached){ File.join(folder, "#{name}.rash") }
+        let(:name)  { "Array/bench_sort"                            }
+        let(:cached){ File.join(folder, "Array", "bench_sort.rash") }
         after{
           File.exists?(cached).should be_true 
           FileUtils.rm_rf(cached) 
@@ -30,20 +32,21 @@ module Viiite
           }
           specify{ 
             subject.should be_a(Alf::Reader)
-            subject.to_a.should eq([{:name => "bench_iteration"}])
+            subject.to_a.should eq([{:name => 'Array/bench_sort'}])
             delegate.called.should be_true 
           }
         end
 
         describe 'when the cache file already exists' do
           before{ 
+            FileUtils.mkdir_p(File.dirname(cached))
             File.open(cached, "w") do |io| 
-              io << "{:name => 'bench_iteration'}"
+              io << "{:name => 'Array/bench_sort'}"
             end
           }
           specify{ 
             subject.should be_a(Alf::Reader)
-            subject.to_a.should eq([{:name => "bench_iteration"}])
+            subject.to_a.should eq([{:name => 'Array/bench_sort'}])
             delegate.called.should be_false 
           }
         end
