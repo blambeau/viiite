@@ -12,6 +12,8 @@ module Viiite
       def dataset(name)
         if File.exists?(file = bench_file(folder, name, ".rb"))
           return Alf::Reader.reader(file, self)
+        elsif File.exists?(file = bench_file(folder, name, ".rash"))
+          return Alf::Reader.reader(file, self)
         else
           raise Alf::NoSuchDatasetError, "No such benchmark #{name}"
         end
