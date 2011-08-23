@@ -10,11 +10,10 @@ module Viiite
     # #{summarized_options}
     #
     class Run < Quickl::Command(__FILE__, __LINE__)
-      
-      def execute(args)
-        raise Quickl::InvalidArgument if args.size > 1
-        input  = Alf::Reader.reader(args.first || $stdin)
-        output = $stdout
+      include Commons
+
+      def execute(argv)
+        input, output = single_source(argv), $stdout
         Alf::Renderer.rash(input).execute(output)
       end
 

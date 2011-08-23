@@ -71,9 +71,8 @@ module Viiite
         op
       end
       
-      def execute(args)
-        raise Quickl::InvalidArgument if args.size > 1
-        op = query Alf::Reader.reader(args.first || $stdin)
+      def execute(argv)
+        op = query(single_source(argv))
         case @render
         when :text
           Alf::Renderer.text(op).execute($stdout)

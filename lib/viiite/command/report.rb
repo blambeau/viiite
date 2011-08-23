@@ -10,6 +10,7 @@ module Viiite
     # #{summarized_options}
     #
     class Report < Quickl::Command(__FILE__, __LINE__)
+      include Commons
 
       options do |opt|
 
@@ -45,19 +46,8 @@ module Viiite
         op
       end
 
-      def source(arg)
-        if arg.is_a?(IO) || File.exists?(arg.to_s)
-          Alf::Reader.reader(arg)
-        elsif requester && requester.respond_to?(:bdb)
-          requester.bdb.dataset(arg.to_s)
-        else
-          raise Quickl::InvalidArgument, "Missing benchmark #{arg}"
-        end
-      end
-
-      def execute(args)
-        raise Quickl::InvalidArgument if args.size > 1
-        op = query(source(args.first || $stdin))
+      def execute(argv)
+        op = query(single_source(argv))
         Alf::Renderer.text(op, {:float_format => @ff}).execute($stdout)
       end
 

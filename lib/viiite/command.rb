@@ -51,6 +51,7 @@ module Viiite
     
   end # class Command
 end # module Viiite
+require "viiite/command/commons"
 require "viiite/command/help"
 require "viiite/command/run"
 require "viiite/command/report"
