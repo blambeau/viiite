@@ -20,8 +20,3 @@ def fixtures_folder
   File.expand_path('../fixtures', __FILE__)
 end
 
-def bench_iteration
-  File.expand_path('../fixtures/bench_iteration.rb', __FILE__)
-end
-
-
