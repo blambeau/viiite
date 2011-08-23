@@ -29,19 +29,28 @@ module Viiite
              "require the library, before executing viiite") do |lib|
         require(lib)
       end
-      @db_folder = "benchmarks"
+
+      @bdb_options = {}
       opt.on('--db=FOLDER', 
              "Specify the benchmark folder (defaults to 'benchmarks')") do |val|
         unless File.directory?(val)
           raise Quickl::InvalidArgument, "Missing folder #{val}"
         end
-        @db_folder = val
+        @bdb_options[:folder] = val
       end
-      @cache_folder = true
       opt.on('--[no-]cache=[FOLDER]',
              'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
-        @cache_folder = folder
+        @bdb_options[:cache] = folder
       end
+      opt.on('--cache-mode=MODE',
+             'Specify the exact mode for accessing cache files') do |mode|
+        @bdb_options[:cache_mode] = mode
+      end
+      opt.on('-a', '--append', 
+             "Shortcut to --cache-mode=a"){ @bdb_options[:cache_mode] = 'a' }
+      opt.on('-w', '--write', 
+             "Shortcut to --cache-mode=w"){ @bdb_options[:cache_mode] = 'w' }
+
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
@@ -51,17 +60,7 @@ module Viiite
     end
 
     def bdb
-      @bdb ||= begin
-        bdb = BDB.immediate(@db_folder)
-        case @cache_folder
-        when String
-          BDB.cached(bdb, @cache_folder)
-        when true
-          BDB.cached(bdb, File.join(@db_folder, '.cache'))
-        when false
-          bdb
-        end
-      end
+      @bdb ||= BDB.new(@bdb_options)
     end
     
   end # class Command

@@ -6,19 +6,22 @@ module Viiite
   class BDB
     include Utils
 
-    def self.immediate(folder = "benchmarks")
-      BDB::Immediate.new(folder)
-    end
+    DEFAULT_OPTIONS = {
+      :folder       => "benchmarks",
+      :cache        => true,
+      :cache_mode   => "w"
+    }
 
-    def self.cached(folder = "benchmarks", cache = nil)
-      if folder.is_a?(String)
-        bdb = immediate(folder)
-        cache ||= File.join(folder, '.cache')
-      else
-        bdb = folder
-        cache ||= File.join(folder.folder, '.cache')
+    def self.new(options = {})
+      options = DEFAULT_OPTIONS.merge(options)
+      folder = options[:folder]
+      bdb = BDB::Immediate.new(folder)
+      if cache = options[:cache]
+        cache = File.join(folder, '.cache') unless cache.is_a?(String)
+        mode  = options[:cache_mode]
+        bdb   = BDB::Cached.new(bdb, cache, mode) 
       end
-      BDB::Cached.new(bdb, cache)
+      bdb
     end
 
   end # class BDB

@@ -5,18 +5,26 @@ module Viiite
 
       attr_reader :delegate
       attr_reader :cache_folder
-      attr_reader :mode
+      attr_reader :cache_mode
 
-      def initialize(delegate, cache_folder, mode = "w")
+      def initialize(delegate, cache_folder, cache_mode = "w")
         @delegate     = delegate
         @cache_folder = cache_folder
-        @mode         = mode
+        @cache_mode   = cache_mode
+      end
+
+      def cached?
+        true
+      end
+
+      def folder
+        delegate.folder
       end
 
       def benchmark(name)
         bm    = delegate.benchmark(name)
         cache = cache_file(name)
-        Proxy.new(bm, cache, mode)
+        Proxy.new(bm, cache, cache_mode)
       end
 
       def dataset(name)
@@ -36,16 +44,16 @@ module Viiite
       class Proxy < DelegateClass(Benchmark)
         include Alf::Iterator
 
-        def initialize(benchmark, cache_file, mode)
+        def initialize(benchmark, cache_file, cache_mode)
           @benchmark  = benchmark
           @cache_file = cache_file
-          @mode       = mode
+          @cache_mode = cache_mode
           super(@benchmark)
         end
 
         def each
           FileUtils.mkdir_p(File.dirname(@cache_file))
-          File.open(@cache_file, @mode) do |io|
+          File.open(@cache_file, @cache_mode) do |io|
             @benchmark.each do |tuple|
               io << Alf::Tools.to_ruby_literal(tuple) << "\n"
               yield(tuple)

@@ -9,6 +9,10 @@ module Viiite
         @folder = folder
       end
 
+      def cached?
+        false
+      end
+
       def benchmark(name)
         if File.exists?(file = bench_file(folder, name, ".rb"))
           return Alf::Reader.reader(file, self)
