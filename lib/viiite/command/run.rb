@@ -13,10 +13,14 @@ module Viiite
       include Commons
 
       def execute(argv)
-        input = single_source(argv) do |bdb, arg|
-          bdb.benchmark(arg)
+        argv = requester.bdb.map{|t| t[:name]} if argv.empty?
+        argv.each do |name|
+          $stderr << "Running #{name}" << "\n"
+          input = single_source([name]) do |bdb, arg|
+            bdb.benchmark(arg)
+          end
+          Alf::Renderer.rash(input).execute($stdout)
         end
-        Alf::Renderer.rash(input).execute($stdout)
       end
 
     end # class Run
