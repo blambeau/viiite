@@ -9,6 +9,9 @@ OPTIONS
   -rlibrary                        require the library, before executing viiite
       --db=FOLDER                  Specify the benchmark folder (defaults to 'benchmarks')
       --[no-]cache=[FOLDER]        Specify the cache heuristic and folder (defaults to --cache)
+      --cache-mode=MODE            Specify the exact mode for accessing cache files
+  -a, --append                     Shortcut to --cache-mode=a
+  -w, --write                      Shortcut to --cache-mode=w
       --help                       Show help
       --version                    Show version
 
