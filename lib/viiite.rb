@@ -1,3 +1,7 @@
+require 'fileutils'
+require "benchmark"
+require "delegate"
+
 require "viiite/version"
 require "viiite/loader"
 require "viiite/errors"
@@ -6,7 +10,6 @@ require "viiite/formatter"
 require "viiite/benchmark"
 require "viiite/command"
 require "viiite/bdb"
-require "benchmark"
 
 #
 # Benchmarking and complexity analyzer utility

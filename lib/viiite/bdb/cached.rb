@@ -12,34 +12,45 @@ module Viiite
       end
 
       def benchmark(name)
-        delegate.benchmark(name)
+        bm, cache = delegate.benchmark(name), cache_file(name)
+        Proxy.new(bm, cache)
       end
 
       def dataset(name)
-        cache_file = cache_file(name)
-        run_one!(name, "w") unless File.exists?(cache_file)
-        Alf::Reader.reader(cache_file, self)
+        if File.exists?(cache_file = cache_file(name))
+          Alf::Reader.reader(cache_file, self)
+        else
+          benchmark(name)
+        end
       end
 
       private
-
-      def run_one!(name, mode)
-        cache_file = cache_file(name)
-        mkdir_p(File.dirname(cache_file))
-        reader = delegate.dataset(name)
-        File.open(cache_file(name), mode) do |io|
-          Alf::Renderer.rash(reader).execute(io)
-        end
-      end
 
       def cache_file(name)
         bench_file(cache_folder, name, ".rash")
       end
       
-      def mkdir_p(folder)
-        require 'fileutils'
-        FileUtils.mkdir_p(folder)
-      end
+      class Proxy < DelegateClass(Benchmark)
+        include Alf::Iterator
+
+        def initialize(benchmark, cache_file, mode = "w")
+          @benchmark  = benchmark
+          @cache_file = cache_file
+          @mode       = mode
+          super(@benchmark)
+        end
+
+        def each
+          FileUtils.mkdir_p(File.dirname(@cache_file))
+          File.open(@cache_file, @mode) do |io|
+            @benchmark.each do |tuple|
+              io << Alf::Tools.to_ruby_literal(tuple) << "\n"
+              yield(tuple)
+            end
+          end
+        end
+
+      end # class Proxy
 
     end # class Cached
   end # class BDB

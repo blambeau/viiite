@@ -13,10 +13,11 @@ module Viiite
         let(:delegate){
           @delegate ||= Object.new.extend Module.new{
             attr_reader :called
-            def dataset(name)
+            def benchmark(name)
               @called = true
               Alf::Relation[{:name => name}]
             end
+            alias :dataset :benchmark
           }
         }
         let(:name)  { "Array/bench_sort"                            }
@@ -31,7 +32,6 @@ module Viiite
             File.exists?(cached).should be_false 
           }
           specify{ 
-            subject.should be_a(Alf::Reader)
             subject.to_a.should eq([{:name => 'Array/bench_sort'}])
             delegate.called.should be_true 
           }
@@ -45,7 +45,6 @@ module Viiite
             end
           }
           specify{ 
-            subject.should be_a(Alf::Reader)
             subject.to_a.should eq([{:name => 'Array/bench_sort'}])
             delegate.called.should be_false 
           }
@@ -56,7 +55,8 @@ module Viiite
       describe "when the benchmark does not exist" do
         let(:delegate){ 
           Object.new.extend Module.new{
-            def dataset(name); raise Alf::NoSuchDatasetError; end
+            def benchmark(name); raise Alf::NoSuchDatasetError; end
+            alias :dataset :benchmark
           }
         } 
         let(:name){ "NotA/Class/bench_non_existing" }
