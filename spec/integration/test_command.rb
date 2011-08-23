@@ -17,10 +17,8 @@ describe "viiite command / " do
       
       specify{
         begin
-          if i = argv.index("raw_data")
-            argv[i] = File.expand_path('../raw_data.rash', __FILE__)
-          end
-          Viiite::Command.run(argv)
+          cache = File.join(fixtures_folder, '.saved')
+          Viiite::Command.run(["--db=#{cache}"] + argv)
         rescue SystemExit
           $stdout << "SystemExit" << "\n"
         end

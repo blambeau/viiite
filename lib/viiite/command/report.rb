@@ -45,9 +45,19 @@ module Viiite
         op
       end
 
+      def source(arg)
+        if arg.is_a?(IO) || File.exists?(arg.to_s)
+          Alf::Reader.reader(arg)
+        elsif requester && requester.respond_to?(:bdb)
+          requester.bdb.dataset(arg.to_s)
+        else
+          raise Quickl::InvalidArgument, "Missing benchmark #{arg}"
+        end
+      end
+
       def execute(args)
         raise Quickl::InvalidArgument if args.size > 1
-        op = query Alf::Reader.reader(args.first || $stdin)
+        op = query(source(args.first || $stdin))
         Alf::Renderer.text(op, {:float_format => @ff}).execute($stdout)
       end
 

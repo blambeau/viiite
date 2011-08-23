@@ -7,6 +7,7 @@ SYNOPSIS
 OPTIONS
   -Idirectory                      specify $LOAD_PATH directory (may be used more than once)
   -rlibrary                        require the library, before executing viiite
+      --db=FOLDER                  Specify the benchmark folder (defaults to 'benchmarks')
       --help                       Show help
       --version                    Show version
 

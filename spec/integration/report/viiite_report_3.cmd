@@ -1,1 +1,1 @@
-viiite report raw_data --hierarchy --regroup=ruby,bench
+viiite report bench_iteration --hierarchy --regroup=ruby,bench

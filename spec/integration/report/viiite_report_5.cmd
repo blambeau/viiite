@@ -1,1 +1,1 @@
-viiite report raw_data --ff=%.10f --hierarchy --regroup=ruby,bench
+viiite report bench_iteration --ff=%.10f

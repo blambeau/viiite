@@ -29,12 +29,24 @@ module Viiite
              "require the library, before executing viiite") do |lib|
         require(lib)
       end
+      @db_folder = "benchmarks"
+      opt.on('--db=FOLDER', 
+             "Specify the benchmark folder (defaults to 'benchmarks')") do |val|
+        unless File.directory?(val)
+          raise Quickl::InvalidArgument, "Missing folder #{val}"
+        end
+        @db_folder = val
+      end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
       opt.on_tail("--version", "Show version") do
         raise Quickl::Exit, "viiite #{Viiite::VERSION} (c) 2011, Bernard Lambeau"
       end
+    end
+
+    def bdb
+      @bdb ||= BDB.immediate(@db_folder)
     end
     
   end # class Command
