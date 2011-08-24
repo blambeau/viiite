@@ -21,8 +21,8 @@ module Viiite
       describe "with --runs" do
         let(:argv){ [ bench_iteration, "--runs=2" ] }
         let(:expected){ 
-          Alf::Relation[{:bench => :times, :run => 1}, 
-                        {:bench => :times, :run => 2}]
+          Alf::Relation[{:bench => :times, :run => 0}, 
+                        {:bench => :times, :run => 1}]
         }
         it{ should eq(expected) }
       end
@@ -30,8 +30,8 @@ module Viiite
       describe "with --runs and --run-key" do
         let(:argv){ [ bench_iteration, "--runs=2", "--run-key=hello" ] }
         let(:expected){ 
-          Alf::Relation[{:bench => :times, :hello => 1}, 
-                        {:bench => :times, :hello => 2}]
+          Alf::Relation[{:bench => :times, :hello => 0}, 
+                        {:bench => :times, :hello => 1}]
         }
         it{ should eq(expected) }
       end
