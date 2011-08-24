@@ -18,6 +18,6 @@ task :default => :test
 #
 # See .rake files there for complete documentation.
 #
-Dir["tasks/*.rake"].each do |taskfile|
+Dir["tasks/**/*.rake"].each do |taskfile|
   instance_eval File.read(taskfile), taskfile
 end

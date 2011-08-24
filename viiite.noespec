@@ -6,6 +6,8 @@ template-info:
   manifest:
     spec/test___lower__.rb:
       ignore: true
+    Rakefile:
+      safe-override: false
 variables:
   lower: 
     viiite
