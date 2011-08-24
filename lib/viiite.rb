@@ -1,5 +1,4 @@
 require 'fileutils'
-require "benchmark"
 require "delegate"
 
 require "viiite/version"
