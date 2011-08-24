@@ -19,6 +19,10 @@ module Viiite
   #
   class Command < Quickl::Delegator(__FILE__, __LINE__)
 
+    def initialize(bdb = nil)
+      @bdb = bdb
+    end
+
     # Install options
     options do |opt|
       opt.on("-Idirectory", 
