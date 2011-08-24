@@ -32,6 +32,7 @@ variables:
     - {name: quickl,       version: "~> 0.4.0",  groups: [runtime      ]}
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime      ]}
     - {name: json,         version: ">= 0",      groups: [runtime      ]}
+    - {name: sinatra,      version: "~> 1.2.6",  groups: [extra        ]}
   rake_tasks: 
     spec_test: 
       pattern: spec/unit/**/test_*.rb

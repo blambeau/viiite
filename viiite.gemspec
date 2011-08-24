@@ -126,6 +126,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rake", "~> 0.9.2")
   s.add_development_dependency("rspec", "~> 2.6.0")
   s.add_development_dependency("wlang", "~> 0.10.2")
+  s.add_development_dependency("sinatra", "~> 1.2.6")
   s.add_dependency("alf", "~> 0.10.0")
   s.add_dependency("quickl", "~> 0.4.0")
   s.add_dependency("gnuplot", "~> 2.3.6")

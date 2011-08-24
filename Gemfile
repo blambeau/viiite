@@ -20,3 +20,7 @@ group :runtime do
   gem "json"
 end
 
+group :extra do
+  gem "sinatra", "~> 1.2.6"
+end
+
