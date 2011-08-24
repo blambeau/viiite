@@ -3,7 +3,7 @@ module Viiite
   describe Tms, "#times" do
   
     subject{ tms * operand }
-    let(:tms){ Viiite::Tms.new([1.0, 2.0, 3.0, 4.0, 5.0]) }
+    let(:tms){ Viiite::Tms.new(1.0, 2.0, 3.0, 4.0, 5.0) }
 
     describe "with an integer" do
       let(:operand){ 2 }

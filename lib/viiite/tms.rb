@@ -3,8 +3,8 @@ module Viiite
 
     FMTSTR = "%10.6u %10.6y %10.6t %10.6r"
 
-    def initialize(tms)
-      super(*tms)
+    def initialize(utime, stime, cutime, cstime, real)
+      super # ensure we have all 5 non-nil arguments
     end
 
     def self.coerce(arg)
@@ -12,13 +12,13 @@ module Viiite
       when Viiite::Tms
         arg
       when ::Benchmark::Tms
-        Viiite::Tms.new arg.to_a[1..-1]
+        Viiite::Tms.new(*arg.to_a[1..-1])
       when Numeric
-        Viiite::Tms.new [arg, 0.0, 0.0, 0.0, 0.0]
+        Viiite::Tms.new arg, 0.0, 0.0, 0.0, 0.0
       when Hash
-        Viiite::Tms.new members.collect{|f| arg[f] || 0.0}
+        Viiite::Tms.new(*members.collect{|f| arg[f] || 0.0})
       when Array
-        Viiite::Tms.new arg
+        Viiite::Tms.new(*arg)
       else
         raise ArgumentError, "Invalid value #{arg.inspect} for Viiite::Tms"
       end
@@ -60,9 +60,9 @@ module Viiite
     def memberwise(op, x)
       case x
       when Viiite::Tms
-        Viiite::Tms.new values.zip(x.values).collect {|a,b| a.__send__(op, b)}
+        Viiite::Tms.new(*values.zip(x.values).collect {|a,b| a.__send__(op, b)})
       else
-        Viiite::Tms.new values.collect{|v| v.__send__(op, x)}
+        Viiite::Tms.new(*values.collect{|v| v.__send__(op, x)})
       end
     end
 
@@ -72,4 +72,8 @@ module Viiite
       def self.members; super.map(&:to_sym); end
     end
   end # class Tms
+
+  def self.Tms(*args)
+    Viiite::Tms.new(*args)
+  end
 end # module Viiite
