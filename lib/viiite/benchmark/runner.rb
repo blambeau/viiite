@@ -13,9 +13,9 @@ module Viiite
         end  
       end
 
-      def range_over(range, name, &block)
+      def range_over(range, name)
         range.each do |value|
-          with(name => value){ block.call(value) }
+          with(name => value){ yield value }
         end
       end
     
