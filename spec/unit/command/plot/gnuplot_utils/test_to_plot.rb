@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Viiite
-  class Formatter::Plot
-    describe "to_plot" do
+  class Command::Plot
+    describe GnuplotUtils, "#to_plot" do
 
       let(:data)    { [ {:x => 1, :y => 10}, {:x => 2, :y => 20} ] }
 
@@ -9,7 +9,7 @@ module Viiite
 
       let(:plot)    { {:title => "plot", :series => [ dataset ] } }
 
-      subject{ Formatter::Plot.to_plot(plot) }
+      subject{ GnuplotUtils.to_plot(plot) }
 
       it "should return a correct plot instance" do
         subject.is_a?(Gnuplot::Plot).should be_true
