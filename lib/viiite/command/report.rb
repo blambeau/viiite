@@ -21,8 +21,15 @@ module Viiite
         end
 
         @hierarchy = false
-        opt.on('-h', "--hierarchy", "Make a hierarchical regrouping") do
+        opt.on('-h', "--hierarchy", 
+               "Make a hierarchical regrouping") do
           @hierarchy = true
+        end
+
+        @stddev = false
+        opt.on("--stddev=[FIELD]", 
+               "Add the standard deviation on FIELD") do |field|
+          @stddev = field || "tms.total"
         end
 
         @ff = "%.6f"
@@ -34,11 +41,14 @@ module Viiite
 
       def query(op)
         lispy = Alf.lispy
-        op = lispy.summarize(op, @regroup, :user   => lispy.avg{tms.utime},
-                                           :system => lispy.avg{tms.stime},
-                                           :total  => lispy.avg{tms.total},
-                                           :real   => lispy.avg{tms.real})
+        aggs = {:user   => lispy.avg{tms.utime},
+                :system => lispy.avg{tms.stime},
+                :total  => lispy.avg{tms.total},
+                :real   => lispy.avg{tms.real}}
+        aggs[:stddev] = "stddev{ #{@stddev} }" if @stddev
+        op = lispy.summarize(op, @regroup, aggs)
         depend = [:user, :system, :total, :real]
+        depend += [:stddev] if @stddev
         @regroup[1..-1].each do |grouping|
           op = lispy.group(op, [grouping] + depend, :measure)
           depend = [:measure]
