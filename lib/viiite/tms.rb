@@ -43,15 +43,6 @@ module Viiite
       @to_h ||= Hash[members.zip(values)]
     end
 
-    def hash
-      to_a.hash
-    end
-
-    def ==(other)
-      other.is_a?(Tms) && (other.to_a == self.to_a)
-    end
-    alias :eql? :==
-
     def format(arg0 = nil, *args)
       fmtstr = (arg0 || FMTSTR).dup
       fmtstr.gsub!(/(%[-+\.\d]*)u/){"#{$1}f" % utime}
