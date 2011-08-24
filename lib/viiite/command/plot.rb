@@ -15,16 +15,7 @@ module Viiite
       # Install options
       options do |opt|
         @render = :text
-        opt.on('--text', "Render output as a text table") do
-          @render = :text
-        end
 
-        opt.on("--gnuplot=[TERM]", 
-               "Render output as a gnuplot text (and terminal)") do |value|
-          @render = :gnuplot
-          @term = (value || "dumb").to_sym
-        end
-        
         @serie_style = File.expand_path("../serie_style.rash", __FILE__)
         opt.on('--serie-style=FILE', "Specify a style file to use for series") do |value|
           @serie_style = value
@@ -58,34 +49,15 @@ module Viiite
         end
       end
     
-      def query(op)
-        lispy = Alf.lispy
-        op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
-                                 {:y => "avg{ #{@ordinate} }"})
-        op = lispy.join(op, Alf::Reader.reader(@serie_style))
-        op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
-        op = lispy.group(op, [:x, :y], :data)
-        op = lispy.rename(op, :serie => :title)
-        op = lispy.group(op, [:graph], :series, {:allbut => true})
-        op = lispy.join(op, Alf::Reader.reader(@graph_style))
-        op = lispy.rename(op, :graph => :title)
-        op
-      end
-      
       def execute(argv)
         op = single_source(argv) do |bdb, arg|
           bdb.dataset(arg)
         end
-        op = query(op)
-        case @render
-        when :text
-          Alf::Renderer.text(op).execute($stdout)
-        when :gnuplot
-          $stdout << "set terminal #{@term}\n"
-          Viiite::Formatter::Plot::to_plots(op.to_a, $stdout)
-        end
+        send(:"to_#{@render}", Alf.lispy, op)
       end
     
     end # class Plot
   end # class Command
 end # module Viiite
+require 'viiite/command/plot/to_text'
+require 'viiite/command/plot/to_gnuplot'

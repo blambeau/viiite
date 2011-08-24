@@ -1,1 +1,1 @@
-viiite plot Array/bench_sort --gnuplot -x size -y tms.total
+viiite plot Array/bench_sort -x size -y tms.total

@@ -20,7 +20,7 @@ describe "viiite command / " do
           db = File.join(fixtures_folder)
           cache = File.join(db, ".saved")
           Viiite::Command.run(["--db=#{cache}", "--cache=#{cache}"] + argv)
-        rescue SystemExit
+        rescue SystemExit => ex
           $stdout << "SystemExit" << "\n"
         end
         $stdout.string.should(eq(stdout_expected)) unless RUBY_VERSION < "1.9"

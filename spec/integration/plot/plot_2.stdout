@@ -1,0 +1,37 @@
+set terminal dumb
+set title "jruby 1.6.3"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.00200009346008301
+1000 0.0189998149871826
+e
+set title "rubinius 1.2.5dev"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.0
+1000 0.02800199999999997
+e
+set title "rubinius 2.0.0dev"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.0
+1000 0.0040000000000000036
+e
+set title "ruby 1.8.7"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.0
+1000 0.0
+e
+set title "ruby 1.9.2p290"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.0
+1000 0.0
+e
+set title "ruby 1.9.3dev"
+set grid 
+plot '-' title 'Array#sort' with linespoints
+100 0.0
+1000 0.0
+e
