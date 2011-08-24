@@ -129,6 +129,7 @@ Gem::Specification.new do |s|
   s.add_dependency("alf", "~> 0.10.0")
   s.add_dependency("quickl", "~> 0.4.0")
   s.add_dependency("gnuplot", "~> 2.3.6")
+  s.add_dependency("json", ">= 0")
 
   # The version of ruby required by this gem
   #

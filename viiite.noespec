@@ -31,6 +31,7 @@ variables:
     - {name: alf,          version: "~> 0.10.0", groups: [runtime      ]}
     - {name: quickl,       version: "~> 0.4.0",  groups: [runtime      ]}
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime      ]}
+    - {name: json,         version: ">= 0",      groups: [runtime      ]}
   rake_tasks: 
     spec_test: 
       pattern: spec/unit/**/test_*.rb
