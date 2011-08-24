@@ -50,10 +50,22 @@ module Viiite
   # 
   def self.which_ruby
     if Object.const_defined?(:RUBY_DESCRIPTION)
-      RUBY_DESCRIPTION =~ /^([^\s]+\s*[^\s]+)/
-      $1
+      short_ruby_description(RUBY_DESCRIPTION)
     else
-      "ruby #{RUBY_VERSION} (#{RUBY_PLATFORM})"
+      "ruby #{RUBY_VERSION}"
+    end
+  end
+
+  def self.short_ruby_description(description)
+    case description
+    when /^ruby 1.8.7 \(2011-02-18 patchlevel 334\)/
+      'ree 1.8.7p334' # this is not fine, but find me a better way and I'll be happy
+    when /^(\w+ \d\.\d\.\d) .+ patchlevel (\d+)/
+      "#{$1}p#{$2}"
+    when /^\w+ \S+/
+      $&
+    else
+      raise "Unknown ruby interpreter: #{description}"
     end
   end
 
