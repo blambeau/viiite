@@ -17,5 +17,6 @@ group :runtime do
 #  gem "alf", "~> 0.10.0"
   gem "quickl", "~> 0.4.0"
   gem "gnuplot", "~> 2.3.6"
+  gem "json"
 end
 
