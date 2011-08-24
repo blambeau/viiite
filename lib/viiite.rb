@@ -20,8 +20,15 @@ module Viiite
     Viiite::Tms.coerce(args)
   end
 
-  def self.measure(&block)
-    Viiite::Tms.coerce ::Benchmark.measure(&block)
+  def self.measure
+    t0, r0 = Process.times, Time.now
+    yield
+    t1, r1 = Process.times, Time.now
+    Tms.new([t1.utime  - t0.utime,
+             t1.stime  - t0.stime,
+             t1.cutime - t0.cutime,
+             t1.cstime - t0.cstime,
+             r1.to_f - r0.to_f])
   end
 
   # Builds a runner instance via the DSL definition given by the block.
