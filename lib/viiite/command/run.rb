@@ -22,7 +22,7 @@ module Viiite
         @run_key = nil
         opt.on("--run-key=[KEY]", 
                "Specify the run key (default to :run)") do |val|
-          @run_key = val
+          @run_key = val.to_sym
         end
       end
 
@@ -32,11 +32,12 @@ module Viiite
           benchmark = single_source([name]) do |bdb, arg|
             bdb.benchmark(arg)
           end
-          if @run_key
-            generator = Alf.lispy.generator(@runs, @run_key)
-            benchmark = Alf.lispy.join(benchmark, generator)
+          @runs.times do |run|
+            benchmark.each do |tuple|
+              tuple = tuple.merge(@run_key => run) if @run_key
+              $stdout << Alf::Tools.to_ruby_literal(tuple) << "\n"
+            end
           end
-          Alf::Renderer.rash(benchmark).execute($stdout)
         end
       end
 
