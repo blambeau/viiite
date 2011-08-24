@@ -16,14 +16,14 @@ module Viiite
       options do |opt|
         @render = :text
 
-        @serie_style = File.expand_path("../serie_style.rash", __FILE__)
+        @serie_style = nil
         opt.on('--serie-style=FILE', "Specify a style file to use for series") do |value|
-          @serie_style = value
+          @serie_style = load_style(value)
         end
         
-        @graph_style = File.expand_path("../graph_style.rash", __FILE__)
+        @graph_style = nil
         opt.on('--graph-style=FILE', "Specify a style file to use for graphs") do |value|
-          @graph_style = value
+          @graph_style = load_style(value)
         end
         
         @abscissa = :size
@@ -54,7 +54,14 @@ module Viiite
           @debug = true
         end
       end
-    
+
+      def load_style(file, reference = nil)
+        if reference
+          file = File.expand_path(File.join("..", file), reference)
+        end
+        Alf::Reader.reader(file).to_rel
+      end
+
       def execute(argv)
         lispy = Alf.lispy
         op = single_source(argv) do |bdb, arg|
