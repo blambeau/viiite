@@ -1,0 +1,27 @@
+body {
+  padding: 15px 50px 0px 0px;
+  font-family: 'Nunito', 'Palatino', sans-serif;
+  font-size: 18px;
+  overflow: scroll;
+  color: #212122;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #A30600;
+}
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#benchmarks{
+  float: left;
+  width: 250px;
+}
+#charts {
+  float: left;
+}
+#charts li { 
+  width: 600px; height: 300px; margin-top: 10px;
+}

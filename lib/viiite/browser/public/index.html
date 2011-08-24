@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Viite Benchmark Browser</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/mustache.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <script type="text/javascript" src="js/themes/gray.js"></script>
+    <script type="text/javascript" src="js/modules/exporting.js"></script>
+    <script type="text/javascript" src="js/viiite.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/viiite.css" media="screen" />
+    <script type="text/javascript">
+      $(document).ready(function(){
+        function load_bench(bench_name) {
+          $.get('/data/' + bench_name + '.json', function(data){
+            $("#charts").html("");
+            $.each(data, function(i, chart){
+              $("#charts").append("<li id='chart_" + i + "'></li>");
+              chart["chart"]["renderTo"] = "chart_" + i;
+              new Highcharts.Chart(chart);
+            });
+          });
+        };
+        function load_all() {
+          $.get('/benchmarks.json', function(data){
+            tpl = "{{#items}}<li><a class='bench-link'>{{name}}</a></li>{{/items}}"
+            $('#benchmarks').html(Mustache.to_html(tpl, {items: data}));
+            $('a.bench-link').click(function(elm){
+              bench_name = elm.srcElement.innerHTML;
+              load_bench(bench_name);
+            });
+          });
+        };
+        load_all();
+      });
+    </script>
+  </head>
+  <body>
+    <ul id="benchmarks">
+    </ul>
+    <ul id="charts">
+    </ul>
+  </body>
+</html>
