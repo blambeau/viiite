@@ -47,13 +47,25 @@ module Viiite
                "Specify the attribute to split graphs") do |value|
           @graph = value.to_sym
         end
+
+        @debug = false
+        opt.on('-d', 
+               'Print the query result instead of rendering') do
+          @debug = true
+        end
       end
     
       def execute(argv)
+        lispy = Alf.lispy
         op = single_source(argv) do |bdb, arg|
           bdb.dataset(arg)
         end
-        send(:"to_#{@render}", Alf.lispy, op)
+        op = send(:"to_#{@render}_query", lispy, op)
+        if @debug
+          Alf::Renderer.text(op).execute($stdout)
+        else
+          send(:"to_#{@render}", lispy, op)
+        end
       end
     
     end # class Plot
@@ -61,3 +73,4 @@ module Viiite
 end # module Viiite
 require 'viiite/command/plot/to_text'
 require 'viiite/command/plot/to_gnuplot'
+require 'viiite/command/plot/to_highcharts'

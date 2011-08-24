@@ -25,7 +25,6 @@ module Viiite
       end
 
       def to_gnuplot(lispy, op)
-        op = to_gnuplot_query(lispy, op)
         $stdout << "set terminal #{@gnuplot_term}\n"
         GnuplotUtils.to_plots(op.to_a, $stdout)
       end

@@ -22,7 +22,7 @@ module Viiite
       end
 
       def to_text(lispy, op)
-        Alf::Renderer.text(to_text_query(lispy, op)).execute($stdout)
+        Alf::Renderer.text(op).execute($stdout)
       end
 
     end # class Plot
