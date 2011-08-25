@@ -9,6 +9,7 @@ describe Viiite do
     {
       'ruby 1.8.7 (2011-02-18 patchlevel 334) [x86_64-linux]' => 'ruby 1.8.7p334',
       'ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]' => 'ruby 1.8.7p352',
+      'ruby 1.8.7 (2011-02-18 patchlevel 334) [x86_64-linux], MBARI 0x6770, Ruby Enterprise Edition 2011.03' => 'ree 2011.03',
       'ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]' => 'ruby 1.9.2p290',
       'ruby 1.9.3dev (2011-07-31 revision 32789) [x86_64-linux]' => 'ruby 1.9.3dev',
       'ruby 1.9.4dev (2011-08-24 trunk 33047) [x86_64-linux]' => 'ruby 1.9.4dev',

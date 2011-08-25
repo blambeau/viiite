@@ -58,6 +58,8 @@ module Viiite
 
   def self.short_ruby_description(description)
     case description
+    when /Ruby Enterprise Edition (\d{4}\.\d{2})/
+      "ree #{$1}"
     when /^(\w+ \d\.\d\.\d) .+ patchlevel (\d+)/
       "#{$1}p#{$2}"
     when /^\w+ \S+/
