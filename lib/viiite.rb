@@ -58,8 +58,6 @@ module Viiite
 
   def self.short_ruby_description(description)
     case description
-    when /^ruby 1.8.7 \(2011-02-18 patchlevel 334\)/
-      'ree 1.8.7p334' # this is not fine, but find me a better way and I'll be happy
     when /^(\w+ \d\.\d\.\d) .+ patchlevel (\d+)/
       "#{$1}p#{$2}"
     when /^\w+ \S+/
