@@ -49,7 +49,7 @@ module Viiite
         op = lispy.summarize(op, @regroup, aggs)
         depend = [:user, :system, :total, :real]
         depend += [:stddev] if @stddev
-        @regroup[1..-1].each do |grouping|
+        @regroup[1..-1].reverse.each do |grouping|
           op = lispy.group(op, [grouping] + depend, :measure)
           depend = [:measure]
         end if @hierarchy 

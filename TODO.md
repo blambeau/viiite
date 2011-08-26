@@ -3,7 +3,6 @@
 * Release alf 0.10.1
 * Rename 'viiite --db' as 'viiite --suite' and update CHANGELOG.md accordingly
 * Add 'viiite --pattern=GLOB' (defaults to 'bench_*.rb'), adding support in BDB options
-* Fix bug when using 'viiite report --regroup=x,y,z --hierarchy' (more than 2)
 
 # Long-term ideas
 

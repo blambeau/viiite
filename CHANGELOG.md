@@ -62,6 +62,12 @@
   * Improved Viiite.which_ruby; it should always output something like 
     '#{rubyname} #{version}#{patchlevel}' from now on (eregon)
 
+## Bug fixes
+
+* Fixed a bug when using 'viiite report --regroup=x,y,z --hierarchy' with more
+  than 2 regrouping attributes.
+
+
 # 0.1.0 / 2011-08-20
 
 * Enhancements
