@@ -7,7 +7,7 @@ SYNOPSIS
 OPTIONS
   -Idirectory                      specify $LOAD_PATH directory (may be used more than once)
   -rlibrary                        require the library, before executing viiite
-      --db=FOLDER                  Specify the benchmark folder (defaults to 'benchmarks')
+      --suite=FOLDER               Specify the folder of the benchmark suite (defaults to 'benchmarks')
       --[no-]cache=[FOLDER]        Specify the cache heuristic and folder (defaults to --cache)
       --cache-mode=MODE            Specify the exact mode for accessing cache files
   -a, --append                     Shortcut to --cache-mode=a

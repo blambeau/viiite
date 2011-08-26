@@ -22,7 +22,7 @@
   benchmark. 
 
 * The default behavior may be controlled through the following main options:
-  --db=[FOLDER], --[no-]cache=[FOLDER], --append, --write. Example:
+  --suite=[FOLDER], --[no-]cache=[FOLDER], --append, --write. Example:
 
     # Run all benchmarks on all rubies, 10 times each, appending all results
     # in cache

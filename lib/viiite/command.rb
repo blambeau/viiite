@@ -31,8 +31,8 @@ module Viiite
       end
 
       @bdb_options = {}
-      opt.on('--db=FOLDER', 
-             "Specify the benchmark folder (defaults to 'benchmarks')") do |val|
+      opt.on('--suite=FOLDER', 
+             "Specify the folder of the benchmark suite (defaults to 'benchmarks')") do |val|
         unless File.directory?(val)
           raise Quickl::InvalidArgument, "Missing folder #{val}"
         end
