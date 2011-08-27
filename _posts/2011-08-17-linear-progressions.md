@@ -33,7 +33,7 @@ Writing such kind of benchmark with Viiite is easy:
 
     # bench_attr_vs_method.rb
     require 'viiite'
-    Viiite.bm do |b|
+    Viiite.bench do |b|
       foo = Foo.new
       b.variation_point :ruby, Viiite.which_ruby
       b.range_over([1, 100_000, 1_000_000], :runs) do |runs|
@@ -56,7 +56,7 @@ Outputting a graph here is only interresting for visual reasons: the intuitive m
 
     # bench_attr_vs_method_2.rb
     require 'viiite'
-    Viiite.bm do |b|
+    Viiite.bench do |b|
       foo = Foo.new
       b.variation_point :ruby, Viiite.which_ruby
       b.report(:bench_reader){ 1_000_000.times{ foo.bench_reader } }

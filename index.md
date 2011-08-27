@@ -12,7 +12,7 @@ Let's start with the common Benchmark example and compare the execution times of
 
     # bench_iteration.rb
     n = 15000
-    Viiite.bm do |r|
+    Viiite.bench do |r|
       r.report(:for)   { for i in 1..n; a = "1"; end }
       r.report(:times) { n.times do   ; a = "1"; end }
       r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -42,7 +42,7 @@ class Array
   def bubblesort() ... end
 end
 
-Viiite.bm do |b|
+Viiite.bench do |b|
 
   # variation point on the ruby version
   b.variation_point :ruby, Viiite.which_ruby

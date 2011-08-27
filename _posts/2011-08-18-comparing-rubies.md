@@ -10,7 +10,7 @@ First, we add a so-called *variation-point* to the benchmarking case, here under
 
     require 'viiite'
     n = 15000
-    Viiite.bm do |r|
+    Viiite.bench do |r|
       r.variation_point :ruby, Viiite.which_ruby
       r.report(:for)   { for i in 1..n; a = "1"; end }
       r.report(:times) { n.times do   ; a = "1"; end }
