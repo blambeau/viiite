@@ -10,14 +10,19 @@ module Viiite
       @definition = definition
     end
 
+    @benchmarks = []
     def self.new(arg, *others)
       case arg
       when String
-        Kernel.eval(File.read(arg), viiite_clean_binding, arg)
+        load File.expand_path(arg)
+        @benchmarks.pop
       when IO, StringIO
         Kernel.eval(arg.readlines.join, viiite_clean_binding)
+        @benchmarks.pop
       else
-        super(arg)
+        bench = super(arg)
+        @benchmarks << bench
+        bench
       end
     end
     
