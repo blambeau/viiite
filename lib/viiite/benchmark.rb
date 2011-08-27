@@ -17,7 +17,7 @@ module Viiite
         load File.expand_path(arg)
         @benchmarks.pop
       when IO, StringIO
-        Kernel.eval(arg.readlines.join, viiite_clean_binding)
+        Kernel.eval(arg.read, TOPLEVEL_BINDING)
         @benchmarks.pop
       else
         bench = super(arg)
@@ -33,8 +33,3 @@ module Viiite
     Alf::Reader.register(:viiite, [".viiite", ".rb"], self)
   end # class Benchmark
 end # module Viiite
-
-def viiite_clean_binding
-  binding
-end
-
