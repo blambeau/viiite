@@ -24,7 +24,7 @@ Learn more on the [github-pages of this project](http://blambeau.github.com/viii
 ```ruby
 require 'viiite'
 n = 15000
-Viiite.bm do |r|
+Viiite.bench do |r|
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -47,7 +47,7 @@ $ viiite report bench_iteration.rb
 ```ruby
 require 'viiite'
 n = 15000
-Viiite.bm do |r|
+Viiite.bench do |r|
   r.variation_point :ruby, Viiite.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
@@ -85,7 +85,7 @@ $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=b
 
 ```ruby
 require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do

@@ -2,15 +2,15 @@ require 'spec_helper'
 module Viiite
   describe Benchmark do
     
-    it "should be definable with Viiite.bm" do
-      b = Viiite.bm do |viiite|
+    it "should be definable with Viiite.bench" do
+      b = Viiite.bench do |viiite|
         viiite.report{ 1 + 1 }
       end
       b.should be_kind_of(Viiite::Benchmark)
     end
 
     it "should be executable" do
-      b = Viiite.bm do |viiite|
+      b = Viiite.bench do |viiite|
         viiite.report{ 1 + 1 }
       end
       res = []
@@ -24,7 +24,7 @@ module Viiite
     end
 
     it "should be enumerable" do
-      b = Viiite.bm do |viiite|
+      b = Viiite.bench do |viiite|
         viiite.report{ 1 + 1 }
       end
       res = b.to_a
@@ -34,7 +34,7 @@ module Viiite
     end
     
     it "should support variation points" do
-      b = Viiite.bm do |viiite|
+      b = Viiite.bench do |viiite|
         2.times do |i| 
           viiite.variation_point(:"#run", i)
           viiite.report do end
@@ -45,7 +45,7 @@ module Viiite
     end
 
     it "should support ranging over values" do
-      b = Viiite.bm do |viiite|
+      b = Viiite.bench do |viiite|
         viiite.range_over [10, 100, 1000], :times do |t|
           viiite.report do end
         end

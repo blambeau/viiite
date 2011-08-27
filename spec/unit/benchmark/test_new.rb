@@ -12,7 +12,7 @@ module Viiite
     }
 
     describe 'with a Proc' do
-      let(:arg){ Proc.new{|bm| bm.report(:add){ 1+1 } } }
+      let(:arg){ Proc.new{|b| b.report(:add){ 1+1 } } }
       it{ should be_a(Benchmark) }
     end
 

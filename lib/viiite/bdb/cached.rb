@@ -18,9 +18,9 @@ module Viiite
       end
 
       def benchmark(name)
-        bm    = __getobj__.benchmark(name)
+        bench = __getobj__.benchmark(name)
         cache = cache_file(name)
-        Proxy.new(bm, cache, cache_mode)
+        Proxy.new(bench, cache, cache_mode)
       end
 
       def dataset(name)

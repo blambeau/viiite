@@ -9,7 +9,7 @@ class Foo
   end
 end
 
-Viiite.bm do |b|
+Viiite.bench do |b|
   foo = Foo.new
   b.variation_point :ruby, Viiite.which_ruby
   b.report(:bench_reader){ 1_000_000.times{ foo.bench_reader } }

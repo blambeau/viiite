@@ -7,7 +7,7 @@ class Array
 end
 
 require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over((1..10).map{|i| i*10_000}, :size) do |size|
     bench_case = Array.random(size)

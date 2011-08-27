@@ -11,7 +11,7 @@ class Foo
 
 end
 
-Viiite.bm do |r|
+Viiite.bench do |r|
   foo = Foo.new
   r.variation_point :ruby, Viiite.which_ruby
   r.range_over([100, 100_000, 1_000_000], :size) do |n|

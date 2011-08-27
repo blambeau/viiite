@@ -29,7 +29,7 @@ module Viiite
   #
   # Example
   #
-  #  Viiite.bm do |b|
+  #  Viiite.bench do |b|
   #    b.variation_point :ruby_version, Viiite.which_ruby
   #    b.range_over([100, 1000, 10000, 100000], :runs) do |runs|
   #      b.variation_point :test, :via_reader do
@@ -41,7 +41,7 @@ module Viiite
   #    end
   #  end
   # 
-  def self.bm(&block)
+  def self.bench(&block)
     Benchmark.new(block)
   end
 

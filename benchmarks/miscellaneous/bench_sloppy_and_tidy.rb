@@ -11,7 +11,7 @@ class Tidy
 end
 
 require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   tidy   = Tidy.new
   sloppy = Sloppy.new
   b.variation_point :ruby, Viiite.which_ruby

@@ -9,7 +9,7 @@ class Foo
   end
 end
 
-Viiite.bm do |b|
+Viiite.bench do |b|
   foo = Foo.new
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([1, 100_000, 1_000_000], :runs) do |runs|
