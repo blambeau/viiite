@@ -45,6 +45,11 @@ module Viiite
     Benchmark.new(block)
   end
 
+  # Alias of Viiite.bench for compatibility
+  def self.bm(&block)
+    bench(&block)
+  end
+
   #
   # Returns a short string with a ruby interpreter description
   # 
