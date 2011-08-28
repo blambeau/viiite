@@ -47,6 +47,7 @@ module Viiite
 
   # Alias of Viiite.bench for compatibility
   def self.bm(&block)
+    warn "Viiite.bm is deprecated, use Viiite.bench instead #{caller[0]}"
     bench(&block)
   end
 
