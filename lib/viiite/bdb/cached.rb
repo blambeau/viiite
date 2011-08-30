@@ -1,14 +1,13 @@
 module Viiite
   class BDB
-    class Cached < Delegator
+    class Cached < SimpleDelegator
       include Utils
 
-      attr_reader :__getobj__
       attr_reader :cache_folder
       attr_reader :cache_mode
 
       def initialize(delegate, cache_folder, cache_mode = "w")
-        @__getobj__   = delegate
+        super delegate
         @cache_folder = cache_folder
         @cache_mode   = cache_mode
       end
@@ -18,7 +17,7 @@ module Viiite
       end
 
       def benchmark(name)
-        bench = __getobj__.benchmark(name)
+        bench = super(name)
         cache = cache_file(name)
         Proxy.new(bench, cache, cache_mode)
       end
