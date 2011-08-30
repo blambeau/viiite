@@ -37,7 +37,7 @@ module Viiite
 
       def _each(&reporter)
         @stack, @reporter = [ {} ], reporter
-        self.instance_eval &definition
+        self.instance_eval(&definition)
         @stack, @reporter = nil, nil
       end
 
