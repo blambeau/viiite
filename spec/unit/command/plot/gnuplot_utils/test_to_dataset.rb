@@ -4,7 +4,7 @@ module Viiite
     describe GnuplotUtils, "#to_dataset" do
 
       let(:tuple) {
-        {:title => "serie", 
+        {:title => "serie",
          :linewidth => 4,
          :data => [ {:x => 1, :y => 10}, {:x => 2, :y => 20} ] }
       }
@@ -18,5 +18,5 @@ module Viiite
       end
 
     end
-  end  
+  end
 end

@@ -1,6 +1,6 @@
 module Viiite
   class Command
-    # 
+    #
     # Run a benchmark and output raw data
     #
     # SYNOPSIS
@@ -14,20 +14,20 @@ module Viiite
 
       options do |opt|
         @runs = 1
-        opt.on("--runs=[NB]", 
+        opt.on("--runs=[NB]",
                "Run the benchmark NB times") do |val|
           @runs = val.to_i
           @run_key = :run unless @run_key
         end
         @run_key = nil
-        opt.on("--run-key=[KEY]", 
+        opt.on("--run-key=[KEY]",
                "Specify the run key (default to :run)") do |val|
           @run_key = val.to_sym
         end
       end
 
       def execute(argv)
-        argv = requester.bdb.to_rel.collect{|t| 
+        argv = requester.bdb.to_rel.collect{|t|
           t[:name]
         } if argv.empty?
         argv.each do |name|

@@ -1,4 +1,4 @@
-# A benchmark pioneered by @tenderlove 
+# A benchmark pioneered by @tenderlove
 # @see https://gist.github.com/1170106
 
 class Sloppy

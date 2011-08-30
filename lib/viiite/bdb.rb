@@ -19,7 +19,7 @@ module Viiite
       if cache = options[:cache]
         cache = File.join(folder, '.cache') unless cache.is_a?(String)
         mode  = options[:cache_mode]
-        bdb   = BDB::Cached.new(bdb, cache, mode) 
+        bdb   = BDB::Cached.new(bdb, cache, mode)
       end
       bdb
     end

@@ -1,6 +1,6 @@
 module Viiite
   class Command < Quickl::Delegator(__FILE__, __LINE__)
-    # 
+    #
     # Report benchmarking results as a plot
     #
     # SYNOPSIS
@@ -10,7 +10,7 @@ module Viiite
     # #{summarized_options}
     #
     class Plot < Quickl::Command(__FILE__, __LINE__)
-      include Commons 
+      include Commons
 
       # Install options
       options do |opt|
@@ -20,17 +20,17 @@ module Viiite
         opt.on('--serie-style=FILE', "Specify a style file to use for series") do |value|
           @serie_style = load_style(value)
         end
-        
+
         @graph_style = nil
         opt.on('--graph-style=FILE', "Specify a style file to use for graphs") do |value|
           @graph_style = load_style(value)
         end
-        
+
         @abscissa = :size
         opt.on('-x abscissa', "Specify the abscissa attribute") do |value|
           @abscissa = value.to_sym
         end
-        
+
         @ordinate = "tms.total"
         opt.on('-y ordinate', "Specify the ordinate attribute") do |value|
           @ordinate = value
@@ -43,13 +43,13 @@ module Viiite
         end
 
         @graph = :ruby
-        opt.on('--graph=ATTR', 
+        opt.on('--graph=ATTR',
                "Specify the attribute to split graphs") do |value|
           @graph = value.to_sym
         end
 
         @debug = false
-        opt.on('-d', 
+        opt.on('-d',
                'Print the query result instead of rendering') do
           @debug = true
         end
@@ -79,7 +79,7 @@ module Viiite
           send(:"to_#{@render}", lispy, op)
         end
       end
-    
+
     end # class Plot
   end # class Command
 end # module Viiite

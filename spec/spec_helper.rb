@@ -2,7 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'viiite'
 
 def redirect_io
-  $oldstdout = $stdout 
+  $oldstdout = $stdout
   $oldstderr = $stderr
   $stdout = StringIO.new
   $stderr = StringIO.new
@@ -12,8 +12,8 @@ end
 def restore_io
   $stdout = $oldstdout
   $stderr = $oldstderr
-  $oldstdout = nil 
-  $oldstderr = nil 
+  $oldstdout = nil
+  $oldstderr = nil
 end
 
 def fixtures_folder

@@ -36,7 +36,7 @@ module Viiite
       def cache_file(name)
         bench_file(cache_folder, name, ".rash")
       end
-      
+
       class Proxy < DelegateClass(Benchmark)
         include Alf::Iterator
 

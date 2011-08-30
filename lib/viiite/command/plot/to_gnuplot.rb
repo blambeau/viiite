@@ -3,7 +3,7 @@ module Viiite
     class Plot
 
       options do |opt|
-        opt.on("--gnuplot=[TERM]", 
+        opt.on("--gnuplot=[TERM]",
                "Render output as a gnuplot text (and terminal)") do |value|
           @render = :gnuplot
           @gnuplot_term = (value || "dumb").to_sym
@@ -14,7 +14,7 @@ module Viiite
 
       def to_gnuplot_query(lispy, op)
         lispy = Alf.lispy
-        op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
+        op = lispy.summarize(op, [@graph, @series, @abscissa].compact,
                                  {:y => "avg{ #{@ordinate} }"})
         op = lispy.join(op, @serie_style) if @serie_style
         op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
@@ -41,7 +41,7 @@ module Viiite
             next if k == :data
             if ds.respond_to?(:"#{k}=")
               ds.send(:"#{k}=", v)
-            end 
+            end
           end
           ds
         end

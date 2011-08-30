@@ -4,7 +4,7 @@ class Foo
   def explicit &block
     yield
   end
-  
+
   def implicit
     yield
   end

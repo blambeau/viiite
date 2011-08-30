@@ -25,7 +25,7 @@ module Viiite
         bench
       end
     end
-    
+
     def each(&reporter)
       self.dup._each(&reporter)
     end

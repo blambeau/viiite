@@ -4,7 +4,7 @@ module Viiite
     describe Run do
 
       let(:bench_iteration){ File.expand_path('../bench_iteration.rb', __FILE__) }
-      subject{ 
+      subject{
         Run.run(argv)
         rel = Alf::Reader.reader(StringIO.new($stdout.string)).to_rel
         rel = rel.project([:tms], {:allbut => true})
@@ -20,8 +20,8 @@ module Viiite
 
       describe "with --runs" do
         let(:argv){ [ bench_iteration, "--runs=2" ] }
-        let(:expected){ 
-          Alf::Relation[{:bench => :times, :run => 0}, 
+        let(:expected){
+          Alf::Relation[{:bench => :times, :run => 0},
                         {:bench => :times, :run => 1}]
         }
         it{ should eq(expected) }
@@ -29,8 +29,8 @@ module Viiite
 
       describe "with --runs and --run-key" do
         let(:argv){ [ bench_iteration, "--runs=2", "--run-key=hello" ] }
-        let(:expected){ 
-          Alf::Relation[{:bench => :times, :hello => 0}, 
+        let(:expected){
+          Alf::Relation[{:bench => :times, :hello => 0},
                         {:bench => :times, :hello => 1}]
         }
         it{ should eq(expected) }

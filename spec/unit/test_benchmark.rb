@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Viiite
   describe Benchmark do
-    
+
     it "should be definable with Viiite.bench" do
       b = Viiite.bench do |viiite|
         viiite.report{ 1 + 1 }
@@ -32,10 +32,10 @@ module Viiite
       res.size.should == 1
       res.first[:tms].should be_kind_of(Viiite::Tms)
     end
-    
+
     it "should support variation points" do
       b = Viiite.bench do |viiite|
-        2.times do |i| 
+        2.times do |i|
           viiite.variation_point(:"#run", i)
           viiite.report do end
         end

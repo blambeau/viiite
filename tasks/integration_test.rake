@@ -6,14 +6,14 @@ begin
     t.pattern = "spec/integration/**/test_*.rb"
 
     # By default, if there is a Gemfile, the generated command will include
-    # 'bundle exec'. Set this to true to ignore the presence of a Gemfile, 
+    # 'bundle exec'. Set this to true to ignore the presence of a Gemfile,
     # and not add 'bundle exec' to the command.
     t.skip_bundler = false
 
     # Name of Gemfile to use
     t.gemfile = "Gemfile"
 
-    # Whether or not to fail Rake when an error occurs (typically when 
+    # Whether or not to fail Rake when an error occurs (typically when
     # examples fail).
     t.fail_on_error = true
 
@@ -33,7 +33,7 @@ begin
     # Command line options to pass to rcov. See 'rcov --help' about this
     t.rcov_opts = []
 
-    # Command line options to pass to ruby. See 'ruby --help' about this 
+    # Command line options to pass to ruby. See 'ruby --help' about this
     t.ruby_opts = []
 
     # Path to rspec

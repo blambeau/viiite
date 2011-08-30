@@ -40,7 +40,7 @@ module Viiite
   #      end
   #    end
   #  end
-  # 
+  #
   def self.bench(&block)
     Benchmark.new(block)
   end
@@ -53,7 +53,7 @@ module Viiite
 
   #
   # Returns a short string with a ruby interpreter description
-  # 
+  #
   def self.which_ruby
     if Object.const_defined?(:RUBY_DESCRIPTION)
       short_ruby_description(RUBY_DESCRIPTION)

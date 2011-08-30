@@ -1,13 +1,13 @@
 # Viiite
 
-Viiite brings tools to benchmark and analyze the complexity of your algorithms. 
-It has been designed as an alternative to Benchmark that let your benchmarks 
+Viiite brings tools to benchmark and analyze the complexity of your algorithms.
+It has been designed as an alternative to Benchmark that let your benchmarks
 evolve smoothly from simple measures to more complex infrastructures.
 
     [sudo] gem install viiite
 
 Viiite uses [semantic versionning](http://semver.org) and has not yet reached the
-public API required for 1.0.0. The safe way to require viiite for now is as 
+public API required for 1.0.0. The safe way to require viiite for now is as
 follows:
 
     gem "viiite", "~> 0.1.0"
@@ -152,4 +152,4 @@ $ viiite plot bench_sort.rb -x size -y tms.total --graph=viiite --series=ruby --
 
 ## On the devel side
 
-Fork the project on github ... and so on. 
+Fork the project on github ... and so on.

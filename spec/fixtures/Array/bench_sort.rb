@@ -1,9 +1,9 @@
 class Array
-  
+
   def self.random(size)
     Array.new(size){ Kernel.rand }
   end
-  
+
 end
 
 require 'viiite'

@@ -1,7 +1,7 @@
 module Viiite
   class Benchmark
     module Runner
- 
+
       def with(hash)
         if block_given?
           @stack << @stack.last.merge(hash)
@@ -10,7 +10,7 @@ module Viiite
           res
         else
           @stack.last.merge!(hash)
-        end  
+        end
       end
 
       def range_over(range, name)
@@ -18,12 +18,12 @@ module Viiite
           with(name => value){ yield value }
         end
       end
-    
+
       def variation_point(name, value, &proc)
         h = {name => value}
         with(h, &proc)
       end
-      
+
       def report(hash = {}, &block)
         hash = {:bench => hash} unless hash.is_a?(Hash)
         with(hash) {
@@ -33,14 +33,14 @@ module Viiite
         }
       end
 
-      protected    
+      protected
 
       def _each(&reporter)
         @stack, @reporter = [ {} ], reporter
         self.instance_eval &definition
         @stack, @reporter = nil, nil
       end
-      
+
       def output
         @reporter.call @stack.last.dup
       end

@@ -6,7 +6,7 @@ module Viiite
 
     after{
       subject.to_a.size.should eq(1)
-      subject.to_a.first.keys.sort{|k1,k2| 
+      subject.to_a.first.keys.sort{|k1,k2|
         k1.to_s <=> k2.to_s
       }.should eq([:bench, :tms])
     }

@@ -1,7 +1,7 @@
 module Viiite
   class Command
     module Commons
-      
+
       def single_source(argv)
         raise Quickl::InvalidArgument if argv.size > 1
         if arg = argv.first
