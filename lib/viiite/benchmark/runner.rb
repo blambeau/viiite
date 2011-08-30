@@ -28,7 +28,7 @@ module Viiite
         hash = {:bench => hash} unless hash.is_a?(Hash)
         with(hash) {
           GC.start
-          tms = Viiite.measure{block.call}
+          tms = Viiite.measure(&block)
           with(:tms => tms){ output }
         }
       end

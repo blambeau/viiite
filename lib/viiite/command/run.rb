@@ -27,9 +27,7 @@ module Viiite
       end
 
       def execute(argv)
-        argv = requester.bdb.to_rel.collect{|t|
-          t[:name]
-        } if argv.empty?
+        argv = requester.bdb.to_rel.collect{|t| t[:name]} if argv.empty?
         argv.each do |name|
           benchmark = single_source([name]) do |bdb, arg|
             bdb.benchmark(arg)

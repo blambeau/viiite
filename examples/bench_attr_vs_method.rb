@@ -1,4 +1,3 @@
-require 'viiite'
 class Foo
   attr_reader :bench_reader
   def initialize

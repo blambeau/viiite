@@ -1,6 +1,5 @@
-require 'viiite'
-n = 15000
 Viiite.bench do |r|
+  n = 15000
   r.variation_point :ruby, Viiite.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }

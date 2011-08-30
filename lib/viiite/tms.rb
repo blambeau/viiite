@@ -22,7 +22,9 @@ module Viiite
       end
     end
 
-    def total;  cutime + cstime + stime + utime; end
+    def total
+      cutime + cstime + stime + utime
+    end
 
     def to_ruby_literal
       "Viiite::Tms(#{to_a.collect{|f| f.inspect}.join(',')})"

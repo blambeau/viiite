@@ -32,6 +32,7 @@ module Viiite
       end
 
       module GnuplotUtils
+        extend self
         def to_data(rel)
           [rel.collect{|t| t[:x]}, rel.collect{|t| t[:y]}]
         end
@@ -39,9 +40,7 @@ module Viiite
           ds = Gnuplot::DataSet.new(to_data(tuple[:data]))
           tuple.each_pair do |k,v|
             next if k == :data
-            if ds.respond_to?(:"#{k}=")
-              ds.send(:"#{k}=", v)
-            end
+            ds.send(:"#{k}=", v) if ds.respond_to?(:"#{k}=")
           end
           ds
         end
@@ -59,7 +58,6 @@ module Viiite
             buffer << to_plot(tuple).to_gplot << "\n"
           end
         end
-        extend self
       end # module Utils
 
     end # class Plot

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'fileutils'
+
 module Viiite
   class BDB
     describe Cached, "#dataset" do

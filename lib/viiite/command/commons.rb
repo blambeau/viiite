@@ -8,9 +8,7 @@ module Viiite
           if File.exists?(arg.to_s)
             Alf::Reader.reader(arg.to_s)
           elsif requester && requester.respond_to?(:bdb)
-            block_given? ?
-              yield(requester.bdb, arg) :
-              requester.bdb.dataset(arg)
+            block_given? ? yield(requester.bdb, arg) : requester.bdb.dataset(arg)
           else
             raise Quickl::InvalidArgument, "Missing benchmark #{arg}"
           end
