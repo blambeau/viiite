@@ -38,6 +38,9 @@ module Viiite
         end
         @bdb_options[:folder] = val
       end
+      opt.on('--pattern=GLOB', "Specify the pattern to find benchmarks in the suite folder") do |glob|
+        @bdb_options[:pattern] = glob
+      end
       opt.on('--[no-]cache=[FOLDER]',
              'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
         @bdb_options[:cache] = folder

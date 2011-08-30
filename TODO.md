@@ -1,7 +1,7 @@
 # Must have for 0.2.0
 
 * Release alf 0.10.1
-* Add 'viiite --pattern=GLOB' (defaults to 'bench_*.rb'), adding support in BDB options
+* Clean up the duplication of ext and pattern in BDB options
 
 # Long-term ideas
 
