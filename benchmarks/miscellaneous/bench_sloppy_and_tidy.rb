@@ -10,7 +10,6 @@ class Tidy
   def tidy;       @tidy; end
 end
 
-require 'viiite'
 Viiite.bench do |b|
   tidy   = Tidy.new
   sloppy = Sloppy.new
@@ -20,4 +19,3 @@ Viiite.bench do |b|
     b.report(:sloppy) { n.times{ sloppy.sloppy } }
   end
 end
-

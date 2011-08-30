@@ -1,6 +1,5 @@
 require 'viiite'
 class Foo
-
   def explicit &block
     yield
   end
@@ -8,7 +7,6 @@ class Foo
   def implicit
     yield
   end
-
 end
 
 Viiite.bench do |r|
@@ -19,4 +17,3 @@ Viiite.bench do |r|
     r.report(:yield_explicit){ n.times{ foo.explicit{} } }
   end
 end
-
