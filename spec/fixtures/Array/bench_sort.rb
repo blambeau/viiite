@@ -5,4 +5,3 @@ Viiite.bench do |b|
     b.report(:"Array#sort") { bench_case.sort }
   end
 end
-

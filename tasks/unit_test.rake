@@ -74,4 +74,3 @@ ensure
   desc "Run all tests"
   task :test => [:unit_test]
 end
-

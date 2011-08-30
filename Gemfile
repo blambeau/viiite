@@ -19,4 +19,3 @@ group :runtime do
   gem "gnuplot", "~> 2.3.6"
   gem "json"
 end
-

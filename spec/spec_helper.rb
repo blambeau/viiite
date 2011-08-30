@@ -19,4 +19,3 @@ end
 def fixtures_folder
   File.expand_path('../fixtures', __FILE__)
 end
-

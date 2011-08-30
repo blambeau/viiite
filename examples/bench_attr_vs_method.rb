@@ -17,4 +17,3 @@ Viiite.bench do |b|
     b.report(:bench_method){ runs.times{ foo.bench_method } }
   end
 end
-

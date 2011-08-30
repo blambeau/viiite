@@ -6,4 +6,3 @@ Viiite.bench do |r|
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
 end
-

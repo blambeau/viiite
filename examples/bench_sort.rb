@@ -35,4 +35,3 @@ Viiite.bench do |b|
     end
   end
 end
-

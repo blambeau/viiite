@@ -15,4 +15,3 @@ Viiite.bench do |b|
   b.report(:bench_reader){ 1_000_000.times{ foo.bench_reader } }
   b.report(:bench_method){ 1_000_000.times{ foo.bench_method } }
 end
-
