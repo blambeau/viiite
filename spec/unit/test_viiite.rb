@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe Viiite do
-  
+
   it "should have a version number" do
     Viiite.const_defined?(:VERSION).should be_true
   end
@@ -21,5 +21,5 @@ describe Viiite do
       Viiite.short_ruby_description(description).should == short
     }
   end
-  
+
 end

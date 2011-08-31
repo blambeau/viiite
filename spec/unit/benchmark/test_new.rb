@@ -6,13 +6,11 @@ module Viiite
 
     after{
       subject.to_a.size.should eq(1)
-      subject.to_a.first.keys.sort{|k1,k2| 
-        k1.to_s <=> k2.to_s
-      }.should eq([:bench, :tms])
+      subject.to_a.first.keys.sort_by(&:to_s).should eq([:bench, :tms])
     }
 
     describe 'with a Proc' do
-      let(:arg){ Proc.new{|bm| bm.report(:add){ 1+1 } } }
+      let(:arg){ Proc.new{|b| b.report(:add){ 1+1 } } }
       it{ should be_a(Benchmark) }
     end
 

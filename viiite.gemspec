@@ -1,4 +1,4 @@
-# We require your library, mainly to have access to the VERSION number. 
+# We require your library, mainly to have access to the VERSION number.
 # Feel free to set $version manually.
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require "viiite/version"
@@ -9,15 +9,15 @@ $version = Viiite::Version.to_s
 # should be correctly packaged given what you have described in the .noespec file.
 #
 Gem::Specification.new do |s|
-  
+
   ################################################################### ABOUT YOUR GEM
-  
-  # Gem name (required) 
+
+  # Gem name (required)
   s.name = "viiite"
-  
+
   # Gem version (required)
   s.version = $version
-  
+
   # A short summary of this gem
   #
   # This is displayed in `gem list -d`.
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   # The description should be more detailed than the summary.  For example,
   # you might wish to copy the entire README into the description.
   s.description = "Viiite brings tools to benchmark and analyze the complexity of your algorithms. \nIt has been designed as an alternative to Benchmark that let your benchmarks \nevolve smoothly from simple measures to more complex infrastructures."
-  
+
   # The URL of this gem home page (optional)
   s.homepage = "http://blambeau.github.com/viiite"
 
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   # you know what you do!
   #
   # s.date = Time.now.strftime('%Y-%m-%d')
-  
+
   # The license(s) for the library.  Each license must be a short name, no
   # more than 64 characters.
   #
@@ -49,35 +49,35 @@ Gem::Specification.new do |s|
   # s.rubyforge_project = nil
 
   ################################################################### ABOUT THE AUTHORS
-  
+
   # The list of author names who wrote this gem.
   #
   # If you are providing multiple authors and multiple emails they should be
   # in the same order.
-  # 
+  #
   s.authors = ["Bernard Lambeau"]
-  
+
   # Contact emails for this gem
   #
   # If you are providing multiple authors and multiple emails they should be
   # in the same order.
   #
-  # NOTE: Somewhat strangly this attribute is always singular! 
+  # NOTE: Somewhat strangly this attribute is always singular!
   #       Don't replace by s.emails = ...
   s.email  = ["blambeau@gmail.com"]
 
   ################################################################### PATHS, FILES, BINARIES
-  
-  # Paths in the gem to add to $LOAD_PATH when this gem is 
+
+  # Paths in the gem to add to $LOAD_PATH when this gem is
   # activated (required).
   #
   # The default 'lib' is typically sufficient.
   s.require_paths = ["lib"]
-  
+
   # Files included in this gem.
   #
   # By default, we take all files included in the Manifest.txt file on root
-  # of the project. Entries of the manifest are interpreted as Dir[...] 
+  # of the project. Entries of the manifest are interpreted as Dir[...]
   # patterns so that lazy people may use wilcards like lib/**/*
   #
   here = File.expand_path(File.dirname(__FILE__))
@@ -107,7 +107,7 @@ Gem::Specification.new do |s|
   #   <= Less than or equal to
   #   ~> Approximately greater than
   #
-  # Don't forget to have a look at http://lmgtfy.com/?q=Ruby+Versioning+Policies 
+  # Don't forget to have a look at http://lmgtfy.com/?q=Ruby+Versioning+Policies
   # for setting your gem version.
   #
   # For your requirements to other gems, remember that
@@ -119,7 +119,7 @@ Gem::Specification.new do |s|
 
   #
   # One call to add_dependency('gem_name', 'gem version requirement') for each
-  # runtime dependency. These gems will be installed with your gem. 
+  # runtime dependency. These gems will be installed with your gem.
   # One call to add_development_dependency('gem_name', 'gem version requirement')
   # for each development dependency. These gems are required for developers
   #
@@ -127,8 +127,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", "~> 2.6.0")
   s.add_development_dependency("wlang", "~> 0.10.2")
   s.add_development_dependency("sinatra", "~> 1.2.6")
-  s.add_dependency("alf", "~> 0.10.0")
-  s.add_dependency("quickl", "~> 0.4.0")
+  s.add_dependency("alf", "~> 0.10.1")
   s.add_dependency("gnuplot", "~> 2.3.6")
   s.add_dependency("json", ">= 0")
 
@@ -146,18 +145,18 @@ Gem::Specification.new do |s|
   #
   # s.platform = nil
 
-  # Extensions to build when installing the gem.  
+  # Extensions to build when installing the gem.
   #
-  # Valid types of extensions are extconf.rb files, configure scripts 
+  # Valid types of extensions are extconf.rb files, configure scripts
   # and rakefiles or mkrf_conf files.
   #
   s.extensions = []
-  
-  # External (to RubyGems) requirements that must be met for this gem to work. 
+
+  # External (to RubyGems) requirements that must be met for this gem to work.
   # It’s simply information for the user.
   #
   s.requirements = nil
-  
+
   # A message that gets displayed after the gem is installed
   #
   # Uncomment and set this if you want to say something to the user
@@ -175,7 +174,7 @@ Gem::Specification.new do |s|
   # details.
   #
   # s.cert_chain = []
-  
+
   ################################################################### RDOC
 
   # An ARGV style array of options to RDoc

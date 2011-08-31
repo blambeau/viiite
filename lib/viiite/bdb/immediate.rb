@@ -6,13 +6,14 @@ module Viiite
 
       attr_reader :folder
 
-      def initialize(folder, ext = ".rb")
+      def initialize(folder, options = DEFAULT_OPTIONS)
         @folder = folder
-        @ext = ext
+        @pattern = options[:pattern]
+        @ext = options[:ext]
       end
 
       def each
-        Dir[File.join(folder, "**/bench_*#{@ext}")].each do |f|
+        Dir[File.join(folder, "**/#{@pattern}")].each do |f|
           yield({
             :name  => f[(1+folder.size)..-(1+@ext.size)],
             :file  => f,

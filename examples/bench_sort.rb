@@ -25,7 +25,7 @@ class Array
 end
 
 require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do
@@ -35,4 +35,3 @@ Viiite.bm do |b|
     end
   end
 end
-

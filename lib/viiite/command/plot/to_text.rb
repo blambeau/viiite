@@ -11,7 +11,7 @@ module Viiite
 
       def to_text_query(lispy, op)
         lispy = Alf.lispy
-        op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
+        op = lispy.summarize(op, [@graph, @series, @abscissa].compact,
                                  {:y => "avg{ #{@ordinate} }"})
         op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
         op = lispy.group(op, [:x, :y], :data)

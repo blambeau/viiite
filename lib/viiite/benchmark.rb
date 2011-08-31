@@ -10,17 +10,22 @@ module Viiite
       @definition = definition
     end
 
+    @benchmarks = []
     def self.new(arg, *others)
       case arg
       when String
-        Kernel.eval(File.read(arg), viiite_clean_binding, arg)
+        load File.expand_path(arg)
+        @benchmarks.pop
       when IO, StringIO
-        Kernel.eval(arg.readlines.join, viiite_clean_binding)
+        Kernel.eval(arg.read, TOPLEVEL_BINDING)
+        @benchmarks.pop
       else
-        super(arg)
+        bench = super(arg)
+        @benchmarks << bench
+        bench
       end
     end
-    
+
     def each(&reporter)
       self.dup._each(&reporter)
     end
@@ -28,8 +33,3 @@ module Viiite
     Alf::Reader.register(:viiite, [".viiite", ".rb"], self)
   end # class Benchmark
 end # module Viiite
-
-def viiite_clean_binding
-  binding
-end
-

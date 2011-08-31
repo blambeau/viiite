@@ -12,15 +12,11 @@ group :release do
 end
 
 group :runtime do
-  gem "alf", :git => "http://github.com/blambeau/alf.git"
-#  gem "alf", :path => "~/work/devel/alf"
-#  gem "alf", "~> 0.10.0"
-  gem "quickl", "~> 0.4.0"
+  gem "alf", "~> 0.10.1"
   gem "gnuplot", "~> 2.3.6"
-  gem "json"
+  gem "json", ">= 0"
 end
 
 group :extra do
   gem "sinatra", "~> 1.2.6"
 end
-

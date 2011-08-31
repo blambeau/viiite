@@ -21,19 +21,19 @@ module Viiite
         end
 
         @hierarchy = false
-        opt.on('-h', "--hierarchy", 
+        opt.on('-h', "--hierarchy",
                "Make a hierarchical regrouping") do
           @hierarchy = true
         end
 
         @stddev = false
-        opt.on("--stddev=[FIELD]", 
+        opt.on("--stddev=[FIELD]",
                "Add the standard deviation on FIELD") do |field|
           @stddev = field || "tms.total"
         end
 
         @ff = "%.6f"
-        opt.on("--ff=FORMAT", 
+        opt.on("--ff=FORMAT",
                "Specify the floating point format") do |val|
           @ff = val
         end
@@ -49,10 +49,10 @@ module Viiite
         op = lispy.summarize(op, @regroup, aggs)
         depend = [:user, :system, :total, :real]
         depend += [:stddev] if @stddev
-        @regroup[1..-1].each do |grouping|
+        @regroup[1..-1].reverse.each do |grouping|
           op = lispy.group(op, [grouping] + depend, :measure)
           depend = [:measure]
-        end if @hierarchy 
+        end if @hierarchy
         op
       end
 
@@ -67,4 +67,3 @@ module Viiite
     end # class Report
   end # class Command
 end # module Viiite
-

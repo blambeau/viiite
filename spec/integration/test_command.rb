@@ -4,7 +4,7 @@ describe "viiite command / " do
   Dir[File.expand_path('../**/*.cmd', __FILE__)].each do |input|
     cmd = File.readlines(input).first
     specify{ cmd.should =~ /^viiite / }
-  
+
     describe "#{File.basename(input)}: #{cmd}" do
       let(:argv)     { Quickl.parse_commandline_args(cmd)[1..-1] }
       let(:stdout)   { File.join(File.dirname(input), "#{File.basename(input, ".cmd")}.stdout") }
@@ -14,13 +14,13 @@ describe "viiite command / " do
 
       before{ redirect_io }
       after { restore_io  }
-      
+
       specify{
         begin
           db = File.join(fixtures_folder)
-          cache = File.join(db, ".saved")
-          Viiite::Command.run(["--db=#{cache}", "--cache=#{cache}"] + argv)
-        rescue SystemExit => ex
+          cache = File.join(db, "saved")
+          Viiite::Command.run(["--suite=#{cache}", "--cache=#{cache}"] + argv)
+        rescue SystemExit
           $stdout << "SystemExit" << "\n"
         end
         $stdout.string.should(eq(stdout_expected)) unless RUBY_VERSION < "1.9"
@@ -28,5 +28,5 @@ describe "viiite command / " do
       }
     end
   end
-    
+
 end

@@ -1,13 +1,13 @@
 # Viiite
 
-Viiite brings tools to benchmark and analyze the complexity of your algorithms. 
-It has been designed as an alternative to Benchmark that let your benchmarks 
+Viiite brings tools to benchmark and analyze the complexity of your algorithms.
+It has been designed as an alternative to Benchmark that let your benchmarks
 evolve smoothly from simple measures to more complex infrastructures.
 
     [sudo] gem install viiite
 
 Viiite uses [semantic versionning](http://semver.org) and has not yet reached the
-public API required for 1.0.0. The safe way to require viiite for now is as 
+public API required for 1.0.0. The safe way to require viiite for now is as
 follows:
 
     gem "viiite", "~> 0.1.0"
@@ -24,7 +24,7 @@ Learn more on the [github-pages of this project](http://blambeau.github.com/viii
 ```ruby
 require 'viiite'
 n = 15000
-Viiite.bm do |r|
+Viiite.bench do |r|
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -47,7 +47,7 @@ $ viiite report bench_iteration.rb
 ```ruby
 require 'viiite'
 n = 15000
-Viiite.bm do |r|
+Viiite.bench do |r|
   r.variation_point :ruby, Viiite.which_ruby
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
@@ -85,7 +85,7 @@ $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=b
 
 ```ruby
 require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do
@@ -152,4 +152,4 @@ $ viiite plot bench_sort.rb -x size -y tms.total --graph=viiite --series=ruby --
 
 ## On the devel side
 
-Fork the project on github ... and so on. 
+Fork the project on github ... and so on.

@@ -1,4 +1,3 @@
-require 'viiite'
 class Foo
   attr_reader :bench_reader
   def initialize
@@ -9,7 +8,7 @@ class Foo
   end
 end
 
-Viiite.bm do |b|
+Viiite.bench do |b|
   foo = Foo.new
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([1, 100_000, 1_000_000], :runs) do |runs|
@@ -17,4 +16,3 @@ Viiite.bm do |b|
     b.report(:bench_method){ runs.times{ foo.bench_method } }
   end
 end
-

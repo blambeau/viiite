@@ -25,7 +25,7 @@ module Viiite
 
     # Install options
     options do |opt|
-      opt.on("-Idirectory", 
+      opt.on("-Idirectory",
              "specify $LOAD_PATH directory (may be used more than once)") do |val|
         $LOAD_PATH.unshift val
       end
@@ -35,12 +35,15 @@ module Viiite
       end
 
       @bdb_options = {}
-      opt.on('--db=FOLDER', 
-             "Specify the benchmark folder (defaults to 'benchmarks')") do |val|
+      opt.on('--suite=FOLDER',
+             "Specify the folder of the benchmark suite (defaults to 'benchmarks')") do |val|
         unless File.directory?(val)
           raise Quickl::InvalidArgument, "Missing folder #{val}"
         end
         @bdb_options[:folder] = val
+      end
+      opt.on('--pattern=GLOB', "Specify the pattern to find benchmarks in the suite folder") do |glob|
+        @bdb_options[:pattern] = glob
       end
       opt.on('--[no-]cache=[FOLDER]',
              'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
@@ -50,9 +53,9 @@ module Viiite
              'Specify the exact mode for accessing cache files') do |mode|
         @bdb_options[:cache_mode] = mode
       end
-      opt.on('-a', '--append', 
+      opt.on('-a', '--append',
              "Shortcut to --cache-mode=a"){ @bdb_options[:cache_mode] = 'a' }
-      opt.on('-w', '--write', 
+      opt.on('-w', '--write',
              "Shortcut to --cache-mode=w"){ @bdb_options[:cache_mode] = 'w' }
 
       opt.on_tail("--help", "Show help") do
@@ -66,7 +69,7 @@ module Viiite
     def bdb
       @bdb ||= BDB.new(@bdb_options)
     end
-    
+
   end # class Command
 end # module Viiite
 require "viiite/command/commons"

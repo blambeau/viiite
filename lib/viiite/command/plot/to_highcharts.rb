@@ -3,7 +3,7 @@ module Viiite
     class Plot
 
       options do |opt|
-        opt.on("--highcharts=[TERM]", 
+        opt.on("--highcharts=[TERM]",
                "Render output for highcharts.js") do |value|
           @render = :highcharts
           @highcharts_term = (value || "json").to_sym
@@ -13,11 +13,11 @@ module Viiite
 
       def to_highcharts_query(lispy, op)
         lispy = Alf.lispy
-        op = lispy.summarize(op, [@graph, @series, @abscissa].compact, 
+        op = lispy.summarize(op, [@graph, @series, @abscissa].compact,
                                  {:y => "avg{ #{@ordinate} }"})
         op = lispy.rename(op, @graph  => :graph, @abscissa => :x, @series => :serie)
-        op = lispy.summarize(op, 
-                             [:x, :y], 
+        op = lispy.summarize(op,
+                             [:x, :y],
                              {:data => lispy.collect{ [x, y] }},
                              {:allbut => true})
         op = lispy.rename(op, :serie => :name)

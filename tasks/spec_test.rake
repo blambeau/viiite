@@ -1,8 +1,8 @@
 # Installs a rake task for for running examples written using rspec.
 #
 # This file installs the 'rake spec_test' (aliased as 'rake spec') as well as
-# extends 'rake test' to run spec tests, if any. It is automatically generated 
-# by Noe from your .noespec file, and should therefore be configured there, 
+# extends 'rake test' to run spec tests, if any. It is automatically generated
+# by Noe from your .noespec file, and should therefore be configured there,
 # under the variables/rake_tasks/spec_test entry, as illustrated below:
 #
 # variables:
@@ -13,16 +13,16 @@
 #       rspec_opts: [--color, --backtrace]
 #       ...
 #
-# If you have specific needs requiring manual intervention on this file, 
+# If you have specific needs requiring manual intervention on this file,
 # don't forget to set safe-override to false in your noe specification:
-# 
+#
 # template-info:
 #   manifest:
 #     tasks/spec_test.rake:
 #       safe-override: false
 #
-# This file has been written to conform to RSpec v2.4.0. More information about 
-# rspec and options of the rake task defined below can be found on 
+# This file has been written to conform to RSpec v2.4.0. More information about
+# rspec and options of the rake task defined below can be found on
 # http://relishapp.com/rspec
 #
 begin
@@ -33,14 +33,14 @@ begin
     t.pattern = "spec/unit/**/test_*.rb"
 
     # By default, if there is a Gemfile, the generated command will include
-    # 'bundle exec'. Set this to true to ignore the presence of a Gemfile, 
+    # 'bundle exec'. Set this to true to ignore the presence of a Gemfile,
     # and not add 'bundle exec' to the command.
     t.skip_bundler = false
 
     # Name of Gemfile to use
     t.gemfile = "Gemfile"
 
-    # Whether or not to fail Rake when an error occurs (typically when 
+    # Whether or not to fail Rake when an error occurs (typically when
     # examples fail).
     t.fail_on_error = true
 
@@ -60,7 +60,7 @@ begin
     # Command line options to pass to rcov. See 'rcov --help' about this
     t.rcov_opts = []
 
-    # Command line options to pass to ruby. See 'ruby --help' about this 
+    # Command line options to pass to ruby. See 'ruby --help' about this
     t.ruby_opts = []
 
     # Path to rspec

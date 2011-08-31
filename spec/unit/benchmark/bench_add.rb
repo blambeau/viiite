@@ -1,3 +1,3 @@
-Viiite.bm do |bm|
-  bm.report(:add){ 1+1 }
+Viiite.bench do |b|
+  b.report(:add){ 1+1 }
 end

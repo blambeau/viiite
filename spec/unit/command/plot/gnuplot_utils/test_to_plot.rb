@@ -17,5 +17,5 @@ module Viiite
       end
 
     end
-  end  
+  end
 end

@@ -1,6 +1,6 @@
 Alf::Relation[{
   :chart => {
-    :renderTo          => 'container', 
+    :renderTo          => 'container',
     :defaultSeriesType => 'line',
     :marginRight       => 170,
     :marginBottom      => 25

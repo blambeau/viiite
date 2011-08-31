@@ -3,7 +3,7 @@ module Viiite
   class Command
     describe Commons, "#single_source" do
 
-      let(:commons){ 
+      let(:commons){
         Object.new.extend(Commons).
                    extend(Module.new{
           attr_accessor :requester
@@ -18,15 +18,15 @@ module Viiite
 
       describe "with an argv with more than one arg" do
         let(:argv){ [1, 2, 3] }
-        specify{ 
-          lambda{subject}.should raise_error(Quickl::InvalidArgument) 
+        specify{
+          lambda{subject}.should raise_error(Quickl::InvalidArgument)
         }
       end
 
       describe "with a argv with one existing file" do
         let(:argv){ [ File.expand_path("../existing.rash", __FILE__) ] }
         it{ should be_a(Alf::Reader) }
-        specify{ 
+        specify{
           subject.to_a.should eq([{:name => 'existing'}])
         }
       end
@@ -34,7 +34,7 @@ module Viiite
       describe "with a argv with a benchmark name but no requester" do
         let(:argv){ [ :hello ] }
         specify{
-          lambda{subject}.should raise_error(Quickl::InvalidArgument) 
+          lambda{subject}.should raise_error(Quickl::InvalidArgument)
         }
       end
 
@@ -48,7 +48,7 @@ module Viiite
         }
         before{ commons.requester = requester }
         describe "with a block" do
-          subject{ 
+          subject{
             commons.single_source(argv){|*args| args}
           }
           it{ should eq([requester, :hello]) }

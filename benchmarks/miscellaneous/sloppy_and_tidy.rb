@@ -1,4 +1,4 @@
-# A benchmark pioneered by @tenderlove 
+# A benchmark pioneered by @tenderlove
 # @see https://gist.github.com/1170106
 
 class Sloppy
@@ -10,8 +10,7 @@ class Tidy
   def tidy;       @tidy; end
 end
 
-require 'viiite'
-Viiite.bm do |b|
+Viiite.bench do |b|
   tidy   = Tidy.new
   sloppy = Sloppy.new
   b.variation_point :ruby, Viiite.which_ruby
@@ -20,4 +19,3 @@ Viiite.bm do |b|
     b.report(:sloppy) { n.times{ sloppy.sloppy } }
   end
 end
-

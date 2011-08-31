@@ -29,7 +29,7 @@ module Viiite
   #
   # Example
   #
-  #  Viiite.bm do |b|
+  #  Viiite.bench do |b|
   #    b.variation_point :ruby_version, Viiite.which_ruby
   #    b.range_over([100, 1000, 10000, 100000], :runs) do |runs|
   #      b.variation_point :test, :via_reader do
@@ -40,14 +40,20 @@ module Viiite
   #      end
   #    end
   #  end
-  # 
-  def self.bm(&block)
+  #
+  def self.bench(&block)
     Benchmark.new(block)
+  end
+
+  # Alias of Viiite.bench for compatibility
+  def self.bm(&block)
+    warn "Viiite.bm is deprecated, use Viiite.bench instead #{caller[0]}"
+    bench(&block)
   end
 
   #
   # Returns a short string with a ruby interpreter description
-  # 
+  #
   def self.which_ruby
     if Object.const_defined?(:RUBY_DESCRIPTION)
       short_ruby_description(RUBY_DESCRIPTION)

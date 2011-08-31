@@ -1,13 +1,13 @@
 require 'spec_helper'
 module Viiite
   describe Tms, "#plus" do
-  
+
     subject{ tms + operand }
     let(:tms){ Viiite::Tms.new(1.0, 2.0, 3.0, 4.0, 5.0) }
 
     describe "with an integer" do
       let(:operand){ 2 }
-      specify{ 
+      specify{
         subject.should be_a(Tms)
         subject.to_a.should eq([3.0, 4.0, 5.0, 6.0, 7.0])
       }
@@ -15,7 +15,7 @@ module Viiite
 
     describe "with another tms" do
       let(:operand){ tms }
-      specify{ 
+      specify{
         subject.should be_a(Tms)
         subject.to_a.should eq([2.0, 4.0, 6.0, 8.0, 10.0])
       }
@@ -23,7 +23,7 @@ module Viiite
 
     describe "the other way around" do
       subject{ 2 + tms }
-      specify{ 
+      specify{
         subject.should be_a(Tms)
         subject.to_a.should eq([3.0, 4.0, 5.0, 6.0, 7.0])
       }
@@ -31,4 +31,3 @@ module Viiite
 
   end
 end
-
