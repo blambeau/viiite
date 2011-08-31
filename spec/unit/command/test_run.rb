@@ -3,7 +3,7 @@ module Viiite
   class Command
     describe Run do
 
-      let(:bench_iteration){ File.expand_path('../bench_iteration.rb', __FILE__) }
+      let(:bench_iteration){ fixtures_folder+'/command/bench_iteration.rb' }
       subject{
         out, err = capture_io { Run.run(argv) }
         rel = Alf::Reader.reader(StringIO.new(out)).to_rel

@@ -3,7 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "#benchmark" do
 
-      let(:bdb){ Immediate.new(fixtures_folder) }
+      let(:bdb){ Immediate.new(fixtures_folder+'/dbd') }
       subject{ bdb.benchmark(name) }
 
       describe "when the file exists in root folder (String)" do
