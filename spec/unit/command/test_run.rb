@@ -5,13 +5,10 @@ module Viiite
 
       let(:bench_iteration){ File.expand_path('../bench_iteration.rb', __FILE__) }
       subject{
-        Run.run(argv)
-        rel = Alf::Reader.reader(StringIO.new($stdout.string)).to_rel
+        out, err = capture_io { Run.run(argv) }
+        rel = Alf::Reader.reader(StringIO.new(out)).to_rel
         rel = rel.project([:tms], {:allbut => true})
       }
-
-      before{ redirect_io }
-      after { restore_io  }
 
       describe "when passed a benchmark file" do
         let(:argv){ [ bench_iteration ] }

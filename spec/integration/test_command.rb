@@ -12,19 +12,18 @@ describe "viiite command / " do
       let(:stdout_expected) { File.exists?(stdout) ? File.read(stdout) : "" }
       let(:stderr_expected) { File.exists?(stderr) ? File.read(stderr) : "" }
 
-      before{ redirect_io }
-      after { restore_io  }
-
       specify{
-        begin
-          db = File.join(fixtures_folder)
-          cache = File.join(db, "saved")
-          Viiite::Command.run(["--suite=#{cache}", "--cache=#{cache}"] + argv)
-        rescue SystemExit
-          $stdout << "SystemExit" << "\n"
+        cache = File.join(fixtures_folder, "saved")
+        out, err = capture_io do
+          begin
+            Viiite::Command.run(["--suite=#{cache}", "--cache=#{cache}"] + argv)
+          rescue SystemExit
+            $stdout << "SystemExit" << "\n"
+          end
         end
-        $stdout.string.should(eq(stdout_expected)) unless RUBY_VERSION < "1.9"
-        $stderr.string.should(eq(stderr_expected)) unless RUBY_VERSION < "1.9"
+
+        out.should eq stdout_expected unless RUBY_VERSION < "1.9"
+        err.should eq stderr_expected unless RUBY_VERSION < "1.9"
       }
     end
   end
