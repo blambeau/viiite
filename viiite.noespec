@@ -2,7 +2,7 @@
 # Run 'noe show-spec' and 'noe help show-spec' for additional details.
 template-info:
   name: "ruby"
-  version: 1.5.0
+  version: 1.5.1
   manifest:
     spec/test___lower__.rb:
       ignore: true
