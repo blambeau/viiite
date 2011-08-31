@@ -25,7 +25,7 @@ module Viiite
       end
 
       def report(hash = {}, &block)
-        hash = {:bench => hash} unless hash.is_a?(Hash)
+        hash = {:bench => hash.to_sym} unless hash.is_a?(Hash)
         with(hash) {
           GC.start
           tms = Viiite.measure(&block)
