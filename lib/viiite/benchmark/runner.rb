@@ -4,12 +4,13 @@ module Viiite
 
       def with(hash)
         if block_given?
-          @stack << @stack.last.merge(hash)
+          org_tuple = @tuple
+          @tuple = org_tuple.merge(hash)
           res = yield
-          @stack.pop
+          @tuple = org_tuple
           res
         else
-          @stack.last.merge!(hash)
+          @tuple.merge!(hash)
         end
       end
 
@@ -36,13 +37,13 @@ module Viiite
       protected
 
       def _each(&reporter)
-        @stack, @reporter = [ {} ], reporter
+        @tuple, @reporter = {}, reporter
         self.instance_eval(&definition)
-        @stack, @reporter = nil, nil
+        @tuple, @reporter = nil, nil
       end
 
       def output
-        @reporter.call @stack.last.dup
+        @reporter.call @tuple.dup
       end
 
     end # module Runner

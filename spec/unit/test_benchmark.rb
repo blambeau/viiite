@@ -53,5 +53,24 @@ module Viiite
       b.to_a.collect{|t| t[:times]}.should == [10, 100, 1000]
     end
 
+   it "should support nested #with, #variation_point and #range_over" do
+      Viiite.bench do |r|
+        r.variation_point :all, true
+        r.variation_point(:ruby, :ruby) do
+          r.variation_point :for_bench1, true
+          r.range_over(1..2, :i) do
+            r.report(:bench1) {}
+          end
+        end
+        r.with(:a => :b) do
+          r.report(:bench2) {}
+        end
+      end.to_rel.project([:tms], {:allbut => true}).should == Alf::Relation[
+        {:all => true, :ruby => :ruby, :for_bench1 => true, :i => 1, :bench => :bench1},
+        {:all => true, :ruby => :ruby, :for_bench1 => true, :i => 2, :bench => :bench1},
+        {:all => true, :a => :b, :bench => :bench2}
+      ]
+    end
+
   end
 end
