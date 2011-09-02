@@ -60,9 +60,9 @@ module Viiite
     def memberwise(op, x)
       case x
       when Viiite::Tms
-        Viiite::Tms.new(*values.zip(x.values).collect {|a,b| a.__send__(op, b)})
+        Viiite::Tms.new(*values.zip(x.values).collect {|a,b| a.send(op, b)})
       else
-        Viiite::Tms.new(*values.collect{|v| v.__send__(op, x)})
+        Viiite::Tms.new(*values.collect{|v| v.send(op, x)})
       end
     end
 
