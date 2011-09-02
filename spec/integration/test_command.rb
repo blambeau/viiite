@@ -17,7 +17,7 @@ describe "viiite commands" do
         begin
           Viiite::Command.run(["--suite=#{fixtures_folder}/bdb", "--cache=#{cache}"] + argv)
         rescue SystemExit
-          $stdout << "SystemExit" << "\n"
+          puts "SystemExit"
         end
       end
 

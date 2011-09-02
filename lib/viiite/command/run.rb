@@ -34,8 +34,8 @@ module Viiite
           end
           @runs.times do |run|
             benchmark.each do |tuple|
-              tuple = tuple.merge(@run_key => run) if @run_key
-              $stdout << Alf::Tools.to_ruby_literal(tuple) << "\n"
+              tuple[@run_key] = run if @run_key
+              puts Alf::Tools.to_ruby_literal(tuple)
             end
           end
         end

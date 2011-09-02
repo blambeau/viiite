@@ -21,8 +21,7 @@ module Viiite
       end
 
       def variation_point(name, value, &proc)
-        h = {name => value}
-        with(h, &proc)
+        with({name => value}, &proc)
       end
 
       def report(hash = {}, &block)

@@ -30,7 +30,7 @@ module Viiite
 
       def to_highcharts(lispy, op)
         require 'json'
-        $stdout << op.to_a.to_json << "\n"
+        puts op.to_a.to_json
       end
 
     end # class Plot
