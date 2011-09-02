@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Viiite
   class BDB
-    describe Utils, ".rextname" do
+    describe Utils, ".replace_extension" do
 
       let(:utils){ Object.new.extend(Utils) }
-      subject{ utils.rextname(file, ".ext") }
+      subject{ utils.replace_extension(file, ".ext") }
 
       describe "on a file without extension" do
         let(:file){ "hello/world" }
