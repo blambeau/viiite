@@ -10,7 +10,7 @@ module Viiite
     }
 
     describe 'with a Proc' do
-      let(:arg){ Proc.new{|b| b.report(:add){ 1+1 } } }
+      let(:arg){ lambda{|b| b.report(:add){ 1+1 } } }
       it{ should be_a(Benchmark) }
     end
 
