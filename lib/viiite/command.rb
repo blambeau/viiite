@@ -38,8 +38,15 @@ module Viiite
         end
         @bdb_options[:folder] = val
       end
-      opt.on('--pattern=GLOB', "Specify the pattern to find benchmarks in the suite folder") do |glob|
-        @bdb_options[:pattern] = glob
+      opt.on('--pattern=GLOB',
+             "Specify the pattern to find benchmarks in the suite folder (defaults to '**/*.rb')") do |glob|
+        if glob =~ /(\.\w+)$/
+          @bdb_options[:pattern] = glob
+          @bdb_options[:ext] = $1
+        else
+          raise Quickl::InvalidArgument,
+                "The benchmark suite pattern must end with a unique extension (for deducing benchmark file from name)"
+        end
       end
       opt.on('--[no-]cache=[FOLDER]',
              'Specify the cache heuristic and folder (defaults to --cache)') do |folder|

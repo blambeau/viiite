@@ -10,7 +10,7 @@ module Viiite
       :folder       => "benchmarks",
       :cache        => true,
       :cache_mode   => "w",
-      :pattern      => "*.rb",
+      :pattern      => "**/*.rb",
       :ext          => ".rb",
     }
 

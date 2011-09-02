@@ -8,14 +8,12 @@ module Viiite
 
       def initialize(folder, options = DEFAULT_OPTIONS)
         @folder = folder
-        @pattern = options[:pattern]
-        @ext = options[:ext]
+        @pattern, @ext = options.values_at(:pattern, :ext)
       end
 
       def each
-        Dir[File.join(folder, "**/#{@pattern}")].each do |f|
-          ext = File.extname(f)
-          yield(:name => f[1+folder.size..-1-ext.size], :file => f)
+        Dir[File.join(folder, @pattern)].each do |f|
+          yield(:name => f[1+folder.size..-1-@ext.size], :file => f)
         end
       end
 

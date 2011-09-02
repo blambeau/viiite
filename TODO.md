@@ -1,7 +1,3 @@
-# Must have for 0.2.0
-
-* Clean up the duplication of ext and pattern in BDB options
-
 # Long-term ideas
 
 * Measure memory consumption. Benchmarks that run the same block 10_000_000 would
