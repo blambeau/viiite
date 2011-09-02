@@ -14,10 +14,8 @@ module Viiite
 
       def each
         Dir[File.join(folder, "**/#{@pattern}")].each do |f|
-          yield({
-            :name  => f[(1+folder.size)..-(1+@ext.size)],
-            :file  => f,
-          })
+          ext = File.extname(f)
+          yield(:name => f[1+folder.size..-1-ext.size], :file => f)
         end
       end
 
