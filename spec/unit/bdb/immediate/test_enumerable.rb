@@ -3,7 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "enumerable" do
 
-      let(:bdb){ Immediate.new(fixtures_folder+'/dbd') }
+      let(:bdb){ Immediate.new(fixtures_folder+'/bdb') }
 
       specify{
         bdb.all?{|tuple|
