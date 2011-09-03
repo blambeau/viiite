@@ -6,9 +6,15 @@ module Viiite
 
       attr_reader :folder
 
-      def initialize(folder, options = DEFAULT_OPTIONS)
+      def initialize(folder, pattern = DEFAULT_OPTIONS[:pattern])
         @folder = folder
-        @pattern, @ext = options.values_at(:pattern, :ext)
+        if pattern =~ /(\.\w+)$/
+          @pattern = pattern
+          @ext = $1
+        else
+          raise InvalidPattern, "The benchmark suite pattern must end with a unique extension " <<
+                                "(for deducing benchmark file from name): #{pattern}"
+        end
       end
 
       def each

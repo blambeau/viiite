@@ -3,7 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "pattern" do
 
-      let(:bdb){ Immediate.new(fixtures_folder+'/bdb', :pattern => '*_iteration.rb', :ext => '.rb') }
+      let(:bdb){ Immediate.new(fixtures_folder+'/bdb', '*_iteration.rb') }
 
       specify{
         bdb.all?{|tuple|
@@ -12,6 +12,12 @@ module Viiite
         bdb.to_rel.project([:name]).should eq(Alf::Relation[
           {:name => "bench_iteration"}
         ])
+      }
+
+      specify{
+        lambda {
+          Immediate.new(fixtures_folder+'/bdb', 'invalid.{a,b}')
+        }.should raise_error(InvalidPattern)
       }
 
     end

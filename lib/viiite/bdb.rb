@@ -11,13 +11,12 @@ module Viiite
       :cache        => true,
       :cache_mode   => "w",
       :pattern      => "**/*.rb",
-      :ext          => ".rb",
     }
 
     def self.new(options = {})
       options = DEFAULT_OPTIONS.merge(options)
       folder = options[:folder]
-      bdb = BDB::Immediate.new(folder, options)
+      bdb = BDB::Immediate.new(folder, options[:pattern])
       if cache = options[:cache]
         cache = File.join(folder, '.cache') unless cache.is_a?(String)
         bdb = BDB::Cached.new(bdb, cache, options[:cache_mode])
