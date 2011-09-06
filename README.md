@@ -10,7 +10,7 @@ Viiite uses [semantic versionning](http://semver.org) and has not yet reached th
 public API required for 1.0.0. The safe way to require viiite for now is as
 follows:
 
-    gem "viiite", "~> 0.1.0"
+    gem "viiite", "~> 0.2.0"
 
 Learn more on the [github-pages of this project](http://blambeau.github.com/viiite)!
 
