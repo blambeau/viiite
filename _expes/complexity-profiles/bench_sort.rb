@@ -1,5 +1,4 @@
 # bench_sort.rb
-require 'viiite'
 Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 300, 500, 700, 900], :size) do |size|

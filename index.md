@@ -35,7 +35,6 @@ Why not comparing two sort methods on two different rubies? Here is the benchmar
 
 <pre><code class="ruby">
 # bench_sort.rb
-require 'viiite'
 class Array
   def random(size) ... end 
   def quicksort()  ... end

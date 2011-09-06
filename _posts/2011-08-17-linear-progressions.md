@@ -32,7 +32,6 @@ end
 Writing such kind of benchmark with Viiite is easy:
 
     # bench_attr_vs_method.rb
-    require 'viiite'
     Viiite.bench do |b|
       foo = Foo.new
       b.variation_point :ruby, Viiite.which_ruby
@@ -55,7 +54,6 @@ This kind of benchmark can be a bit misleading. The fact that the curves are lin
 Outputting a graph here is only interresting for visual reasons: the intuitive message is very clear. That's probably why Aaron did it that way. Observe that the following way of conducting the comparison shares the same information, but is less convenient for a talk:
 
     # bench_attr_vs_method_2.rb
-    require 'viiite'
     Viiite.bench do |b|
       foo = Foo.new
       b.variation_point :ruby, Viiite.which_ruby

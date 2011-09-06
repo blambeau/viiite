@@ -8,7 +8,6 @@ In this post, we show how to compare the performance of the same algorithm(s) un
 
 First, we add a so-called *variation-point* to the benchmarking case, here under a :ruby key:
 
-    require 'viiite'
     n = 15000
     Viiite.bench do |r|
       r.variation_point :ruby, Viiite.which_ruby
