@@ -46,7 +46,7 @@ Of course, they are plenty of options to customize this behavior:
     -w, --write                Shortcut to --cache-mode=w
     [...]
 
-While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` option, which run `NB` times the benchmark as you would expect:
+While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` option, which runs `NB` times the benchmark as you would expect:
 
     $ viiite --append run --runs=10 iteration
     $ viiite report iteration -h --regroup=size,bench
@@ -62,7 +62,7 @@ While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` optio
     |         | +--------+----------+----------+----------+----------+ |
     +---------+--------------------------------------------------------+
 
-`viiite report` then use the average of the results.  
+`viiite report` then uses the average of the results.  
 This helps to have a better statistical validity.
 
 So, what do you think of these new viiite 0.2 features ?
