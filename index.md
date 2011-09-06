@@ -4,7 +4,7 @@ title: Viiite &mdash; An alternative to Benchmark
 ---
 # Viiite &mdash; An alternative to Benchmark
 
-After a first sketch a few weeks ago, I decided to dedicate my *whyday* on Viiite. Viiite is an alternative to Benchmark (stdlib), designed to let benchmarks evolve from simple measures to complete benchmarking infrastructures. This is possible thanks to a separation of concerns between *running* benchmarks (viiite run) and *reporting* benchmarking results (viiite report). 
+Viiite is an alternative to the Benchmark library, designed to let benchmarks evolve from simple measures to complete benchmarking infrastructures. This is possible thanks to a separation of concerns between *running* benchmarks (viiite run) and *reporting* benchmarking results (viiite report). Viiite can also produce nice graphics (viiite plot).
 
 ## Starting 'ala' Benchmark
 
@@ -70,3 +70,7 @@ And here is one way to obain a comparison of ruby versions/implementations.
 ![Comparing Quicksort complexity with Viiite](images/quicksort-rubies.jpeg)
 
 You'll find typical use-cases in the menu at left!
+
+## Origins
+
+After a first sketch in July, Viiite is the result of my *whyday*.
