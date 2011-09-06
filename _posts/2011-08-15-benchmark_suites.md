@@ -62,9 +62,8 @@ While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` optio
     |         | +--------+----------+----------+----------+----------+ |
     +---------+--------------------------------------------------------+
 
-`viiite report` then uses the average of the results.  
-This helps to have a better statistical validity.
+By default, `viiite report` will average timing measures over all runs. This helps reaching a better statistical representativeness.
 
-So, what do you think of these new viiite 0.2 features ?
+[Tell us](https://github.com/blambeau/viiite) what you think about these new viiite 0.2.0 features!
 
-<small>eregon</small>
+[@eregon](https://github.com/eregon)
