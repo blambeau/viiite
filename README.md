@@ -22,9 +22,8 @@ Learn more on the [github-pages of this project](http://blambeau.github.com/viii
 ## From simple measures ...
 
 ```ruby
-require 'viiite'
-n = 15000
 Viiite.bench do |r|
+  n = 15000
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -45,10 +44,9 @@ $ viiite report bench_iteration.rb
 ## To more complex ones ...
 
 ```ruby
-require 'viiite'
-n = 15000
 Viiite.bench do |r|
   r.variation_point :ruby, Viiite.which_ruby
+  n = 15000
   r.report(:for)   { for i in 1..n; a = "1"; end }
   r.report(:times) { n.times do   ; a = "1"; end }
   r.report(:upto)  { 1.upto(n) do ; a = "1"; end }
@@ -84,15 +82,11 @@ $ rvm exec viiite run bench_iteration.rb | viiite report --hierarchy --regroup=b
 ## To awesomeness ...
 
 ```ruby
-require 'viiite'
 Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
-    b.range_over(1..5, :i) do
-      bench_case = Array.random(size)
-      b.report(:quicksort) { bench_case.quicksort }
-      b.report(:bubblesort){ bench_case.bubblesort }
-    end
+    bench_case = Array.new(size){ rand }
+    b.report(:bubblesort){ bench_case.bubblesort }
   end
 end
 ```
@@ -122,32 +116,6 @@ $ viiite plot bench_sort.rb -x size -y tms.total --graph=viiite --series=ruby --
        A****    ########B########+       +        +        +       +        +
      0 B########+-------+--------+-------+--------+--------+-------+-------++
       100      150     200      250     300      350      400     450      500
-
-
-                                      quicksort
-
-  0.012 ++-------+-------+--------+-------+--------+-------+--------+------++
-        +        +       +        +       +        +      ruby 1.8.7+**A*** +
-        |                                              ruby 1.9.3dev ##B### |
-   0.01 ++                                                                **A
-        |                                                           ******  |
-        |                                                     ******        |
-  0.008 ++                                                 A**             ++
-        |                                                **                 |
-        |                                              **                   |
-        |                                             *                     B
-  0.006 ++                                          **                    ##+
-        |                                         **                    ##  |
-        |                                       **                     #    |
-  0.004 ++                                     *                     ##    ++
-        |                                    **                    ##       |
-        |                                  **                    ##         |
-  0.002 ++             ##B##############**A########             #          ++
-        |        ######           ******           ######     ##            |
-        +  ######+       +  ******+       +        +     ##+##      +       +
-      0 A****************A**------+-------+--------+-------B--------+------++
-       100      150     200      250     300      350     400      450     500
-
 ```
 
 ## On the devel side
