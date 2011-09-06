@@ -58,9 +58,9 @@
 ## Other improvements
 
   * The garbage collector is started before running report{ ... } blocks
-  * Viiite does not depend on benchmark (stdlib) anymore (eregon)
+  * Viiite does not depend on benchmark (stdlib) anymore
   * Improved Viiite.which_ruby; it should always output something like
-    '#{rubyname} #{version}#{patchlevel}' from now on (eregon)
+    '#{rubyname} #{version}#{patchlevel}' from now on
 
 ## Bug fixes
 
