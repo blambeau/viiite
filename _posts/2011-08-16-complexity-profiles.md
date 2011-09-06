@@ -32,20 +32,7 @@ In this post, we show how the complexity of an algorithm can be profiled using V
 
 Profiling the complexity of an algorithm requires varying the size of the problem it solves. In our example, the size of the array to sort. For this, we first need a generator for benchmark cases:
 
-    # array_patch.rb continued...
-    class Array
-      
-      def bubblesort() 
-        # ... 
-      end
-      
-      def self.random(size) 
-        Array.new(size){ Kernel.rand }
-      end
-    
-    end
-
-    $ ruby -I. -rarray_patch -e 'puts Array.random(5).inspect'
+    $ ruby -e 'p Array.new(5){ rand }'
     [0.1669548026830059, 0.7314616453961759, 0.07112821314762585, 0.6994881121420211, 0.04235770869794486]
 
 Now, the benchmark:
@@ -56,7 +43,7 @@ Now, the benchmark:
       b.range_over([100, 300, 500, 700, 900], :size) do |size|
         # smoothing and statistical validity 
         b.range_over(1..5, :run) do |run|
-          bench_case = Array.random(size)
+          bench_case = Array.new(size){ rand }
           b.report(:bubblesort){ bench_case.bubblesort }
         end
       end

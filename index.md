@@ -36,7 +36,6 @@ Why not comparing two sort methods on two different rubies? Here is the benchmar
 <pre><code class="ruby">
 # bench_sort.rb
 class Array
-  def random(size) ... end 
   def quicksort()  ... end
   def bubblesort() ... end
 end
@@ -53,7 +52,7 @@ Viiite.bench do |b|
     b.range_over(1..5, :i) do
 
       # run two sort methods on the same benchmark case
-      viiite_case = Array.random(size)
+      viiite_case = Array.new(size){ rand }
       b.report(:quicksort) { viiite_case.quicksort  }
       b.report(:bubblesort){ viiite_case.bubblesort }
 

@@ -13,8 +13,4 @@ class Array
     sarray
   end
   
-  def self.random(size) 
-    Array.new(size){ Kernel.rand }
-  end
-  
 end
