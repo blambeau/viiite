@@ -1,3 +1,9 @@
+# 0.3.0 Ideas
+
+* Bar charts
+* Simplify commands. For example, get rid of "--gnuplot=jpeg | gnuplot > graph.jpg"
+* Support for multiple images for multiple benchmarks
+
 # Long-term ideas
 
 * Measure memory consumption. Benchmarks that run the same block 10_000_000 would
