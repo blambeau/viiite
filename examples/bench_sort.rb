@@ -1,9 +1,5 @@
 class Array
 
-  def self.random(size)
-    Array.new(size){ Kernel.rand }
-  end
-
   def quicksort(list = self)
      return list if list.nil? or list.size <= 1
      less, more = list[1..-1].partition { |i| i < list[0] }
@@ -29,7 +25,7 @@ Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
     b.range_over(1..5, :i) do
-      bench_case = Array.random(size)
+      bench_case = Array.new(size) { rand }
       b.report(:quicksort) { bench_case.quicksort }
       b.report(:bubblesort){ bench_case.bubblesort }
     end
