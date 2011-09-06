@@ -3,7 +3,7 @@
 ## Awesome new features
 
 * Viiite is now able to work on complete benchmark suites (located in
-  './benchmarks' and looking for 'bench_*.rb' files by default). Subcommands
+  './benchmarks' and looking for '**/*.rb' files by default). Subcommands
   automatically resolve benchmark names passed as arguments. For example:
 
     ./benchmarks/
@@ -22,7 +22,7 @@
   benchmark.
 
 * The default behavior may be controlled through the following main options:
-  --suite=[FOLDER], --[no-]cache=[FOLDER], --append, --write. Example:
+  --suite=[FOLDER], --pattern=[GLOB], --[no-]cache=[FOLDER], --append, --write. Example:
 
     # Run all benchmarks on all rubies, 10 times each, appending all results
     # in cache
