@@ -15,11 +15,10 @@ Also, individual benchmarks files can now be passed by name:
       Array/
         sort.rb        -> viiite run Array/sort
 
-And results are automatically saved by benchmark in the cache.
-Viiite automatically use cached files if available:
+When ran, benchmarking results are automatically saved, by benchmark, in a cache. When requesting it to make reporting, Viiite will automatically use cached files if available (otherwise, the benchmark is ran and results are saved):
 
     $ viiite report iteration -h --regroup=size,bench
-    # immediate if cached
+    # immediate if cached, otherwise ran and cached
     +---------+--------------------------------------------------------+
     | :size   | :measure                                               |
     +---------+--------------------------------------------------------+
@@ -46,7 +45,7 @@ Of course, they are plenty of options to customize this behavior:
     -w, --write                Shortcut to --cache-mode=w
     [...]
 
-While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` option, which runs `NB` times the benchmark as you would expect:
+While we are talking of good stuff, `viiite run` now accepts a `--runs=NB` option, which runs the benchmark `NB` times  as you would expect:
 
     $ viiite --append run --runs=10 iteration
     $ viiite report iteration -h --regroup=size,bench
