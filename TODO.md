@@ -1,5 +1,6 @@
 # 0.3.0 Ideas
 
+* What is benchmarking about? Assess **progress/improvement**. Provide tools to support this.
 * Bar charts
 * Simplify commands. For example, get rid of "--gnuplot=jpeg | gnuplot > graph.jpg"
 * Support for multiple images for multiple benchmarks
