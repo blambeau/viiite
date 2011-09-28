@@ -30,9 +30,9 @@ module Viiite
       "Viiite::Tms(#{to_a.collect{|f| f.inspect}.join(',')})"
     end
 
-    def *(x);     memberwise(:*, x)     end
     def +(other); memberwise(:+, other) end
     def -(other); memberwise(:-, other) end
+    def *(other); memberwise(:*, other) end
     def /(other); memberwise(:/, other) end
 
     def coerce(other)
