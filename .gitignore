@@ -2,7 +2,6 @@
 *.rbc
 .yardoc
 .bundle
-Gemfile.lock
 
 coverage
 pkg

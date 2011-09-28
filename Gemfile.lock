@@ -1,0 +1,34 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    alf (0.10.1)
+      highline (~> 1.6.2)
+      myrrha (~> 1.2.1)
+      quickl (~> 0.4.1)
+    diff-lcs (1.1.3)
+    gnuplot (2.3.6)
+    highline (1.6.2)
+    json (1.5.3)
+    myrrha (1.2.1)
+    quickl (0.4.1)
+    rake (0.9.2)
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.4)
+    rspec-expectations (2.6.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.6.0)
+    wlang (0.10.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  alf (~> 0.10.1)
+  gnuplot (~> 2.3.6)
+  json
+  rake (~> 0.9.2)
+  rspec (~> 2.6.0)
+  wlang (~> 0.10.2)
