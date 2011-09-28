@@ -1,7 +1,7 @@
 module Viiite
   class Tms < Struct.new(:utime, :stime, :cutime, :cstime, :real)
 
-    FMTSTR = "%10.6u %10.6y %10.6t %10.6r"
+    FORMAT = "%10.6u %10.6y %10.6t %10.6r"
 
     def initialize(utime, stime, cutime, cstime, real)
       super # ensure we have all 5 non-nil arguments
@@ -43,15 +43,15 @@ module Viiite
       @to_h ||= Hash[members.zip(values)]
     end
 
-    def format(arg0 = nil, *args)
-      fmtstr = (arg0 || FMTSTR).dup
-      fmtstr.gsub!(/(%[-+\.\d]*)u/){"#{$1}f" % utime}
-      fmtstr.gsub!(/(%[-+\.\d]*)y/){"#{$1}f" % stime}
-      fmtstr.gsub!(/(%[-+\.\d]*)U/){"#{$1}f" % cutime}
-      fmtstr.gsub!(/(%[-+\.\d]*)Y/){"#{$1}f" % cstime}
-      fmtstr.gsub!(/(%[-+\.\d]*)t/){"#{$1}f" % total}
-      fmtstr.gsub!(/(%[-+\.\d]*)r/){"(#{$1}f)" % real}
-      arg0 ? Kernel::format(fmtstr, *args) : fmtstr
+    def format(format = nil, *args)
+      str = (format || FORMAT).dup
+      str.gsub!(/(%[-+.\d]*)u/) { "#{$1}f" % utime }
+      str.gsub!(/(%[-+.\d]*)y/) { "#{$1}f" % stime }
+      str.gsub!(/(%[-+.\d]*)U/) { "#{$1}f" % cutime }
+      str.gsub!(/(%[-+.\d]*)Y/) { "#{$1}f" % cstime }
+      str.gsub!(/(%[-+.\d]*)t/) { "#{$1}f" % total }
+      str.gsub!(/(%[-+.\d]*)r/) { "(#{$1}f)" % real }
+      format ? str % args : str
     end
     alias :to_s :format
 
