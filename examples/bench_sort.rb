@@ -20,7 +20,6 @@ class Array
 
 end
 
-require 'viiite'
 Viiite.bench do |b|
   b.variation_point :ruby, Viiite.which_ruby
   b.range_over([100, 200, 300, 400, 500], :size) do |size|
