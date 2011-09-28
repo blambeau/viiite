@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'pathname'
 require "delegate"
 
 require "viiite/version"

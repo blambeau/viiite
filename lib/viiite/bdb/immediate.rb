@@ -7,7 +7,7 @@ module Viiite
       attr_reader :folder
 
       def initialize(folder, pattern = DEFAULT_OPTIONS[:pattern])
-        @folder = folder
+        @folder = Pathname.new(folder)
         if pattern =~ /(\.\w+)$/
           @pattern = pattern
           @ext = $1
@@ -18,8 +18,9 @@ module Viiite
       end
 
       def each
-        Dir[File.join(folder, @pattern)].each do |f|
-          yield(:name => f[1+folder.size..-1-@ext.size], :file => f)
+        Dir[@folder.join(@pattern)].each do |f|
+          relative = Pathname.new(f).relative_path_from(folder).to_s
+          yield(:name => relative[0..-1-@ext.size], :file => f)
         end
       end
 
@@ -28,8 +29,8 @@ module Viiite
       end
 
       def benchmark(name)
-        if File.exists?(file = bench_file(folder, name.to_s, @ext))
-          return Alf::Reader.reader(file, self)
+        if (file = bench_file(folder, name.to_s, @ext)).exist?
+          return Alf::Reader.reader(file.to_s, self) # FIXME
         else
           raise NoSuchBenchmarkError, "No such benchmark #{name}"
         end

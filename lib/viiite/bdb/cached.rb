@@ -8,7 +8,7 @@ module Viiite
 
       def initialize(delegate, cache_folder, cache_mode = "w")
         super delegate
-        @cache_folder = cache_folder
+        @cache_folder = Pathname.new(cache_folder)
         @cache_mode   = cache_mode
       end
 
@@ -23,8 +23,8 @@ module Viiite
       end
 
       def dataset(name)
-        if File.exists?(cache_file = cache_file(name))
-          Alf::Reader.reader(cache_file, self)
+        if (cache_file = cache_file(name)).exist?
+          Alf::Reader.reader(cache_file.to_s, self) # FIXME: Alf::Reader should accept a Pathname
         else
           benchmark(name)
         end
@@ -47,8 +47,8 @@ module Viiite
         end
 
         def each
-          FileUtils.mkdir_p(File.dirname(@cache_file))
-          File.open(@cache_file, @cache_mode) do |io|
+          @cache_file.dirname.mkpath
+          @cache_file.open(@cache_mode) do |io|
             @benchmark.each do |tuple|
               io << Alf::Tools.to_ruby_literal(tuple) << "\n"
               yield(tuple)
