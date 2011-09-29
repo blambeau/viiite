@@ -27,7 +27,7 @@
             tpl = "{{#items}}<li><a class='bench-link'>{{name}}</a></li>{{/items}}"
             $('#benchmarks').html(Mustache.to_html(tpl, {items: data}));
             $('a.bench-link').click(function(elm){
-              bench_name = elm.srcElement.innerHTML;
+              bench_name = elm.target.innerHTML;
               load_bench(bench_name);
             });
           });
