@@ -19,7 +19,7 @@ module Viiite
       def benchmark(name)
         bench = super(name)
         cache = cache_file(name)
-        Proxy.new(bench, cache, cache_mode)
+        Proxy.new(bench, cache, @cache_mode)
       end
 
       def dataset(name)
@@ -33,7 +33,7 @@ module Viiite
       private
 
       def cache_file(name)
-        bench_file(cache_folder, name, ".rash")
+        bench_file(@cache_folder, name, ".rash")
       end
 
       class Proxy < DelegateClass(Benchmark)
