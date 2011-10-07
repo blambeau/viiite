@@ -2,13 +2,8 @@ module Viiite
   class BDB
     module Utils
 
-      def replace_extension(file, ext)
-        old_ext = File.extname(file)
-        "#{file[0..-(1+old_ext.size)]}#{ext}"
-      end
-
       def bench_file(folder, name, ext)
-        folder.join(replace_extension(name, ext))
+        folder.join(name).replace_extension(ext)
       end
 
     end # module Utils
