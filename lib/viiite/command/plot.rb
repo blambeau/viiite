@@ -56,14 +56,14 @@ module Viiite
       end
 
       def load_style(file, reference = nil)
+        file = EPath.new(file)
         if reference
-          file = File.join("..", file)
-          file = File.expand_path(file, reference)
+          file = EPath.new(reference).dir/file
         end
-        if File.extname(file) == ".rb"
-          Kernel.eval(File.read(file))
+        if file.ext == "rb"
+          Kernel.eval(file.read)
         else
-          Alf::Reader.reader(file).to_rel
+          Alf::Reader.reader(file.to_s).to_rel
         end
       end
 
