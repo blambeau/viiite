@@ -13,7 +13,7 @@ describe "viiite commands" do
       stderr_expected = stderr.exist? ? stderr.read : ""
 
       cmd.should match /^viiite /
-      cache = File.join(fixtures_folder, "saved")
+      cache = fixtures_folder/'saved'
       out, err = capture_io do
         begin
           Viiite::Command.run(["--suite=#{fixtures_folder}/bdb", "--cache=#{cache}"] + argv)

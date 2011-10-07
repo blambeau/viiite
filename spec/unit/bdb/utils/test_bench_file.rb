@@ -4,7 +4,7 @@ module Viiite
     describe Utils, "#bench_file" do
 
       let(:utils) { Object.new.extend(Utils) }
-      let(:folder){ EPath.new(fixtures_folder) }
+      let(:folder){ fixtures_folder }
       subject{ utils.bench_file(folder, file, ext) }
 
       describe "on a file in root folder" do

@@ -3,7 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "#dataset" do
 
-      let(:bdb){ Immediate.new(fixtures_folder+'/bdb') }
+      let(:bdb){ Immediate.new(fixtures_folder/'bdb') }
       subject{ bdb.dataset(name) }
 
       describe "when the file exists in root folder (String)" do

@@ -13,5 +13,5 @@ ensure
 end
 
 def fixtures_folder
-  File.expand_path('../fixtures', __FILE__)
+  EPath.new(__FILE__).parent/'fixtures'
 end

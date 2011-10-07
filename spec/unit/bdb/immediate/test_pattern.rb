@@ -3,7 +3,7 @@ module Viiite
   class BDB
     describe Immediate, "pattern" do
 
-      let(:bdb){ Immediate.new(fixtures_folder+'/bdb', '*_iteration.rb') }
+      let(:bdb){ Immediate.new(fixtures_folder/'bdb', '*_iteration.rb') }
 
       specify{
         bdb.all?{|tuple|
