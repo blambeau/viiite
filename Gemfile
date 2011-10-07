@@ -15,4 +15,5 @@ group :runtime do
   gem "alf", :git => 'https://github.com/blambeau/alf.git' # "~> 0.10.1"
   gem "gnuplot", "~> 2.3.6"
   gem "json", ">= 0"
+  gem "epath", :git => "https://github.com/eregon/epath"
 end

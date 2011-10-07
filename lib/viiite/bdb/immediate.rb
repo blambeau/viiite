@@ -7,7 +7,7 @@ module Viiite
       attr_reader :folder
 
       def initialize(folder, pattern = DEFAULT_OPTIONS[:pattern])
-        @folder = Pathname.new(folder)
+        @folder = EPath.new(folder)
         if pattern =~ /(\.\w+)$/
           @pattern = pattern
           @ext = $1
@@ -19,7 +19,7 @@ module Viiite
 
       def each
         Dir[@folder.join(@pattern)].each do |f|
-          relative = Pathname.new(f).relative_path_from(@folder).to_s
+          relative = EPath.new(f).relative_path_from(@folder).to_s
           yield(:name => relative[0..-1-@ext.size], :file => f)
         end
       end

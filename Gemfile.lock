@@ -6,6 +6,12 @@ GIT
       myrrha (~> 1.2.1)
       quickl (~> 0.4.1)
 
+GIT
+  remote: https://github.com/eregon/epath
+  revision: b70596f5752b345dca4aec6934900fa80ac95906
+  specs:
+    epath (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -30,6 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   alf!
+  epath!
   gnuplot (~> 2.3.6)
   json
   rake (~> 0.9.2)

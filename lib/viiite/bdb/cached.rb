@@ -7,7 +7,7 @@ module Viiite
 
       def initialize(delegate, cache_folder)
         super delegate
-        @cache_folder = Pathname.new(cache_folder)
+        @cache_folder = EPath.new(cache_folder)
       end
 
       def cached?
