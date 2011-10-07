@@ -18,9 +18,8 @@ module Viiite
       end
 
       def each
-        Dir[@folder.join(@pattern)].each do |f|
-          relative = EPath.new(f).relative_path_from(@folder).to_s
-          yield(:name => relative[0..-1-@ext.size], :file => f)
+        @folder.glob(@pattern).each do |f|
+          yield(:name => f.relative_to(@folder).without_extension.to_s, :file => f.to_s)
         end
       end
 
