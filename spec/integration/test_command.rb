@@ -2,14 +2,15 @@ require 'spec_helper'
 describe "viiite commands" do
 
   Dir[File.expand_path('../**/*.cmd', __FILE__)].each do |input|
-    cmd = File.read(input).chomp
+    input = EPath.new(input)
+    cmd = input.read.chomp
 
     specify "#{File.basename(input)}: #{cmd}" do
       argv = Quickl.parse_commandline_args(cmd)[1..-1]
-      stdout = File.join(File.dirname(input), "#{File.basename(input, ".cmd")}.stdout")
-      stderr = File.join(File.dirname(input), "#{File.basename(input, ".cmd")}.stderr")
-      stdout_expected = File.exists?(stdout) ? File.read(stdout) : ""
-      stderr_expected = File.exists?(stderr) ? File.read(stderr) : ""
+      stdout = input.replace_extension('.stdout')
+      stderr = input.replace_extension('.stderr')
+      stdout_expected = stdout.exist? ? stdout.read : ""
+      stderr_expected = stderr.exist? ? stderr.read : ""
 
       cmd.should match /^viiite /
       cache = File.join(fixtures_folder, "saved")
