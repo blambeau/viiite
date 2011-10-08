@@ -2,6 +2,7 @@ require 'spec_helper'
 module Viiite
   describe Benchmark, '.new' do
 
+    dir = EPath.new(__FILE__).dir
     subject{ Benchmark.new(arg) }
 
     after{
@@ -15,12 +16,12 @@ module Viiite
     end
 
     describe 'with an existing file' do
-      let(:arg){ File.expand_path('../bench_add.rb', __FILE__) }
+      let(:arg){ dir/'bench_add.rb' }
       it{ should be_a(Benchmark) }
     end
 
     describe 'with an IO' do
-      let(:arg){ File.open(File.expand_path('../bench_add.rb', __FILE__), 'r') }
+      let(:arg){ (dir/'bench_add.rb').open }
       it{ should be_a(Benchmark) }
     end
 

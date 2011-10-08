@@ -6,9 +6,9 @@ module Viiite
       let(:bdb){ Immediate.new(fixtures_folder/'bdb', '*_iteration.rb') }
 
       specify{
-        bdb.all?{|tuple|
-          File.exists?(tuple[:file])
-        }.should be_true
+        bdb.each{|tuple|
+          File.exists?(tuple[:file]).should be_true
+        }
         bdb.to_rel.project([:name]).should eq(Alf::Relation[
           {:name => "bench_iteration"}
         ])
@@ -16,7 +16,7 @@ module Viiite
 
       specify{
         lambda {
-          Immediate.new(fixtures_folder+'/bdb', 'invalid.{a,b}')
+          Immediate.new(fixtures_folder/'bdb', 'invalid.{a,b}')
         }.should raise_error(InvalidPattern)
       }
 

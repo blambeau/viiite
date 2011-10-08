@@ -6,9 +6,9 @@ module Viiite
       let(:bdb){ Immediate.new(fixtures_folder/'bdb') }
 
       specify{
-        bdb.all?{|tuple|
-          File.exists?(tuple[:file])
-        }.should be_true
+        bdb.each{|tuple|
+          File.exists?(tuple[:file]).should be_true
+        }
         bdb.to_rel.project([:name]).should eq(Alf::Relation[
           {:name => "bench_iteration"},
           {:name => "Array/bench_sort"}
