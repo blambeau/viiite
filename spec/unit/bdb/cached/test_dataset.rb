@@ -4,10 +4,10 @@ module Viiite
   class BDB
     describe Cached, "#dataset" do
 
-      let(:folder) { File.join(fixtures_folder, '.cache') }
-      let(:bdb)    { Cached.new(delegate, folder)         }
-      subject      { bdb.dataset(name)                    }
-      before(:each){ FileUtils.rm_rf(folder)              }
+      let(:folder) { fixtures_folder/'.cache'     }
+      let(:bdb)    { Cached.new(delegate, folder) }
+      subject      { bdb.dataset(name)            }
+      before(:each){ folder.rm_rf                 }
 
       describe "when the benchmark exists" do
         let(:delegate){
@@ -20,16 +20,16 @@ module Viiite
             alias :dataset :benchmark
           }
         }
-        let(:name)  { "Array/bench_sort"                            }
-        let(:cached){ File.join(folder, "Array", "bench_sort.rash") }
+        let(:name)  { "Array/bench_sort"    }
+        let(:cached){ folder/"#{name}.rash" }
         after{
-          File.exists?(cached).should be_true
-          FileUtils.rm_rf(cached)
+          cached.exist?.should be_true
+          cached.rm_rf
         }
 
         describe 'when the cache file does not exist yet' do
           before{
-            File.exists?(cached).should be_false
+            cached.exist?.should be_false
           }
           specify{
             subject.to_a.should eq([{:name => 'Array/bench_sort'}])
@@ -39,10 +39,8 @@ module Viiite
 
         describe 'when the cache file already exists' do
           before{
-            FileUtils.mkdir_p(File.dirname(cached))
-            File.open(cached, "w") do |io|
-              io << "{:name => 'Array/bench_sort'}"
-            end
+            cached.dir.mkdir_p
+            cached.write "{:name => 'Array/bench_sort'}"
           }
           specify{
             subject.to_a.should eq([{:name => 'Array/bench_sort'}])
