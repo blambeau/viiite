@@ -6,6 +6,8 @@ template-info:
   manifest:
     spec/test___lower__.rb:
       ignore: true
+    tasks/unit_test.rake:
+      ignore: true
 variables:
   lower: 
     viiite

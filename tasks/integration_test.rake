@@ -47,5 +47,6 @@ rescue LoadError => ex
     abort 'rspec is not available. In order to run spec, you must: gem install rspec'
   end
 ensure
+  desc "Run all tests"
   task :test => [:integration_test]
 end
