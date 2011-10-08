@@ -31,48 +31,45 @@
 #     tasks/debug_mail.txt:
 #       safe-override: false
 #
-begin
-  require 'wlang'
-  require 'yaml'
-
-  desc "Debug the release announcement mail"
-  task :debug_mail do
-    # Check that a .noespec file exists
-    noespec_file = File.expand_path('../../viiite.noespec', __FILE__)
-    unless File.exists?(noespec_file)
-      raise "Unable to find .noespec project file, sorry."
-    end
-
-    # Load it as well as variables and options
-    noespec = YAML::load(File.read(noespec_file))
-    vars = noespec['variables'] || {}
-
-    # Changes are taken from CHANGELOG
-    logs = Dir[File.expand_path("../../CHANGELOG.*", __FILE__)]
-    unless logs.size == 1
-      abort "Unable to find a changelog file"
-    end
-
-    # Load interesting changesets
-    changes, end_found = [], 0
-    File.readlines(logs.first).select{|line|
-      if line =~ /^# /
-        break if end_found >= 1
-        end_found += 1
-      end
-      changes << line
-    }
-    vars['changes'] = changes.join
-
-    # WLang template
-    template = File.expand_path('../debug_mail.txt', __FILE__)
-
-    # Let's go!
-    $stdout << WLang::file_instantiate(template, vars, "wlang/active-text")
-  end
-
-rescue LoadError
-  task :debug_mail do
+desc "Debug the release announcement mail"
+task :debug_mail do
+  begin
+    require 'wlang'
+  rescue LoadError
     abort "wlang is not available. Try 'gem install wlang'"
   end
+  require 'yaml'
+
+  # Check that a .noespec file exists
+  noespec_file = File.expand_path('../../viiite.noespec', __FILE__)
+  unless File.exists?(noespec_file)
+    raise "Unable to find .noespec project file, sorry."
+  end
+
+  # Load it as well as variables and options
+  noespec = YAML::load(File.read(noespec_file))
+  vars = noespec['variables'] || {}
+
+  # Changes are taken from CHANGELOG
+  logs = Dir[File.expand_path("../../CHANGELOG.*", __FILE__)]
+  unless logs.size == 1
+    abort "Unable to find a changelog file"
+  end
+
+  # Load interesting changesets
+  changes, end_found = [], 0
+  File.readlines(logs.first).select{|line|
+    if line =~ /^# /
+      break if end_found >= 1
+      end_found += 1
+    end
+    changes << line
+  }
+  vars['changes'] = changes.join
+
+  # WLang template
+  template = File.expand_path('../debug_mail.txt', __FILE__)
+
+  # Let's go!
+  $stdout << WLang::file_instantiate(template, vars, "wlang/active-text")
 end
