@@ -11,7 +11,7 @@ $gemspec_file = File.expand_path('../viiite.gemspec', __FILE__)
 $gemspec      = Kernel.eval(File.read($gemspec_file))
 
 # We run tests by default
-task :default => :test
+task :default => :fast_test
 
 #
 # Install all tasks found in tasks folder
