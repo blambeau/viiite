@@ -34,6 +34,7 @@ variables:
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime      ]}
     - {name: json,         version: ">= 0",      groups: [runtime      ]}
     - {name: sinatra,      version: "~> 1.2.6",  groups: [extra        ]}
+    - {name: rack-test,    version: "~> 0.6.1",  groups: [test         ]}
   rake_tasks: 
     spec_test: 
       pattern: spec/unit/**/test_*.rb
