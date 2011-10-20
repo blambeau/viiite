@@ -35,6 +35,27 @@ module Viiite
         }
       end
 
+      def report_native(env, command = nil, parser = nil, &block)
+        # Argument conventions
+        env, command, parser = {}, env, command unless env.is_a?(Hash)
+        parser ||= (block || default_native_parser)
+
+        # Execute native command and parse result so as to get
+        # a relation
+        result = IO.popen([env, command], &parser)
+        result = [result] if result.is_a?(Hash)
+        result = Alf::Relation.coerce(result)
+
+        # Enclose in a new relation
+        tuple = @tuple.dup.merge(:native_result => result)
+        rel   = Alf::Relation.coerce([tuple])
+
+        # Yield flattened tuples
+        rel.ungroup(:native_result).each do |tuple|
+          @reporter.call(tuple)
+        end
+      end
+
       protected
 
       def _each(&reporter)
