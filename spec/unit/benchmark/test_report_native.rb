@@ -20,5 +20,14 @@ module Viiite
       }
     end
 
+    context "when called without a parsing block" do
+      let(:bench) do
+        Viiite.bench do |b|
+          b.report_native("echo '1.10'")
+        end
+      end
+      it{ should eq([{:tms => Tms.coerce(1.10)}]) }
+    end
+
   end
 end # module Viiite

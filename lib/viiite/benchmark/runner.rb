@@ -37,12 +37,15 @@ module Viiite
 
       def report_native(env, command = nil, parser = nil, &block)
         # Argument conventions
-        env, command, parser = {}, env, command unless env.is_a?(Hash)
-        parser ||= (block || default_native_parser)
+        env, command, parser = nil, env, command unless env.is_a?(Hash)
+        parser ||= (block || lambda{|io|
+          {:tms => Tms.coerce(io.read.to_f) }
+        })
 
         # Execute native command and parse result so as to get
         # a relation
-        result = IO.popen([env, command], &parser)
+        args = env.nil? ? command : [env, command]
+        result = IO.popen(args, &parser)
         result = [result] if result.is_a?(Hash)
         result = Alf::Relation.coerce(result)
 
