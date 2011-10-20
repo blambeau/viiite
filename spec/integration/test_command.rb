@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe "viiite commands" do
 
-  EPath.new(__FILE__).dir.glob('**/*.cmd').each do |input|
+  Path.dir.glob('**/*.cmd').each do |input|
     cmd = input.read.chomp
 
     specify "#{input.base}: #{cmd}" do

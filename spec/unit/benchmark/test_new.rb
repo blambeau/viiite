@@ -2,7 +2,7 @@ require 'spec_helper'
 module Viiite
   describe Benchmark, '.new' do
 
-    dir = EPath.new(__FILE__).dir
+    dir = Path.dir
     subject{ Benchmark.new(arg) }
 
     after{

@@ -13,7 +13,7 @@ module Viiite
     @benchmarks = []
     def self.new(arg, *others)
       case arg
-      when String, EPath
+      when String, Path
         load File.expand_path(arg)
         @benchmarks.pop
       when IO, StringIO
