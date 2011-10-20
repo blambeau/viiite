@@ -10,7 +10,6 @@ module Viiite
         subject.should be_cached
         subject.folder.should eq(Pathname.new("benchmarks"))
         subject.cache_folder.should eq(Pathname.new("benchmarks/.cache"))
-        subject.cache_mode.should eq("w")
       }
     end
 

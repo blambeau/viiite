@@ -46,14 +46,6 @@ module Viiite
              'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
         @bdb_options[:cache] = folder
       end
-      opt.on('--cache-mode=MODE',
-             'Specify the exact mode for accessing cache files') do |mode|
-        @bdb_options[:cache_mode] = mode
-      end
-      opt.on('-a', '--append',
-             "Shortcut to --cache-mode=a"){ @bdb_options[:cache_mode] = 'a' }
-      opt.on('-w', '--write',
-             "Shortcut to --cache-mode=w"){ @bdb_options[:cache_mode] = 'w' }
 
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help

@@ -10,9 +10,6 @@ OPTIONS
       --suite=FOLDER               Specify the folder of the benchmark suite (defaults to 'benchmarks')
       --pattern=GLOB               Specify the pattern to find benchmarks in the suite folder (defaults to '**/*.rb')
       --[no-]cache=[FOLDER]        Specify the cache heuristic and folder (defaults to --cache)
-      --cache-mode=MODE            Specify the exact mode for accessing cache files
-  -a, --append                     Shortcut to --cache-mode=a
-  -w, --write                      Shortcut to --cache-mode=w
       --help                       Show help
       --version                    Show version
 

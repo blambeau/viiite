@@ -9,18 +9,21 @@ module Viiite
     DEFAULT_OPTIONS = {
       :folder       => "benchmarks",
       :cache        => true,
-      :cache_mode   => "w",
       :pattern      => "**/*.rb",
     }
 
     def self.new(options = {})
       options = DEFAULT_OPTIONS.merge(options)
-      folder = options[:folder]
+      folder, cache = options.values_at :folder, :cache
+
       bdb = BDB::Immediate.new(folder, options[:pattern])
-      if cache = options[:cache]
-        cache = File.join(folder, '.cache') unless cache.is_a?(String)
-        bdb = BDB::Cached.new(bdb, cache, options[:cache_mode])
-      end
+
+      # true cache heuristics -> default cache folder
+      cache = File.join(folder, '.cache') if cache == true
+
+      # Build a cache if requested
+      bdb = BDB::Cached.new(bdb, cache) if cache
+
       bdb
     end
 
