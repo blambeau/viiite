@@ -1,7 +1,3 @@
-require 'fileutils'
-require 'pathname'
-require "delegate"
-
 require "viiite/version"
 require "viiite/loader"
 require "viiite/errors"

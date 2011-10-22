@@ -1,13 +1,19 @@
 module Viiite
   class BDB
-    class Cached < SimpleDelegator
+    class Cached
       include Utils
 
       attr_reader :cache_folder
 
-      def initialize(delegate, cache_folder)
-        super delegate
+      def initialize(immediate, cache_folder)
+        @immediate = immediate
         @cache_folder = Path.new(cache_folder)
+      end
+
+      # delegates to @immediate
+      def method_missing(meth, *args, &block)
+        super unless @immediate.respond_to? meth
+        @immediate.send(meth, *args, &block)
       end
 
       def cached?
@@ -15,7 +21,7 @@ module Viiite
       end
 
       def benchmark(name)
-        bench = super(name)
+        bench = @immediate.benchmark(name)
         cache = cache_file(name)
         Proxy.new(bench, cache)
       end
@@ -34,13 +40,12 @@ module Viiite
         bench_file(@cache_folder, name, ".rash")
       end
 
-      class Proxy < DelegateClass(Benchmark)
+      class Proxy
         include Alf::Iterator
 
         def initialize(benchmark, cache_file)
           @benchmark  = benchmark
           @cache_file = cache_file
-          super(@benchmark)
         end
 
         def each
