@@ -7,7 +7,7 @@ module Viiite
                "Render output for highcharts.js") do |value|
           @render = :highcharts
           @highcharts_term = (value || "json").to_sym
-          @graph_style = load_style("to_highcharts_graph.rb", __FILE__) unless @graph_style
+          @graph_style = load_style(Path.dir/'to_highcharts_graph.rb') unless @graph_style
         end
       end
 

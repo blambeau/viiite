@@ -55,11 +55,8 @@ module Viiite
         end
       end
 
-      def load_style(file, reference = nil)
+      def load_style(file)
         file = Path(file)
-        if reference
-          file = Path(reference).dir/file
-        end
         if file.ext == "rb"
           Kernel.eval(file.read)
         else

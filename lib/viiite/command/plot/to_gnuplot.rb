@@ -7,8 +7,8 @@ module Viiite
                "Render output as a gnuplot text (and terminal)") do |value|
           @render = :gnuplot
           @gnuplot_term = (value || "dumb").to_sym
-          @graph_style = load_style("to_gnuplot_graph.rash", __FILE__) unless @graph_style
-          @serie_style = load_style("to_gnuplot_serie.rash", __FILE__) unless @serie_style
+          @graph_style = load_style(Path.dir/'to_gnuplot_graph.rash') unless @graph_style
+          @serie_style = load_style(Path.dir/'to_gnuplot_serie.rash') unless @serie_style
         end
       end
 
