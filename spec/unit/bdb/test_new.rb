@@ -31,7 +31,7 @@ module Viiite
     end
 
     describe "with cache set to a specific folder" do
-      let(:options){ {:cache => "/tmp"} }
+      let(:options){ {:cache => Path("/tmp") } }
       specify{
         subject.should be_cached
         subject.folder.should eq(Path("benchmarks"))

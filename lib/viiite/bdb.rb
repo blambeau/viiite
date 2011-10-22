@@ -14,15 +14,15 @@ module Viiite
 
     def self.new(options = {})
       options = DEFAULT_OPTIONS.merge(options)
-      folder, cache = options.values_at :folder, :cache
+      folder, cache = Path(options[:folder]), options[:cache]
 
       bdb = BDB::Immediate.new(folder, options[:pattern])
 
-      # true cache heuristics -> default cache folder
-      cache = File.join(folder, '.cache') if cache == true
-
-      # Build a cache if requested
-      bdb = BDB::Cached.new(bdb, cache) if cache
+      if cache
+        # true cache heuristics -> default cache folder
+        cache = folder/'.cache' if cache == true
+        bdb = BDB::Cached.new(bdb, Path(cache))
+      end
 
       bdb
     end
