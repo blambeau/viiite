@@ -7,7 +7,7 @@ module Viiite
       attr_reader :folder
 
       def initialize(folder, pattern = DEFAULT_OPTIONS[:pattern])
-        @folder = Path.new(folder)
+        @folder = Path(folder)
         if pattern =~ /(\.\w+)$/
           @pattern = pattern
           @ext = $1

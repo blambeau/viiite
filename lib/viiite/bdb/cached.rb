@@ -7,7 +7,7 @@ module Viiite
 
       def initialize(immediate, cache_folder)
         @immediate = immediate
-        @cache_folder = Path.new(cache_folder)
+        @cache_folder = Path(cache_folder)
       end
 
       # delegates to @immediate
