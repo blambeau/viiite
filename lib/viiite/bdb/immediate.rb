@@ -19,7 +19,7 @@ module Viiite
 
       def each
         @folder.glob(@pattern).each do |f|
-          yield(:name => f.relative_to(@folder).without_extension.to_s, :file => f.to_s)
+          yield(:name => f.relative_to(@folder).without_extension.to_s, :file => f)
         end
       end
 

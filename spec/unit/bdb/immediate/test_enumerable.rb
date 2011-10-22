@@ -7,7 +7,7 @@ module Viiite
 
       specify{
         bdb.each{|tuple|
-          File.exists?(tuple[:file]).should be_true
+          tuple[:file].exist?.should be_true
         }
         bdb.to_rel.project([:name]).should eq(Alf::Relation[
           {:name => "bench_iteration"},

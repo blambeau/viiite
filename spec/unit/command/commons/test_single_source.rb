@@ -24,7 +24,7 @@ module Viiite
       end
 
       describe "with a argv with one existing file" do
-        let(:argv){ [ File.expand_path("../existing.rash", __FILE__) ] }
+        let(:argv){ [ Path.dir/'existing.rash' ] }
         it{ should be_a(Alf::Reader) }
         specify{
           subject.to_a.should eq([{:name => 'existing'}])

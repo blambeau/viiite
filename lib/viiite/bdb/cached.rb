@@ -49,7 +49,7 @@ module Viiite
         end
 
         def each
-          @cache_file.dirname.mkpath
+          @cache_file.dir.mkdir_p
           @cache_file.open('a') do |io|
             @benchmark.each do |tuple|
               io << Alf::Tools.to_ruby_literal(tuple) << "\n"

@@ -14,7 +14,7 @@ module Viiite
     def self.new(arg, *others)
       case arg
       when String, Path
-        load File.expand_path(arg)
+        load Path(arg).expand
         @benchmarks.pop
       when IO, StringIO
         eval(arg.read, TOPLEVEL_BINDING)
