@@ -17,7 +17,7 @@ module Viiite
         load File.expand_path(arg)
         @benchmarks.pop
       when IO, StringIO
-        Kernel.eval(arg.read, TOPLEVEL_BINDING)
+        eval(arg.read, TOPLEVEL_BINDING)
         @benchmarks.pop
       else
         bench = super(arg)
