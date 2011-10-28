@@ -37,7 +37,7 @@ module Viiite
       b = Viiite.bench do |viiite|
         2.times do |i|
           viiite.variation_point(:"#run", i)
-          viiite.report do end
+          viiite.report {}
         end
       end
       res = b.to_a
@@ -47,13 +47,13 @@ module Viiite
     it "should support ranging over values" do
       b = Viiite.bench do |viiite|
         viiite.range_over [10, 100, 1000], :times do |t|
-          viiite.report do end
+          viiite.report {}
         end
       end
       b.to_a.collect{|t| t[:times]}.should == [10, 100, 1000]
     end
 
-   it "should support nested #with, #variation_point and #range_over" do
+    it "should support nested #with, #variation_point and #range_over" do
       Viiite.bench do |r|
         r.variation_point :all, true
         r.variation_point(:ruby, :ruby) do
