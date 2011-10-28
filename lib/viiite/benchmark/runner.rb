@@ -14,9 +14,11 @@ module Viiite
         end
       end
 
-      def range_over(range, name)
+      def range_over(range, name = nil, &block)
+        name ||= block.parameters.first.last if RUBY_VERSION > '1.9'
+        raise ArgumentError, "You must specify a name (explicitely in 1.8)" unless name
         range.each do |value|
-          with(name => value){ yield value }
+          with(name => value) { yield value }
         end
       end
 
