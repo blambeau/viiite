@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/blambeau/alf.git
-  revision: 1c0e79ebc1b4bc57deeefd55fad65d7b9ff97dfa
+  revision: 837a2c997e0a072260fd6f75a29ef66d307a7c4c
   specs:
     alf (0.10.1)
       myrrha (~> 1.2.1)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/eregon/epath
-  revision: b70596f5752b345dca4aec6934900fa80ac95906
+  revision: 30484e80f617b047014fc7e028dff984fd3cde65
   specs:
     epath (0.0.1)
 
@@ -20,7 +20,7 @@ GEM
     json (1.6.1)
     myrrha (1.2.1)
     quickl (0.4.1)
-    rake (0.9.2)
+    rake (0.9.2.2)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
