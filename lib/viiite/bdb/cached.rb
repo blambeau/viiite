@@ -28,7 +28,7 @@ module Viiite
 
       def dataset(name)
         if (cache_file = cache_file(name)).exist?
-          Alf::Reader.reader(cache_file.to_s, self) # FIXME: Alf::Reader should accept a Pathname
+          Alf::Reader.reader(cache_file, self)
         else
           benchmark(name)
         end
