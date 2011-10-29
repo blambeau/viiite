@@ -47,19 +47,25 @@ module Viiite
     it "should support ranging over values" do
       b = Viiite.bench do |viiite|
         viiite.range_over [10, 100, 1000], :times do |t|
+          viiite.with :times_value => t
           viiite.report {}
         end
       end
       b.to_a.collect{|t| t[:times]}.should == [10, 100, 1000]
+      b.to_a.collect{|t| t[:times_value]}.should == [10, 100, 1000]
     end
 
     if RUBY_VERSION > '1.9'
       it "should support ranging over values with implicit parameter name" do
         Viiite.bench do |b|
           b.range_over [10, 100, 1000] do |size|
+            b.with :size_value => size
             b.report {}
           end
-        end.to_a.map { |t| t[:size] }.should == [10, 100, 1000]
+        end.to_a.map { |t|
+          t[:size].should == t[:size_value]
+          t[:size]
+        }.should == [10, 100, 1000]
       end
     end
 
@@ -70,6 +76,7 @@ module Viiite
           r.variation_point :for_bench1, true
           r.range_over(1..2, :i) do
             r.report(:bench1) {}
+            r.variation_point :ignored, nil
           end
         end
         r.with(:a => :b) do
