@@ -55,18 +55,16 @@ module Viiite
       b.to_a.collect{|t| t[:times_value]}.should == [10, 100, 1000]
     end
 
-    if RUBY_VERSION > '1.9'
-      it "should support ranging over values with implicit parameter name" do
-        Viiite.bench do |b|
-          b.range_over [10, 100, 1000] do |size|
-            b.with :size_value => size
-            b.report {}
-          end
-        end.to_a.map { |t|
-          t[:size].should == t[:size_value]
-          t[:size]
-        }.should == [10, 100, 1000]
-      end
+    it "should support ranging over values with implicit parameter name", :ruby => 1.9 do
+      Viiite.bench do |b|
+        b.range_over [10, 100, 1000] do |size|
+          b.with :size_value => size
+          b.report {}
+        end
+      end.to_a.map { |t|
+        t[:size].should == t[:size_value]
+        t[:size]
+      }.should == [10, 100, 1000]
     end
 
     it "should support nested #with, #variation_point and #range_over" do

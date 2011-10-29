@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe "viiite commands" do
+describe "viiite commands", :ruby => 1.9 do
 
   Path.dir.glob('**/*.cmd').each do |input|
     cmd = input.read.chomp
@@ -21,8 +21,8 @@ describe "viiite commands" do
         end
       end
 
-      out.should eq stdout_expected unless RUBY_VERSION < "1.9"
-      err.should eq stderr_expected unless RUBY_VERSION < "1.9"
+      out.should eq stdout_expected
+      err.should eq stderr_expected
     end
   end
 
