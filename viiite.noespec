@@ -23,6 +23,7 @@ variables:
     evolve smoothly from simple measures to more complex infrastructures.
   authors: 
     - {name: Bernard Lambeau, email: blambeau@gmail.com}
+    - {name: Benoit Daloze, email: eregontp@gmail.com}
   links:
     - http://blambeau.github.com/viiite
     - http://github.com/blambeau/viiite

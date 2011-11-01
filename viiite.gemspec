@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   # If you are providing multiple authors and multiple emails they should be
   # in the same order.
   #
-  s.authors = ["Bernard Lambeau"]
+  s.authors = ["Bernard Lambeau", "Benoit Daloze"]
 
   # Contact emails for this gem
   #
@@ -64,7 +64,7 @@ Gem::Specification.new do |s|
   #
   # NOTE: Somewhat strangly this attribute is always singular!
   #       Don't replace by s.emails = ...
-  s.email  = ["blambeau@gmail.com"]
+  s.email  = ["blambeau@gmail.com", "eregontp@gmail.com"]
 
   ################################################################### PATHS, FILES, BINARIES
 
