@@ -8,10 +8,9 @@ end
 
 def capture_io
   stdout, stderr = $stdout, $stderr
-  out, err = StringIO.new, StringIO.new
-  $stdout, $stderr = out, err
+  $stdout, $stderr = StringIO.new, StringIO.new
   yield
-  [out.string, err.string]
+  [$stdout.string, $stderr.string]
 ensure
   $stdout, $stderr = stdout, stderr
 end
