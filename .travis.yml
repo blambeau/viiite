@@ -6,4 +6,3 @@ rvm:
   - ruby-head
   - jruby
   - rbx-18mode
-env: JRUBY_OPTS=--1.9
