@@ -3,14 +3,23 @@ module Viiite
     module Native
 
       ELAPSED_TIME_PARSER = lambda{|io|
-        tms = Tms.coerce(Float(io.read))
+        s = io.read.strip
+        s =~ /\A(\d+\.\d+)\Z/
+        tms = Tms.coerce(Float($1))
         {:tms => tms}
       }
 
       POSIX_1003_2_PARSER = lambda{|io|
         s = io.read.strip
-        s =~ /\Areal (.*)\nuser (.*)\nsys (.*)\Z/
+        s =~ /\Areal (\d+\.\d+)\nuser (\d+\.\d+)\nsys (\d+\.\d+)\Z/
         tms = Tms.new(Float($2), Float($3), 0.0, 0.0, Float($1))
+        {:tms => tms}
+      }
+
+      ZSH_TIME_PARSER = lambda{|io|
+        s = io.read.strip
+        s =~ /\A.*? (\d+\.\d+)s user (\d+\.\d+)s system .*? (\d+\.\d+) total\Z/
+        tms = Tms.new(Float($1), Float($2), 0.0, 0.0, Float($3))
         {:tms => tms}
       }
 
