@@ -20,7 +20,7 @@ module Viiite
           /\A.*? (\d+\.\d+)s user (\d+\.\d+)s system .*? (\d+\.\d+) total\Z/,
           lambda{|m| 
             Tms.new(Float(m[1]), Float(m[2]), 0.0, 0.0, Float(m[3]))
-          } ]
+          }]
       ]
 
       def self.time_parser(which)
