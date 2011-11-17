@@ -41,7 +41,7 @@ module Viiite
 
       def report_native(*args, &block)
         args << {} unless Hash === args.last
-        parser = block || Native.time_parser(:elapsed)
+        parser = block || Native.time_parser(:auto)
 
         # Execute native command and parse result so as to get
         # a relation (sfl provides Kernel.spawn for 1.8.x)
