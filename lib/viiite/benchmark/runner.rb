@@ -39,7 +39,7 @@ module Viiite
 
       def _each(&reporter)
         @tuple, @reporter = {}, reporter
-        self.instance_eval(&definition)
+        definition.call(self)
         @tuple, @reporter = nil, nil
       end
 
