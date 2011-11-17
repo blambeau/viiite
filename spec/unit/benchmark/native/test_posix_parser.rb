@@ -2,7 +2,7 @@ module Viiite::Benchmark::Native
   describe "posix 1003.2 parser" do
 
     subject{
-      POSIX_1003_2_PARSER.call(io)
+      POSIX_1003_2_TIME_PARSER.call(io)
     }
 
     context "on a correct input" do

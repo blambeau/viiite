@@ -9,7 +9,7 @@ module Viiite
         {:tms => tms}
       }
 
-      POSIX_1003_2_PARSER = lambda{|io|
+      POSIX_1003_2_TIME_PARSER = lambda{|io|
         s = io.read.strip
         s =~ /\Areal (\d+\.\d+)\nuser (\d+\.\d+)\nsys (\d+\.\d+)\Z/
         tms = Tms.new(Float($2), Float($3), 0.0, 0.0, Float($1))
