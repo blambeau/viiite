@@ -3,7 +3,15 @@ module Viiite
     module Native
 
       ELAPSED_TIME_PARSER = lambda{|io|
-        {:tms => Tms.coerce(Float(io.read)) }
+        tms = Tms.coerce(Float(io.read))
+        {:tms => tms}
+      }
+
+      POSIX_1003_2_PARSER = lambda{|io|
+        s = io.read.strip
+        s =~ /\Areal (.*)\nuser (.*)\nsys (.*)\Z/
+        tms = Tms.new(Float($2), Float($3), 0.0, 0.0, Float($1))
+        {:tms => tms}
       }
 
       def report_native(*args, &block)
