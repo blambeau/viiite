@@ -39,7 +39,7 @@ module Viiite
 
       def _each(&reporter)
         @tuple, @reporter = {}, reporter
-        if definition.arity == 0
+        if definition.arity <= 0
           instance_exec(&definition)
         else
           definition.call(self)
