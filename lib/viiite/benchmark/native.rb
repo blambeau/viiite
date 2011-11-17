@@ -34,7 +34,7 @@ module Viiite
           if p
             {:tms => p[2].call(p[1].match(s))}
           else
-            raise ArgumentError, "No time parser #{which} found"
+            raise ArgumentError, "No time parser #{which} found for '#{s}'"
           end
         }
       end
