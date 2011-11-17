@@ -45,15 +45,14 @@ module Viiite
 
         # Execute native command and parse result so as to get
         # a relation (sfl provides Kernel.spawn for 1.8.x)
-        require "sfl" if RUBY_VERSION < "1.9"
-        r, w  = IO.pipe
-        args.last.merge!(:out => w)
-        Process.wait Kernel.spawn(*args)
-        w.close
-
-        result = parser.call(r)
-        result = [result] if result.is_a?(Hash)
-        result = Alf::Relation.coerce(result)
+        require 'open3'
+        result = nil
+        Open3.popen3(*args) do |stdin,stdout,_,wait_thr|
+          result = parser.call(stdout)
+          result = [result] if result.is_a?(Hash)
+          result = Alf::Relation.coerce(result)
+          wait_thr.value
+        end
 
         # Enclose in a new relation
         tuple = @tuple.dup.merge(:native_result => result)
