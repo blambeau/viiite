@@ -9,6 +9,7 @@ module Viiite
       def report_native(*args, &block)
         args << {} unless Hash === args.last
         parser = block || ELAPSED_TIME_PARSER
+
         # Execute native command and parse result so as to get
         # a relation (sfl provides Kernel.spawn for 1.8.x)
         require "sfl" if RUBY_VERSION < "1.9"
