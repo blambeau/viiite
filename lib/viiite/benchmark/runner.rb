@@ -46,7 +46,7 @@ module Viiite
         require "sfl" if RUBY_VERSION < "1.9"
         r, w  = IO.pipe
         args.last.merge!(:out => w)
-        Process.wait spawn(*args)
+        Process.wait Kernel.spawn(*args)
         w.close
 
         result = parser.call(r)
