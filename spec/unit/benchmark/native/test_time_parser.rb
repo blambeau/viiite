@@ -1,29 +1,35 @@
 class Viiite::Benchmark
   describe "Native.time_parser" do
 
-    let(:io){ StringIO.new(str) }
-    subject{
-      Native.time_parser(which).call(io)
-    }
+    CASES = [
+      [ :elapsed, 
+        "1.12", 
+        Viiite::Tms.coerce(1.12) ],
+      [ :posix, 
+        "real 3.94\nuser 3.55\nsys 0.37", 
+        Viiite::Tms.new(3.55,0.37,0.0,0.0,3.94) ],
+      [ :zshtime,
+        "rake spec  3.52s user 0.45s system 99% cpu 3.984 total",
+        Viiite::Tms.new(3.52,0.45,0.0,0.0,3.984) ]
+    ]
 
-    context "elapsed-time parser" do
-      let(:which){ :elapsed }
-      let(:str)   { "1.12" }
-      it{ 
-        should eq(:tms => Viiite::Tms.coerce(1.12)) 
-      }
+    CASES.each do |which, str, tms| 
+      context "#{which} parser" do
+        let(:io){ StringIO.new(str) }
+        subject{
+          Native.time_parser(which).call(io)
+        }
+        it{ 
+          should eq(:tms => tms) 
+        }
+      end
     end
 
-    context "posix" do
-      let(:which){ :posix }
-      let(:str){ "real 3.94\nuser 3.55\nsys 0.37" }
-      it{ should eq(:tms => Viiite::Tms.new(3.55,0.37,0.0,0.0,3.94)) }
-    end
-
-    context "zshtime" do
-      let(:which){ :zshtime }
-      let(:str){ "rake spec  3.52s user 0.45s system 99% cpu 3.984 total" }
-      it{ should eq(:tms => Viiite::Tms.new(3.52,0.45,0.0,0.0,3.984)) }
+    it "auto parser" do
+      CASES.each do |_,str,tms| 
+        p = Native.time_parser(:auto)
+        p.call(StringIO.new(str)).should eq(:tms => tms)
+      end
     end
 
   end

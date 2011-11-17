@@ -25,9 +25,17 @@ module Viiite
 
       def self.time_parser(which)
         lambda{|io|
-          p = TIME_PARSERS.find{|p| p.first == which}
-          tms = p[2].call(p[1].match(io.read.strip))
-          {:tms => tms}
+          s = io.read.strip
+          p = if which == :auto 
+            TIME_PARSERS.find{|p| p[1] =~ s}
+          else 
+            TIME_PARSERS.find{|p| p[0] == which} 
+          end
+          if p
+            {:tms => p[2].call(p[1].match(s))}
+          else
+            raise ArgumentError, "No time parser #{which} found"
+          end
         }
       end
 
