@@ -2,6 +2,13 @@ require 'spec_helper'
 module Viiite
   describe Benchmark, "report_native" do
 
+    let(:envi){ Hash.new }
+    let(:options){ Hash.new }
+    let(:bench) {
+      Viiite.bench do |b|
+        b.report_native(envi, command, options)
+      end
+    }
     subject{ bench.to_a }
 
     context "when called with a parsing block" do
@@ -21,11 +28,7 @@ module Viiite
     end
 
     context "when called without a parsing block" do
-      let(:bench) do
-        Viiite.bench do |b|
-          b.report_native("echo '1.10'")
-        end
-      end
+      let(:command){ "echo '1.10'" }
       it{ should eq([{:tms => Tms.coerce(1.10)}]) }
     end
 
