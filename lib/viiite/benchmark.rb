@@ -1,7 +1,9 @@
 require 'viiite/benchmark/runner'
+require 'viiite/benchmark/native'
 module Viiite
   class Benchmark
     include Runner
+    include Native
     include Alf::Iterator
 
     attr_reader :definition
