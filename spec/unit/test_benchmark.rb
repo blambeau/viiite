@@ -9,6 +9,17 @@ module Viiite
       b.should be_kind_of(Viiite::Benchmark)
     end
 
+    it "should evalutate with the Runner instance only when asked" do
+      Viiite.bench do |x|
+        x.class.should == Viiite::Benchmark
+        self.class.should_not == Viiite::Benchmark
+      end.to_a
+
+      Viiite.bench do
+        self.class.should == Viiite::Benchmark
+      end.to_a
+    end
+
     it "should be executable" do
       b = Viiite.bench do |viiite|
         viiite.report{ 1 + 1 }

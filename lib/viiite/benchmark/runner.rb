@@ -39,7 +39,11 @@ module Viiite
 
       def _each(&reporter)
         @tuple, @reporter = {}, reporter
-        definition.call(self)
+        if definition.arity == 0
+          instance_exec(&definition)
+        else
+          definition.call(self)
+        end
         @tuple, @reporter = nil, nil
       end
 
