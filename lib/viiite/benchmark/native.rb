@@ -2,30 +2,38 @@ module Viiite
   class Benchmark
     module Native
 
-      ELAPSED_TIME_PARSER = lambda{|io|
-        s = io.read.strip
-        s =~ /\A(\d+\.\d+)\Z/
-        tms = Tms.coerce(Float($1))
-        {:tms => tms}
-      }
+      TIME_PARSERS = [
+        # elapsed-time parser
+        [ :elapsed,
+          /\A(\d+\.\d+)\Z/, 
+          lambda{|m| 
+            Tms.coerce(Float(m[1]))
+          }],
+        # POSIX 1003.2
+        [ :posix,
+          /\Areal (\d+\.\d+)\nuser (\d+\.\d+)\nsys (\d+\.\d+)\Z/, 
+          lambda{|m|
+            Tms.new(Float(m[2]), Float(m[3]), 0.0, 0.0, Float(m[1]))
+          }],
+        # ZSH's time command
+        [ :zshtime,
+          /\A.*? (\d+\.\d+)s user (\d+\.\d+)s system .*? (\d+\.\d+) total\Z/,
+          lambda{|m| 
+            Tms.new(Float(m[1]), Float(m[2]), 0.0, 0.0, Float(m[3]))
+          } ]
+      ]
 
-      POSIX_1003_2_TIME_PARSER = lambda{|io|
-        s = io.read.strip
-        s =~ /\Areal (\d+\.\d+)\nuser (\d+\.\d+)\nsys (\d+\.\d+)\Z/
-        tms = Tms.new(Float($2), Float($3), 0.0, 0.0, Float($1))
-        {:tms => tms}
-      }
-
-      ZSH_TIME_PARSER = lambda{|io|
-        s = io.read.strip
-        s =~ /\A.*? (\d+\.\d+)s user (\d+\.\d+)s system .*? (\d+\.\d+) total\Z/
-        tms = Tms.new(Float($1), Float($2), 0.0, 0.0, Float($3))
-        {:tms => tms}
-      }
+      def self.time_parser(which)
+        lambda{|io|
+          p = TIME_PARSERS.find{|p| p.first == which}
+          tms = p[2].call(p[1].match(io.read.strip))
+          {:tms => tms}
+        }
+      end
 
       def report_native(*args, &block)
         args << {} unless Hash === args.last
-        parser = block || ELAPSED_TIME_PARSER
+        parser = block || Native.time_parser(:elapsed)
 
         # Execute native command and parse result so as to get
         # a relation (sfl provides Kernel.spawn for 1.8.x)
