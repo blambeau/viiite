@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/blambeau/alf.git
+  remote: http://github.com/blambeau/alf.git
   revision: b94fbe9ea3f7062b916d08c172c5c0c9530aa38b
   specs:
     alf (0.11.0)
