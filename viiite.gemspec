@@ -127,6 +127,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", "~> 2.6.0")
   s.add_development_dependency("wlang", "~> 0.10.2")
   s.add_dependency("alf", "~> 0.10.1")
+  s.add_dependency("epath", ">= 0")
   s.add_dependency("gnuplot", "~> 2.3.6")
   s.add_dependency("json", ">= 0")
 
