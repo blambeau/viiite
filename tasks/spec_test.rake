@@ -32,14 +32,6 @@ begin
     # Glob pattern to match files.
     t.pattern = "spec/unit/**/test_*.rb"
 
-    # By default, if there is a Gemfile, the generated command will include
-    # 'bundle exec'. Set this to true to ignore the presence of a Gemfile,
-    # and not add 'bundle exec' to the command.
-    t.skip_bundler = false
-
-    # Name of Gemfile to use
-    t.gemfile = "Gemfile"
-
     # Whether or not to fail Rake when an error occurs (typically when
     # examples fail).
     t.fail_on_error = true
