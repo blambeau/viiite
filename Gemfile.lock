@@ -1,14 +1,11 @@
-GIT
-  remote: http://github.com/blambeau/alf.git
-  revision: b94fbe9ea3f7062b916d08c172c5c0c9530aa38b
-  specs:
-    alf (0.11.0)
-      myrrha (~> 1.2.1)
-      quickl (~> 0.4.2)
-
 GEM
   remote: http://rubygems.org/
   specs:
+    alf (0.11.0)
+      backports (~> 2.3.0)
+      myrrha (~> 1.2.1)
+      quickl (~> 0.4.2)
+    backports (2.3.0)
     diff-lcs (1.1.3)
     epath (0.0.1)
     gnuplot (2.3.6)
@@ -30,7 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  alf!
+  alf (~> 0.11.0)
   epath
   gnuplot (~> 2.3.6)
   json
