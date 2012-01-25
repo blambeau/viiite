@@ -14,10 +14,11 @@ OPTIONS
       --version                    Show version
 
 COMMANDS
-  help       Show help about a specific command
-  run        Run a benchmark and output raw data
-  report     Report benchmarking results as a table
-  plot       Report benchmarking results as a plot
+  help        Show help about a specific command
+  run         Run a benchmark and output raw data
+  report      Report benchmarking results as a table
+  compare     Compare benchmarking results easily
+  plot        Report benchmarking results as a plot
 
 DESCRIPTION
   This command helps you benchmarking ruby applications and manipulating
