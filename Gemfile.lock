@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    alf (0.11.0)
+    alf (0.11.1)
       backports (~> 2.3.0)
       myrrha (~> 1.2.1)
       quickl (~> 0.4.2)
@@ -27,7 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  alf (~> 0.11.0)
+  alf (~> 0.11.1)
   epath
   gnuplot (~> 2.3.6)
   json
