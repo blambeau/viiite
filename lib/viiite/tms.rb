@@ -21,6 +21,9 @@ module Viiite
         raise ArgumentError, "Invalid value #{arg.inspect} for Viiite::Tms"
       end
     end
+    
+    alias :user :utime
+    alias :system :stime
 
     def total
       cutime + cstime + stime + utime
