@@ -1,15 +1,19 @@
 require "viiite/version"
 require "viiite/loader"
 require "viiite/errors"
-require "viiite/tms"
-require "viiite/benchmark"
-require "viiite/command"
-require "viiite/bdb"
 
 #
 # Benchmarking and complexity analyzer utility
 #
 module Viiite
+
+  # Much missing boolean type
+  Boolean = Myrrha::Boolean
+
+  # Duplicate, reuse and extend Myrrha default coercions
+  Coercions = Myrrha::Coerce.dup.append do |r|
+    r.coercion(String, Path){|value, _| Path(value)}
+  end    
 
   def self.measure
     t0, r0 = Process.times, Time.now
@@ -73,3 +77,8 @@ module Viiite
   end
 
 end # module Viiite
+require "viiite/tms"
+require 'viiite/configuration'
+require "viiite/benchmark"
+require "viiite/command"
+require "viiite/bdb"
