@@ -48,35 +48,22 @@ module Viiite
 
   # Alias of Viiite.bench for compatibility
   def self.bm(&block)
-    warn "Viiite.bm is deprecated, use Viiite.bench instead #{caller[0]}"
+    warn "Viiite.bm is deprecated, use Viiite.bench #{caller[0]}"
     bench(&block)
   end
 
-  #
-  # Returns a short string with a ruby interpreter description
-  #
-  def self.which_ruby
-    if Object.const_defined?(:RUBY_DESCRIPTION)
-      short_ruby_description(RUBY_DESCRIPTION)
-    else
-      "ruby #{RUBY_VERSION}"
-    end
+  def self.short_ruby_description(desc)
+    warn "Viiite.short_ruby_description is deprecated, use RubyFacts.short_ruby_description (#{caller[0]})"
+    RubyFacts.short_ruby_description(desc)
   end
 
-  def self.short_ruby_description(description)
-    case description
-    when /Ruby Enterprise Edition (\d{4}\.\d{2})/
-      "ree #{$1}"
-    when /^(\w+ \d\.\d\.\d) .+ patchlevel (\d+)/
-      "#{$1}p#{$2}"
-    when /^\w+ \S+/
-      $&
-    else
-      raise "Unknown ruby interpreter: #{description}"
-    end
+  def self.which_ruby
+    warn "Viiite.which_ruby is deprecated, use RubyFacts.which_ruby (#{caller[0]})"
+    RubyFacts.which_ruby
   end
 
 end # module Viiite
+require 'viiite/facts/ruby_facts'
 require "viiite/tms"
 require 'viiite/configuration'
 require "viiite/benchmark"
