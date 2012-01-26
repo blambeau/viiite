@@ -50,13 +50,6 @@ module Viiite
         }
       end
       
-      private
-      
-      # Outputs `tuple`, result of the current benchmark step
-      def output(tuple)
-      end
-      undef :output
-      
     end # module DSL
   end # class Benchmark
 end # module Viiite
