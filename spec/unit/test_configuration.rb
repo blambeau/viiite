@@ -5,7 +5,7 @@ module Viiite
     let(:config){ Configuration.new }
     
     it 'has benchmark_folder accessors' do
-      config.benchmark_folder.should eq("benchmarks")
+      config.benchmark_folder.should eq(Path("benchmarks"))
       config.benchmark_folder = "test"
       config.benchmark_folder.should eq(Path("test"))
     end
@@ -16,10 +16,29 @@ module Viiite
       config.benchmark_pattern.should eq("bench_*.rb")
     end
 
-    it 'has cache accessors' do
-      config.cache.should eq(true)
-      config.cache = "false"
-      config.cache.should eq(false)
+    it 'has cache_folder accessors' do
+      config.cache_folder.should eq(Path("benchmarks/.cache"))
+      config.cache_folder = "cache"
+      config.cache_folder.should eq(Path("cache"))
+    end
+    
+    it 'supports a Proc as cache_folder' do
+      config.cache_folder = Proc.new{|c| c.should eq(config); "cache" }
+      config.cache_folder.should eq(Path("cache"))
+    end
+
+    describe 'cache_enabled?' do
+      it 'is enabled by default' do
+        config.should be_cache_enabled
+      end
+      it 'depends on cache_folder' do
+        config.cache_folder = nil
+        config.should_not be_cache_enabled
+      end
+      it 'works even when cache_folder is a Proc' do
+        config.cache_folder = Proc.new{|c| nil}
+        config.should_not be_cache_enabled
+      end
     end
     
   end
