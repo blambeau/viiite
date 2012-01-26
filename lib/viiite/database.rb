@@ -16,8 +16,10 @@ module Viiite
       Alf::Relation.coerce(tuples)
     end
 
-    def benchmark_result(name)
-      tuple = benchmarks.restrict(:name => name).to_a.first
+    def benchmark_result(tuple)
+      if tuple.is_a?(String)
+        tuple = benchmarks.restrict(:name => tuple).to_a.first
+      end
       if tuple and cache=config.cache_folder
         result_file = cache/"#{tuple[:name]}.rash"
         if result_file.file?
