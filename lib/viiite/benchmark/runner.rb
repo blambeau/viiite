@@ -2,6 +2,7 @@ module Viiite
   class Benchmark
     class Runner
       include DSL
+      include Alf::Iterator
 
       def initialize(definition)
         @definition = definition
@@ -17,6 +18,10 @@ module Viiite
           end
         end
         @reporter = nil
+      end
+      
+      def each(&reporter)
+        call(reporter)
       end
 
       protected
