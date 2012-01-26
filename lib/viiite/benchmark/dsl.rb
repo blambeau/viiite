@@ -1,20 +1,30 @@
 module Viiite
   class Benchmark
     #
-    # Domain Specific Language for specifying the Benchmark
+    # Domain Specific Language for specifying a Benchmark.
     #
-    # This module expects an `output` method.
+    # This module expects an `output` method that outputs the computation tuple
+    # at each step.
     #
     module DSL
       
+      attr_reader :current_tuple
+      
+      def in_a_run
+        @current_tuple = {}
+        res = yield
+        @current_tuple = nil
+        res
+      end
+      
       def with(hash)
         if block_given?
-          old_tuple, @tuple = @tuple, @tuple.merge(hash)
+          old_tuple, @current_tuple = current_tuple, current_tuple.merge(hash)
           res = yield
-          @tuple = old_tuple
+          @current_tuple = old_tuple
           res
         else
-          @tuple.merge!(hash)
+          current_tuple.merge!(hash)
         end
       end
 
@@ -35,10 +45,17 @@ module Viiite
         with(hash) {
           GC.start
           with(:tms => Viiite.measure(&block)){ 
-            output
+            output current_tuple.dup
           }
         }
       end
+      
+      private
+      
+      # Outputs `tuple`, result of the current benchmark step
+      def output(tuple)
+      end
+      undef :output
       
     end # module DSL
   end # class Benchmark

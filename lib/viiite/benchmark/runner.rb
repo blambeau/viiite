@@ -6,17 +6,19 @@ module Viiite
       protected
 
       def _each(&reporter)
-        @tuple, @reporter = {}, reporter
-        if definition.arity <= 0
-          instance_exec(&definition)
-        else
-          definition.call(self)
+        @reporter = reporter
+        in_a_run do
+          if definition.arity <= 0
+            instance_exec(&definition)
+          else
+            definition.call(self)
+          end
         end
-        @tuple, @reporter = nil, nil
+        @reporter = nil
       end
 
-      def output
-        @reporter.call @tuple.dup
+      def output(tuple)
+        @reporter.call tuple
       end
 
     end # module Runner
