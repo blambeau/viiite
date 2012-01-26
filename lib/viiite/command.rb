@@ -19,6 +19,12 @@ module Viiite
   #
   class Command < Quickl::Delegator(__FILE__, __LINE__)
 
+    attr_reader :config
+    
+    def initialize
+      @config = Configuration.new
+    end
+
     # Install options
     options do |opt|
       opt.on("-Idirectory",
@@ -30,21 +36,22 @@ module Viiite
         require(lib)
       end
 
-      @bdb_options = {}
       opt.on('--suite=FOLDER',
              "Specify the folder of the benchmark suite (defaults to 'benchmarks')") do |val|
-        unless File.directory?(val)
-          raise Quickl::InvalidArgument, "Missing folder #{val}"
-        end
-        @bdb_options[:folder] = val
+        raise Quickl::InvalidArgument, "Missing folder #{val}" unless File.directory?(val)
+        @config.benchmark_folder = val
       end
       opt.on('--pattern=GLOB',
              "Specify the pattern to find benchmarks in the suite folder (defaults to '**/*.rb')") do |glob|
-        @bdb_options[:pattern] = glob
+        @config.benchmark_pattern = glob
       end
-      opt.on('--[no-]cache=[FOLDER]',
-             'Specify the cache heuristic and folder (defaults to --cache)') do |folder|
-        @bdb_options[:cache] = folder
+      opt.on('--cache=FOLDER',
+             'Specify the cache folder') do |folder|
+        @config.cache_folder = folder
+      end
+      opt.on('--no-cache',
+             'Disable the cache') do
+        @config.cache_folder = nil
       end
 
       opt.on_tail("--help", "Show help") do
@@ -56,7 +63,7 @@ module Viiite
     end
 
     def bdb
-      @bdb ||= BDB.new(@bdb_options)
+      @bdb ||= BDB.new(@config)
     end
 
   end # class Command

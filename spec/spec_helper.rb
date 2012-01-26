@@ -18,3 +18,11 @@ end
 def fixtures_folder
   Path.dir/'fixtures'
 end
+
+def fixtures_config
+  Viiite::Configuration.new do |c|
+    c.benchmark_folder  = Path.dir/:fixtures/:bdb
+    c.cache_folder      = Path.dir/:fixtures/:saved
+    c.benchmark_pattern = "**/*.rb"
+  end
+end
