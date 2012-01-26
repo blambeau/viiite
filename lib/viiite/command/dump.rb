@@ -1,0 +1,41 @@
+module Viiite
+  class Command
+    #
+    # Dump a relation from the benchmark database
+    #
+    # SYNOPSIS
+    #   viiite #{command_name} [RELATION]
+    #
+    # OPTIONS
+    # #{summarized_options}
+    #
+    class Dump < Quickl::Command(__FILE__, __LINE__)
+
+      options do |opt|
+        @renderer = :rash
+        opt.on('-t','--text',
+               'Outputs a human-readable table') do
+          @renderer = :text
+        end
+      end
+
+      def database
+        Database.new requester.config
+      end
+
+      def dump(relation)
+        r = Alf::Renderer.renderer(@renderer, relation)
+        r.execute($stdout)
+      end
+
+      def execute(argv)
+        raise Quickl::Help unless argv.size <= 1
+        case argv.first
+        when "benchmarks"
+          dump database.benchmarks
+        end
+      end
+
+    end # class Dump
+  end # class Command
+end # module Viiite

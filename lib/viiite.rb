@@ -10,6 +10,13 @@ module Viiite
   # Much missing boolean type
   Boolean = Myrrha::Boolean
 
+  # Install a to_ruby_literal coercion for Path
+  Alf::Tools::ToRubyLiteral.append do |r|
+    r.coercion(Path) do |path,_|
+      "Path(#{r.apply(path.to_s)})"
+    end
+  end
+
   # Duplicate, reuse and extend Myrrha default coercions
   Coercions = Myrrha::Coerce.dup.append do |r|
     r.coercion(String, Path){|value, _| Path(value)}

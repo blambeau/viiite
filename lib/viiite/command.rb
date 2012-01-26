@@ -70,6 +70,7 @@ module Viiite
 end # module Viiite
 require "viiite/command/commons"
 require "viiite/command/help"
+require "viiite/command/dump"
 require "viiite/command/run"
 require "viiite/command/report"
 require "viiite/command/compare"
