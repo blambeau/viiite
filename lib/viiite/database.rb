@@ -8,13 +8,14 @@ module Viiite
     end
     
     def benchmarks
+      folder = config.benchmark_folder
       tuples = benchmark_files.map{|f|
-        {:path => f, :benchmark => Benchmark.new(f)}
+        {:name => f.relative_to(folder).without_extension.to_s, :path => f}
       }
       Alf::Relation.coerce(tuples)
     end
     
-    private 
+    private
     
     def benchmark_files
       c = config

@@ -4,7 +4,11 @@ module Viiite
     let(:db){ Database.new(fixtures_config) }
     
     it 'benchmarks' do
-      db.benchmarks.should be_a(Alf::Relation)
+      expected = Alf::Relation[
+        {:name => "bench_iteration",  :path => fixtures_folder/"bdb/bench_iteration.rb"},
+        {:name => "Array/bench_sort", :path => fixtures_folder/"bdb/Array/bench_sort.rb"}
+      ]
+      db.benchmarks.should eq(expected)
     end
     
   end # describe Database
