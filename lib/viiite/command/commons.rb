@@ -5,8 +5,13 @@ module Viiite
       def single_source(argv)
         raise Quickl::InvalidArgument if argv.size > 1
         if arg = argv.first
-          if File.exists?(arg.to_s)
-            Alf::Reader.reader(arg)
+          path = Path(arg.to_s)
+          if path.file?
+            if path.extname == ".rb"
+              Benchmark.new(arg.to_s).runner
+            else
+              Alf::Reader.reader(path)
+            end
           elsif requester && requester.respond_to?(:bdb)
             block_given? ? yield(requester.bdb, arg) : requester.bdb.dataset(arg)
           else

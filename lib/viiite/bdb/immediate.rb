@@ -29,7 +29,7 @@ module Viiite
 
       def benchmark(name)
         if (file = bench_file(config.benchmark_folder, name.to_s, @ext)).exist?
-          return Alf::Reader.reader(file, self)
+          return Benchmark.new(file)
         else
           raise NoSuchBenchmarkError, "No such benchmark #{name}"
         end
