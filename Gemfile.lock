@@ -10,7 +10,7 @@ GEM
     epath (0.0.1)
     gnuplot (2.3.6)
     json (1.6.5)
-    myrrha (1.2.1)
+    myrrha (1.2.2)
     quickl (0.4.2)
     rake (0.9.2.2)
     rspec (2.6.0)
