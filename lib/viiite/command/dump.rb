@@ -30,9 +30,16 @@ module Viiite
 
       def execute(argv)
         raise Quickl::Help unless argv.size <= 1
-        case argv.first
+        case arg = argv.first.strip
         when "benchmarks"
-          dump database.benchmarks
+          dump database.benchmarks(Path('.').expand)
+        else
+          if rel = database.benchmark_result(arg) 
+            dump rel
+          else
+            $stderr << "No such benchmark #{arg}\n"
+            exit(1)
+          end
         end
       end
 
