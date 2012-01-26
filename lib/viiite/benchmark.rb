@@ -1,3 +1,4 @@
+require 'viiite/benchmark/dsl'
 require 'viiite/benchmark/runner'
 module Viiite
   class Benchmark
