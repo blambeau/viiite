@@ -1,26 +1,30 @@
 module Viiite
   class Benchmark
-    module Runner
+    class Runner
       include DSL
 
-      protected
+      def initialize(definition)
+        @definition = definition
+      end
 
-      def _each(&reporter)
+      def call(reporter)
         @reporter = reporter
         in_a_run do
-          if definition.arity <= 0
-            instance_exec(&definition)
+          if @definition.arity <= 0
+            instance_exec(&@definition)
           else
-            definition.call(self)
+            @definition.call(self)
           end
         end
         @reporter = nil
       end
 
+      protected
+
       def output(tuple)
         @reporter.call tuple
       end
 
-    end # module Runner
+    end # class Runner
   end # class Benchmark
 end # module Viiite

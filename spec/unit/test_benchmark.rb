@@ -11,12 +11,12 @@ module Viiite
 
     it "should evalutate with the Runner instance only when asked" do
       Viiite.bench do |x|
-        x.class.should == Viiite::Benchmark
-        self.class.should_not == Viiite::Benchmark
+        x.class.should == Viiite::Benchmark::Runner
+        self.class.should_not == Viiite::Benchmark::Runner
       end.to_a
 
       Viiite.bench do
-        self.class.should == Viiite::Benchmark
+        self.class.should == Viiite::Benchmark::Runner
       end.to_a
     end
 
