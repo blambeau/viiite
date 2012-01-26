@@ -2,6 +2,7 @@
 *.rbc
 .yardoc
 .bundle
+.rbx
 
 coverage
 pkg

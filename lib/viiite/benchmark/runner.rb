@@ -1,56 +1,35 @@
 module Viiite
   class Benchmark
-    module Runner
+    class Runner
+      include DSL
+      include Alf::Iterator
 
-      def with(hash)
-        if block_given?
-          org_tuple = @tuple
-          @tuple = org_tuple.merge(hash)
-          res = yield
-          @tuple = org_tuple
-          res
-        else
-          @tuple.merge!(hash)
+      def initialize(definition)
+        @definition = definition
+      end
+
+      def call(reporter)
+        @reporter = reporter
+        in_a_run do
+          if @definition.arity <= 0
+            instance_exec(&@definition)
+          else
+            @definition.call(self)
+          end
         end
+        @reporter = nil
       end
-
-      def range_over(range, name = nil, &block)
-        name ||= block.parameters.first.last if RUBY_VERSION > '1.9'
-        raise ArgumentError, "You must specify a name (explicitely in 1.8)" unless name
-        range.each do |value|
-          with(name => value) { yield value }
-        end
-      end
-
-      def variation_point(name, value, &proc)
-        with({name => value}, &proc)
-      end
-
-      def report(hash = {}, &block)
-        hash = {:bench => hash.to_sym} unless hash.is_a?(Hash)
-        with(hash) {
-          GC.start
-          tms = Viiite.measure(&block)
-          with(:tms => tms){ output }
-        }
+      
+      def each(&reporter)
+        call(reporter)
       end
 
       protected
 
-      def _each(&reporter)
-        @tuple, @reporter = {}, reporter
-        if definition.arity <= 0
-          instance_exec(&definition)
-        else
-          definition.call(self)
-        end
-        @tuple, @reporter = nil, nil
+      def output(tuple)
+        @reporter.call tuple
       end
 
-      def output
-        @reporter.call @tuple.dup
-      end
-
-    end # module Runner
+    end # class Runner
   end # class Benchmark
 end # module Viiite

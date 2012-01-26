@@ -1,8 +1,7 @@
+require 'viiite/benchmark/dsl'
 require 'viiite/benchmark/runner'
 module Viiite
   class Benchmark
-    include Runner
-    include Alf::Iterator
 
     attr_reader :definition
 
@@ -26,10 +25,13 @@ module Viiite
       end
     end
 
-    def each(&reporter)
-      self.dup._each(&reporter)
+    def runner
+      Runner.new(definition)
+    end
+    
+    def run(&reporter)
+      runner.call(reporter)
     end
 
-    Alf::Reader.register(:viiite, [".viiite", ".rb"], self)
   end # class Benchmark
 end # module Viiite

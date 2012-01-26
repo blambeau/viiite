@@ -3,17 +3,16 @@ module Viiite
     class Cached
       include Utils
 
-      attr_reader :cache_folder
+      attr_reader :immediate
 
-      def initialize(immediate, cache_folder)
+      def initialize(immediate)
         @immediate = immediate
-        @cache_folder = cache_folder
       end
 
       # delegates to @immediate
       def method_missing(meth, *args, &block)
-        super unless @immediate.respond_to? meth
-        @immediate.send(meth, *args, &block)
+        super unless immediate.respond_to? meth
+        immediate.send(meth, *args, &block)
       end
 
       def cached?
@@ -21,7 +20,7 @@ module Viiite
       end
 
       def benchmark(name)
-        bench = @immediate.benchmark(name)
+        bench = immediate.benchmark(name)
         cache = cache_file(name)
         Proxy.new(bench, cache)
       end
@@ -35,9 +34,9 @@ module Viiite
       end
 
       private
-
+      
       def cache_file(name)
-        bench_file(@cache_folder, name, ".rash")
+        bench_file(cache_folder, name, ".rash")
       end
 
       class Proxy

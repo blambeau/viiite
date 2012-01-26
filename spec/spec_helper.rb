@@ -26,3 +26,4 @@ def fixtures_config
     c.benchmark_pattern = "**/*.rb"
   end
 end
+
