@@ -34,6 +34,10 @@ module Viiite
     end
     extend(ClassMethods)
     
+    def initialize
+      yield(self) if block_given?
+    end
+    
     attribute :benchmark_folder,  Path,    "benchmarks"
     attribute :benchmark_pattern, String,  "**/*.rb"
     attribute :cache_folder,      Path,    Proc.new{|c| c.benchmark_folder/".cache" }

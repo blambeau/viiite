@@ -4,6 +4,12 @@ module Viiite
     
     let(:config){ Configuration.new }
     
+    it 'yields itself at construction' do
+      seen     = nil
+      returned = Configuration.new{|c| seen = c}
+      seen.should eq(returned)
+    end
+    
     it 'has benchmark_folder accessors' do
       config.benchmark_folder.should eq(Path("benchmarks"))
       config.benchmark_folder = "test"
