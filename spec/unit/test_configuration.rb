@@ -52,6 +52,6 @@ module Viiite
         config.should_not be_cache_enabled
       end
     end
-
+    
   end
 end
