@@ -6,7 +6,7 @@ module Viiite
       def initialize(suite)
         @suite = suite
       end
-      
+
       def run(&reporter)
         return self unless reporter
         @suite.each do |bench|
