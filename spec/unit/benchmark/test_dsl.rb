@@ -25,7 +25,7 @@ module Viiite
         rel do |dsl|
           2.times do |i|
             dsl.variation_point(:"#run", i)
-            dsl.report {}
+            dsl.report
           end
         end.map{|t| t[:'#run']}.should eq([0, 1])
       end
@@ -33,7 +33,7 @@ module Viiite
       it "supports ranging over values" do
         rel do |dsl|
           dsl.range_over [10, 100, 1000], :times do |t|
-            dsl.report {}
+            dsl.report
           end
         end.map{|t| t[:times]}.should == [10, 100, 1000]
       end
@@ -41,7 +41,7 @@ module Viiite
       it "supports ranging over values with implicit parameter name", :ruby => 1.9 do
         rel do |dsl|
           dsl.range_over [10, 100, 1000] do |size|
-            dsl.report {}
+            dsl.report
           end
         end.map{|t| t[:size]}.should == [10, 100, 1000]
       end
@@ -52,12 +52,12 @@ module Viiite
           dsl.variation_point(:ruby, :ruby) do
             dsl.variation_point :for_bench1, true
             dsl.range_over(1..2, :i) do
-              dsl.report(:bench1) {}
+              dsl.report(:bench1)
               dsl.variation_point :ignored, nil
             end
           end
           dsl.with(:a => :b) do
-            dsl.report(:bench2) {}
+            dsl.report(:bench2)
           end
         end.map{|t| t.delete(:tms); t}.should eq([
           {:all => true, :ruby => :ruby, :for_bench1 => true, :i => 1, :bench => :bench1},
