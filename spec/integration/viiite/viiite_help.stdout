@@ -18,7 +18,6 @@ COMMANDS
   help        Show help about a specific command
   dump        Dump a relation from the benchmark database
   run         Run a benchmark and output raw data
-  report      Report benchmarking results as a table
   compare     Compare benchmarking results easily
   plot        Report benchmarking results as a plot
 
