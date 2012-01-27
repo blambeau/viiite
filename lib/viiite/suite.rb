@@ -11,8 +11,13 @@ module Viiite
       @path   = path
     end
 
-    def run(&reporter)
-      Runner.new(self).run(&reporter)
+    def run(reporter = nil, &block)
+      reporter ||= block
+      if reporter and reporter.respond_to?(:report)
+        reporter.report(self)
+      else
+        Runner.new(self).run(&reporter)
+      end
     end
 
     def each(&proc)

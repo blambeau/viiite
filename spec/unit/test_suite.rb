@@ -19,6 +19,13 @@ module Viiite
         subject.run do |t| seen << t; end
         seen.should_not be_empty
       end
+
+      it 'invokes the reporter if it responds to :report' do
+        reporter = Object.new.extend(Module.new{
+          def report(suite); [:called, suite]; end
+        })
+        subject.run(reporter).should eq([:called, subject])
+      end
     end
 
     context "on a single file" do
