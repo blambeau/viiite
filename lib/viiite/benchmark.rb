@@ -4,13 +4,13 @@ module Viiite
     include Unit
     include DSL
 
-    attr_reader :config
-    attr_reader :path
     attr_reader :definition
 
     def initialize(config, path, definition)
-      @config = config
-      @path = path
+      unless definition
+        raise ArgumentError, "Benchmark definition is mandatory", caller 
+      end
+      super(config, path)
       @definition = definition
     end
 

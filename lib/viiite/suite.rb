@@ -3,11 +3,8 @@ module Viiite
     include Unit
     include Enumerable
 
-    attr_reader :config
-
     def initialize(config, path = config.benchmark_folder)
-      @config = config
-      @path   = path
+      super
     end
 
     def each(&proc)

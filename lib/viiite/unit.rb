@@ -1,7 +1,13 @@
 module Viiite
   module Unit
 
+    attr_reader :config
     attr_reader :path
+
+    def initialize(config, path)
+      @config = config
+      @path   = path
+    end
 
     def run(extra = nil, reporter = nil, &block)
       extra, reporter = {}, extra unless extra.is_a?(Hash)
