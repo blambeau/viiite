@@ -49,7 +49,7 @@ module Viiite
     elsif path
       load(path)
       if @last_bench
-        b = Benchmark.new(config, Path(path), @last_bench.definition)
+        b = Benchmark.new(config, Path(path).expand, @last_bench.definition)
         @last_bench = nil
         b
       end
