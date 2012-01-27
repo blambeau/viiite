@@ -1,3 +1,15 @@
+{:ruby => "jruby 1.6.3", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.00200009346008301,0.0,0.0,0.0,0.00200009346008301)}
+{:ruby => "jruby 1.6.3", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0189998149871826,0.0,0.0,0.0,0.0199999809265137)}
+{:size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00038504600524902344), :ruby => "rubinius 2.0.0dev"}
+{:size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0040000000000000036,0.0,0.0,0.0,0.005118131637573242), :ruby => "rubinius 2.0.0dev"}
+{:bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.20159912109375e-05), :size => 100, :ruby => "ruby 1.8.7"}
+{:bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00109100341796875), :size => 1000, :ruby => "ruby 1.8.7"}
+{:ruby => "rubinius 1.2.5dev", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0003991127014160156)}
+{:ruby => "rubinius 1.2.5dev", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.02800199999999997,0.0,0.0,0.0,0.04252505302429199)}
+{:ruby => "ruby 1.9.3dev", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.368492126464844e-05)}
+{:ruby => "ruby 1.9.3dev", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0011630058288574219)}
+{:ruby => "ruby 1.9.2p290", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.0108642578125e-05)}
+{:ruby => "ruby 1.9.2p290", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0011208057403564453)}
 {:ruby => "jruby 1.6.3", :bench => :for, :tms => Viiite::Tms(0.00699996948242187,0.0,0.0,0.0,0.00699996948242187)}
 {:ruby => "jruby 1.6.3", :bench => :times, :tms => Viiite::Tms(0.00400018692016602,0.0,0.0,0.0,0.00300002098083496)}
 {:ruby => "jruby 1.6.3", :bench => :upto, :tms => Viiite::Tms(0.00300002098083496,0.0,0.0,0.0,0.00300002098083496)}
@@ -16,15 +28,3 @@
 {:ruby => "ruby 1.9.2p290", :bench => :for, :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00018215179443359375)}
 {:ruby => "ruby 1.9.2p290", :bench => :times, :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00017213821411132812)}
 {:ruby => "ruby 1.9.2p290", :bench => :upto, :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00016951560974121094)}
-{:ruby => "jruby 1.6.3", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.00200009346008301,0.0,0.0,0.0,0.00200009346008301)}
-{:ruby => "jruby 1.6.3", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0189998149871826,0.0,0.0,0.0,0.0199999809265137)}
-{:size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00038504600524902344), :ruby => "rubinius 2.0.0dev"}
-{:size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0040000000000000036,0.0,0.0,0.0,0.005118131637573242), :ruby => "rubinius 2.0.0dev"}
-{:bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.20159912109375e-05), :size => 100, :ruby => "ruby 1.8.7"}
-{:bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.00109100341796875), :size => 1000, :ruby => "ruby 1.8.7"}
-{:ruby => "rubinius 1.2.5dev", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0003991127014160156)}
-{:ruby => "rubinius 1.2.5dev", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.02800199999999997,0.0,0.0,0.0,0.04252505302429199)}
-{:ruby => "ruby 1.9.3dev", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.368492126464844e-05)}
-{:ruby => "ruby 1.9.3dev", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0011630058288574219)}
-{:ruby => "ruby 1.9.2p290", :size => 100, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,8.0108642578125e-05)}
-{:ruby => "ruby 1.9.2p290", :size => 1000, :bench => :"Array#sort", :tms => Viiite::Tms(0.0,0.0,0.0,0.0,0.0011208057403564453)}

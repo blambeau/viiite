@@ -34,7 +34,7 @@ module Viiite
 
     def benchmark_files
       c = config
-      c.benchmark_folder.glob(c.benchmark_pattern)
+      c.benchmark_folder.glob(c.benchmark_pattern).sort
     end
 
   end # class Database

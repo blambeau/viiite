@@ -1,6 +1,6 @@
 +------------------+---------------------------------------+
 | :name            | :path                                 |
 +------------------+---------------------------------------+
-| bench_iteration  | spec/fixtures/bdb/bench_iteration.rb  |
 | Array/bench_sort | spec/fixtures/bdb/Array/bench_sort.rb |
+| bench_iteration  | spec/fixtures/bdb/bench_iteration.rb  |
 +------------------+---------------------------------------+
