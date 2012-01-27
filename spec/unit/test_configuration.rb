@@ -66,6 +66,11 @@ module Viiite
         config.cache_folder = nil
         config.cache_file_for(source).should be_nil
       end
+      it 'works with a benchmark' do
+        config = fixtures_config
+        source = Benchmark.new(config.benchmark_folder/"bench_iteration.rb")
+        config.cache_file_for(source).should eq(config.cache_folder/'bench_iteration.rb')
+      end
     end
 
   end
