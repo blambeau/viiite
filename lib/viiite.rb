@@ -61,6 +61,7 @@ require 'viiite/configuration'
 require 'viiite/unit'
 require "viiite/benchmark"
 require "viiite/suite"
+require "viiite/n_times"
 require "viiite/command"
 require "viiite/bdb"
 require 'viiite/reporter'
