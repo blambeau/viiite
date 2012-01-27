@@ -1,6 +1,7 @@
 module Viiite
   module Reporter
     class Rash
+      include Reporter
       
       def initialize(io = $stdout)
         @io = io

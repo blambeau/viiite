@@ -30,12 +30,12 @@ module Viiite
       end
     end
 
-    def runner
-      Runner.new(definition)
+    def run(&reporter)
+      to_enum.call(reporter)
     end
 
-    def run(&reporter)
-      runner.call(reporter)
+    def to_enum
+      Runner.new(definition)
     end
 
     private
