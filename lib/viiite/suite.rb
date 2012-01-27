@@ -6,12 +6,7 @@ module Viiite
 
     def initialize(config, files = config.benchmark_folder)
       @config = config
-      @files  = case files
-      when Path, String
-        [ Path(files).expand ]
-      when Array
-        files.map{|f| Path(f).expand}
-      end
+      @files  = Array(files).map{|f| Path(f).expand}
     end
 
     def benchmark_files
@@ -22,19 +17,19 @@ module Viiite
     attr_reader :files
 
     def benchmarks
-      files.map{|file| load_one(file)}.flatten
+      files.map(&method(:load_one)).flatten.compact
     end
 
     def load_one(file)
       if file.file?
-        bench = Viiite.bench(config, file)
-        warn "No benchmark found in #{file}" unless bench
-        [ bench ].compact
+        unless bench = Viiite.bench(config, file)
+          warn "No benchmark found in #{file}"
+        end
+        [ bench ]
       else
         file.glob(config.benchmark_pattern).
              sort.
-             map{|file| load_one(file)}.
-             compact
+             map{|file| load_one(file)}
       end
     end
 
