@@ -45,27 +45,15 @@ module Viiite
     end
 
     def suite_tuple_for(file)
+      files  = benchmark_files(file)
+      benchs = files.map{|f| Viiite.bench(config, f) }
+      suite  = Suite.new(config, benchs)
       {:name  => benchmark_name(file),
-       :files => benchmark_files(file)}
+       :suite => suite}
     end
 
-    def benchmark_files(dir)
-      tuples = if dir.file?
-        [
-          {:path => benchmark_path(dir)}
-        ]
-      else
-        dir.glob(config.benchmark_pattern).sort.map{|f|
-          {:path => benchmark_path(f) }
-        }
-      end
-      Alf::Relation.coerce(tuples)
-    end
-
-    def benchmark_path(file)
-      pwd = config.pwd
-      pwd = config.pwd.expand if pwd
-      pwd ? file.expand.relative_to(pwd) : file
+    def benchmark_files(path)
+      path.file? ? [ path ] : path.glob(config.benchmark_pattern).sort
     end
 
     def benchmark_name(file)

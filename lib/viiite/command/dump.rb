@@ -35,6 +35,7 @@ module Viiite
         when "benchmarks"
           dump db.benchmarks
         when "suite"
+          @renderer = :text
           dump db.suite
         when NilClass
           db.benchmarks.each do |tuple|

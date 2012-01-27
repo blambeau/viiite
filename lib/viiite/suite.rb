@@ -14,6 +14,13 @@ module Viiite
       benchmarks.map(&:path)
     end
 
+    def to_s
+      fs = files.map{|f| 
+        {:path => f.expand.relative_to(config.pwd.expand)} 
+      }
+      Alf::Relation.coerce(fs).to_s
+    end
+
     protected
 
     def _run(extra, reporter)
