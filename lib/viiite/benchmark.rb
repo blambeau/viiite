@@ -35,7 +35,7 @@ module Viiite
       if reporter and reporter.respond_to?(:report)
         reporter.report(self)
       elsif reporter
-        runner.call(reporter)
+        runner.each(&reporter)
       else
         runner
       end

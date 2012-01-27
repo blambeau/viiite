@@ -12,20 +12,19 @@ module Viiite
 
       it{ should be_a(Enumerable) }
 
-      it 'should return an Enumerable when ran without reporter' do
-        subject.run.should eq(subject)
+      it 'should return an Enumerable without reporter' do
         subject.each.should eq(subject)
       end
 
       it 'pass itself to the definition block when asked' do
         runner = Runner.new(Proc.new{|x| x.should eq(runner)})
-        runner.call(nil)
+        runner.each{}
       end
 
       it 'instance_exec the definition block otherwise' do
         runner = Runner.new(Proc.new{ with(:runner => self){ report{} } })
         seen   = nil
-        runner.call(Proc.new{|t| seen = t[:runner]})
+        runner.each{|t| seen = t[:runner]}
         seen.should eq(runner)
       end
 

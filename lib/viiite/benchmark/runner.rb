@@ -8,17 +8,12 @@ module Viiite
         @definition = definition
       end
 
-      def call(reporter)
+      def each(&reporter)
+        return self unless reporter
         @reporter = reporter
         dsl_run(@definition)
         @reporter = nil
       end
-
-      def run(&reporter)
-        return self unless reporter
-        call(reporter)
-      end
-      alias :each :run
 
       protected
 
