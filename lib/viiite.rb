@@ -52,18 +52,10 @@ module Viiite
     bench(&block)
   end
 
-  def self.short_ruby_description(desc)
-    warn "Viiite.short_ruby_description is deprecated, use RubyFacts.short_ruby_description (#{caller[0]})"
-    RubyFacts.send(:short_ruby_description, desc)
-  end
-
-  def self.which_ruby
-    warn "Viiite.which_ruby is deprecated, use RubyFacts.which_ruby (#{caller[0]})"
-    RubyFacts.which
-  end
+  require 'viiite/facts/ruby_facts'
+  extend(RubyFacts)
 
 end # module Viiite
-require 'viiite/facts/ruby_facts'
 require "viiite/tms"
 require 'viiite/configuration'
 require "viiite/benchmark"
