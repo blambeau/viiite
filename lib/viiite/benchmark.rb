@@ -34,15 +34,20 @@ module Viiite
       reporter ||= block
       if reporter and reporter.respond_to?(:report)
         reporter.report(self)
+      elsif reporter
+        runner.call(reporter)
       else
-        runner = Runner.new(definition)
-        reporter ? runner.call(reporter) : runner
+        runner
       end
     end
 
     private
 
     attr_writer :path
+    
+    def runner
+      Runner.new(definition)
+    end
 
   end # class Benchmark
 end # module Viiite

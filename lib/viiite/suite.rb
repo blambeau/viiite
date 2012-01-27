@@ -15,8 +15,10 @@ module Viiite
       reporter ||= block
       if reporter and reporter.respond_to?(:report)
         reporter.report(self)
+      elsif reporter
+        runner.run(&reporter)
       else
-        Runner.new(self).run(&reporter)
+        runner
       end
     end
 
@@ -45,6 +47,10 @@ module Viiite
       bench = Benchmark.new(file)
       warn "No benchmark found in #{file}" unless bench
       bench
+    end
+
+    def runner
+      Runner.new(self)
     end
 
   end # class Suite
