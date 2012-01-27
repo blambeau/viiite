@@ -63,7 +63,9 @@ module Viiite
     end
 
     def benchmark_path(file)
-      config.pwd ? file.relative_to(config.pwd) : file
+      pwd = config.pwd
+      pwd = config.pwd.expand if pwd
+      pwd ? file.expand.relative_to(pwd) : file
     end
 
     def benchmark_name(file)
