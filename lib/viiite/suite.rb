@@ -1,45 +1,41 @@
 module Viiite
   class Suite
     include Unit
-    include Enumerable
 
     attr_reader :config
 
-    def initialize(config, path = config.benchmark_folder)
+    def initialize(config, files = config.benchmark_folder)
       @config = config
-      @path   = path
+      @files  = Array(files).map{|f| Path(f).expand}
     end
 
-    def each(&proc)
-      benchmarks = if path.file?
-        [ load_one(path) ]
-      else
-        path.glob(config.benchmark_pattern).
-             sort.
-             map{|file| load_one(file)}
-      end
-      benchmarks.compact.each(&proc)
-    end
-
-    def files
-      map(&:path)
-    end
-
-    def empty?
-      to_a.empty?
+    def benchmark_files
+      benchmarks.map(&:path)
     end
 
     protected
+    attr_reader :files
+
+    def benchmarks
+      files.map(&method(:load_one)).flatten.compact
+    end
 
     def load_one(file)
-      bench = Benchmark.new(file)
-      warn "No benchmark found in #{file}" unless bench
-      bench
+      if file.file?
+        unless bench = Viiite.bench(config, file)
+          warn "No benchmark found in #{file}"
+        end
+        [ bench ]
+      else
+        file.glob(config.benchmark_pattern).
+             sort.
+             map{|file| load_one(file)}
+      end
     end
 
     def _run(extra, reporter)
-      each do |bench|
-        bench.run(extra, reporter)
+      benchmarks.each do |unit|
+        unit.run(extra, reporter)
       end
     end
 

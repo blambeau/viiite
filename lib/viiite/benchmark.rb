@@ -4,38 +4,27 @@ module Viiite
     include Unit
     include DSL
 
+    attr_reader :config
+    attr_reader :path
     attr_reader :definition
 
-    def initialize(definition)
+    def initialize(config, path, definition)
+      unless definition
+        raise ArgumentError, "Benchmark definition is mandatory", caller 
+      end
+      @config     = config
+      @path       = path
       @definition = definition
     end
 
-    @benchmarks = []
-    def self.new(arg, *others)
-      case arg
-      when String, Path
-        @benchmarks = []
-        load(path = Path(arg).expand)
-        bench = @benchmarks.pop
-        bench.send(:path=, path) if bench
-        bench
-      when IO, StringIO
-        warn "Building Benchmarks from IO objects is deprecated"
-        eval(arg.read, TOPLEVEL_BINDING)
-        @benchmarks.pop
-      else
-        bench = super(arg)
-        @benchmarks << bench
-        bench
-      end
-    end
-
     protected
-    attr_writer :path
 
     def _run(extra, reporter)
       @reporter = reporter
-      extra = extra.merge(:path => path) if path
+      if path and config
+        relpath = path.relative_to(config.benchmark_folder)
+        extra   = extra.merge(:path => relpath)
+      end
       dsl_run(@definition, extra)
       @reporter = nil
     end

@@ -1,8 +1,6 @@
 module Viiite
   module Unit
 
-    attr_reader :path
-
     def run(extra = nil, reporter = nil, &block)
       extra, reporter = {}, extra unless extra.is_a?(Hash)
       reporter ||= block

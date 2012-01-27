@@ -6,8 +6,8 @@ module Viiite
       @delegate, @n, @key = delegate, n, key
     end
 
-    def path
-      delegate.path
+    def config
+      delegate.config
     end
 
     protected

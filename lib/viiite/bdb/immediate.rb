@@ -29,7 +29,7 @@ module Viiite
 
       def benchmark(name)
         if (file = bench_file(config.benchmark_folder, name.to_s, @ext)).exist?
-          return Benchmark.new(file)
+          return Viiite.bench(file)
         else
           raise NoSuchBenchmarkError, "No such benchmark #{name}"
         end
