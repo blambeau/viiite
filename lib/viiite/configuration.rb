@@ -49,5 +49,13 @@ module Viiite
       !!cache_folder
     end
 
+    def cache_file_for(path)
+      return nil unless cache_folder
+      path = path.path if path.respond_to?(:path)
+      path = path.expand
+      path = path.relative_to(benchmark_folder.expand)
+      cache_folder/path
+    end
+
   end # class Configuration
 end # module Viiite

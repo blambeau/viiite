@@ -38,7 +38,7 @@ module Viiite
       config.stdout = StringIO.new
       config.stdout.should be_a(StringIO)
     end
-    
+
     describe 'cache_enabled?' do
       it 'is enabled by default' do
         config.should be_cache_enabled
@@ -52,6 +52,21 @@ module Viiite
         config.should_not be_cache_enabled
       end
     end
-    
+
+    describe "cache_file_for" do
+      let(:source){ config.benchmark_folder/"Array/bench_sort.rb" }
+      it 'supports a Path' do
+        config.cache_file_for(source).should eq(config.cache_folder/'Array/bench_sort.rb')
+      end
+      it 'works with unrelated cache folder' do
+        config.cache_folder = '/tmp'
+        config.cache_file_for(source).should eq(Path("/tmp/Array/bench_sort.rb"))
+      end
+      it 'returns nil if no cache' do
+        config.cache_folder = nil
+        config.cache_file_for(source).should be_nil
+      end
+    end
+
   end
 end
