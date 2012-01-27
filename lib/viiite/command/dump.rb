@@ -33,7 +33,9 @@ module Viiite
         db = database
         case arg = argv.first
         when "benchmarks"
-          dump db.benchmarks(Path('.').expand)
+          dump db.benchmarks
+        when "suite"
+          dump db.suite
         when NilClass
           db.benchmarks.each do |tuple|
             dump db.benchmark_result(tuple)

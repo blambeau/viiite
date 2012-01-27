@@ -1,0 +1,4 @@
+{:name => ".", :files => Alf::Relation[{:path => Path("spec/fixtures/bdb/Array/bench_sort.rb")}, {:path => Path("spec/fixtures/bdb/bench_iteration.rb")}]}
+{:name => "Array", :files => Alf::Relation[{:path => Path("spec/fixtures/bdb/Array/bench_sort.rb")}]}
+{:name => "Array/bench_sort", :files => Alf::Relation[{:path => Path("spec/fixtures/bdb/Array/bench_sort.rb")}]}
+{:name => "bench_iteration", :files => Alf::Relation[{:path => Path("spec/fixtures/bdb/bench_iteration.rb")}]}
