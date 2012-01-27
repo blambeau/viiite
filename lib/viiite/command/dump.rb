@@ -10,6 +10,7 @@ module Viiite
     # #{summarized_options}
     #
     class Dump < Quickl::Command(__FILE__, __LINE__)
+      include Commons
 
       options do |opt|
         @renderer = :rash
@@ -25,23 +26,10 @@ module Viiite
       end
 
       def execute(argv)
-        raise Quickl::Help unless argv.size <= 1
-        db = database
-        case arg = argv.first
-        when "suite"
+        if argv.empty?
           @renderer = :text
-          dump db.suite
-        when NilClass
-          db.benchmarks.each do |tuple|
-            dump db.benchmark_result(tuple)
-          end
+          dump database.suite
         else
-          if rel = db.benchmark_result(arg) 
-            dump rel
-          else
-            $stderr << "No such benchmark #{arg}\n"
-            exit(1)
-          end
         end
       end
 
