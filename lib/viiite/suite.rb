@@ -1,3 +1,4 @@
+require 'viiite/suite/runner'
 module Viiite
   class Suite
     include Enumerable
@@ -11,9 +12,7 @@ module Viiite
     end
 
     def run(&reporter)
-      each do |bench|
-        bench.run(&reporter)
-      end
+      Runner.new(self).run(&reporter)
     end
 
     def each(&proc)
