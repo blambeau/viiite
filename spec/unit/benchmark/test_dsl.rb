@@ -14,6 +14,12 @@ module Viiite
         dsl_run(defn)
         @output
       end
+      
+      it 'supports reporting nothing' do
+        rel do |dsl|
+          dsl.report
+        end.should eq([{}])
+      end
 
       it "supports variation points" do
         rel do |dsl|
