@@ -31,7 +31,7 @@ module Viiite
       end
 
       it 'should contain the expected benchmark' do
-        subject.to_a.first.path.should eq(config.benchmark_folder/"bench_iteration.rb")
+        subject.files.should eq([config.benchmark_folder/"bench_iteration.rb"])
       end
     end
 
@@ -39,6 +39,13 @@ module Viiite
       let(:subject){ Suite.new(config, config.benchmark_folder) }
 
       it_should_behave_like("A benchmark suite")
+
+      it 'should contain the expected benchmarkf' do
+        subject.files.should eq([
+          config.benchmark_folder/"Array/bench_sort.rb",
+          config.benchmark_folder/"bench_iteration.rb"
+        ])
+      end
     end
 
     context "on a wrong file" do

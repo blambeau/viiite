@@ -21,9 +21,14 @@ module Viiite
         [ load_one(path) ]
       else
         path.glob(config.benchmark_pattern).
+             sort.
              map{|file| load_one(file)}
       end
       benchmarks.compact.each(&proc)
+    end
+
+    def files
+      map(&:path)
     end
 
     def empty?
