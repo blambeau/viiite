@@ -62,3 +62,5 @@ require "viiite/benchmark"
 require "viiite/suite"
 require "viiite/command"
 require "viiite/bdb"
+
+require 'viiite/reporter/rash'
