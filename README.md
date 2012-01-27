@@ -1,5 +1,8 @@
 # Viiite
 
+[![Build Status](https://secure.travis-ci.org/blambeau/viiite.png)](http://travis-ci.org/blambeau/viiite)
+[![Dependency Status](https://gemnasium.com/blambeau/viiite.png)](https://gemnasium.com/blambeau/viiite)
+
 Viiite brings tools to benchmark and analyze the complexity of your algorithms.
 It has been designed as an alternative to Benchmark that let your benchmarks
 evolve smoothly from simple measures to more complex infrastructures.

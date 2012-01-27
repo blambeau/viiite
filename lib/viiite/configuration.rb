@@ -38,13 +38,25 @@ module Viiite
       yield(self) if block_given?
     end
 
-    attribute :benchmark_folder,  Path,    "benchmarks"
-    attribute :benchmark_pattern, String,  "**/*.rb"
-    attribute :cache_folder,      Path,    Proc.new{|c| c.benchmark_folder/".cache" }
+    ValidOut = lambda{|x| x.respond_to?(:<<) }
+
+    attribute :benchmark_folder,  Path,     "benchmarks"
+    attribute :benchmark_pattern, String,   "**/*.rb"
+    attribute :cache_folder,      Path,     Proc.new{|c| c.benchmark_folder/".cache" }
+    attribute :stdout,            ValidOut, $stdout
     attribute :pwd,               Path,    Proc.new{|c| Path('.').expand }
 
     def cache_enabled?
       !!cache_folder
+    end
+
+    def cache_file_for(path)
+      return nil unless cache_folder
+      path = path.path if path.respond_to?(:path)
+      return nil unless path
+      path = path.expand
+      path = path.relative_to(benchmark_folder.expand)
+      (cache_folder/path).replace_extension(".rash")
     end
 
   end # class Configuration

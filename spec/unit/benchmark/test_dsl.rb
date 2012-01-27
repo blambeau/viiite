@@ -68,7 +68,7 @@ module Viiite
 
       it 'provides info about ruby' do
         rel do |dsl|
-          dsl.variation_point :which, RubyFacts.which
+          dsl.variation_point :which, RubyFacts.which_ruby
           dsl.report
         end.first.should have_key(:which)
       end

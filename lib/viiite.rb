@@ -20,7 +20,7 @@ module Viiite
   # Duplicate, reuse and extend Myrrha default coercions
   Coercions = Myrrha::Coerce.dup.append do |r|
     r.coercion(String, Path){|value, _| Path(value)}
-  end    
+  end
 
   def self.measure
     t0, r0 = Process.times, Time.now
@@ -59,22 +59,17 @@ module Viiite
     bench(&block)
   end
 
-  def self.short_ruby_description(desc)
-    warn "Viiite.short_ruby_description is deprecated, use RubyFacts.short_ruby_description (#{caller[0]})"
-    RubyFacts.send(:short_ruby_description, desc)
-  end
-
-  def self.which_ruby
-    warn "Viiite.which_ruby is deprecated, use RubyFacts.which_ruby (#{caller[0]})"
-    RubyFacts.which
-  end
+  require 'viiite/facts/ruby_facts'
+  extend(RubyFacts)
 
 end # module Viiite
-require 'viiite/facts/ruby_facts'
 require "viiite/tms"
 require 'viiite/configuration'
+require 'viiite/unit'
 require "viiite/benchmark"
 require "viiite/suite"
+require "viiite/n_times"
 require 'viiite/database'
 require "viiite/command"
 require "viiite/bdb"
+require 'viiite/reporter'

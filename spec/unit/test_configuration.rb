@@ -39,6 +39,12 @@ module Viiite
       config.pwd.should eq(Path("blah"))
     end
 
+    it 'has stdout accessors' do
+      config.stdout.should eq($stdout)
+      config.stdout = StringIO.new
+      config.stdout.should be_a(StringIO)
+    end
+
     describe 'cache_enabled?' do
       it 'is enabled by default' do
         config.should be_cache_enabled
@@ -50,6 +56,33 @@ module Viiite
       it 'works even when cache_folder is a Proc' do
         config.cache_folder = Proc.new{|c| nil}
         config.should_not be_cache_enabled
+      end
+    end
+
+    describe "cache_file_for" do
+      let(:source){ config.benchmark_folder/"Array/bench_sort.rb" }
+      it 'supports a Path' do
+        config.cache_file_for(source).should eq(config.cache_folder/'Array/bench_sort.rash')
+      end
+      it 'supports a pseudo Path' do
+        config.cache_file_for(source.without_extension).should eq(config.cache_folder/'Array/bench_sort.rash')
+      end
+      it 'works with unrelated cache folder' do
+        config.cache_folder = '/tmp'
+        config.cache_file_for(source).should eq(Path("/tmp/Array/bench_sort.rash"))
+      end
+      it 'returns nil if no cache' do
+        config.cache_folder = nil
+        config.cache_file_for(source).should be_nil
+      end
+      it 'works with a benchmark' do
+        config = fixtures_config
+        source = Benchmark.new(config.benchmark_folder/"bench_iteration.rb")
+        config.cache_file_for(source).should eq(config.cache_folder/'bench_iteration.rash')
+      end
+      it 'works if the benchmark is detached' do
+        source = Benchmark.new(Proc.new{})
+        config.cache_file_for(source).should be_nil
       end
     end
 

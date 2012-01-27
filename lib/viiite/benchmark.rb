@@ -1,9 +1,9 @@
 require 'viiite/benchmark/dsl'
-require 'viiite/benchmark/runner'
 module Viiite
   class Benchmark
+    include Unit
+    include DSL
 
-    attr_reader :path
     attr_reader :definition
 
     def initialize(definition)
@@ -30,17 +30,19 @@ module Viiite
       end
     end
 
-    def runner
-      Runner.new(definition)
-    end
-
-    def run(&reporter)
-      runner.call(reporter)
-    end
-
-    private
-
+    protected
     attr_writer :path
+
+    def _run(extra, reporter)
+      @reporter = reporter
+      extra = extra.merge(:path => path) if path
+      dsl_run(@definition, extra)
+      @reporter = nil
+    end
+
+    def output(tuple)
+      @reporter.call tuple
+    end
 
   end # class Benchmark
 end # module Viiite

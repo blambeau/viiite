@@ -50,7 +50,7 @@ module Viiite
         def each
           @cache_file.dir.mkdir_p
           @cache_file.open('a') do |io|
-            @benchmark.runner.each do |tuple|
+            @benchmark.run do |tuple|
               io << Alf::Tools.to_ruby_literal(tuple) << "\n"
               yield(tuple)
             end

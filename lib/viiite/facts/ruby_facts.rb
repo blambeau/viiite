@@ -1,15 +1,13 @@
 module Viiite
   module RubyFacts
 
-    def which
+    def which_ruby
       if Object.const_defined?(:RUBY_DESCRIPTION)
         short_ruby_description(RUBY_DESCRIPTION)
       else
         "ruby #{RUBY_VERSION}"
       end
     end
-
-    private
 
     def short_ruby_description(description)
       case description
