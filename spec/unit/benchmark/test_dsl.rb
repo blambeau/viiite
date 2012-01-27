@@ -65,7 +65,14 @@ module Viiite
           {:all => true, :a => :b, :bench => :bench2}
         ])
       end
-      
+
+      it 'provides info about ruby' do
+        rel do |dsl|
+          dsl.variation_point :which, RubyFacts.which
+          dsl.report
+        end.first.should have_key(:which)
+      end
+
     end
   end
 end

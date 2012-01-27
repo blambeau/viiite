@@ -20,13 +20,12 @@ module Viiite
       }
     end
     
-    it 'which_ruby' do
-      which_ruby.should_not be_nil
+    it 'which' do
+      which.should_not be_nil
     end
     
-    it 'has those methods installed on the module itself' do
-      RubyFacts.should respond_to(:short_ruby_description)
-      RubyFacts.should respond_to(:which_ruby)
+    it 'has public methods installed on the module itself' do
+      RubyFacts.should respond_to(:which)
     end
 
   end
