@@ -3,10 +3,18 @@ module Viiite
   module Reporter
     describe Rash do
 
-      it 'outputs hash literals' do
-        io = StringIO.new
-        reporter = Reporter::Rash.new(io)
-        reporter.call(:ruby => "rules the world")
+      let(:io){ StringIO.new }
+      let(:subject){ Reporter::Rash.new(io) }
+
+      it 'outputs hash literals when called' do
+        subject.call(:ruby => "rules the world")
+        io.string.should eq(%Q{{:ruby => "rules the world"}\n})
+      end
+
+      it 'reports hash literals' do
+        bench = [:ruby => "rules the world"]
+        def bench.run; self; end
+        subject.report(bench)
         io.string.should eq(%Q{{:ruby => "rules the world"}\n})
       end
 
