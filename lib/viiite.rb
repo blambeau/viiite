@@ -13,7 +13,7 @@ module Viiite
   # Duplicate, reuse and extend Myrrha default coercions
   Coercions = Myrrha::Coerce.dup.append do |r|
     r.coercion(String, Path){|value, _| Path(value)}
-  end    
+  end
 
   def self.measure
     t0, r0 = Process.times, Time.now
