@@ -30,9 +30,14 @@ module Viiite
       end
     end
 
-    def run(&reporter)
-      runner = Runner.new(definition)
-      reporter ? runner.call(reporter) : runner
+    def run(reporter = nil, &block)
+      reporter ||= block
+      if reporter and reporter.respond_to?(:report)
+        reporter.report(self)
+      else
+        runner = Runner.new(definition)
+        reporter ? runner.call(reporter) : runner
+      end
     end
 
     private
