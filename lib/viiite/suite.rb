@@ -1,4 +1,3 @@
-require 'viiite/suite/runner'
 module Viiite
   class Suite
     include Unit
@@ -30,7 +29,7 @@ module Viiite
       to_a.empty?
     end
 
-    private
+    protected
 
     def load_one(file)
       bench = Benchmark.new(file)
@@ -38,8 +37,10 @@ module Viiite
       bench
     end
 
-    def runner
-      Runner.new(self)
+    def _run(reporter)
+      each do |bench|
+        bench.run(reporter)
+      end
     end
 
   end # class Suite

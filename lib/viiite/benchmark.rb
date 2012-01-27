@@ -1,8 +1,8 @@
 require 'viiite/benchmark/dsl'
-require 'viiite/benchmark/runner'
 module Viiite
   class Benchmark
     include Unit
+    include DSL
 
     attr_reader :definition
 
@@ -30,12 +30,17 @@ module Viiite
       end
     end
 
-    private
-
+    protected
     attr_writer :path
 
-    def runner
-      Runner.new(definition)
+    def _run(reporter)
+      @reporter = reporter
+      dsl_run(@definition)
+      @reporter = nil
+    end
+
+    def output(tuple)
+      @reporter.call tuple
     end
 
   end # class Benchmark

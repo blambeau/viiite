@@ -5,12 +5,24 @@ module Viiite
 
     def run(reporter = nil, &block)
       reporter ||= block
-      if reporter and reporter.respond_to?(:report)
-        reporter.report(self)
-      elsif reporter
-        runner.each(&reporter)
-      else
-        runner
+      return to_enum unless reporter
+      dup._run(reporter)
+    end
+
+    private
+
+    def to_enum
+      Enum.new(self)
+    end
+
+    class Enum
+      include Enumerable
+      def initialize(unit)
+        @unit = unit
+      end
+      def each(&proc)
+        return self unless proc
+        @unit.run(proc)
       end
     end
 

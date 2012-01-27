@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'viiite'
 require 'stringio'
+require File.expand_path('../unit/shared/unit', __FILE__)
 
 RSpec.configure do |c|
   c.filter_run_excluding :ruby => lambda { |version| RUBY_VERSION < version.to_s }
