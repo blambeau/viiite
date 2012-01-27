@@ -10,8 +10,8 @@ module Viiite
 
       attr_reader :current_tuple
 
-      def dsl_run(defn, current = {})
-        @current_tuple = current.dup
+      def dsl_run(defn, init = {})
+        @current_tuple = init.dup
         if defn.arity <= 0
           instance_exec(&defn)
         else
