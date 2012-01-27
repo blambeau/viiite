@@ -10,11 +10,14 @@ module Viiite
       
       attr_reader :current_tuple
       
-      def in_a_run
+      def dsl_run(defn, subject = self)
         @current_tuple = {}
-        res = yield
+        if defn.arity <= 0
+          subject.instance_exec(&defn)
+        else
+          defn.call(self)
+        end
         @current_tuple = nil
-        res
       end
       
       def with(hash)

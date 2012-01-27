@@ -10,13 +10,7 @@ module Viiite
 
       def call(reporter)
         @reporter = reporter
-        in_a_run do
-          if @definition.arity <= 0
-            instance_exec(&@definition)
-          else
-            @definition.call(self)
-          end
-        end
+        dsl_run(@definition)
         @reporter = nil
       end
       
