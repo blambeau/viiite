@@ -18,7 +18,10 @@ module Viiite
 
     def _run(extra, reporter)
       @reporter = reporter
-      extra = extra.merge(:path => path) if path
+      if path and config
+        relpath = path.relative_to(config.benchmark_folder)
+        extra   = extra.merge(:path => relpath)
+      end
       dsl_run(@definition, extra)
       @reporter = nil
     end

@@ -12,14 +12,14 @@ module Viiite
 
       describe "when passed a benchmark file" do
         let(:argv){ [ bench_iteration ] }
-        it{ should eq(Alf::Relation[{:bench => :times, :path => bench_iteration}]) }
+        it{ should eq(Alf::Relation[{:bench => :times}]) }
       end
 
       describe "with --runs" do
         let(:argv){ [ bench_iteration, "--runs=2" ] }
         let(:expected){
-          Alf::Relation[{:bench => :times, :run => 0, :path => bench_iteration},
-                        {:bench => :times, :run => 1, :path => bench_iteration}]
+          Alf::Relation[{:bench => :times, :run => 0},
+                        {:bench => :times, :run => 1}]
         }
         it{ should eq(expected) }
       end
@@ -27,8 +27,8 @@ module Viiite
       describe "with --runs and --run-key" do
         let(:argv){ [ bench_iteration, "--runs=2", "--run-key=hello" ] }
         let(:expected){
-          Alf::Relation[{:bench => :times, :hello => 0, :path => bench_iteration},
-                        {:bench => :times, :hello => 1, :path => bench_iteration}]
+          Alf::Relation[{:bench => :times, :hello => 0},
+                        {:bench => :times, :hello => 1}]
         }
         it{ should eq(expected) }
       end
