@@ -1,8 +1,8 @@
 module Viiite
   class Benchmark
     class Runner
+      include Enumerable
       include DSL
-      include Alf::Iterator
 
       def initialize(definition)
         @definition = definition
@@ -14,9 +14,11 @@ module Viiite
         @reporter = nil
       end
 
-      def each(&reporter)
+      def run(&reporter)
+        return self unless reporter
         call(reporter)
       end
+      alias :each :run
 
       protected
 

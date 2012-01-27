@@ -8,15 +8,13 @@ module Viiite
           b.report(:add){ 1+1 }
         end
       }
-      let(:runner){ Runner.new(definition) }
+      let(:subject){ Runner.new(definition) }
 
-      it 'is Enumerable' do
-        runner.should respond_to(:each)
-        runner.should respond_to(:map)
-      end
+      it{ should be_a(Enumerable) }
 
-      it 'is Alf iterable' do
-        runner.should respond_to(:to_rel)
+      it 'should return an Enumerable when ran without reporter' do
+        subject.run.should eq(subject)
+        subject.each.should eq(subject)
       end
 
       it 'pass itself to the definition block when asked' do
