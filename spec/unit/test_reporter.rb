@@ -19,6 +19,6 @@ module Viiite
       subject.report(bench)
       io.string.should eq(literal)
     end
-    
+
   end # describe Reporter
 end # module Viiite

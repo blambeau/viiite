@@ -33,7 +33,7 @@ module Viiite
     private
 
     attr_writer :path
-    
+
     def runner
       Runner.new(definition)
     end

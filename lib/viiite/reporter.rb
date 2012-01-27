@@ -15,7 +15,7 @@ module Viiite
         unit.each &method(:call)
       end
     end
-    
+
     def ios
       [config.stdout]
     end

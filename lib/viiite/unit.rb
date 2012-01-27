@@ -1,8 +1,8 @@
 module Viiite
   module Unit
-    
+
     attr_reader :path
-    
+
     def run(reporter = nil, &block)
       reporter ||= block
       if reporter and reporter.respond_to?(:report)
