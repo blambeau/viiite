@@ -1,25 +1,14 @@
 require 'viiite/suite/runner'
 module Viiite
   class Suite
+    include Unit
     include Enumerable
 
     attr_reader :config
-    attr_reader :path
 
     def initialize(config, path = config.benchmark_folder)
       @config = config
       @path   = path
-    end
-
-    def run(reporter = nil, &block)
-      reporter ||= block
-      if reporter and reporter.respond_to?(:report)
-        reporter.report(self)
-      elsif reporter
-        runner.each(&reporter)
-      else
-        runner
-      end
     end
 
     def each(&proc)

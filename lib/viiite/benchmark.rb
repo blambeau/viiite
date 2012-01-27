@@ -2,8 +2,8 @@ require 'viiite/benchmark/dsl'
 require 'viiite/benchmark/runner'
 module Viiite
   class Benchmark
+    include Unit
 
-    attr_reader :path
     attr_reader :definition
 
     def initialize(definition)
@@ -27,17 +27,6 @@ module Viiite
         bench = super(arg)
         @benchmarks << bench
         bench
-      end
-    end
-
-    def run(reporter = nil, &block)
-      reporter ||= block
-      if reporter and reporter.respond_to?(:report)
-        reporter.report(self)
-      elsif reporter
-        runner.each(&reporter)
-      else
-        runner
       end
     end
 

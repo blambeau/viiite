@@ -58,9 +58,9 @@ module Viiite
 end # module Viiite
 require "viiite/tms"
 require 'viiite/configuration'
+require 'viiite/unit'
 require "viiite/benchmark"
 require "viiite/suite"
 require "viiite/command"
 require "viiite/bdb"
-
 require 'viiite/reporter'
