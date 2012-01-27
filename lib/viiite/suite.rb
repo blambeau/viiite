@@ -37,9 +37,9 @@ module Viiite
       bench
     end
 
-    def _run(reporter)
+    def _run(extra, reporter)
       each do |bench|
-        bench.run(reporter)
+        bench.run(extra, reporter)
       end
     end
 

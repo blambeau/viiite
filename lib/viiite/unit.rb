@@ -3,27 +3,35 @@ module Viiite
 
     attr_reader :path
 
-    def run(reporter = nil, &block)
+    def run(extra = nil, reporter = nil, &block)
+      extra, reporter = {}, extra unless extra.is_a?(Hash)
       reporter ||= block
-      return to_enum unless reporter
-      dup._run(reporter)
+      if reporter
+        dup._run(extra, reporter)
+      else
+        to_enum(extra)
+      end
     end
 
     private
 
-    def to_enum
-      Enum.new(self)
+    def to_enum(extra = {})
+      Enum.new(self, extra)
     end
 
     class Enum
       include Enumerable
-      def initialize(unit)
-        @unit = unit
+
+      def initialize(unit, extra)
+        @unit  = unit
+        @extra = extra
       end
+
       def each(&proc)
         return self unless proc
-        @unit.run(proc)
+        @unit.run(@extra, proc)
       end
+
     end
 
   end # module Unit

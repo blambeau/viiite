@@ -33,9 +33,9 @@ module Viiite
     protected
     attr_writer :path
 
-    def _run(reporter)
+    def _run(extra, reporter)
       @reporter = reporter
-      dsl_run(@definition)
+      dsl_run(@definition, extra)
       @reporter = nil
     end
 
