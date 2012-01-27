@@ -1,13 +1,10 @@
 module Viiite
   module Reporter
     class Rash
+      include Reporter
 
       def initialize(io = $stdout)
         @io = io
-      end
-
-      def report(bench_or_suite)
-        Alf::Renderer.rash(bench_or_suite.run).execute(@io)
       end
 
       def call(tuple)
