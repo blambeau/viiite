@@ -8,6 +8,10 @@ module Viiite
         @delegate = delegate
       end
 
+      def report(unit)
+        unit.run.each(&method(:call))
+      end
+
       def call(tuple)
         @io << Alf::Tools.to_ruby_literal(tuple) << "\n"
         @delegate.call(tuple) if @delegate
