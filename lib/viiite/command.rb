@@ -39,7 +39,7 @@ module Viiite
       opt.on('--suite=FOLDER',
              "Specify the folder of the benchmark suite (defaults to 'benchmarks')") do |val|
         raise Quickl::InvalidArgument, "Missing folder #{val}" unless File.directory?(val)
-        @config.benchmark_folder = val
+        @config.benchmark_folder = Path(val).expand
       end
       opt.on('--pattern=GLOB',
              "Specify the pattern to find benchmarks in the suite folder (defaults to '**/*.rb')") do |glob|
@@ -47,7 +47,7 @@ module Viiite
       end
       opt.on('--cache=FOLDER',
              'Specify the cache folder') do |folder|
-        @config.cache_folder = folder
+        @config.cache_folder = Path(folder).expand
       end
       opt.on('--no-cache',
              'Disable the cache') do
