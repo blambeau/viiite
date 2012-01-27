@@ -3,19 +3,29 @@ module Viiite
   module Reporter
     describe Rash do
 
-      let(:io){ StringIO.new }
-      let(:subject){ Reporter::Rash.new(io) }
+      let(:io)     { StringIO.new                       }
+      let(:subject){ Reporter::Rash.new(io)             }
+      let(:tuple)  { {:ruby => "rules the world"}       }
+      let(:literal){ %Q|{:ruby => "rules the world"}\n| }
 
       it 'outputs hash literals when called' do
-        subject.call(:ruby => "rules the world")
-        io.string.should eq(%Q{{:ruby => "rules the world"}\n})
+        subject.call(tuple)
+        io.string.should eq(literal)
       end
 
       it 'reports hash literals' do
-        bench = [:ruby => "rules the world"]
+        bench = [tuple]
         def bench.run; self; end
         subject.report(bench)
-        io.string.should eq(%Q{{:ruby => "rules the world"}\n})
+        io.string.should eq(literal)
+      end
+      
+      it 'supports a delegate' do
+        seen     = []
+        delegate = Proc.new{|t| seen << t}
+        subject  = Reporter::Rash.new(io, delegate)
+        subject.call(tuple)
+        seen.should eq([tuple])
       end
 
     end # describe Rash
