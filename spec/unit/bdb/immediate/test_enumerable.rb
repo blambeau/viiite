@@ -10,7 +10,7 @@ module Viiite
           tuple[:file].exist?.should be_true
         end
       end
-      
+
       it 'returns expected benchmarks' do
         expected = Alf::Relation[
           {:name => "bench_iteration"},

@@ -20,7 +20,7 @@ module Viiite
   class Command < Quickl::Delegator(__FILE__, __LINE__)
 
     attr_reader :config
-    
+
     def initialize
       @config = Configuration.new
     end

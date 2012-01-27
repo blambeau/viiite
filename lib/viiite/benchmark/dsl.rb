@@ -7,9 +7,9 @@ module Viiite
     # at each step.
     #
     module DSL
-      
+
       attr_reader :current_tuple
-      
+
       def dsl_run(defn, subject = self)
         @current_tuple = {}
         if defn.arity <= 0
@@ -19,7 +19,7 @@ module Viiite
         end
         @current_tuple = nil
       end
-      
+
       def with(hash)
         if block_given?
           old_tuple, @current_tuple = current_tuple, current_tuple.merge(hash)
@@ -51,7 +51,7 @@ module Viiite
         end
         with(hash){ output current_tuple.dup }
       end
-      
+
     end # module DSL
   end # class Benchmark
 end # module Viiite

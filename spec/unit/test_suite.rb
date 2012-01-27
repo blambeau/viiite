@@ -1,9 +1,9 @@
 require 'spec_helper'
 module Viiite
   describe Suite do
-    
+
     let(:config){ fixtures_config }
-    
+
     shared_examples_for("A benchmark suite") do
 
       it{ should be_a(Enumerable) }
@@ -34,7 +34,7 @@ module Viiite
         subject.to_a.first.path.should eq(config.benchmark_folder/"bench_iteration.rb")
       end
     end
-    
+
     context "on a folder" do
       let(:subject){ Suite.new(config, config.benchmark_folder) }
 
@@ -45,6 +45,6 @@ module Viiite
       let(:subject){ Suite.new(config, fixtures_folder/"fake_bench.rb") }
       it{ should be_empty }
     end
-    
+
   end # describe Suite
 end # module Viiite

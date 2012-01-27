@@ -14,7 +14,7 @@ module Viiite
         dsl_run(defn)
         @output
       end
-      
+
       it 'supports reporting nothing' do
         rel do |dsl|
           dsl.report
@@ -45,7 +45,7 @@ module Viiite
           end
         end.map{|t| t[:size]}.should == [10, 100, 1000]
       end
-    
+
       it "supports nested #with, #variation_point and #range_over" do
         x = rel do |dsl|
           dsl.variation_point :all, true

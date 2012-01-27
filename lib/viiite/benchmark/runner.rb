@@ -13,7 +13,7 @@ module Viiite
         dsl_run(@definition)
         @reporter = nil
       end
-      
+
       def each(&reporter)
         call(reporter)
       end

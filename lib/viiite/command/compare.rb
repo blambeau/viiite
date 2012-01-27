@@ -40,7 +40,7 @@ module Viiite
           [a, "avg{ tms.#{a} }"]
         }].merge("stddev_#{first}".to_sym => "stddev{ tms.#{first} }")
         op = lispy.summarize(op, @by, aggs)
-        
+
         # 2) make the sorting
         op = lispy.sort(op, @order)
 
@@ -52,7 +52,7 @@ module Viiite
             depend = [:measure]
           end
         end
-        
+
         op
       end
 
