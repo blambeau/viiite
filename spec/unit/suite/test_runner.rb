@@ -8,7 +8,7 @@ module Viiite
       it { should be_a(Enumerable) }
 
       it 'should enumerate tuples' do
-        subject.run do |t|
+        subject.each do |t|
           t.should be_a(Hash)
           t[:tms].should_not be_nil
         end
@@ -16,7 +16,6 @@ module Viiite
 
       it 'should return an Enumerable when invoked without reporter' do
         subject.each.should eq(subject)
-        subject.run.should eq(subject)
       end
 
     end
