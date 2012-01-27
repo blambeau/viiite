@@ -9,6 +9,10 @@ module Viiite
       @config     = config
       @benchmarks = benchmarks
     end
+    
+    def files
+      benchmarks.map(&:path)
+    end
 
     protected
 
