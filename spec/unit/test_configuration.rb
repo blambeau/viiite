@@ -33,6 +33,12 @@ module Viiite
       config.cache_folder.should eq(Path("cache"))
     end
 
+    it 'has stdout accessors' do
+      config.stdout.should eq($stdout)
+      config.stdout = StringIO.new
+      config.stdout.should be_a(StringIO)
+    end
+    
     describe 'cache_enabled?' do
       it 'is enabled by default' do
         config.should be_cache_enabled
