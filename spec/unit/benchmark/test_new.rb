@@ -20,10 +20,5 @@ module Viiite
       specify{ subject.path.should eq(arg) }
     end
 
-    describe 'with an IO' do
-      let(:arg){ (dir/'bench_add.rb').open }
-      it{ should be_a(Benchmark) }
-    end
-
   end
 end

@@ -19,10 +19,6 @@ module Viiite
         bench = @benchmarks.pop
         bench.send(:path=, path) if bench
         bench
-      when IO, StringIO
-        warn "Building Benchmarks from IO objects is deprecated"
-        eval(arg.read, TOPLEVEL_BINDING)
-        @benchmarks.pop
       else
         bench = super(arg)
         @benchmarks << bench
