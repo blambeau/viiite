@@ -10,11 +10,14 @@ module Viiite
       
       attr_reader :current_tuple
       
-      def in_a_run
+      def dsl_run(defn, subject = self)
         @current_tuple = {}
-        res = yield
+        if defn.arity <= 0
+          subject.instance_exec(&defn)
+        else
+          defn.call(self)
+        end
         @current_tuple = nil
-        res
       end
       
       def with(hash)
@@ -42,12 +45,11 @@ module Viiite
 
       def report(hash = {}, &block)
         hash = {:bench => hash.to_sym} unless hash.is_a?(Hash)
-        with(hash) {
+        if block
           GC.start
-          with(:tms => Viiite.measure(&block)){ 
-            output current_tuple.dup
-          }
-        }
+          hash = hash.merge(:tms => Viiite.measure(&block))
+        end
+        with(hash){ output current_tuple.dup }
       end
       
     end # module DSL

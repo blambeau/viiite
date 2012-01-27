@@ -61,12 +61,12 @@ module Viiite
 
   def self.short_ruby_description(desc)
     warn "Viiite.short_ruby_description is deprecated, use RubyFacts.short_ruby_description (#{caller[0]})"
-    RubyFacts.short_ruby_description(desc)
+    RubyFacts.send(:short_ruby_description, desc)
   end
 
   def self.which_ruby
     warn "Viiite.which_ruby is deprecated, use RubyFacts.which_ruby (#{caller[0]})"
-    RubyFacts.which_ruby
+    RubyFacts.which
   end
 
 end # module Viiite
