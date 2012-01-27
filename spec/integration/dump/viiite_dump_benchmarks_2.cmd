@@ -1,1 +1,0 @@
-viiite dump --text benchmarks

@@ -1,2 +1,0 @@
-{:name => "Array/bench_sort", :path => Path("spec/fixtures/bdb/Array/bench_sort.rb")}
-{:name => "bench_iteration", :path => Path("spec/fixtures/bdb/bench_iteration.rb")}

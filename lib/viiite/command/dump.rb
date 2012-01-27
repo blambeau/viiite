@@ -32,8 +32,6 @@ module Viiite
         raise Quickl::Help unless argv.size <= 1
         db = database
         case arg = argv.first
-        when "benchmarks"
-          dump db.benchmarks
         when "suite"
           @renderer = :text
           dump db.suite
