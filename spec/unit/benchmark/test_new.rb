@@ -18,6 +18,7 @@ module Viiite
     describe 'with an existing file' do
       let(:arg){ dir/'bench_add.rb' }
       it{ should be_a(Benchmark) }
+      specify{ subject.path.should eq(arg) }
     end
 
     describe 'with an IO' do

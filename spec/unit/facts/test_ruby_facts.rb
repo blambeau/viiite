@@ -19,11 +19,11 @@ module Viiite
         short_ruby_description(description).should == short
       }
     end
-    
+
     it 'which' do
       which.should_not be_nil
     end
-    
+
     it 'has public methods installed on the module itself' do
       RubyFacts.should respond_to(:which)
     end

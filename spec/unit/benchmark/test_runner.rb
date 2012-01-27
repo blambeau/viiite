@@ -9,7 +9,7 @@ module Viiite
         end
       }
       let(:runner){ Runner.new(definition) }
-      
+
       it 'is Enumerable' do
         runner.should respond_to(:each)
         runner.should respond_to(:map)
@@ -23,14 +23,14 @@ module Viiite
         runner = Runner.new(Proc.new{|x| x.should eq(runner)})
         runner.call(nil)
       end
-      
+
       it 'instance_exec the definition block otherwise' do
         runner = Runner.new(Proc.new{ with(:runner => self){ report{} } })
         seen   = nil
         runner.call(Proc.new{|t| seen = t[:runner]})
         seen.should eq(runner)
       end
-      
+
     end
   end
 end

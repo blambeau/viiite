@@ -74,6 +74,7 @@ require 'viiite/facts/ruby_facts'
 require "viiite/tms"
 require 'viiite/configuration'
 require "viiite/benchmark"
+require "viiite/suite"
 require 'viiite/database'
 require "viiite/command"
 require "viiite/bdb"

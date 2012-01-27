@@ -34,7 +34,7 @@ module Viiite
       end
 
       private
-      
+
       def cache_file(name)
         bench_file(cache_folder, name, ".rash")
       end
