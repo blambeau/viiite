@@ -19,10 +19,6 @@ module Viiite
         end
       end
 
-      def database
-        Database.new requester.config
-      end
-
       def dump(relation)
         r = Alf::Renderer.renderer(@renderer, relation)
         r.execute($stdout)

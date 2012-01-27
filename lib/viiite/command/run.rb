@@ -25,20 +25,35 @@ module Viiite
           @run_key = val.to_sym
         end
       end
-
-      def execute(argv)
-        argv = requester.bdb.to_rel.collect{|t| t[:name]} if argv.empty?
-        argv.each do |name|
-          benchmark = single_source([name]) do |bdb, arg|
-            bdb.benchmark(arg)
-          end
-          @runs.times do |run|
-            benchmark.each do |tuple|
-              tuple[@run_key] = run if @run_key
-              puts Alf::Tools.to_ruby_literal(tuple)
-            end
-          end
+      
+      def run_one(unit)
+        unit = NTimes.new(unit, @runs, @run_key) if @run_key
+        unit.run do |tuple|
+          puts Alf::Tools::ToRubyLiteral.apply(tuple)
         end
+      end
+      
+      def execute_files(files)
+        files.each do |f|
+          run_one Viiite.bench(f)
+        end
+      end
+      
+      def execute_names(names)
+        which = Alf::Relation.coerce(names.map{|n| {:name => n}})
+        database.suite.join(which).each do |t|
+          run_one t[:suite]
+        end
+      end
+      
+      def execute(argv)
+        if argv.empty?
+          files, names = [], ['.']
+        else
+          files, names = argv.partition{|f| Path(f).file?}
+        end
+        execute_files(files)
+        execute_names(names)
       end
 
     end # class Run

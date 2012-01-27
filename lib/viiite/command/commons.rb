@@ -2,24 +2,8 @@ module Viiite
   class Command
     module Commons
 
-      def single_source(argv)
-        raise Quickl::InvalidArgument if argv.size > 1
-        if arg = argv.first
-          path = Path(arg.to_s)
-          if path.file?
-            if path.extname == ".rb"
-              Viiite.bench(arg.to_s).run
-            else
-              Alf::Reader.reader(path)
-            end
-          elsif requester && requester.respond_to?(:bdb)
-            block_given? ? yield(requester.bdb, arg) : requester.bdb.dataset(arg)
-          else
-            raise Quickl::InvalidArgument, "Missing benchmark #{arg}"
-          end
-        else
-          Alf::Reader.reader($stdin)
-        end
+      def database
+        Database.new requester.config
       end
 
     end # module Commons

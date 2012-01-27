@@ -3,9 +3,10 @@ module Viiite
   class Command
     describe Run do
 
+      let(:config){ fixtures_config }
       let(:bench_iteration){ fixtures_folder/'command/bench_iteration.rb' }
       subject{
-        out, err = capture_io { Run.run(argv) }
+        out, err = capture_io { Run.run(argv, self) }
         rel = Alf::Reader.reader(StringIO.new(out)).to_rel
         rel = rel.project([:tms], {:allbut => true})
       }

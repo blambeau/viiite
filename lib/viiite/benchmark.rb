@@ -22,7 +22,7 @@ module Viiite
     def _run(extra, reporter)
       @reporter = reporter
       if path and config
-        relpath = path.relative_to(config.benchmark_folder)
+        relpath = path.expand.relative_to(config.benchmark_folder.expand)
         extra   = extra.merge(:path => relpath)
       end
       dsl_run(@definition, extra)
