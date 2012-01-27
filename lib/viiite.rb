@@ -42,8 +42,18 @@ module Viiite
   #    end
   #  end
   #
-  def self.bench(&block)
-    Benchmark.new(block)
+  def self.bench(config = nil, path = nil, &block)
+    config, path = nil, config if path.nil?
+    if block
+      @last_bench = Benchmark.new(config, path, block)
+    elsif path
+      load(path)
+      if @last_bench
+        b = Benchmark.new(config, Path(path), @last_bench.definition)
+        @last_bench = nil
+        b
+      end
+    end
   end
 
   # Alias of Viiite.bench for compatibility

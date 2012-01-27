@@ -4,30 +4,17 @@ module Viiite
     include Unit
     include DSL
 
+    attr_reader :config
+    attr_reader :path
     attr_reader :definition
 
-    def initialize(definition)
+    def initialize(config, path, definition)
+      @config = config
+      @path = path
       @definition = definition
     end
 
-    @benchmarks = []
-    def self.new(arg, *others)
-      case arg
-      when String, Path
-        @benchmarks = []
-        load(path = Path(arg).expand)
-        bench = @benchmarks.pop
-        bench.send(:path=, path) if bench
-        bench
-      else
-        bench = super(arg)
-        @benchmarks << bench
-        bench
-      end
-    end
-
     protected
-    attr_writer :path
 
     def _run(extra, reporter)
       @reporter = reporter

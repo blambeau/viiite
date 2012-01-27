@@ -32,7 +32,7 @@ module Viiite
     protected
 
     def load_one(file)
-      bench = Benchmark.new(file)
+      bench = Viiite.bench(config, file)
       warn "No benchmark found in #{file}" unless bench
       bench
     end

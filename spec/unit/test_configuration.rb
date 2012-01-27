@@ -71,11 +71,11 @@ module Viiite
       end
       it 'works with a benchmark' do
         config = fixtures_config
-        source = Benchmark.new(config.benchmark_folder/"bench_iteration.rb")
+        source = Viiite.bench(config.benchmark_folder/"bench_iteration.rb")
         config.cache_file_for(source).should eq(config.cache_folder/'bench_iteration.rash')
       end
       it 'works if the benchmark is detached' do
-        source = Benchmark.new(Proc.new{})
+        source = Viiite.bench{}
         config.cache_file_for(source).should be_nil
       end
     end
