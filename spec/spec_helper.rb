@@ -24,6 +24,7 @@ def fixtures_config
     c.benchmark_folder  = Path.dir/:fixtures/:bdb
     c.cache_folder      = Path.dir/:fixtures/:saved
     c.benchmark_pattern = "**/*.rb"
+    c.pwd               = Path.dir/:fixtures/:bdb
   end
 end
 
