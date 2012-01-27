@@ -14,6 +14,7 @@ module Viiite
     def self.new(arg, *others)
       case arg
       when String, Path
+        @benchmarks = []
         load(path = Path(arg).expand)
         bench = @benchmarks.pop
         bench.send(:path=, path) if bench
