@@ -5,11 +5,11 @@ describe Viiite do
     Viiite.const_defined?(:VERSION).should be_true
   end
 
-  it 'respond_to short_ruby_description (compatibility)' do
+  it 'responds to short_ruby_description' do
     Viiite.should respond_to(:short_ruby_description)
   end
 
-  it 'respond_to which_ruby (compatibility)' do
+  it 'responds to which_ruby' do
     Viiite.should respond_to(:which_ruby)
   end
 
