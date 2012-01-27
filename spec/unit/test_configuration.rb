@@ -58,6 +58,9 @@ module Viiite
       it 'supports a Path' do
         config.cache_file_for(source).should eq(config.cache_folder/'Array/bench_sort.rash')
       end
+      it 'supports a pseudo Path' do
+        config.cache_file_for(source.without_extension).should eq(config.cache_folder/'Array/bench_sort.rash')
+      end
       it 'works with unrelated cache folder' do
         config.cache_folder = '/tmp'
         config.cache_file_for(source).should eq(Path("/tmp/Array/bench_sort.rash"))
