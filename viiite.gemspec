@@ -124,7 +124,7 @@ Gem::Specification.new do |s|
   # for each development dependency. These gems are required for developers
   #
   s.add_development_dependency("rake", "~> 0.9.2")
-  s.add_development_dependency("rspec", "~> 2.6.0")
+  s.add_development_dependency("rspec", "~> 2.8.0")
   s.add_development_dependency("wlang", "~> 0.10.2")
   s.add_dependency("alf", "~> 0.11.1")
   s.add_dependency("epath", ">= 0")
