@@ -11,7 +11,7 @@ module Viiite
     it "is obtained through Viiite.bench" do
       subject.should be_kind_of(Viiite::Benchmark)
     end
-    
+
     it_should_behave_like "A Unit"
 
   end

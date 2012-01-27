@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Viiite
   describe Database do
-    
+
     let(:folder){ fixtures_config.benchmark_folder }
     let(:db){ Database.new(fixtures_config) }
-    
+
     describe 'benchmark_name' do
       it 'resolves relative paths' do
         db.benchmark_name(Path("bench_iteration.rb")).should eq("bench_iteration")
@@ -15,7 +15,7 @@ module Viiite
         db.benchmark_name(folder/"Array/bench_sort.rb").should eq("Array/bench_sort")
       end
     end
-    
+
     describe 'benchmark_files' do
       it 'coerces a single file' do
         db.benchmark_files(folder/"bench_iteration.rb").should eq(Alf::Relation[

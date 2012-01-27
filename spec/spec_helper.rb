@@ -29,4 +29,3 @@ def fixtures_config
     c.stdout            = StringIO.new
   end
 end
-

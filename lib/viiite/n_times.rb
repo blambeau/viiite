@@ -5,13 +5,13 @@ module Viiite
     def initialize(delegate, n, key)
       @delegate, @n, @key = delegate, n, key
     end
-    
+
     def path
       delegate.path
     end
-    
+
     protected
-    
+
     def _run(extra, reporter)
       @n.times do |i|
         @delegate.run(extra.merge(@key => i), reporter)

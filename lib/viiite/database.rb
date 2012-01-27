@@ -33,7 +33,7 @@ module Viiite
     end
 
     ###
-    
+
     def build_suite(current, tuples = [])
       tuples << suite_tuple_for(current)
       if current.directory?
