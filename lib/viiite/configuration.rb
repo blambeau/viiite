@@ -52,6 +52,7 @@ module Viiite
     def cache_file_for(path)
       return nil unless cache_folder
       path = path.path if path.respond_to?(:path)
+      return nil unless path
       path = path.expand
       path = path.relative_to(benchmark_folder.expand)
       (cache_folder/path).replace_extension(".rash")
