@@ -12,7 +12,7 @@ describe Viiite do
   it 'responds to which_ruby' do
     Viiite.should respond_to(:which_ruby)
   end
-  
+
   describe "bench" do
 
     it 'supports a block' do
@@ -25,7 +25,7 @@ describe Viiite do
       b.should be_a(Viiite::Benchmark)
       b.path.should eq(path)
     end
-    
+
     it 'returns nil on an invalid path' do
       path = fixtures_folder/"fake_bench.rb"
       Viiite.bench(path).should be_nil
