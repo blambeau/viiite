@@ -81,5 +81,4 @@ require "viiite/suite"
 require "viiite/n_times"
 require 'viiite/database'
 require "viiite/command"
-require "viiite/bdb"
 require 'viiite/reporter'
