@@ -11,27 +11,6 @@ module Viiite
       Alf::Relation.coerce build_suite(config.benchmark_folder, [])
     end
 
-    def benchmarks
-      tuples = benchmark_files(config.benchmark_folder).map do |t|
-        {:name => benchmark_name(t[:path])}.merge(t)
-      end
-      Alf::Relation.coerce tuples
-    end
-
-    def benchmark_result(tuple)
-      if tuple.is_a?(String)
-        tuple = benchmarks.restrict(:name => tuple).to_a.first
-      end
-      if tuple and cache=config.cache_folder
-        result_file = cache/"#{tuple[:name]}.rash"
-        if result_file.file?
-          Alf::Reader.rash(result_file.to_s)
-        else
-          Alf::Relation::DUM
-        end
-      end
-    end
-
     ###
 
     def build_suite(current, tuples = [])
