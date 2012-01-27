@@ -56,11 +56,11 @@ module Viiite
     describe "cache_file_for" do
       let(:source){ config.benchmark_folder/"Array/bench_sort.rb" }
       it 'supports a Path' do
-        config.cache_file_for(source).should eq(config.cache_folder/'Array/bench_sort.rb')
+        config.cache_file_for(source).should eq(config.cache_folder/'Array/bench_sort.rash')
       end
       it 'works with unrelated cache folder' do
         config.cache_folder = '/tmp'
-        config.cache_file_for(source).should eq(Path("/tmp/Array/bench_sort.rb"))
+        config.cache_file_for(source).should eq(Path("/tmp/Array/bench_sort.rash"))
       end
       it 'returns nil if no cache' do
         config.cache_folder = nil
@@ -69,7 +69,7 @@ module Viiite
       it 'works with a benchmark' do
         config = fixtures_config
         source = Benchmark.new(config.benchmark_folder/"bench_iteration.rb")
-        config.cache_file_for(source).should eq(config.cache_folder/'bench_iteration.rb')
+        config.cache_file_for(source).should eq(config.cache_folder/'bench_iteration.rash')
       end
     end
 
