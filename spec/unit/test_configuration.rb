@@ -33,6 +33,12 @@ module Viiite
       config.cache_folder.should eq(Path("cache"))
     end
 
+    it 'hash pwd accessors' do
+      config.pwd.should eq(Path('.').expand)
+      config.pwd = "blah"
+      config.pwd.should eq(Path("blah"))
+    end
+
     describe 'cache_enabled?' do
       it 'is enabled by default' do
         config.should be_cache_enabled

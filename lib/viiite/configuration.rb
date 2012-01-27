@@ -41,6 +41,7 @@ module Viiite
     attribute :benchmark_folder,  Path,    "benchmarks"
     attribute :benchmark_pattern, String,  "**/*.rb"
     attribute :cache_folder,      Path,    Proc.new{|c| c.benchmark_folder/".cache" }
+    attribute :pwd,               Path,    Proc.new{|c| Path('.').expand }
 
     def cache_enabled?
       !!cache_folder
