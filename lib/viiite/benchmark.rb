@@ -31,11 +31,8 @@ module Viiite
     end
 
     def run(&reporter)
-      to_enum.call(reporter)
-    end
-
-    def to_enum
-      Runner.new(definition)
+      runner = Runner.new(definition)
+      reporter ? runner.call(reporter) : runner
     end
 
     private

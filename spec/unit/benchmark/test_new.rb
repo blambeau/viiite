@@ -6,8 +6,8 @@ module Viiite
     subject{ Benchmark.new(arg) }
 
     after{
-      subject.to_enum.to_a.size.should eq(1)
-      subject.to_enum.to_a.first.keys.sort_by(&:to_s).should eq([:bench, :tms])
+      subject.run.to_a.size.should eq(1)
+      subject.run.to_a.first.keys.sort_by(&:to_s).should eq([:bench, :tms])
     }
 
     describe 'with a Proc' do
