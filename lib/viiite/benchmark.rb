@@ -35,6 +35,7 @@ module Viiite
 
     def _run(extra, reporter)
       @reporter = reporter
+      extra = extra.merge(:path => path) if path
       dsl_run(@definition, extra)
       @reporter = nil
     end

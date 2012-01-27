@@ -13,8 +13,6 @@ module Viiite
       end
     end
 
-    private
-
     def to_enum(extra = {})
       Enum.new(self, extra)
     end
