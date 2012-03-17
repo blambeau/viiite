@@ -19,7 +19,7 @@ module Viiite
       def each
         folder = config.benchmark_folder
         folder.glob(config.benchmark_pattern).each do |f|
-          yield(:name => f.relative_to(folder).without_extension.to_s, :file => f)
+          yield(:name => f.relative_to(folder).rm_ext.to_s, :file => f)
         end
       end
 
@@ -28,7 +28,7 @@ module Viiite
       end
 
       def benchmark(name)
-        if (file = bench_file(config.benchmark_folder, name.to_s, @ext)).exist?
+        if (file = bench_file(config.benchmark_folder, name, @ext)).exist?
           return Viiite.bench(file)
         else
           raise NoSuchBenchmarkError, "No such benchmark #{name}"

@@ -32,7 +32,7 @@ variables:
     - {name: rspec,        version: "~> 2.8.0",  groups: [test, release]}
     - {name: wlang,        version: "~> 0.10.2", groups: [release      ]}
     - {name: alf,          version: "~> 0.11.1", groups: [runtime      ]}
-    - {name: epath,        version: ">= 0",      groups: [runtime      ]}
+    - {name: epath,        version: "~> 0.1.0",  groups: [runtime      ]}
     - {name: gnuplot,      version: "~> 2.3.6",  groups: [runtime      ]}
     - {name: json,         version: ">= 0",      groups: [runtime      ]}
   rake_tasks: 

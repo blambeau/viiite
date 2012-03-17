@@ -55,7 +55,7 @@ module Viiite
       return nil unless path
       path = path.expand
       path = path.relative_to(benchmark_folder.expand)
-      (cache_folder/path).replace_extension(".rash")
+      (cache_folder/path).sub_ext(".rash")
     end
 
   end # class Configuration

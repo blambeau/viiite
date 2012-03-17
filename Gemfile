@@ -13,7 +13,7 @@ end
 
 group :runtime do
   gem "alf", "~> 0.11.1"
-  gem "epath", ">= 0"
+  gem "epath", "~> 0.1.0"
   gem "gnuplot", "~> 2.3.6"
   gem "json", ">= 0"
 end

@@ -5,10 +5,10 @@ module Viiite
       def single_source(argv)
         raise Quickl::InvalidArgument if argv.size > 1
         if arg = argv.first
-          path = Path(arg.to_s)
+          path = Path(arg)
           if path.file?
             if path.extname == ".rb"
-              Viiite.bench(arg.to_s).run
+              Viiite.bench(arg).run
             else
               Alf::Reader.reader(path)
             end

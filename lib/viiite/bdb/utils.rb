@@ -3,7 +3,7 @@ module Viiite
     module Utils
 
       def bench_file(folder, name, ext)
-        folder.join(name).replace_extension(ext)
+        (folder/name).sub_ext(ext)
       end
 
       def folder

@@ -6,8 +6,8 @@ describe "viiite commands", :ruby => 1.9 do
 
     specify "#{input.base}: #{cmd}" do
       argv = Quickl.parse_commandline_args(cmd)[1..-1]
-      stdout = input.replace_extension('.stdout')
-      stderr = input.replace_extension('.stderr')
+      stdout = input.sub_ext('.stdout')
+      stderr = input.sub_ext('.stderr')
       stdout_expected = stdout.exist? ? stdout.read : ""
       stderr_expected = stderr.exist? ? stderr.read : ""
 
