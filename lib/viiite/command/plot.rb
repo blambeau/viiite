@@ -57,7 +57,7 @@ module Viiite
 
       def load_style(file)
         file = Path(file)
-        if file.ext == "rb"
+        if file.ext == ".rb"
           eval file.read
         else
           Alf::Reader.reader(file.to_s).to_rel

@@ -1,4 +1,4 @@
 require "alf"
-require "epath"
+require "path"
 require "gnuplot"
 require "json"
