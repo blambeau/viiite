@@ -7,7 +7,7 @@ module Viiite
         if arg = argv.first
           path = Path(arg)
           if path.file?
-            if path.extname == ".rb"
+            if path.ext == ".rb"
               Viiite.bench(arg).run
             else
               Alf::Reader.reader(path)

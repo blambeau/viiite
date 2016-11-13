@@ -53,7 +53,7 @@ module Viiite
       return nil unless cache_folder
       path = path.path if path.respond_to?(:path)
       return nil unless path
-      path = path.expand
+      path = Path(path).expand
       path = path.relative_to(benchmark_folder.expand)
       (cache_folder/path).sub_ext(".rash")
     end
